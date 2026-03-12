@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop Abayas & Hijabs | Rizvi Store</title>
+    <meta name="description" content="Browse our complete collection of elegant Abayas and Hijabs. Premium modest fashion with custom options available.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Same header as index.html -->
+    <header>
+        <nav class="navbar">
+            <div class="container">
+                <div class="nav-brand">
+                    <a href="/">
+                        <h1>Rizvi <span>Store</span></h1>
+                    </a>
+                </div>
+                <button class="mobile-menu-btn" aria-label="Menu">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <ul class="nav-menu">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/shop" class="active">Shop</a></li>
+                    <li><a href="/abaya">Abayas</a></li>
+                    <li><a href="/hijab">Hijabs</a></li>
+                    <li><a href="/custom">Custom Order</a></li>
+                    <li><a href="/contact">Contact</a></li>
+                </ul>
+                <a href="https://wa.me/919594306625" class="whatsapp-nav-btn" target="_blank">
+                    <i class="fab fa-whatsapp"></i> Order Now
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Our Collection</h1>
+            <div class="breadcrumb">
+                <a href="/">Home</a> / <span>Shop</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Shop Content -->
+    <section class="shop-page">
+        <div class="container">
+            <!-- Category Tabs -->
+            <div class="category-tabs">
+                <button class="tab-btn active" data-category="all">All Products</button>
+                <button class="tab-btn" data-category="abaya">Abayas</button>
+                <button class="tab-btn" data-category="hijab">Hijabs</button>
+            </div>
+
+            <!-- Products Grid -->
+            <div class="products-grid" id="all-products">
+                <!-- Products will be loaded via JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer (same as index.html) -->
+    <footer>
+        <!-- ... footer content ... -->
+    </footer>
+
+    <script src="/js/products.js"></script>
+    <script src="/js/main.js"></script>
+</body>
+</html>
