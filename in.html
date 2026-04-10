@@ -1,96 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- ============================================= -->
-    <!-- PRIMARY META TAGS -->
-    <!-- ============================================= -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
-    <meta name="robots" content="index, follow, max-image-preview:large">
-    <meta name="googlebot" content="index, follow">
-    <meta name="bingbot" content="index, follow">
     
     <!-- SEO Meta Tags -->
-    <title>Rizvi.Store | 26 Premium Luxury Brands | Fashion, Beauty, Home & Services</title>
-    <meta name="description" content="Discover 26 premium brands at Rizvi.Store. Abayas, couture, cosmetics, furniture, kids fashion, custom gifts, event management, healthcare & more. Global shipping available.">
-    <meta name="keywords" content="luxury brands, premium brands, abayas, hijabs, modest fashion, kids fashion, custom gifts, cosmetics, furniture, interior design, Mumbai services, global shipping">
+    <title>Rizvi.Store | 26+ Premium Luxury Brands | Fashion, Beauty, Home, Kids & More</title>
+    <meta name="description" content="Discover 26+ premium luxury brands at Rizvi.Store. Abayas, couture, cosmetics, furniture, kids wear, custom gifts, food, event management, healthcare & home services. Global shipping.">
+    <meta name="keywords" content="luxury brands, premium brands, abayas, hijabs, modest fashion, kids wear, toddler diapers, custom gifts, cosmetics, furniture, Mumbai services, global shipping, Rizvi Store">
     <meta name="author" content="Rizvi.Store">
-    <meta name="language" content="English">
+    <meta name="robots" content="index, follow">
     
-    <!-- Canonical URL -->
-    <link rel="canonical" href="https://rizvi.store/">
-    
-    <!-- Open Graph Meta Tags -->
+    <!-- Open Graph -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://rizvi.store/">
-    <meta property="og:title" content="Rizvi.Store | 26 Premium Luxury Brands Ecosystem">
-    <meta property="og:description" content="Global luxury meets local warmth. 26 premium brands across fashion, beauty, home, kids & services.">
+    <meta property="og:title" content="Rizvi.Store | 26+ Premium Luxury Brands">
+    <meta property="og:description" content="Global luxury meets local warmth. 26+ premium brands across fashion, beauty, home, kids & services.">
     <meta property="og:image" content="https://rizvi.store/og-image.jpg">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
     <meta property="og:site_name" content="Rizvi.Store">
-    <meta property="og:locale" content="en_US">
     
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Rizvi.Store | 26 Premium Luxury Brands">
-    <meta name="twitter:description" content="Fashion, beauty, home, kids & services. 26 premium brands with worldwide shipping.">
-    <meta name="twitter:image" content="https://rizvi.store/twitter-card.jpg">
-    <meta name="twitter:creator" content="@RizviStore">
+    <meta name="twitter:title" content="Rizvi.Store | 26+ Premium Luxury Brands">
+    <meta name="twitter:description" content="Fashion, beauty, home, kids & services. 26+ premium brands with worldwide shipping.">
     
-    <!-- Schema.org JSON-LD -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "Organization",
-        "name": "Rizvi.Store",
-        "url": "https://rizvi.store",
-        "logo": "https://rizvi.store/logo.png",
-        "description": "Premium luxury brand ecosystem featuring 26 exclusive labels across fashion, beauty, home, kids & services.",
-        "address": {
-            "@type": "PostalAddress",
-            "addressLocality": "Mumbai",
-            "addressCountry": "IN"
-        },
-        "contactPoint": {
-            "@type": "ContactPoint",
-            "telephone": "+91-8879952676",
-            "contactType": "customer service",
-            "availableLanguage": ["English", "Hindi"]
-        }
-    }
-    </script>
-    
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "WebSite",
-        "name": "Rizvi.Store",
-        "url": "https://rizvi.store",
-        "potentialAction": {
-            "@type": "SearchAction",
-            "target": "https://rizvi.store/search?q={search_term_string}",
-            "query-input": "required name=search_term_string"
-        }
-    }
-    </script>
+    <!-- Canonical -->
+    <link rel="canonical" href="https://rizvi.store/">
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
     
-    <!-- Font Awesome 6.5.1 -->
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>R</text></svg>">
-    <meta name="theme-color" content="#0a0a0f">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <meta name="theme-color" content="#0A0A0F">
 
     <style>
-        /* ============================================= */
-        /* RESET & BASE */
-        /* ============================================= */
         * {
             margin: 0;
             padding: 0;
@@ -98,28 +48,20 @@
         }
 
         :root {
-            --bg-dark: #0a0a0f;
-            --accent-cyan: #00FFFF;
-            --accent-magenta: #FF00FF;
-            --accent-green: #00FF80;
-            --accent-gold: #FFD700;
+            --bg-dark: #0A0A0F;
+            --cyan: #00FFFF;
+            --magenta: #FF00FF;
+            --green: #00FF80;
+            --gold: #FFD700;
             --text-primary: #FFFFFF;
-            --text-secondary: rgba(255, 255, 255, 0.75);
-            --text-muted: rgba(255, 255, 255, 0.5);
-            --glass-bg: rgba(20, 20, 30, 0.35);
-            --glass-border: rgba(255, 255, 255, 0.08);
-            --shadow-card: 0 8px 32px rgba(0, 0, 0, 0.3);
-            --shadow-hover: 0 20px 60px rgba(0, 0, 0, 0.4), 0 0 40px rgba(0, 255, 255, 0.1);
-            --radius-sm: 12px;
-            --radius-md: 20px;
-            --radius-lg: 35px;
-            --radius-full: 9999px;
-            --transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+            --text-secondary: rgba(255,255,255,0.75);
+            --text-muted: rgba(255,255,255,0.5);
+            --glass-bg: rgba(20,20,30,0.35);
+            --glass-border: rgba(255,255,255,0.08);
         }
 
         html {
             scroll-behavior: smooth;
-            -webkit-font-smoothing: antialiased;
         }
 
         body {
@@ -130,34 +72,8 @@
             overflow-x: hidden;
         }
 
-        ::selection {
-            background: var(--accent-cyan);
-            color: var(--bg-dark);
-        }
-
-        /* Skip to Content */
-        .skip-link {
-            position: absolute;
-            top: -40px;
-            left: 0;
-            background: var(--accent-cyan);
-            color: var(--bg-dark);
-            padding: 8px 16px;
-            z-index: 10000;
-            border-radius: 0 0 8px 0;
-            transition: top 0.3s;
-            text-decoration: none;
-            font-weight: 600;
-        }
-
-        .skip-link:focus {
-            top: 0;
-        }
-
-        /* ============================================= */
-        /* ANIMATED BACKGROUND */
-        /* ============================================= */
-        .bg-gradient {
+        /* Animated Background */
+        .bg-animation {
             position: fixed;
             top: 0;
             left: 0;
@@ -167,21 +83,20 @@
             background: var(--bg-dark);
         }
 
-        .bg-gradient::before {
+        .bg-animation::before {
             content: '';
             position: absolute;
             width: 200%;
             height: 200%;
             background: 
-                radial-gradient(circle at 20% 40%, rgba(0, 255, 255, 0.06) 0%, transparent 35%),
-                radial-gradient(circle at 80% 60%, rgba(255, 0, 255, 0.06) 0%, transparent 40%),
-                radial-gradient(circle at 50% 80%, rgba(0, 255, 128, 0.04) 0%, transparent 35%);
-            animation: bgShift 30s ease-in-out infinite alternate;
+                radial-gradient(circle at 30% 40%, rgba(0,255,255,0.06) 0%, transparent 40%),
+                radial-gradient(circle at 70% 60%, rgba(255,0,255,0.06) 0%, transparent 40%);
+            animation: bgMove 20s ease-in-out infinite alternate;
         }
 
-        @keyframes bgShift {
-            0% { transform: translate(0, 0) rotate(0deg); }
-            100% { transform: translate(-5%, -3%) rotate(5deg); }
+        @keyframes bgMove {
+            0% { transform: translate(0,0) rotate(0deg); }
+            100% { transform: translate(-5%,-3%) rotate(3deg); }
         }
 
         .orb {
@@ -191,31 +106,33 @@
             opacity: 0.15;
             z-index: -1;
             pointer-events: none;
-            will-change: transform;
         }
 
-        .orb-1 { width: 500px; height: 500px; background: #00FFFF; top: -10%; right: -5%; animation: float 20s ease-in-out infinite; }
-        .orb-2 { width: 600px; height: 600px; background: #FF00FF; bottom: -15%; left: -10%; animation: float 25s ease-in-out infinite reverse; }
+        .orb-1 { width: 500px; height: 500px; background: var(--cyan); top: -10%; right: -10%; }
+        .orb-2 { width: 600px; height: 600px; background: var(--magenta); bottom: -15%; left: -15%; }
 
-        @keyframes float {
-            0%, 100% { transform: translate(0, 0) scale(1); }
-            50% { transform: translate(30px, -30px) scale(1.1); }
+        /* Skip Link */
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: var(--cyan);
+            color: var(--bg-dark);
+            padding: 8px 16px;
+            z-index: 10000;
+            border-radius: 0 0 8px 0;
+            transition: top 0.3s;
         }
+        .skip-link:focus { top: 0; }
 
-        /* ============================================= */
-        /* CONTAINER */
-        /* ============================================= */
+        /* Container */
         .container {
             max-width: 1400px;
             margin: 0 auto;
-            padding: 0 40px;
-            position: relative;
-            z-index: 1;
+            padding: 0 32px;
         }
 
-        /* ============================================= */
-        /* HEADER */
-        /* ============================================= */
+        /* Header */
         .header {
             position: fixed;
             top: 0;
@@ -223,22 +140,20 @@
             right: 0;
             z-index: 1000;
             padding: 16px 0;
-            transition: var(--transition);
+            transition: all 0.3s;
         }
 
         .header.scrolled {
-            background: rgba(10, 10, 15, 0.9);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(0, 255, 255, 0.1);
+            background: rgba(10,10,15,0.9);
+            backdrop-filter: blur(30px);
+            border-bottom: 1px solid rgba(0,255,255,0.1);
             padding: 10px 0;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
         }
 
         .header-content {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            gap: 20px;
         }
 
         .logo {
@@ -250,7 +165,7 @@
         .logo-icon {
             width: 44px;
             height: 44px;
-            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-magenta), var(--accent-green));
+            background: linear-gradient(135deg, var(--cyan), var(--magenta), var(--green));
             border-radius: 14px;
             display: flex;
             align-items: center;
@@ -258,80 +173,69 @@
             font-size: 22px;
             font-weight: 800;
             color: var(--bg-dark);
-            transform: rotate(-4deg);
-            transition: var(--transition);
-            box-shadow: 0 0 30px rgba(0, 255, 255, 0.3);
+            transform: rotate(-3deg);
+            animation: logoGlow 3s ease-in-out infinite;
         }
 
-        .logo:hover .logo-icon {
-            transform: rotate(0deg) scale(1.05);
-            box-shadow: 0 0 50px rgba(0, 255, 255, 0.5);
+        @keyframes logoGlow {
+            0%,100% { box-shadow: 0 0 30px rgba(0,255,255,0.4); }
+            50% { box-shadow: 0 0 50px rgba(255,0,255,0.5); }
         }
 
         .logo-text h1 {
             font-family: 'Playfair Display', serif;
             font-size: 24px;
             font-weight: 700;
-            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-magenta));
+            background: linear-gradient(135deg, var(--cyan), var(--magenta), var(--green));
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            line-height: 1.2;
         }
 
         .logo-text span {
             font-size: 9px;
             letter-spacing: 3px;
             color: var(--text-muted);
-            font-weight: 600;
         }
 
         /* Navigation */
         .nav-menu {
             display: flex;
-            gap: 6px;
-            background: rgba(255, 255, 255, 0.02);
-            backdrop-filter: blur(15px);
-            padding: 6px;
-            border-radius: var(--radius-full);
-            border: 1px solid rgba(0, 255, 255, 0.1);
+            gap: 4px;
+            background: rgba(255,255,255,0.02);
+            backdrop-filter: blur(20px);
+            padding: 4px;
+            border-radius: 50px;
+            border: 1px solid rgba(0,255,255,0.1);
         }
 
         .nav-item {
-            padding: 10px 20px;
+            padding: 8px 20px;
             color: var(--text-secondary);
             text-decoration: none;
             font-weight: 500;
             font-size: 13px;
-            border-radius: var(--radius-full);
-            transition: var(--transition);
-            white-space: nowrap;
+            border-radius: 50px;
+            transition: all 0.2s;
         }
 
         .nav-item:hover {
             color: var(--text-primary);
-            background: rgba(0, 255, 255, 0.06);
+            background: rgba(0,255,255,0.06);
         }
 
         .nav-item.active {
-            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-magenta));
+            background: linear-gradient(135deg, var(--cyan), var(--magenta));
             color: var(--bg-dark);
             font-weight: 600;
         }
 
-        /* Header Actions */
-        .header-actions {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
         .whatsapp-btn {
-            padding: 10px 20px;
-            background: rgba(37, 211, 102, 0.1);
-            backdrop-filter: blur(15px);
-            border: 1px solid rgba(37, 211, 102, 0.3);
-            border-radius: var(--radius-full);
+            padding: 10px 22px;
+            background: rgba(37,211,102,0.1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(37,211,102,0.3);
+            border-radius: 50px;
             color: white;
             text-decoration: none;
             font-weight: 500;
@@ -339,38 +243,28 @@
             display: flex;
             align-items: center;
             gap: 8px;
-            transition: var(--transition);
+            transition: all 0.2s;
         }
 
         .whatsapp-btn:hover {
-            background: rgba(37, 211, 102, 0.2);
+            background: rgba(37,211,102,0.2);
             transform: translateY(-2px);
         }
 
-        .whatsapp-btn i {
-            color: #25D366;
-            font-size: 18px;
-        }
+        .whatsapp-btn i { color: #25D366; font-size: 18px; }
 
         .mobile-toggle {
             display: none;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(0, 255, 255, 0.2);
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(0,255,255,0.2);
             border-radius: 12px;
             padding: 10px 14px;
             color: white;
             font-size: 22px;
             cursor: pointer;
-            transition: var(--transition);
         }
 
-        .mobile-toggle:hover {
-            background: rgba(0, 255, 255, 0.1);
-        }
-
-        /* ============================================= */
-        /* HERO */
-        /* ============================================= */
+        /* Hero */
         .hero {
             min-height: 100vh;
             display: flex;
@@ -390,19 +284,15 @@
             align-items: center;
             gap: 8px;
             padding: 8px 18px;
-            background: rgba(0, 255, 255, 0.06);
-            backdrop-filter: blur(15px);
-            border: 1px solid rgba(0, 255, 255, 0.2);
-            border-radius: var(--radius-full);
+            background: rgba(0,255,255,0.06);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0,255,255,0.2);
+            border-radius: 50px;
             font-size: 11px;
             font-weight: 600;
             letter-spacing: 2px;
             margin-bottom: 24px;
-            color: var(--accent-cyan);
-        }
-
-        .hero-badge i {
-            color: var(--accent-gold);
+            color: var(--cyan);
         }
 
         .hero-title {
@@ -411,188 +301,124 @@
             font-weight: 700;
             line-height: 1.15;
             margin-bottom: 20px;
-            background: linear-gradient(135deg, #fff, var(--accent-cyan), var(--accent-magenta));
+            background: linear-gradient(135deg, #fff, var(--cyan), var(--magenta));
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
         }
 
         .hero-subtitle {
-            font-size: 17px;
+            font-size: 16px;
             color: var(--text-secondary);
             margin-bottom: 32px;
-            line-height: 1.7;
-            max-width: 540px;
+            max-width: 500px;
         }
 
         .hero-stats {
             display: flex;
-            gap: 36px;
+            gap: 35px;
             margin-top: 40px;
             flex-wrap: wrap;
         }
 
-        .stat-item {
-            text-align: center;
-        }
+        .stat-item { text-align: center; }
+        .stat-number { font-size: 36px; font-weight: 700; background: linear-gradient(135deg, var(--cyan), var(--green)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+        .stat-label { font-size: 11px; color: var(--text-muted); letter-spacing: 2px; }
 
-        .stat-number {
-            font-size: 36px;
-            font-weight: 700;
-            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-green));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-
-        .stat-label {
-            font-size: 11px;
-            color: var(--text-muted);
-            letter-spacing: 2px;
-            font-weight: 600;
-            text-transform: uppercase;
-        }
-
-        /* Hero Cards */
+        /* Floating Cards */
         .hero-visual {
             position: relative;
-            height: 460px;
+            height: 450px;
         }
 
         .float-card {
             position: absolute;
             width: 260px;
             background: var(--glass-bg);
-            backdrop-filter: blur(25px);
-            border: 1px solid rgba(0, 255, 255, 0.15);
-            border-radius: 28px;
-            padding: 28px;
-            transform: rotate(-4deg);
-            animation: cardFloat 6s ease-in-out infinite;
-            box-shadow: var(--shadow-card);
+            backdrop-filter: blur(30px);
+            border: 1px solid rgba(0,255,255,0.15);
+            border-radius: 30px;
+            padding: 25px;
+            animation: float 6s ease-in-out infinite;
         }
 
         .float-card:nth-child(1) { top: 0; left: 0; animation-delay: 0s; }
-        .float-card:nth-child(2) { top: 110px; right: 0; transform: rotate(5deg); animation: cardFloatRev 6s ease-in-out infinite; animation-delay: -2s; }
-        .float-card:nth-child(3) { bottom: 0; left: 30px; transform: rotate(-2deg); animation-delay: -4s; }
+        .float-card:nth-child(2) { top: 120px; right: 0; transform: rotate(5deg); animation: floatReverse 6s ease-in-out infinite; animation-delay: -2s; }
+        .float-card:nth-child(3) { bottom: 0; left: 30px; transform: rotate(-3deg); animation-delay: -4s; }
 
-        @keyframes cardFloat {
-            0%, 100% { transform: translateY(0) rotate(-4deg); }
-            50% { transform: translateY(-15px) rotate(-2deg); }
+        @keyframes float {
+            0%,100% { transform: translateY(0) rotate(-3deg); }
+            50% { transform: translateY(-20px) rotate(-1deg); }
         }
-
-        @keyframes cardFloatRev {
-            0%, 100% { transform: translateY(0) rotate(5deg); }
-            50% { transform: translateY(-15px) rotate(7deg); }
+        @keyframes floatReverse {
+            0%,100% { transform: translateY(0) rotate(5deg); }
+            50% { transform: translateY(-20px) rotate(7deg); }
         }
 
         .float-icon {
-            width: 55px;
-            height: 55px;
-            background: linear-gradient(135deg, rgba(0, 255, 255, 0.12), rgba(255, 0, 255, 0.12));
-            border-radius: 18px;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, rgba(0,255,255,0.15), rgba(255,0,255,0.15));
+            border-radius: 16px;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 20px;
-            border: 1px solid rgba(0, 255, 255, 0.2);
+            margin-bottom: 18px;
+            border: 1px solid rgba(0,255,255,0.2);
         }
+        .float-icon i { font-size: 24px; color: var(--cyan); }
+        .float-card h3 { font-size: 18px; margin-bottom: 8px; }
+        .float-card p { font-size: 12px; color: var(--text-secondary); }
 
-        .float-icon i {
-            font-size: 26px;
-            color: var(--accent-cyan);
-        }
-
-        .float-card h3 {
-            font-size: 18px;
-            margin-bottom: 8px;
-        }
-
-        .float-card p {
-            color: var(--text-secondary);
-            font-size: 13px;
-        }
-
-        /* ============================================= */
-        /* SECTION HEADERS */
-        /* ============================================= */
+        /* Section Headers */
         .section-header {
             text-align: center;
             margin-bottom: 45px;
         }
-
         .section-title {
             font-family: 'Playfair Display', serif;
-            font-size: clamp(34px, 5vw, 44px);
+            font-size: clamp(32px, 5vw, 44px);
             font-weight: 700;
             margin-bottom: 12px;
-            background: linear-gradient(135deg, #fff, var(--accent-cyan), var(--accent-magenta));
+            background: linear-gradient(135deg, #fff, var(--cyan), var(--magenta));
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
         }
-
         .section-subtitle {
             color: var(--text-muted);
             font-size: 13px;
             letter-spacing: 3px;
             text-transform: uppercase;
-            font-weight: 600;
         }
 
-        /* ============================================= */
-        /* FILTER PILLS */
-        /* ============================================= */
-        .filter-section {
-            margin: 35px 0 30px;
-        }
-
+        /* Filter Pills */
+        .filter-section { margin: 35px 0 25px; }
         .filter-pills {
             display: flex;
             justify-content: center;
-            gap: 10px;
+            gap: 8px;
             flex-wrap: wrap;
         }
-
         .pill {
-            padding: 10px 22px;
-            background: rgba(255, 255, 255, 0.02);
-            backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            border-radius: var(--radius-full);
+            padding: 10px 20px;
+            background: rgba(255,255,255,0.02);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 50px;
             color: var(--text-secondary);
             font-weight: 500;
             font-size: 12px;
             cursor: pointer;
-            transition: var(--transition);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            display: inline-flex;
+            transition: all 0.2s;
+            display: flex;
             align-items: center;
             gap: 6px;
         }
+        .pill:hover { background: rgba(0,255,255,0.06); border-color: rgba(0,255,255,0.2); color: white; }
+        .pill.active { background: linear-gradient(135deg, var(--cyan), var(--magenta)); color: var(--bg-dark); border-color: transparent; }
 
-        .pill:hover {
-            background: rgba(0, 255, 255, 0.06);
-            border-color: rgba(0, 255, 255, 0.2);
-            color: var(--text-primary);
-        }
-
-        .pill.active {
-            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-magenta));
-            border-color: transparent;
-            color: var(--bg-dark);
-            font-weight: 600;
-            box-shadow: 0 0 25px rgba(0, 255, 255, 0.25);
-        }
-
-        /* ============================================= */
-        /* BRAND GRID */
-        /* ============================================= */
-        .brands-section {
-            padding: 50px 0;
-        }
-
+        /* Brand Grid */
         .brand-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -604,9 +430,9 @@
             background: var(--glass-bg);
             backdrop-filter: blur(25px);
             border: 1px solid var(--glass-border);
-            border-radius: var(--radius-lg);
+            border-radius: 30px;
             padding: 28px 24px;
-            transition: var(--transition);
+            transition: all 0.3s cubic-bezier(0.23,1,0.32,1);
             text-decoration: none;
             color: inherit;
             display: block;
@@ -614,76 +440,36 @@
             overflow: hidden;
         }
 
-        .brand-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg, rgba(0, 255, 255, 0.04), rgba(255, 0, 255, 0.04));
-            opacity: 0;
-            transition: opacity 0.4s;
-        }
-
-        .brand-card:hover::before {
-            opacity: 1;
-        }
-
         .brand-card:hover {
             transform: translateY(-8px);
-            border-color: rgba(0, 255, 255, 0.25);
-            box-shadow: var(--shadow-hover);
+            border-color: rgba(0,255,255,0.25);
+            box-shadow: 0 30px 50px rgba(0,0,0,0.4), 0 0 30px rgba(0,255,255,0.1);
         }
 
         .card-header {
             display: flex;
             align-items: flex-start;
             gap: 16px;
-            margin-bottom: 20px;
+            margin-bottom: 18px;
         }
 
         .card-icon {
             width: 60px;
             height: 60px;
-            background: linear-gradient(135deg, rgba(0, 255, 255, 0.1), rgba(255, 0, 255, 0.1));
+            background: linear-gradient(135deg, rgba(0,255,255,0.1), rgba(255,0,255,0.1));
             border-radius: 18px;
             display: flex;
             align-items: center;
             justify-content: center;
-            border: 1px solid rgba(0, 255, 255, 0.15);
+            border: 1px solid rgba(0,255,255,0.15);
             flex-shrink: 0;
-            transition: var(--transition);
+            transition: all 0.3s;
         }
+        .brand-card:hover .card-icon { transform: rotate(3deg) scale(1.05); background: linear-gradient(135deg, rgba(0,255,255,0.18), rgba(255,0,255,0.18)); }
+        .card-icon i { font-size: 28px; color: var(--cyan); }
 
-        .brand-card:hover .card-icon {
-            transform: rotate(3deg) scale(1.05);
-            background: linear-gradient(135deg, rgba(0, 255, 255, 0.15), rgba(255, 0, 255, 0.15));
-            box-shadow: 0 0 30px rgba(0, 255, 255, 0.15);
-        }
-
-        .card-icon i {
-            font-size: 28px;
-            color: var(--accent-cyan);
-        }
-
-        .card-title {
-            flex: 1;
-        }
-
-        .brand-name {
-            font-size: 20px;
-            font-weight: 700;
-            margin-bottom: 4px;
-        }
-
-        .brand-category {
-            font-size: 10px;
-            font-weight: 600;
-            letter-spacing: 1.5px;
-            color: var(--accent-green);
-            text-transform: uppercase;
-        }
+        .card-title h3 { font-size: 20px; font-weight: 700; margin-bottom: 3px; }
+        .card-title .category { font-size: 10px; font-weight: 600; letter-spacing: 1.5px; color: var(--green); text-transform: uppercase; }
 
         .brand-desc {
             color: var(--text-secondary);
@@ -697,15 +483,13 @@
             flex-wrap: wrap;
             gap: 6px;
         }
-
         .tag {
             padding: 4px 12px;
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            border-radius: var(--radius-full);
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 40px;
             font-size: 10px;
             color: var(--text-secondary);
-            font-weight: 500;
             text-transform: uppercase;
             letter-spacing: 0.3px;
         }
@@ -715,341 +499,206 @@
             bottom: -50px;
             left: 0;
             right: 0;
-            padding: 16px 24px;
-            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-magenta));
-            transition: bottom 0.3s;
+            padding: 16px;
+            background: linear-gradient(135deg, rgba(0,255,255,0.95), rgba(255,0,255,0.95));
             text-align: center;
             font-weight: 600;
             color: var(--bg-dark);
             font-size: 13px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
+            transition: bottom 0.3s;
         }
+        .brand-card:hover .card-hover { bottom: 0; }
 
-        .brand-card:hover .card-hover {
-            bottom: 0;
-        }
-
-        /* ============================================= */
-        /* WHY CHOOSE US - 12 POINTS */
-        /* ============================================= */
-        .why-section {
-            padding: 70px 0;
-        }
-
+        /* Why Section */
+        .why-section { padding: 70px 0; }
         .why-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 18px;
-            margin-top: 45px;
+            margin-top: 40px;
         }
-
         .why-card {
             background: var(--glass-bg);
-            backdrop-filter: blur(20px);
+            backdrop-filter: blur(25px);
             border: 1px solid var(--glass-border);
             border-radius: 22px;
-            padding: 26px 20px;
-            transition: var(--transition);
+            padding: 24px 18px;
             text-align: center;
+            transition: all 0.2s;
         }
-
-        .why-card:hover {
-            background: rgba(0, 255, 255, 0.03);
-            border-color: rgba(0, 255, 255, 0.15);
-            transform: translateY(-4px);
-        }
-
+        .why-card:hover { background: rgba(0,255,255,0.04); border-color: rgba(0,255,255,0.2); transform: translateY(-4px); }
         .why-icon {
-            width: 52px;
-            height: 52px;
-            margin: 0 auto 18px;
-            background: linear-gradient(135deg, rgba(0, 255, 255, 0.1), rgba(255, 0, 255, 0.1));
+            width: 50px;
+            height: 50px;
+            margin: 0 auto 16px;
+            background: linear-gradient(135deg, rgba(0,255,255,0.1), rgba(255,0,255,0.1));
             border-radius: 16px;
             display: flex;
             align-items: center;
             justify-content: center;
-            border: 1px solid rgba(0, 255, 255, 0.15);
+            border: 1px solid rgba(0,255,255,0.15);
         }
+        .why-icon i { font-size: 22px; color: var(--cyan); }
+        .why-card h4 { font-size: 15px; margin-bottom: 8px; font-weight: 600; }
+        .why-card p { font-size: 11px; color: var(--text-secondary); }
 
-        .why-icon i {
-            font-size: 24px;
-            color: var(--accent-cyan);
-        }
-
-        .why-card h4 {
-            font-size: 16px;
-            font-weight: 600;
-            margin-bottom: 8px;
-        }
-
-        .why-card p {
-            color: var(--text-secondary);
-            font-size: 12px;
-            line-height: 1.5;
-        }
-
-        /* ============================================= */
-        /* FEATURES */
-        /* ============================================= */
-        .features-section {
-            padding: 70px 0;
-        }
-
+        /* Features */
+        .features-section { padding: 60px 0; }
         .features-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 22px;
-            margin-top: 45px;
+            margin-top: 35px;
         }
-
         .feature-card {
             background: var(--glass-bg);
-            backdrop-filter: blur(20px);
+            backdrop-filter: blur(25px);
             border: 1px solid var(--glass-border);
             border-radius: 28px;
-            padding: 34px 26px;
+            padding: 32px 24px;
             text-align: center;
-            transition: var(--transition);
+            transition: all 0.2s;
         }
-
-        .feature-card:hover {
-            background: rgba(0, 255, 255, 0.03);
-            border-color: rgba(0, 255, 255, 0.15);
-            transform: translateY(-5px);
-        }
-
+        .feature-card:hover { background: rgba(0,255,255,0.04); border-color: rgba(0,255,255,0.2); transform: translateY(-5px); }
         .feature-icon {
-            width: 70px;
-            height: 70px;
+            width: 65px;
+            height: 65px;
             margin: 0 auto 22px;
-            background: linear-gradient(135deg, rgba(0, 255, 255, 0.1), rgba(255, 0, 255, 0.1));
-            border-radius: 22px;
+            background: linear-gradient(135deg, rgba(0,255,255,0.1), rgba(255,0,255,0.1));
+            border-radius: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
-            border: 1px solid rgba(0, 255, 255, 0.15);
+            border: 1px solid rgba(0,255,255,0.15);
         }
+        .feature-icon i { font-size: 30px; color: var(--cyan); }
+        .feature-card h3 { font-size: 18px; margin-bottom: 12px; }
+        .feature-card p { font-size: 13px; color: var(--text-secondary); line-height: 1.5; }
 
-        .feature-icon i {
-            font-size: 32px;
-            color: var(--accent-cyan);
-        }
-
-        .feature-card h3 {
-            font-size: 19px;
-            margin-bottom: 12px;
-            font-weight: 600;
-        }
-
-        .feature-card p {
-            color: var(--text-secondary);
-            font-size: 13px;
-            line-height: 1.6;
-        }
-
-        /* ============================================= */
         /* CTA */
-        /* ============================================= */
-        .cta-section {
-            padding: 70px 0;
-            text-align: center;
-        }
-
+        .cta-section { padding: 60px 0; }
         .cta-card {
-            background: linear-gradient(135deg, rgba(0, 255, 255, 0.05), rgba(255, 0, 255, 0.05));
-            backdrop-filter: blur(30px);
-            border: 1px solid rgba(0, 255, 255, 0.15);
+            background: linear-gradient(135deg, rgba(0,255,255,0.06), rgba(255,0,255,0.06));
+            backdrop-filter: blur(40px);
+            border: 1px solid rgba(0,255,255,0.2);
             border-radius: 50px;
             padding: 60px 40px;
-            position: relative;
-            overflow: hidden;
+            text-align: center;
         }
-
         .cta-title {
             font-family: 'Playfair Display', serif;
-            font-size: clamp(34px, 5vw, 46px);
-            font-weight: 700;
-            margin-bottom: 18px;
-            background: linear-gradient(135deg, #fff, var(--accent-cyan), var(--accent-magenta));
+            font-size: clamp(32px, 5vw, 44px);
+            margin-bottom: 16px;
+            background: linear-gradient(135deg, #fff, var(--cyan), var(--magenta));
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
         }
-
-        .cta-subtitle {
-            font-size: 17px;
-            color: var(--text-secondary);
-            margin-bottom: 36px;
-        }
-
-        .cta-button {
+        .cta-subtitle { color: var(--text-secondary); margin-bottom: 30px; }
+        .cta-btn {
             display: inline-flex;
             align-items: center;
             gap: 10px;
-            padding: 16px 44px;
-            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-magenta));
+            padding: 16px 40px;
+            background: linear-gradient(135deg, var(--cyan), var(--magenta));
             color: var(--bg-dark);
             text-decoration: none;
             font-weight: 700;
-            font-size: 16px;
-            border-radius: var(--radius-full);
-            transition: var(--transition);
-            box-shadow: 0 10px 35px rgba(0, 255, 255, 0.2);
+            border-radius: 50px;
+            transition: all 0.3s;
         }
+        .cta-btn:hover { transform: scale(1.05); box-shadow: 0 20px 50px rgba(0,255,255,0.3); }
 
-        .cta-button:hover {
-            transform: scale(1.04);
-            box-shadow: 0 15px 50px rgba(255, 0, 255, 0.3);
-        }
-
-        /* ============================================= */
-        /* FOOTER */
-        /* ============================================= */
+        /* Footer */
         .footer {
-            padding: 60px 0 30px;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            background: rgba(10,10,15,0.7);
+            backdrop-filter: blur(30px);
+            border-top: 1px solid rgba(255,255,255,0.05);
+            padding: 55px 0 25px;
             margin-top: 50px;
-            background: rgba(5, 5, 8, 0.4);
-            backdrop-filter: blur(20px);
         }
-
         .footer-grid {
             display: grid;
             grid-template-columns: 2fr 1fr 1fr 1.2fr;
-            gap: 45px;
-            margin-bottom: 45px;
+            gap: 40px;
+            margin-bottom: 40px;
         }
-
         .footer-brand h3 {
             font-family: 'Playfair Display', serif;
             font-size: 28px;
             margin-bottom: 18px;
-            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-magenta));
+            background: linear-gradient(135deg, var(--cyan), var(--magenta));
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
         }
-
-        .footer-brand p {
-            color: var(--text-muted);
-            font-size: 13px;
-            line-height: 1.7;
-            margin-bottom: 20px;
-        }
-
-        .social-links {
-            display: flex;
-            gap: 10px;
-        }
-
+        .footer-brand p { color: var(--text-muted); font-size: 13px; line-height: 1.7; margin-bottom: 20px; }
+        .social-links { display: flex; gap: 10px; }
         .social-links a {
-            width: 38px;
-            height: 38px;
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.06);
+            width: 38px; height: 38px;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.06);
             border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
             color: var(--text-secondary);
             text-decoration: none;
-            transition: var(--transition);
+            transition: all 0.2s;
         }
-
-        .social-links a:hover {
-            background: var(--accent-cyan);
-            color: var(--bg-dark);
-        }
-
-        .footer-links h4 {
-            font-size: 14px;
-            margin-bottom: 22px;
-            color: var(--text-primary);
-            font-weight: 600;
-        }
-
-        .footer-links ul {
-            list-style: none;
-        }
-
-        .footer-links li {
-            margin-bottom: 12px;
-        }
-
+        .social-links a:hover { background: var(--cyan); color: var(--bg-dark); transform: translateY(-3px); }
+        .footer-links h4 { font-size: 14px; margin-bottom: 22px; font-weight: 600; letter-spacing: 1px; }
+        .footer-links ul { list-style: none; }
+        .footer-links li { margin-bottom: 12px; }
         .footer-links a {
             color: var(--text-muted);
             text-decoration: none;
             font-size: 13px;
-            transition: var(--transition);
+            transition: all 0.2s;
             display: inline-flex;
             align-items: center;
             gap: 8px;
         }
-
-        .footer-links a:hover {
-            color: var(--accent-cyan);
-        }
-
-        .footer-links i {
-            color: var(--accent-green);
-            font-size: 12px;
-        }
-
+        .footer-links a:hover { color: var(--cyan); transform: translateX(4px); }
+        .footer-links i { color: var(--green); font-size: 13px; width: 16px; }
         .footer-bottom {
             text-align: center;
             padding-top: 30px;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            border-top: 1px solid rgba(255,255,255,0.05);
             color: var(--text-muted);
-            font-size: 13px;
+            font-size: 12px;
         }
+        .footer-bottom a { color: var(--cyan); text-decoration: none; }
 
-        /* ============================================= */
-        /* BACK TO TOP */
-        /* ============================================= */
-        .back-to-top {
+        /* Back to Top */
+        .back-top {
             position: fixed;
             bottom: 30px;
             right: 30px;
-            width: 48px;
-            height: 48px;
+            width: 45px;
+            height: 45px;
             background: var(--glass-bg);
-            backdrop-filter: blur(15px);
-            border: 1px solid rgba(0, 255, 255, 0.2);
-            border-radius: 16px;
-            color: var(--accent-cyan);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0,255,255,0.2);
+            border-radius: 14px;
+            color: var(--cyan);
             display: flex;
             align-items: center;
             justify-content: center;
             text-decoration: none;
             font-size: 20px;
-            transition: var(--transition);
             opacity: 0;
             visibility: hidden;
+            transition: all 0.3s;
             z-index: 999;
         }
+        .back-top.visible { opacity: 1; visibility: visible; }
+        .back-top:hover { background: var(--cyan); color: var(--bg-dark); }
 
-        .back-to-top.visible {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .back-to-top:hover {
-            background: rgba(0, 255, 255, 0.15);
-            transform: translateY(-5px);
-        }
-
-        /* ============================================= */
-        /* RESPONSIVE */
-        /* ============================================= */
-        @media (max-width: 1200px) {
-            .container { padding: 0 30px; }
+        /* Responsive */
+        @media (max-width: 1100px) {
             .why-grid { grid-template-columns: repeat(3, 1fr); }
-            .features-grid { grid-template-columns: repeat(2, 1fr); }
         }
-
         @media (max-width: 992px) {
             .hero-grid { grid-template-columns: 1fr; text-align: center; }
             .hero-subtitle { margin-left: auto; margin-right: auto; }
@@ -1057,30 +706,24 @@
             .hero-visual { display: none; }
             .nav-menu { display: none; }
             .mobile-toggle { display: block; }
-            .why-grid { grid-template-columns: repeat(2, 1fr); }
+            .features-grid { grid-template-columns: repeat(2, 1fr); }
             .footer-grid { grid-template-columns: repeat(2, 1fr); }
         }
-
         @media (max-width: 768px) {
             .container { padding: 0 20px; }
             .logo-text span { display: none; }
             .whatsapp-btn span { display: none; }
             .whatsapp-btn { padding: 10px 16px; }
-            .hero-title { font-size: 36px; }
+            .why-grid { grid-template-columns: repeat(2, 1fr); }
+            .brand-grid { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 600px) {
             .why-grid { grid-template-columns: 1fr; }
             .features-grid { grid-template-columns: 1fr; }
-            .brand-grid { grid-template-columns: 1fr; }
-            .footer-grid { grid-template-columns: 1fr; gap: 30px; }
-            .cta-card { padding: 45px 25px; }
-            .back-to-top { bottom: 20px; right: 20px; }
-            .filter-pills { gap: 8px; }
-            .pill { padding: 8px 16px; font-size: 11px; }
-        }
-
-        @media (max-width: 480px) {
+            .footer-grid { grid-template-columns: 1fr; }
             .hero-stats { gap: 20px; }
-            .stat-number { font-size: 28px; }
-            .hero-badge { font-size: 9px; }
+            .filter-pills .pill span { display: none; }
+            .pill { padding: 10px 16px; }
         }
 
         @media (prefers-reduced-motion: reduce) {
@@ -1091,14 +734,12 @@
 <body>
     <a href="#main-content" class="skip-link">Skip to main content</a>
 
-    <div class="bg-gradient"></div>
+    <!-- Background -->
+    <div class="bg-animation"></div>
     <div class="orb orb-1"></div>
     <div class="orb orb-2"></div>
 
-    <a href="#" class="back-to-top" id="backToTop" aria-label="Back to top">
-        <i class="fas fa-arrow-up"></i>
-    </a>
-
+    <!-- Header -->
     <header class="header" id="header">
         <div class="container">
             <div class="header-content">
@@ -1106,7 +747,7 @@
                     <div class="logo-icon">R</div>
                     <div class="logo-text">
                         <h1>RIZVI.STORE</h1>
-                        <span>26 PREMIUM BRANDS</span>
+                        <span>26+ PREMIUM BRANDS</span>
                     </div>
                 </div>
                 
@@ -1114,66 +755,69 @@
                     <a href="#home" class="nav-item active">Home</a>
                     <a href="#brands" class="nav-item">Brands</a>
                     <a href="#why" class="nav-item">Why Us</a>
-                    <a href="#features" class="nav-item">Features</a>
+                    <a href="#categories" class="nav-item">Categories</a>
                 </nav>
                 
-                <div class="header-actions">
-                    <a href="https://wa.me/918879952676" class="whatsapp-btn" target="_blank">
+                <div style="display: flex; align-items: center; gap: 12px;">
+                    <a href="https://wa.me/918879952676" class="whatsapp-btn" target="_blank" rel="noopener">
                         <i class="fab fa-whatsapp"></i>
-                        <span>Connect</span>
+                        <span>+91 88799 52676</span>
                     </a>
-                    <button class="mobile-toggle" id="mobileToggle" aria-label="Menu">
+                    <div class="mobile-toggle" id="mobileToggle" aria-label="Menu">
                         <i class="fas fa-bars"></i>
-                    </button>
+                    </div>
                 </div>
             </div>
         </div>
     </header>
 
     <main id="main-content">
+        <!-- Hero -->
         <section class="hero" id="home">
             <div class="container">
                 <div class="hero-grid">
-                    <div class="hero-content">
+                    <div>
                         <div class="hero-badge">
                             <i class="fas fa-crown"></i> LUXURY ECOSYSTEM
                         </div>
-                        <h1 class="hero-title">26 Premium Brands.<br>One Luxury Ecosystem.</h1>
+                        <h1 class="hero-title">26+ Premium Brands.<br>One Luxury Ecosystem.</h1>
                         <p class="hero-subtitle">From modest fashion to home services. Global shipping, authentic products, local Mumbai excellence.</p>
-                        <a href="#brands" class="cta-button">Explore Brands <i class="fas fa-arrow-right"></i></a>
+                        <a href="#brands" class="cta-btn">Explore Brands <i class="fas fa-arrow-right"></i></a>
                         <div class="hero-stats">
-                            <div class="stat-item"><div class="stat-number">26</div><div class="stat-label">BRANDS</div></div>
+                            <div class="stat-item"><div class="stat-number">26+</div><div class="stat-label">PREMIUM BRANDS</div></div>
                             <div class="stat-item"><div class="stat-number">7</div><div class="stat-label">CATEGORIES</div></div>
-                            <div class="stat-item"><div class="stat-number">15K+</div><div class="stat-label">CLIENTS</div></div>
+                            <div class="stat-item"><div class="stat-number">15K+</div><div class="stat-label">HAPPY CLIENTS</div></div>
                             <div class="stat-item"><div class="stat-number">40+</div><div class="stat-label">COUNTRIES</div></div>
                         </div>
                     </div>
                     <div class="hero-visual">
-                        <div class="float-card"><div class="float-icon"><i class="fas fa-vest"></i></div><h3>Aayat</h3><p>Premium abayas & hijabs</p></div>
-                        <div class="float-card"><div class="float-icon"><i class="fas fa-baby"></i></div><h3>Kiddus</h3><p>Kids fashion & accessories</p></div>
-                        <div class="float-card"><div class="float-icon"><i class="fas fa-gift"></i></div><h3>Bushra</h3><p>Custom gifts for all occasions</p></div>
+                        <div class="float-card"><div class="float-icon"><i class="fas fa-vest"></i></div><h3>Modest Fashion</h3><p>Premium abayas, hijabs & couture</p></div>
+                        <div class="float-card"><div class="float-icon"><i class="fas fa-baby"></i></div><h3>Kids Collection</h3><p>Toddler to teen fashion & essentials</p></div>
+                        <div class="float-card"><div class="float-icon"><i class="fas fa-gift"></i></div><h3>Custom Gifts</h3><p>Personalized gifting for every occasion</p></div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="brands" class="brands-section">
+        <!-- Brands Section -->
+        <section id="brands" style="padding: 60px 0;">
             <div class="container">
                 <div class="section-header">
                     <h2 class="section-title">Our Brand Universe</h2>
-                    <p class="section-subtitle">26 PREMIUM LABELS · ONE ECOSYSTEM</p>
+                    <p class="section-subtitle">26+ PREMIUM LABELS · ONE ECOSYSTEM</p>
                 </div>
                 
-                <div class="filter-section">
+                <div class="filter-section" id="categories">
                     <div class="filter-pills">
-                        <button class="pill active" data-filter="all"><i class="fas fa-grid-2"></i> All (26)</button>
-                        <button class="pill" data-filter="fashion"><i class="fas fa-vest"></i> Fashion (6)</button>
-                        <button class="pill" data-filter="beauty"><i class="fas fa-palette"></i> Beauty (3)</button>
-                        <button class="pill" data-filter="home"><i class="fas fa-couch"></i> Home (5)</button>
-                        <button class="pill" data-filter="food"><i class="fas fa-utensils"></i> Food (2)</button>
-                        <button class="pill" data-filter="service"><i class="fas fa-calendar"></i> Services (5)</button>
-                        <button class="pill" data-filter="lifestyle"><i class="fas fa-leaf"></i> Lifestyle (3)</button>
-                        <button class="pill" data-filter="business"><i class="fas fa-chart-simple"></i> Business (2)</button>
+                        <button class="pill active" data-filter="all"><i class="fas fa-grid-2"></i> <span>All</span> (26)</button>
+                        <button class="pill" data-filter="fashion"><i class="fas fa-vest"></i> <span>Fashion</span> (5)</button>
+                        <button class="pill" data-filter="beauty"><i class="fas fa-palette"></i> <span>Beauty</span> (3)</button>
+                        <button class="pill" data-filter="home"><i class="fas fa-couch"></i> <span>Home</span> (5)</button>
+                        <button class="pill" data-filter="kids"><i class="fas fa-child"></i> <span>Kids</span> (1)</button>
+                        <button class="pill" data-filter="food"><i class="fas fa-utensils"></i> <span>Food</span> (2)</button>
+                        <button class="pill" data-filter="service"><i class="fas fa-calendar"></i> <span>Services</span> (5)</button>
+                        <button class="pill" data-filter="lifestyle"><i class="fas fa-leaf"></i> <span>Lifestyle</span> (3)</button>
+                        <button class="pill" data-filter="business"><i class="fas fa-chart-simple"></i> <span>Business</span> (2)</button>
                     </div>
                 </div>
                 
@@ -1181,6 +825,7 @@
             </div>
         </section>
 
+        <!-- Why Choose Us -->
         <section id="why" class="why-section">
             <div class="container">
                 <div class="section-header">
@@ -1188,30 +833,31 @@
                     <p class="section-subtitle">12 REASONS TO TRUST US</p>
                 </div>
                 <div class="why-grid">
-                    <div class="why-card"><div class="why-icon"><i class="fas fa-store"></i></div><h4>26 Brands, One Platform</h4><p>Everything in one trusted ecosystem</p></div>
-                    <div class="why-card"><div class="why-icon"><i class="fas fa-globe"></i></div><h4>Global + Local Reach</h4><p>Dubai to Dadar, luxury has no borders</p></div>
-                    <div class="why-card"><div class="why-icon"><i class="fas fa-check-double"></i></div><h4>Authenticity Guaranteed</h4><p>Verified brands and quality services</p></div>
-                    <div class="why-card"><div class="why-icon"><i class="fas fa-heart"></i></div><h4>Tradition Meets Modernity</h4><p>Couture, cuisine, interiors connected</p></div>
-                    <div class="why-card"><div class="why-icon"><i class="fas fa-headset"></i></div><h4>24/7 Dedicated Support</h4><p>Your satisfaction is our priority</p></div>
-                    <div class="why-card"><div class="why-icon"><i class="fas fa-truck"></i></div><h4>Export Ready Partners</h4><p>Worldwide shipping with customs expertise</p></div>
-                    <div class="why-card"><div class="why-icon"><i class="fas fa-id-card"></i></div><h4>Verified Professionals</h4><p>All service providers background checked</p></div>
-                    <div class="why-card"><div class="why-icon"><i class="fas fa-award"></i></div><h4>15+ Years of Excellence</h4><p>Established 2010, trusted by thousands</p></div>
-                    <div class="why-card"><div class="why-icon"><i class="fas fa-hand-holding-heart"></i></div><h4>Halal & Ethical</h4><p>All products follow strict ethical standards</p></div>
-                    <div class="why-card"><div class="why-icon"><i class="fas fa-chart-line"></i></div><h4>Innovation First</h4><p>Digital marketing and training solutions</p></div>
-                    <div class="why-card"><div class="why-icon"><i class="fas fa-gem"></i></div><h4>Premium Craftsmanship</h4><p>Indian artistry with global appeal</p></div>
-                    <div class="why-card"><div class="why-icon"><i class="fas fa-smile"></i></div><h4>Customer First Approach</h4><p>Your trust is our greatest asset</p></div>
+                    <div class="why-card"><div class="why-icon"><i class="fas fa-store"></i></div><h4>26+ Brands</h4><p>Everything in one trusted ecosystem</p></div>
+                    <div class="why-card"><div class="why-icon"><i class="fas fa-globe"></i></div><h4>Global + Local</h4><p>Dubai to Mumbai, no borders</p></div>
+                    <div class="why-card"><div class="why-icon"><i class="fas fa-check-double"></i></div><h4>Authenticity</h4><p>Verified brands & quality</p></div>
+                    <div class="why-card"><div class="why-icon"><i class="fas fa-heart"></i></div><h4>Tradition + Modern</h4><p>Couture, cuisine, interiors</p></div>
+                    <div class="why-card"><div class="why-icon"><i class="fas fa-headset"></i></div><h4>24/7 Support</h4><p>Your satisfaction is priority</p></div>
+                    <div class="why-card"><div class="why-icon"><i class="fas fa-truck"></i></div><h4>Export Ready</h4><p>Worldwide shipping expertise</p></div>
+                    <div class="why-card"><div class="why-icon"><i class="fas fa-id-card"></i></div><h4>Verified Staff</h4><p>Background checked professionals</p></div>
+                    <div class="why-card"><div class="why-icon"><i class="fas fa-award"></i></div><h4>15+ Years</h4><p>Established 2010, trusted</p></div>
+                    <div class="why-card"><div class="why-icon"><i class="fas fa-hand-holding-heart"></i></div><h4>Halal & Ethical</h4><p>Strict ethical standards</p></div>
+                    <div class="why-card"><div class="why-icon"><i class="fas fa-chart-line"></i></div><h4>Innovation First</h4><p>Digital marketing & training</p></div>
+                    <div class="why-card"><div class="why-icon"><i class="fas fa-gem"></i></div><h4>Premium Craft</h4><p>Indian artistry, global appeal</p></div>
+                    <div class="why-card"><div class="why-icon"><i class="fas fa-smile"></i></div><h4>Customer First</h4><p>Your trust is our asset</p></div>
                 </div>
             </div>
         </section>
 
-        <section id="features" class="features-section">
+        <!-- Features -->
+        <section class="features-section">
             <div class="container">
                 <div class="section-header">
-                    <h2 class="section-title">Our Core Features</h2>
-                    <p class="section-subtitle">EXCEPTIONAL SERVICE · EVERY TIME</p>
+                    <h2 class="section-title">Core Features</h2>
+                    <p class="section-subtitle">EXCEPTIONAL SERVICE EVERY TIME</p>
                 </div>
                 <div class="features-grid">
-                    <div class="feature-card"><div class="feature-icon"><i class="fas fa-globe-asia"></i></div><h3>Worldwide Shipping</h3><p>40+ countries with express delivery and customs expertise</p></div>
+                    <div class="feature-card"><div class="feature-icon"><i class="fas fa-globe-asia"></i></div><h3>Worldwide Shipping</h3><p>Express delivery to 40+ countries with customs expertise</p></div>
                     <div class="feature-card"><div class="feature-icon"><i class="fas fa-shield-alt"></i></div><h3>100% Authentic</h3><p>Every product verified and certified for authenticity</p></div>
                     <div class="feature-card"><div class="feature-icon"><i class="fas fa-headset"></i></div><h3>24/7 Concierge</h3><p>Dedicated support team available round the clock</p></div>
                     <div class="feature-card"><div class="feature-icon"><i class="fas fa-medal"></i></div><h3>Premium Quality</h3><p>Handpicked brands with exceptional standards</p></div>
@@ -1219,100 +865,129 @@
             </div>
         </section>
 
+        <!-- CTA -->
         <section class="cta-section">
             <div class="container">
                 <div class="cta-card">
                     <h2 class="cta-title">Ready to Experience Luxury?</h2>
                     <p class="cta-subtitle">Join thousands of satisfied customers worldwide</p>
-                    <a href="https://wa.me/918879952676" class="cta-button" target="_blank"><i class="fab fa-whatsapp"></i> Connect on WhatsApp</a>
+                    <a href="https://wa.me/918879952676" class="cta-btn" target="_blank"><i class="fab fa-whatsapp"></i> Connect on WhatsApp</a>
                 </div>
             </div>
         </section>
     </main>
 
+    <!-- Footer -->
     <footer class="footer">
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-brand">
                     <h3>RIZVI.STORE</h3>
-                    <p>26 premium brands across fashion, beauty, home, kids & services. Global reach, local excellence.</p>
+                    <p>26+ premium brands across fashion, beauty, home, kids, food & services. Global reach, local excellence.</p>
                     <div class="social-links">
-                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="https://instagram.com/rizvistore" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="https://facebook.com/rizvistore" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://youtube.com/@rizvistore" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                        <a href="https://pinterest.com/rizvistore" aria-label="Pinterest"><i class="fab fa-pinterest-p"></i></a>
                         <a href="https://wa.me/918879952676" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
                     </div>
                 </div>
-                <div class="footer-links"><h4>Explore</h4><ul><li><a href="#"><i class="fas fa-angle-right"></i> All Brands</a></li><li><a href="#"><i class="fas fa-angle-right"></i> New Arrivals</a></li><li><a href="#"><i class="fas fa-angle-right"></i> Best Sellers</a></li><li><a href="#"><i class="fas fa-angle-right"></i> Gift Cards</a></li></ul></div>
-                <div class="footer-links"><h4>Support</h4><ul><li><a href="#"><i class="fas fa-angle-right"></i> Help Center</a></li><li><a href="#"><i class="fas fa-angle-right"></i> Shipping Info</a></li><li><a href="#"><i class="fas fa-angle-right"></i> Returns</a></li><li><a href="#"><i class="fas fa-angle-right"></i> Track Order</a></li></ul></div>
-                <div class="footer-links"><h4>Contact</h4><ul><li><a href="tel:+918879952676"><i class="fas fa-phone"></i> +91 88799 52676</a></li><li><a href="mailto:hello@rizvi.store"><i class="fas fa-envelope"></i> hello@rizvi.store</a></li><li><i class="fas fa-map-marker-alt"></i> Mumbai, India</li><li><i class="fas fa-clock"></i> 24/7 Support</li></ul></div>
+                <div class="footer-links">
+                    <h4>Explore</h4>
+                    <ul>
+                        <li><a href="/brands/"><i class="fas fa-angle-right"></i> All Brands</a></li>
+                        <li><a href="/new-arrivals/"><i class="fas fa-angle-right"></i> New Arrivals</a></li>
+                        <li><a href="/best-sellers/"><i class="fas fa-angle-right"></i> Best Sellers</a></li>
+                        <li><a href="/gift-cards/"><i class="fas fa-angle-right"></i> Gift Cards</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="/help/"><i class="fas fa-angle-right"></i> Help Center</a></li>
+                        <li><a href="/shipping/"><i class="fas fa-angle-right"></i> Shipping Info</a></li>
+                        <li><a href="/returns/"><i class="fas fa-angle-right"></i> Returns</a></li>
+                        <li><a href="/track/"><i class="fas fa-angle-right"></i> Track Order</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Contact</h4>
+                    <ul>
+                        <li><a href="tel:+918879952676"><i class="fas fa-phone"></i> +91 88799 52676</a></li>
+                        <li><a href="mailto:hello@rizvi.store"><i class="fas fa-envelope"></i> hello@rizvi.store</a></li>
+                        <li><i class="fas fa-map-marker-alt"></i> Mumbai, India</li>
+                        <li><i class="fas fa-clock"></i> 24/7 Support</li>
+                    </ul>
+                </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2025 Rizvi.Store — All rights reserved. | <a href="#" style="color: var(--accent-cyan);">Privacy</a> | <a href="#" style="color: var(--accent-cyan);">Terms</a></p>
+                <p>&copy; 2025 Rizvi.Store — All rights reserved. | <a href="/privacy/">Privacy</a> | <a href="/terms/">Terms</a> | <a href="/sitemap/">Sitemap</a></p>
             </div>
         </div>
     </footer>
 
+    <!-- Back to Top -->
+    <a href="#" class="back-top" id="backTop" aria-label="Back to top"><i class="fas fa-arrow-up"></i></a>
+
     <script>
-        // =============================================
-        // 26 BRANDS - COMPLETE DATABASE
-        // =============================================
+        // BRAND DATABASE - 26 Brands with verified Font Awesome 6 icons
         const brands = [
-            // FASHION (6)
-            { name: 'Aayat', category: 'Abayas & Hijabs', tag: 'fashion', desc: 'Premium abayas blending Middle Eastern grace with contemporary design. Breathable, high-quality fabric.', icon: 'vest', features: ['Global Delivery', 'Custom Tailoring', 'Size Inclusive', 'Premium Fabric'], route: '/brand/aayat/' },
-            { name: 'Sharmeen', category: 'Niqab & Hijab', tag: 'fashion', desc: 'Exclusive niqab lines and designer hijabs for modest fashion lovers. Multiple fabric options.', icon: 'user-tie', features: ['Modest Elegance', 'Breathable', 'Custom Sizing', 'Global Delivery'], route: '/brand/sharmeen/' },
-            { name: 'Ruqayya', category: 'Teen Modest Fashion', tag: 'fashion', desc: 'Youthful modestwear for teens aged 13-19. Age-appropriate designs with trendy colors.', icon: 'child', features: ['Age-Appropriate', 'Trendy Designs', 'Comfort Fit', 'School Friendly'], route: '/brand/ruqayya/' },
-            { name: 'Zaybaish', category: 'Luxury Couture', tag: 'fashion', desc: 'Aari, Dardozi embroidery, intricate beadwork — handmade masterpieces for brides and collectors.', icon: 'crown', features: ['Indian Artistry', 'Handmade', 'Bridal Couture', 'Worldwide Shipping'], route: '/brand/zaybaish/' },
-            { name: 'Insiya', category: 'Fashion Accessories', tag: 'fashion', desc: 'Curated bags, belts, jewelry, and pins — timeless elegance for every occasion.', icon: 'ring', features: ['Complete Look', 'Premium Quality', 'Trendsetting', 'Gift Ready'], route: '/brand/insiya/' },
-            { name: 'Kiddus', category: 'Kids Fashion & Accessories', tag: 'fashion', desc: 'Toddler diapers to kids dresses, shoes and accessories for both boys and girls. Ages 0-12.', icon: 'baby', features: ['Toddler to Tween', 'Boy & Girl', 'Premium Quality', 'Comfort First'], route: '/brand/kiddus/' },
+            // FASHION (5)
+            { name: 'Aayat', category: 'Abayas & Hijabs', tag: 'fashion', desc: 'Premium abayas blending Middle Eastern grace with contemporary design. Breathable fabric, global shipping.', icon: 'vest', features: ['Global Delivery','Custom Tailoring','Size Inclusive','Premium Fabric'], route: '/brand/aayat/' },
+            { name: 'Sharmeen', category: 'Niqab & Hijab', tag: 'fashion', desc: 'Exclusive niqab lines and designer hijabs. Multiple fabric options with sophisticated modest designs.', icon: 'user-tie', features: ['Modest Elegance','Breathable','Custom Sizing','Global Delivery'], route: '/brand/sharmeen/' },
+            { name: 'Ruqayya', category: 'Teen Modest Fashion', tag: 'fashion', desc: 'Youthful modestwear for teens 13-19. Age-appropriate designs with trendy colors and comfort fit.', icon: 'child', features: ['Age-Appropriate','Trendy Designs','Comfort Fit','School Friendly'], route: '/brand/ruqayya/' },
+            { name: 'Zaybaish', category: 'Luxury Couture', tag: 'fashion', desc: 'Aari, Dardozi embroidery, intricate beadwork. Handmade bridal masterpieces for global couture collectors.', icon: 'crown', features: ['Indian Artistry','Handmade','Bridal Couture','Worldwide Shipping'], route: '/brand/zaybaish/' },
+            { name: 'Insiya', category: 'Fashion Accessories', tag: 'fashion', desc: 'Curated bags, belts, jewelry, and pins. Timeless elegance and trend-forward style for every occasion.', icon: 'ring', features: ['Complete Look','Premium Quality','Trendsetting','Gift Ready'], route: '/brand/insiya/' },
             
-            // BEAUTY (3)
-            { name: 'Mehreen', category: 'Luxury Cosmetics', tag: 'beauty', desc: 'Authentic international beauty brands — high-end makeup and skincare with guaranteed authenticity.', icon: 'palette', features: ['100% Authentic', 'Global Shipping', 'Cruelty-Free', 'Premium Brands'], route: '/brand/mehreen/' },
-            { name: 'Mahek', category: 'Premium Perfumes', tag: 'beauty', desc: 'Arabian-inspired fragrances with oud, rose, and amber. Crafted for longevity.', icon: 'wine-bottle', features: ['Long-Lasting', 'Oud Collection', 'Arabic Blends', 'Gift Sets'], route: '/brand/mahek/' },
-            { name: 'Zoya', category: 'Beauty Services', tag: 'beauty', desc: 'Premium beauty products with Mumbai salon partnerships. Professional stylists and bridal packages.', icon: 'spa', features: ['Salon Network', 'Bridal Packages', 'Home Services', 'Expert Stylists'], route: '/brand/zoya/' },
+            // BEAUTY (3) - Mehreen Glow replaced with Zoya
+            { name: 'Mehreen', category: 'Luxury Cosmetics', tag: 'beauty', desc: 'Authentic international beauty brands. High-end makeup and skincare with guaranteed authenticity.', icon: 'palette', features: ['100% Authentic','Global Shipping','Cruelty-Free','Premium Brands'], route: '/brand/mehreen/' },
+            { name: 'Mahek', category: 'Premium Perfumes', tag: 'beauty', desc: 'Arabian-inspired fragrances with oud, rose, and amber. Crafted for longevity and sophisticated palates.', icon: 'wine-bottle', features: ['Long-Lasting','Oud Collection','Arabic Blends','Gift Sets'], route: '/brand/mahek/' },
+            { name: 'Zoya', category: 'Beauty Services', tag: 'beauty', desc: 'Premium beauty products with Mumbai salon partnerships. Professional stylists and bridal packages.', icon: 'spa', features: ['Salon Network','Bridal Packages','Home Services','Expert Stylists'], route: '/brand/zoya/' },
             
             // HOME (5)
-            { name: 'Asaish', category: 'Custom Furniture', tag: 'home', desc: 'Handmade sofas, dining sets, and custom furniture — timeless craftsmanship for global homes.', icon: 'couch', features: ['Built to Last', 'International Shipping', 'Custom Designs', 'Premium Materials'], route: '/brand/asaish/' },
-            { name: 'Satayir', category: 'Curtains & Drapery', tag: 'home', desc: 'Designer curtains, blinds, and drapery installations — texture, light, and creativity worldwide.', icon: 'roller', features: ['Global Design', 'Custom Measurements', 'Professional Install', 'Luxury Fabrics'], route: '/brand/satayir/' },
-            { name: 'Araish', category: 'Interior Design', tag: 'home', desc: 'From minimalist modern to royal Indian interiors — spaces that reflect your personality.', icon: 'house', features: ['Global Consultation', 'Turnkey Projects', 'Virtual Design', 'Luxury Finishes'], route: '/brand/araish/' },
-            { name: 'Naqqash', category: 'Laser Engraving & 3D Art', tag: 'home', desc: 'Laser engraved metal, acrylic, wooden wall art and 3D tabletop items. Precision craftsmanship.', icon: 'cubes', features: ['3D Tabletop', 'Custom Engraving', 'Corporate Gifting', 'Worldwide Shipping'], route: '/brand/naqqash/' },
-            { name: 'Fi Electronics', category: 'Electronics & Appliances', tag: 'home', desc: 'Mobile, TV, fridge, washing machine and premium electronics — quality guaranteed.', icon: 'tv', features: ['Premium Brands', 'Global Warranty', 'Best Prices', 'After-Sales Support'], route: '/brand/fi-electronics/' },
+            { name: 'Asaish', category: 'Custom Furniture', tag: 'home', desc: 'Handmade sofas, dining sets, and custom furniture. Timeless craftsmanship for global homes.', icon: 'couch', features: ['Built to Last','International Shipping','Custom Designs','White-Glove Delivery'], route: '/brand/asaish/' },
+            { name: 'Satayir', category: 'Curtains & Drapery', tag: 'home', desc: 'Designer curtains, blinds, and drapery installations. Texture, light, and creativity worldwide.', icon: 'roller', features: ['Global Design','Custom Measurements','Professional Install','Luxury Fabrics'], route: '/brand/satayir/' },
+            { name: 'Araish', category: 'Interior Design', tag: 'home', desc: 'From minimalist modern to royal Indian interiors. Spaces that reflect your personality worldwide.', icon: 'house', features: ['Global Consultation','Turnkey Projects','Virtual Design','Luxury Finishes'], route: '/brand/araish/' },
+            { name: 'Naqqash', category: 'Laser Engraving & 3D Art', tag: 'home', desc: 'Laser engraved metal, acrylic, wooden wall art and 3D tabletop items. Precision craftsmanship.', icon: 'cubes', features: ['3D Tabletop','Custom Engraving','Corporate Gifting','Precision Art'], route: '/brand/naqqash/' },
+            { name: 'Fi Electronics', category: 'Electronics & Appliances', tag: 'home', desc: 'Mobile, TV, fridge, washing machine and premium electronics. Quality guaranteed.', icon: 'tv', features: ['Premium Brands','Global Warranty','Best Prices','Export Ready'], route: '/brand/fi-electronics/' },
+            
+            // KIDS (1) - New Brand Kiddus
+            { name: 'Kiddus', category: 'Toddler to Kids Fashion', tag: 'kids', desc: 'From toddler diapers to kids dresses, shoes and accessories for both boys and girls. Complete kids collection.', icon: 'baby', features: ['Toddler Diapers','Dresses & Shoes','Boys & Girls','Accessories'], route: '/brand/kiddus/' },
             
             // FOOD (2)
-            { name: 'Sheereen', category: 'Mithai & Premium Sweets', tag: 'food', desc: 'Vacuum-packed Indian mithai and dry sweets — fresh, global shipping. Perfect for gifting.', icon: 'cake-candles', features: ['Authentic Taste', 'Gift Ready', 'Global Shipping', 'Festival Specials'], route: '/brand/sheereen/' },
-            { name: 'Awadhi Zaiqa', category: 'Cloud Kitchen', tag: 'food', desc: 'Authentic Lucknowi kebabs, biryanis, and parathas — royal flavors delivered across Mumbai.', icon: 'utensils', features: ['Five-Star Taste', 'Quick Delivery', 'Royal Recipes', 'Catering Services'], route: '/brand/awadhi-zaiqa/' },
+            { name: 'Sheereen', category: 'Mithai & Premium Sweets', tag: 'food', desc: 'Vacuum-packed Indian mithai and dry sweets. Fresh, global shipping. Perfect for festivals and gifting.', icon: 'cake-candles', features: ['Authentic Taste','Gift Ready','Global Shipping','Festival Specials'], route: '/brand/sheereen/' },
+            { name: 'Awadhi Zaiqa', category: 'Cloud Kitchen', tag: 'food', desc: 'Authentic Lucknowi kebabs, biryanis, and parathas. Royal flavors delivered across Mumbai.', icon: 'utensils', features: ['Five-Star Taste','Quick Delivery','Royal Recipes','Catering Services'], route: '/brand/awadhi-zaiqa/' },
             
             // SERVICES (5)
-            { name: 'Bazm (Exhieve)', category: 'Event Management', tag: 'service', desc: 'Weddings, corporate events, and intimate gatherings — full planning, décor, and catering.', icon: 'calendar', features: ['Seamless Execution', 'Full Planning', 'Décor & Catering', 'Corporate Events'], route: '/brand/bazm/' },
-            { name: 'Nawa', category: 'Healthcare at Home', tag: 'service', desc: 'Physiotherapy, nursing, elder care — trained professionals ensuring comfort and dignity.', icon: 'heart-pulse', features: ['Trusted Care', '24/7 Support', 'Post-Operative', 'Professional Staff'], route: '/brand/nawa/' },
-            { name: 'Madadgar', category: 'Home Staff Services', tag: 'service', desc: 'Verified, trained maids, cooks, and domestic helpers across Mumbai. Background-checked.', icon: 'people-group', features: ['Verified Professionals', 'Background Checked', 'Replacement Guarantee', 'Mumbai-Wide'], route: '/brand/madadgar/' },
-            { name: 'Kareegar', category: 'Metal Fabrication', tag: 'service', desc: 'Custom metalwork, grills, gates for homes and offices — strength meets artistry.', icon: 'gear', features: ['Metal Craftsmanship', 'Custom Designs', 'Durable', 'Installation'], route: '/brand/kareegar/' },
-            { name: 'Narmosh', category: 'Mom & Baby Care', tag: 'service', desc: 'Professional pre- and post-natal massage, traditional baby care at home.', icon: 'baby', features: ['Nurturing Care', 'Professional Masseuse', 'Ayurvedic', 'Home Visits'], route: '/brand/narmosh/' },
+            { name: 'Bazm', category: 'Event Management', tag: 'service', desc: 'Weddings, corporate events, and intimate gatherings. Full planning, décor, and catering.', icon: 'calendar', features: ['Seamless Execution','Full Planning','Décor & Catering','Corporate Events'], route: '/brand/bazm/' },
+            { name: 'Nawa', category: 'Healthcare at Home', tag: 'service', desc: 'Physiotherapy, nursing, elder care. Trained professionals ensuring comfort and dignity.', icon: 'heart-pulse', features: ['Trusted Care','24/7 Support','Post-Operative','Rehabilitation'], route: '/brand/nawa/' },
+            { name: 'Madadgar', category: 'Home Staff Services', tag: 'service', desc: 'Verified, trained maids, cooks, and domestic helpers across Mumbai. Background-checked professionals.', icon: 'people-group', features: ['Verified Professionals','Background Checked','Replacement Guarantee','Trained Staff'], route: '/brand/madadgar/' },
+            { name: 'Kareegar', category: 'Metal Fabrication', tag: 'service', desc: 'Custom metalwork, grills, gates for homes and offices. Strength meets artistry.', icon: 'gear', features: ['Metal Craftsmanship','Custom Designs','Durable','Installation'], route: '/brand/kareegar/' },
+            { name: 'Narmosh', category: 'Mom & Baby Care', tag: 'service', desc: 'Professional pre- and post-natal massage, traditional baby care at home.', icon: 'baby', features: ['Nurturing Care','Professional Masseuse','Ayurvedic','Home Visits'], route: '/brand/narmosh/' },
             
-            // LIFESTYLE (3)
-            { name: 'Sanobar', category: 'Floral Gifting', tag: 'lifestyle', desc: 'Preserved and luxury floral arrangements for global delivery. Art meets emotion.', icon: 'leaf', features: ['Worldwide Delivery', 'Luxury Arrangements', 'Preserved Flowers', 'Wedding Flowers'], route: '/brand/sanobar/' },
-            { name: 'Parwaaz', category: 'Custom Kites', tag: 'lifestyle', desc: 'Custom-branded kites with names, logos, and patterns — perfect for events and export.', icon: 'wind', features: ['Festival Specials', 'Custom Designs', 'Export Ready', 'Bulk Orders'], route: '/brand/parwaaz/' },
-            { name: 'Bushra', category: 'Custom Gifts', tag: 'lifestyle', desc: 'Personalized custom gifts for all occasions. Birthdays, weddings, anniversaries, corporate.', icon: 'gift', features: ['Personalized', 'All Occasions', 'Corporate Gifting', 'Express Delivery'], route: '/brand/bushra/' },
+            // LIFESTYLE (3) - Added Bushra, replaced Barqiya with Shahaab
+            { name: 'Sanobar', category: 'Floral Gifting', tag: 'lifestyle', desc: 'Preserved and luxury floral arrangements for global delivery. Art meets emotion across continents.', icon: 'leaf', features: ['Worldwide Delivery','Luxury Arrangements','Preserved Flowers','Wedding Flowers'], route: '/brand/sanobar/' },
+            { name: 'Parwaaz', category: 'Custom Kites', tag: 'lifestyle', desc: 'Custom-branded kites with names, logos, and patterns. Perfect for events and export.', icon: 'wind', features: ['Festival Specials','Custom Designs','Export Ready','Bulk Orders'], route: '/brand/parwaaz/' },
+            { name: 'Bushra', category: 'Custom Gifts', tag: 'lifestyle', desc: 'Personalized custom gifts for every occasion. Corporate gifting, wedding favors, and unique presents.', icon: 'gift', features: ['Personalized Gifts','Corporate Gifting','Wedding Favors','Custom Designs'], route: '/brand/bushra/' },
             
-            // BUSINESS (2)
-            { name: 'Shahaab', category: 'Digital Marketing Services', tag: 'business', desc: 'SEO, social media, PPC campaigns. Business gadgets and branding solutions for enterprises.', icon: 'chart-simple', features: ['Growth Solutions', 'Digital Strategy', 'ROI Focused', 'Brand Building'], route: '/brand/shahaab/' },
-            { name: 'Anabiya', category: 'Digital Training', tag: 'business', desc: 'Online courses in SEO, Ads Management, and digital marketing for professionals.', icon: 'graduation-cap', features: ['Expert Trainers', 'Certificate', 'Practical Skills', 'Job Placement'], route: '/brand/anabiya/' }
+            // BUSINESS (2) - Shahaab replaces Barqiya
+            { name: 'Shahaab', category: 'Digital Marketing', tag: 'business', desc: 'SEO, social media, PPC campaigns. Business gadgets and branding solutions for startups and enterprises.', icon: 'chart-simple', features: ['Growth Solutions','Digital Strategy','ROI Focused','Brand Building'], route: '/brand/shahaab/' },
+            { name: 'Anabiya', category: 'Digital Training', tag: 'business', desc: 'Online courses in SEO, Ads Management, and digital marketing for students and professionals.', icon: 'graduation-cap', features: ['Expert Trainers','Certificate','Practical Skills','Job Placement'], route: '/brand/anabiya/' }
         ];
 
         console.log('✅ Rizvi.Store - 26 Premium Brands Loaded!');
 
         // Render brands
         const brandGrid = document.getElementById('brandGrid');
-        
-        function renderBrands(filterType = 'all') {
-            const filtered = filterType === 'all' ? brands : brands.filter(b => b.tag === filterType);
+        function renderBrands(filter = 'all') {
+            const filtered = filter === 'all' ? brands : brands.filter(b => b.tag === filter);
             brandGrid.innerHTML = filtered.map(b => `
                 <a href="${b.route}" class="brand-card">
                     <div class="card-header">
                         <div class="card-icon"><i class="fas fa-${b.icon}"></i></div>
                         <div class="card-title">
-                            <div class="brand-name">${b.name}</div>
-                            <div class="brand-category">${b.category}</div>
+                            <h3>${b.name}</h3>
+                            <div class="category">${b.category}</div>
                         </div>
                     </div>
                     <div class="brand-desc">${b.desc}</div>
@@ -1321,75 +996,82 @@
                 </a>
             `).join('');
         }
-
         renderBrands();
 
-        // Filter functionality
-        document.querySelectorAll('.pill').forEach(pill => {
-            pill.addEventListener('click', function() {
-                document.querySelectorAll('.pill').forEach(p => { p.classList.remove('active'); p.setAttribute('aria-selected', 'false'); });
-                this.classList.add('active'); this.setAttribute('aria-selected', 'true');
+        // Filter
+        document.querySelectorAll('.pill').forEach(p => {
+            p.addEventListener('click', function() {
+                document.querySelectorAll('.pill').forEach(x => x.classList.remove('active'));
+                this.classList.add('active');
                 renderBrands(this.dataset.filter);
             });
         });
 
         // Header scroll
         const header = document.getElementById('header');
-        window.addEventListener('scroll', () => { header.classList.toggle('scrolled', window.scrollY > 100); });
+        window.addEventListener('scroll', () => header.classList.toggle('scrolled', scrollY > 100));
 
-        // Back to Top
-        const backToTop = document.getElementById('backToTop');
-        window.addEventListener('scroll', () => { backToTop.classList.toggle('visible', window.scrollY > 400); });
-        backToTop.addEventListener('click', (e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); });
+        // Back to top
+        const backTop = document.getElementById('backTop');
+        window.addEventListener('scroll', () => backTop.classList.toggle('visible', scrollY > 400));
+        backTop.addEventListener('click', e => { e.preventDefault(); scrollTo({top: 0, behavior: 'smooth'}); });
 
         // Mobile menu
         const mobileToggle = document.getElementById('mobileToggle');
         const navMenu = document.getElementById('navMenu');
         mobileToggle.addEventListener('click', () => {
-            const isExpanded = mobileToggle.getAttribute('aria-expanded') === 'true';
-            mobileToggle.setAttribute('aria-expanded', !isExpanded);
+            const icon = mobileToggle.querySelector('i');
             if (navMenu.style.display === 'flex') {
-                navMenu.style.display = '';
+                navMenu.style.display = 'none';
+                icon.className = 'fas fa-bars';
             } else {
                 navMenu.style.display = 'flex';
                 navMenu.style.flexDirection = 'column';
                 navMenu.style.position = 'absolute';
-                navMenu.style.top = '70px';
+                navMenu.style.top = '75px';
                 navMenu.style.left = '20px';
                 navMenu.style.right = '20px';
                 navMenu.style.background = 'rgba(10,10,15,0.98)';
-                navMenu.style.backdropFilter = 'blur(25px)';
+                navMenu.style.backdropFilter = 'blur(30px)';
                 navMenu.style.padding = '20px';
                 navMenu.style.borderRadius = '30px';
                 navMenu.style.border = '1px solid rgba(0,255,255,0.15)';
                 navMenu.style.gap = '8px';
                 navMenu.style.zIndex = '1000';
+                icon.className = 'fas fa-times';
             }
         });
 
         // Smooth scroll
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                const href = this.getAttribute('href');
-                if (href !== '#' && href !== '#main-content') {
+        document.querySelectorAll('a[href^="#"]').forEach(a => {
+            a.addEventListener('click', e => {
+                const href = a.getAttribute('href');
+                if (href !== '#') {
                     e.preventDefault();
-                    const target = document.querySelector(href);
-                    if (target) { target.scrollIntoView({ behavior: 'smooth' }); }
-                    if (window.innerWidth <= 992) { navMenu.style.display = ''; mobileToggle.setAttribute('aria-expanded', 'false'); }
+                    document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' });
                 }
             });
         });
 
-        // Active nav
+        // Active nav on scroll
         window.addEventListener('scroll', () => {
             const sections = document.querySelectorAll('section[id]');
             const navItems = document.querySelectorAll('.nav-item');
             let current = '';
-            sections.forEach(s => { if (scrollY >= s.offsetTop - 200) current = s.getAttribute('id'); });
-            navItems.forEach(item => { item.classList.remove('active'); if (item.getAttribute('href') === `#${current}`) item.classList.add('active'); });
+            sections.forEach(s => { if (scrollY >= s.offsetTop - 150) current = s.id; });
+            navItems.forEach(i => {
+                i.classList.remove('active');
+                if (i.getAttribute('href') === `#${current}`) i.classList.add('active');
+            });
         });
 
-        window.addEventListener('resize', () => { if (window.innerWidth > 992) { navMenu.style.display = ''; mobileToggle.setAttribute('aria-expanded', 'false'); } });
+        // Close mobile on resize
+        window.addEventListener('resize', () => {
+            if (innerWidth > 992) {
+                navMenu.style.display = '';
+                mobileToggle.querySelector('i').className = 'fas fa-bars';
+            }
+        });
     </script>
 </body>
 </html>
