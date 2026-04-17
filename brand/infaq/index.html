@@ -1,0 +1,1446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    
+    <!-- ============================================= -->
+    <!-- PRIMARY SEO META TAGS -->
+    <!-- ============================================= -->
+    <title>Infaq | Donate Waste, Create Value | Free Donation Pickup Mumbai & Thane | Rizvi.Store</title>
+    <meta name="description" content="Infaq connects your unused items with those who need them. Donate clothes, books, household items, stationery & baby items across Mumbai & Thane. Free doorstep pickup with appreciation certificate.">
+    <meta name="keywords" content="Infaq, donate items, donate clothes Mumbai, donate books Thane, free donation pickup, charity, social donation, reuse recycle, Rizvi Store">
+    <meta name="author" content="Infaq by Rizvi.Store">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://rizvi.store/brand/infaq/">
+    
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://rizvi.store/brand/infaq/">
+    <meta property="og:title" content="Infaq | Donate Waste, Create Value | Free Donation Pickup">
+    <meta property="og:description" content="Donate unused items to those in need. Free doorstep pickup across Mumbai & Thane with appreciation certificate.">
+    <meta property="og:image" content="https://rizvi.store/images/brands/infaq/infaq-og.jpg">
+    <meta property="og:site_name" content="Rizvi.Store">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Infaq | Donate Waste, Create Value">
+    <meta name="twitter:description" content="Free donation pickup across Mumbai & Thane with appreciation certificate.">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <meta name="theme-color" content="#0A0A0F">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-dark: #0A0A0F;
+            --cyan: #00FFFF;
+            --magenta: #FF00FF;
+            --green: #00FF80;
+            --gold: #FFD700;
+            --primary: #00FF80;
+            --primary-dark: #00cc66;
+            --secondary: #FF00FF;
+            --accent: #00FFFF;
+            --text-primary: #FFFFFF;
+            --text-secondary: rgba(255,255,255,0.75);
+            --text-muted: rgba(255,255,255,0.5);
+            --glass-bg: rgba(20,20,30,0.35);
+            --glass-border: rgba(255,255,255,0.08);
+            --card-bg: rgba(20,20,30,0.5);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Animated Background */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            background: var(--bg-dark);
+        }
+
+        .bg-animation::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: 
+                radial-gradient(circle at 30% 40%, rgba(0,255,255,0.05) 0%, transparent 40%),
+                radial-gradient(circle at 70% 60%, rgba(255,0,255,0.05) 0%, transparent 40%);
+            animation: bgMove 20s ease-in-out infinite alternate;
+        }
+
+        @keyframes bgMove {
+            0% { transform: translate(0,0) rotate(0deg); }
+            100% { transform: translate(-5%,-3%) rotate(3deg); }
+        }
+
+        .orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.12;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .orb-1 { width: 500px; height: 500px; background: var(--cyan); top: -10%; right: -10%; }
+        .orb-2 { width: 600px; height: 600px; background: var(--magenta); bottom: -15%; left: -15%; }
+
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: var(--cyan);
+            color: var(--bg-dark);
+            padding: 8px 16px;
+            z-index: 10000;
+            border-radius: 0 0 8px 0;
+            text-decoration: none;
+            transition: top 0.3s;
+        }
+        .skip-link:focus { top: 0; }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 32px;
+        }
+
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 16px 0;
+            transition: all 0.3s;
+            background: rgba(10,10,15,0.95);
+            backdrop-filter: blur(30px);
+            border-bottom: 1px solid rgba(0,255,255,0.1);
+        }
+
+        .header.scrolled {
+            padding: 10px 0;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(135deg, var(--cyan), var(--magenta), var(--green));
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            font-weight: 800;
+            color: var(--bg-dark);
+            transform: rotate(-3deg);
+            animation: logoGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes logoGlow {
+            0%,100% { box-shadow: 0 0 30px rgba(0,255,255,0.4); }
+            50% { box-shadow: 0 0 50px rgba(255,0,255,0.5); }
+        }
+
+        .logo-text h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--cyan), var(--magenta), var(--green));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .logo-text span {
+            font-size: 9px;
+            letter-spacing: 3px;
+            color: var(--text-muted);
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 4px;
+            background: rgba(255,255,255,0.02);
+            backdrop-filter: blur(20px);
+            padding: 4px;
+            border-radius: 50px;
+            border: 1px solid rgba(0,255,255,0.1);
+        }
+
+        .nav-item {
+            padding: 8px 20px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 13px;
+            border-radius: 50px;
+            transition: all 0.2s;
+        }
+
+        .nav-item:hover {
+            color: var(--text-primary);
+            background: rgba(0,255,255,0.06);
+        }
+
+        .nav-item.active {
+            background: linear-gradient(135deg, var(--cyan), var(--magenta));
+            color: var(--bg-dark);
+            font-weight: 600;
+        }
+
+        .donate-btn-nav {
+            padding: 10px 22px;
+            background: linear-gradient(135deg, var(--green), var(--cyan));
+            border-radius: 50px;
+            color: var(--bg-dark);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 13px;
+            transition: all 0.2s;
+        }
+
+        .donate-btn-nav:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(0,255,128,0.3);
+        }
+
+        .whatsapp-btn {
+            padding: 10px 22px;
+            background: rgba(37,211,102,0.1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(37,211,102,0.3);
+            border-radius: 50px;
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s;
+        }
+
+        .whatsapp-btn:hover {
+            background: rgba(37,211,102,0.2);
+            transform: translateY(-2px);
+        }
+
+        .whatsapp-btn i { color: #25D366; font-size: 18px; }
+
+        .mobile-toggle {
+            display: none;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(0,255,255,0.2);
+            border-radius: 12px;
+            padding: 10px 14px;
+            color: white;
+            font-size: 22px;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 120px 0 80px;
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 18px;
+            background: rgba(0,255,128,0.1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0,255,128,0.3);
+            border-radius: 50px;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            margin-bottom: 24px;
+            color: var(--green);
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(40px, 7vw, 64px);
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 24px;
+            background: linear-gradient(135deg, #fff, var(--green), var(--cyan));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .hero p {
+            font-size: 18px;
+            color: var(--text-secondary);
+            margin-bottom: 32px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 14px 32px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 16px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--green), var(--cyan));
+            color: var(--bg-dark);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0,255,128,0.3);
+        }
+
+        .btn-secondary {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.2);
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255,255,255,0.1);
+            transform: translateY(-3px);
+        }
+
+        /* Section Styling */
+        section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-title h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(32px, 5vw, 44px);
+            font-weight: 700;
+            margin-bottom: 16px;
+            background: linear-gradient(135deg, #fff, var(--green), var(--cyan));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .section-title p {
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto;
+            font-size: 16px;
+        }
+
+        /* Steps */
+        .steps {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 25px;
+        }
+
+        .step {
+            flex: 1;
+            min-width: 220px;
+            text-align: center;
+            padding: 35px 25px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            transition: all 0.3s;
+        }
+
+        .step:hover {
+            transform: translateY(-10px);
+            border-color: rgba(0,255,128,0.3);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        .step-icon {
+            font-size: 50px;
+            color: var(--green);
+            margin-bottom: 20px;
+        }
+
+        .step h3 {
+            font-size: 20px;
+            margin-bottom: 12px;
+            color: var(--cyan);
+        }
+
+        .step p {
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        /* Acceptance Grid */
+        .acceptance-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .acceptance-item {
+            text-align: center;
+            padding: 30px 20px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            transition: all 0.3s;
+        }
+
+        .acceptance-item:hover {
+            transform: translateY(-8px);
+            border-color: rgba(0,255,128,0.3);
+        }
+
+        .acceptance-icon {
+            font-size: 45px;
+            color: var(--green);
+            margin-bottom: 15px;
+        }
+
+        .acceptance-item h4 {
+            font-size: 16px;
+            color: var(--text-primary);
+        }
+
+        /* Impact Counter */
+        .impact {
+            background: linear-gradient(135deg, rgba(0,255,128,0.1), rgba(0,255,255,0.1));
+            backdrop-filter: blur(20px);
+            border-top: 1px solid rgba(0,255,128,0.2);
+            border-bottom: 1px solid rgba(0,255,128,0.2);
+        }
+
+        .counter-container {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 40px;
+        }
+
+        .counter {
+            text-align: center;
+        }
+
+        .counter i {
+            font-size: 45px;
+            color: var(--green);
+            margin-bottom: 15px;
+        }
+
+        .counter-number {
+            font-size: 42px;
+            font-weight: 800;
+            color: var(--cyan);
+            margin-bottom: 8px;
+        }
+
+        .counter p {
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        /* Benefits */
+        .benefits-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        .benefit-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 30px;
+            transition: all 0.3s;
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(0,255,128,0.3);
+        }
+
+        .benefit-icon {
+            font-size: 40px;
+            color: var(--green);
+            margin-bottom: 20px;
+        }
+
+        .benefit-card h3 {
+            font-size: 20px;
+            margin-bottom: 12px;
+            color: var(--cyan);
+        }
+
+        .benefit-card p {
+            color: var(--text-secondary);
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        /* Stories Slider */
+        .story-container {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .story-slide {
+            display: none;
+            text-align: center;
+            padding: 40px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 30px;
+        }
+
+        .story-slide.active {
+            display: block;
+            animation: fadeIn 0.8s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .story-icon {
+            font-size: 50px;
+            color: var(--green);
+            margin-bottom: 20px;
+        }
+
+        .story-text {
+            font-size: 18px;
+            line-height: 1.8;
+            margin-bottom: 25px;
+            color: var(--text-secondary);
+            font-style: italic;
+        }
+
+        .story-author {
+            font-weight: 600;
+            color: var(--cyan);
+        }
+
+        .story-nav {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 30px;
+        }
+
+        .story-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--text-muted);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .story-dot.active {
+            background: var(--green);
+            width: 25px;
+            border-radius: 10px;
+        }
+
+        /* FAQ */
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            margin-bottom: 16px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        .faq-question {
+            padding: 20px 25px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            font-size: 16px;
+        }
+
+        .faq-question i {
+            color: var(--green);
+            transition: transform 0.3s;
+        }
+
+        .faq-answer {
+            padding: 0 25px;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        .faq-answer.active {
+            padding: 0 25px 20px;
+            max-height: 300px;
+        }
+
+        /* Donation Form */
+        .donation-form {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 40px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 14px 16px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            font-size: 14px;
+            color: white;
+            transition: all 0.3s;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--green);
+        }
+
+        .checkbox-group {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 12px;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 12px;
+        }
+
+        .checkbox-item input {
+            width: 18px;
+            height: 18px;
+            accent-color: var(--green);
+        }
+
+        /* Certificate Section */
+        .certificate-section {
+            display: none;
+            padding: 60px 0;
+        }
+
+        .certificate-section.active {
+            display: block;
+        }
+
+        .certificate-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: linear-gradient(135deg, rgba(0,255,128,0.05), rgba(0,255,255,0.05));
+            backdrop-filter: blur(20px);
+            border: 2px solid rgba(0,255,128,0.3);
+            border-radius: 30px;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .certificate-container h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 32px;
+            color: var(--green);
+            margin-bottom: 20px;
+        }
+
+        .certificate-container h3 {
+            font-size: 28px;
+            color: var(--cyan);
+            margin: 20px 0;
+        }
+
+        .certificate-id {
+            color: var(--green);
+            font-weight: 600;
+            margin: 15px 0;
+        }
+
+        .certificate-actions {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .certificate-btn {
+            padding: 12px 28px;
+            border-radius: 40px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+            font-size: 14px;
+        }
+
+        .certificate-print {
+            background: linear-gradient(135deg, var(--green), var(--cyan));
+            color: var(--bg-dark);
+        }
+
+        .certificate-download {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            color: white;
+        }
+
+        .certificate-btn:hover {
+            transform: translateY(-3px);
+        }
+
+        /* Footer */
+        .footer {
+            background: rgba(10,10,15,0.7);
+            backdrop-filter: blur(30px);
+            border-top: 1px solid rgba(255,255,255,0.05);
+            padding: 55px 0 25px;
+            margin-top: 50px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1.2fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-brand h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            margin-bottom: 18px;
+            background: linear-gradient(135deg, var(--cyan), var(--magenta));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .footer-brand p {
+            color: var(--text-muted);
+            font-size: 13px;
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 10px;
+        }
+
+        .social-links a {
+            width: 38px;
+            height: 38px;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+
+        .social-links a:hover {
+            background: var(--cyan);
+            color: var(--bg-dark);
+            transform: translateY(-3px);
+        }
+
+        .footer-links h4 {
+            font-size: 14px;
+            margin-bottom: 22px;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 13px;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .footer-links a:hover {
+            color: var(--cyan);
+            transform: translateX(4px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            color: var(--text-muted);
+            font-size: 12px;
+        }
+
+        .footer-bottom a {
+            color: var(--cyan);
+            text-decoration: none;
+        }
+
+        /* Back to Top */
+        .back-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 45px;
+            height: 45px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0,255,255,0.2);
+            border-radius: 14px;
+            color: var(--cyan);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            font-size: 20px;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            z-index: 999;
+        }
+
+        .back-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-top:hover {
+            background: var(--cyan);
+            color: var(--bg-dark);
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .nav-menu { display: none; }
+            .mobile-toggle { display: block; }
+            .footer-grid { grid-template-columns: repeat(2, 1fr); }
+            .acceptance-grid { grid-template-columns: repeat(3, 1fr); }
+        }
+
+        @media (max-width: 768px) {
+            .container { padding: 0 20px; }
+            .logo-text span { display: none; }
+            .whatsapp-btn span { display: none; }
+            .whatsapp-btn { padding: 10px 16px; }
+            .hero { padding: 100px 0 60px; }
+            .cta-buttons { flex-direction: column; align-items: center; }
+            .btn { width: 100%; max-width: 280px; justify-content: center; }
+            .acceptance-grid { grid-template-columns: repeat(2, 1fr); }
+            .footer-grid { grid-template-columns: 1fr; }
+            .donation-form { padding: 25px; }
+        }
+
+        @media (max-width: 576px) {
+            .acceptance-grid { grid-template-columns: 1fr; }
+            .counter-number { font-size: 32px; }
+        }
+    </style>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <div class="bg-animation"></div>
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+
+    <header class="header" id="header">
+        <div class="container">
+            <div class="header-content">
+                <a href="/" class="logo">
+                    <div class="logo-icon">R</div>
+                    <div class="logo-text">
+                        <h1>RIZVI.STORE</h1>
+                        <span>HOUSE OF BRANDS</span>
+                    </div>
+                </a>
+                
+                <nav class="nav-menu" id="navMenu">
+                    <a href="/" class="nav-item">Home</a>
+                    <a href="/brands/" class="nav-item">Brands</a>
+                    <a href="#how-it-works" class="nav-item">How It Works</a>
+                    <a href="#impact" class="nav-item">Impact</a>
+                    <a href="#donate" class="donate-btn-nav">Donate Now</a>
+                </nav>
+                
+                <div style="display: flex; align-items: center; gap: 12px;">
+                    <a href="https://wa.me/918879952676" class="whatsapp-btn" target="_blank" rel="noopener">
+                        <i class="fab fa-whatsapp"></i>
+                        <span>+91 88799 52676</span>
+                    </a>
+                    <div class="mobile-toggle" id="mobileToggle" aria-label="Menu">
+                        <i class="fas fa-bars"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main id="main-content">
+        <!-- Hero Section -->
+        <section class="hero" id="home">
+            <div class="container">
+                <div class="hero-content">
+                    <div class="hero-badge">
+                        <i class="fas fa-hand-holding-heart"></i> YOUR WASTE CAN BE SOMEONE'S TREASURE
+                    </div>
+                    <h1>Donate. Reuse. Transform Lives.</h1>
+                    <p>Infaq connects your unused items with those who need them. Free doorstep pickup across Mumbai & Thane with appreciation certificate.</p>
+                    <div class="cta-buttons">
+                        <a href="#donate" class="btn btn-primary">Donate Now <i class="fas fa-hands-helping"></i></a>
+                        <a href="#stories" class="btn btn-secondary">Read Impact Stories <i class="fas fa-heart"></i></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- How It Works -->
+        <section id="how-it-works">
+            <div class="container">
+                <div class="section-title">
+                    <h2>How It Works</h2>
+                    <p>Four simple steps to turn your unused items into happiness for others</p>
+                </div>
+                
+                <div class="steps">
+                    <div class="step">
+                        <div class="step-icon"><i class="fas fa-edit"></i></div>
+                        <h3>1. Schedule Pickup</h3>
+                        <p>Fill our simple online form with details of items you wish to donate</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-icon"><i class="fas fa-truck"></i></div>
+                        <h3>2. Doorstep Collection</h3>
+                        <p>We collect items from your home at your convenient time - completely free!</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-icon"><i class="fas fa-tshirt"></i></div>
+                        <h3>3. Sorting & Sanitization</h3>
+                        <p>Items are carefully sorted, checked, cleaned and sanitized for recipients</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-icon"><i class="fas fa-gift"></i></div>
+                        <h3>4. Redistribution & Certificate</h3>
+                        <p>Items reach those in need & you receive an appreciation certificate</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- What We Accept -->
+        <section id="what-we-accept">
+            <div class="container">
+                <div class="section-title">
+                    <h2>What We Accept</h2>
+                    <p>We collect essential items that can bring smiles to those in need</p>
+                </div>
+                
+                <div class="acceptance-grid">
+                    <div class="acceptance-item"><div class="acceptance-icon"><i class="fas fa-tshirt"></i></div><h4>Clothes</h4></div>
+                    <div class="acceptance-item"><div class="acceptance-icon"><i class="fas fa-book"></i></div><h4>Books</h4></div>
+                    <div class="acceptance-item"><div class="acceptance-icon"><i class="fas fa-home"></i></div><h4>Household Items</h4></div>
+                    <div class="acceptance-item"><div class="acceptance-icon"><i class="fas fa-pencil-alt"></i></div><h4>Stationery</h4></div>
+                    <div class="acceptance-item"><div class="acceptance-icon"><i class="fas fa-baby-carriage"></i></div><h4>Baby Items</h4></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Impact Counter -->
+        <section class="impact" id="impact">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Our Impact</h2>
+                    <p>Together we're making a significant difference</p>
+                </div>
+                
+                <div class="counter-container">
+                    <div class="counter">
+                        <i class="fas fa-tshirt"></i>
+                        <div class="counter-number" data-target="28750">28,750</div>
+                        <p>Items Donated</p>
+                    </div>
+                    <div class="counter">
+                        <i class="fas fa-smile"></i>
+                        <div class="counter-number" data-target="8920">8,920</div>
+                        <p>Lives Touched</p>
+                    </div>
+                    <div class="counter">
+                        <i class="fas fa-certificate"></i>
+                        <div class="counter-number" data-target="15640">15,640</div>
+                        <p>Certificates Issued</p>
+                    </div>
+                    <div class="counter">
+                        <i class="fas fa-tree"></i>
+                        <div class="counter-number" data-target="24">24</div>
+                        <p>Tons Waste Reduced</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Benefits -->
+        <section id="benefits">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Benefits of Donating</h2>
+                    <p>Your donation creates a positive impact across multiple dimensions</p>
+                </div>
+                
+                <div class="benefits-container">
+                    <div class="benefit-card"><div class="benefit-icon"><i class="fas fa-hands-helping"></i></div><h3>For Donors</h3><p>Free up space at home, receive appreciation certificates, and experience the joy of giving. Free doorstep pickup at your convenience.</p></div>
+                    <div class="benefit-card"><div class="benefit-icon"><i class="fas fa-user-friends"></i></div><h3>For Recipients</h3><p>Access to essential items they need but cannot afford. Dignified access to clothing, educational materials, and household items.</p></div>
+                    <div class="benefit-card"><div class="benefit-icon"><i class="fas fa-city"></i></div><h3>For Society</h3><p>Reduces inequality, fosters community spirit, creates a culture of sharing and caring. Builds stronger, more connected communities.</p></div>
+                    <div class="benefit-card"><div class="benefit-icon"><i class="fas fa-leaf"></i></div><h3>For Environment</h3><p>Reduces landfill waste, decreases carbon footprint, conserves resources, and promotes circular economy.</p></div>
+                    <div class="benefit-card"><div class="benefit-icon"><i class="fas fa-globe-asia"></i></div><h3>For Cities</h3><p>Cleaner cities, reduced waste management costs, resource optimization, and progress towards Sustainable Development Goals.</p></div>
+                    <div class="benefit-card"><div class="benefit-icon"><i class="fas fa-seedling"></i></div><h3>For Nature</h3><p>Lowers pollution, conserves natural resources, reduces manufacturing demand, and helps combat climate change.</p></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stories -->
+        <section id="stories">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Heartwarming Stories</h2>
+                    <p>Real stories of how your donations are changing lives</p>
+                </div>
+                
+                <div class="story-container">
+                    <div class="story-slide active">
+                        <div class="story-icon"><i class="fas fa-graduation-cap"></i></div>
+                        <p class="story-text">"Because of donated books and stationery, my daughter could continue her education. She just scored 92% in her exams and wants to become a doctor. Your old books gave her a new future."</p>
+                        <p class="story-author">- Mrs. Sharma, Mother of a scholarship student</p>
+                    </div>
+                    <div class="story-slide">
+                        <div class="story-icon"><i class="fas fa-hands"></i></div>
+                        <p class="story-text">"We received modest clothing donations just when we needed them most. My children can now attend school with dignity and confidence."</p>
+                        <p class="story-author">- Priya, Mother of two</p>
+                    </div>
+                    <div class="story-slide">
+                        <div class="story-icon"><i class="fas fa-home"></i></div>
+                        <p class="story-text">"The household items we received helped us set up our first home after migrating to the city. We finally have a proper place to call our own."</p>
+                        <p class="story-author">- Ramesh, Migrant worker</p>
+                    </div>
+                    <div class="story-slide">
+                        <div class="story-icon"><i class="fas fa-baby-carriage"></i></div>
+                        <p class="story-text">"Baby items donation came at the perfect time when we were struggling financially. Your generosity helped us provide for our newborn."</p>
+                        <p class="story-author">- Young Parents</p>
+                    </div>
+                    <div class="story-nav">
+                        <div class="story-dot active" data-slide="0"></div>
+                        <div class="story-dot" data-slide="1"></div>
+                        <div class="story-dot" data-slide="2"></div>
+                        <div class="story-dot" data-slide="3"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ -->
+        <section id="faq">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Frequently Asked Questions</h2>
+                    <p>Find answers to common questions about our donation process</p>
+                </div>
+                
+                <div class="faq-container">
+                    <div class="faq-item">
+                        <div class="faq-question"><span>What areas do you currently serve?</span><i class="fas fa-chevron-down"></i></div>
+                        <div class="faq-answer"><p>We currently operate in Mumbai and Thane. We're planning to expand to other cities soon. Our service areas include all major residential and commercial locations in these cities.</p></div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question"><span>Is there any cost for donation pickup?</span><i class="fas fa-chevron-down"></i></div>
+                        <div class="faq-answer"><p>No, our doorstep collection service is completely free for donors. We bear all the costs of transportation, sorting, and distribution.</p></div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question"><span>What condition should the donated items be in?</span><i class="fas fa-chevron-down"></i></div>
+                        <div class="faq-answer"><p>We accept items in usable condition. Clothes should be clean, books should be readable, and household items should be functional. We do minor repairs if needed before distribution.</p></div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question"><span>How do I get the appreciation certificate?</span><i class="fas fa-chevron-down"></i></div>
+                        <div class="faq-answer"><p>After you submit the donation form, we'll generate a digital certificate immediately. You can download it as PDF or print it directly from your browser.</p></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Donation Form -->
+        <section id="donate">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Schedule Your Donation</h2>
+                    <p>Fill this form and we'll contact you to schedule a free pickup</p>
+                </div>
+                
+                <form class="donation-form" id="donationForm">
+                    <div class="form-group">
+                        <label>Full Name <span style="color: var(--green);">*</span></label>
+                        <input type="text" id="donorName" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Phone Number <span style="color: var(--green);">*</span></label>
+                        <input type="tel" id="donorPhone" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Email Address</label>
+                        <input type="email" id="donorEmail" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Full Address <span style="color: var(--green);">*</span></label>
+                        <textarea id="donorAddress" class="form-control" rows="3" required placeholder="Please include your complete address with landmark"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Items You Want to Donate <span style="color: var(--green);">*</span></label>
+                        <div class="checkbox-group">
+                            <div class="checkbox-item"><input type="checkbox" value="clothes"> <label>Clothes & Textiles</label></div>
+                            <div class="checkbox-item"><input type="checkbox" value="books"> <label>Books & Stationery</label></div>
+                            <div class="checkbox-item"><input type="checkbox" value="household"> <label>Household Items</label></div>
+                            <div class="checkbox-item"><input type="checkbox" value="stationery"> <label>Stationery</label></div>
+                            <div class="checkbox-item"><input type="checkbox" value="baby"> <label>Baby Items</label></div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Description of Items</label>
+                        <textarea id="itemDescription" class="form-control" rows="2" placeholder="Please provide details about the items you're donating..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Preferred Pickup Date</label>
+                        <input type="date" id="pickupDate" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Preferred Pickup Time</label>
+                        <select id="pickupTime" class="form-control">
+                            <option value="">Select Time Slot</option>
+                            <option value="9am-12pm">9:00 AM - 12:00 PM</option>
+                            <option value="12pm-3pm">12:00 PM - 3:00 PM</option>
+                            <option value="3pm-6pm">3:00 PM - 6:00 PM</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center;">Schedule Free Pickup & Get Certificate <i class="fas fa-certificate"></i></button>
+                </form>
+            </div>
+        </section>
+
+        <!-- Certificate Section -->
+        <section class="certificate-section" id="certificate">
+            <div class="container">
+                <div class="certificate-container" id="certificateContainer">
+                    <h2>Certificate of Appreciation</h2>
+                    <p>Presented to</p>
+                    <h3 id="certificateName">Donor Name</h3>
+                    <p>In recognition of your generous donation and commitment to social welfare</p>
+                    <p>Your contribution has helped create a positive impact in our community</p>
+                    <div class="certificate-id">Certificate ID: <span id="certificateId">INF-2025-XXXX</span></div>
+                    <div class="certificate-id">Valid until: <span id="certificateValidity">December 2026</span></div>
+                    <div class="certificate-actions">
+                        <button class="certificate-btn certificate-print" id="printCertificate"><i class="fas fa-print"></i> Print Certificate</button>
+                        <button class="certificate-btn certificate-download" id="downloadCertificate"><i class="fas fa-download"></i> Download PDF</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h3>INFAQ</h3>
+                    <p>Turning waste into resources by connecting donors with those in need across Mumbai and Thane. Making the world better, one donation at a time.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-links"><h4>Quick Links</h4><ul><li><a href="#home"><i class="fas fa-angle-right"></i> Home</a></li><li><a href="#how-it-works"><i class="fas fa-angle-right"></i> How It Works</a></li><li><a href="#what-we-accept"><i class="fas fa-angle-right"></i> What We Accept</a></li><li><a href="#donate"><i class="fas fa-angle-right"></i> Donate Now</a></li></ul></div>
+                <div class="footer-links"><h4>Support</h4><ul><li><a href="#faq"><i class="fas fa-angle-right"></i> FAQ</a></li><li><a href="#impact"><i class="fas fa-angle-right"></i> Our Impact</a></li><li><a href="#stories"><i class="fas fa-angle-right"></i> Stories</a></li><li><a href="#benefits"><i class="fas fa-angle-right"></i> Benefits</a></li></ul></div>
+                <div class="footer-links"><h4>Contact</h4><ul><li><a href="tel:+918879952676"><i class="fas fa-phone"></i> +91 88799 52676</a></li><li><a href="mailto:infaq@rizvi.store"><i class="fas fa-envelope"></i> infaq@rizvi.store</a></li><li><i class="fas fa-map-marker-alt"></i> Mumbai & Thane, India</li></ul></div>
+            </div>
+            <div class="footer-bottom"><p>&copy; 2025 Infaq by Rizvi.Store — All rights reserved. | <a href="/privacy/">Privacy</a> | <a href="/terms/">Terms</a></p></div>
+        </div>
+    </footer>
+
+    <a href="#" class="back-top" id="backTop"><i class="fas fa-arrow-up"></i></a>
+
+    <script>
+        // Mobile Menu
+        const mobileToggle = document.getElementById('mobileToggle');
+        const navMenu = document.getElementById('navMenu');
+        mobileToggle.addEventListener('click', () => {
+            const icon = mobileToggle.querySelector('i');
+            if (navMenu.style.display === 'flex') {
+                navMenu.style.display = 'none';
+                icon.className = 'fas fa-bars';
+            } else {
+                navMenu.style.display = 'flex';
+                navMenu.style.flexDirection = 'column';
+                navMenu.style.position = 'absolute';
+                navMenu.style.top = '75px';
+                navMenu.style.left = '20px';
+                navMenu.style.right = '20px';
+                navMenu.style.background = 'rgba(10,10,15,0.98)';
+                navMenu.style.backdropFilter = 'blur(30px)';
+                navMenu.style.padding = '20px';
+                navMenu.style.borderRadius = '30px';
+                navMenu.style.border = '1px solid rgba(0,255,255,0.15)';
+                navMenu.style.gap = '8px';
+                navMenu.style.zIndex = '1000';
+                icon.className = 'fas fa-times';
+            }
+        });
+
+        window.addEventListener('resize', () => {
+            if (innerWidth > 992) {
+                navMenu.style.display = '';
+                if(mobileToggle.querySelector('i')) mobileToggle.querySelector('i').className = 'fas fa-bars';
+            }
+        });
+
+        // FAQ Accordion
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                const answer = question.nextElementSibling;
+                answer.classList.toggle('active');
+                const icon = question.querySelector('i');
+                icon.classList.toggle('fa-chevron-down');
+                icon.classList.toggle('fa-chevron-up');
+            });
+        });
+
+        // Stories Slider
+        let currentStory = 0;
+        const stories = document.querySelectorAll('.story-slide');
+        const dots = document.querySelectorAll('.story-dot');
+        
+        function showStory(index) {
+            stories.forEach(s => s.classList.remove('active'));
+            dots.forEach(d => d.classList.remove('active'));
+            stories[index].classList.add('active');
+            dots[index].classList.add('active');
+            currentStory = index;
+        }
+        
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => showStory(index));
+        });
+        
+        setInterval(() => {
+            currentStory = (currentStory + 1) % stories.length;
+            showStory(currentStory);
+        }, 5000);
+
+        // Header Scroll
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', () => header.classList.toggle('scrolled', window.scrollY > 100));
+
+        // Back to Top
+        const backTop = document.getElementById('backTop');
+        window.addEventListener('scroll', () => backTop.classList.toggle('visible', window.scrollY > 400));
+        backTop.addEventListener('click', e => { e.preventDefault(); window.scrollTo({top: 0, behavior: 'smooth'}); });
+
+        // Smooth Scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                if (this.getAttribute('href') === '#') return;
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) target.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+
+        // Donation Form & Certificate
+        const donationForm = document.getElementById('donationForm');
+        const certificateSection = document.getElementById('certificate');
+        const certificateName = document.getElementById('certificateName');
+        const certificateIdSpan = document.getElementById('certificateId');
+        const certificateValiditySpan = document.getElementById('certificateValidity');
+
+        donationForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const name = document.getElementById('donorName').value;
+            const certificateId = 'INF-' + new Date().getFullYear() + '-' + Math.floor(1000 + Math.random() * 9000);
+            const validityDate = new Date();
+            validityDate.setFullYear(validityDate.getFullYear() + 1);
+            const formattedDate = validityDate.toLocaleDateString('en-IN', { year: 'numeric', month: 'long', day: 'numeric' });
+            
+            certificateName.textContent = name;
+            certificateIdSpan.textContent = certificateId;
+            certificateValiditySpan.textContent = formattedDate;
+            
+            certificateSection.classList.add('active');
+            certificateSection.scrollIntoView({ behavior: 'smooth' });
+            
+            alert(`Thank you ${name}! Your donation request has been submitted. Our team will contact you within 24 hours to schedule pickup.`);
+            donationForm.reset();
+        });
+
+        // Print Certificate
+        document.getElementById('printCertificate').addEventListener('click', function() {
+            const printContents = document.getElementById('certificateContainer').innerHTML;
+            const originalContents = document.body.innerHTML;
+            document.body.innerHTML = `<div style="padding: 40px; background: white; color: black; font-family: Arial;">${printContents}</div>`;
+            window.print();
+            document.body.innerHTML = originalContents;
+            window.location.reload();
+        });
+
+        // Download PDF (html2pdf simulation - creates downloadable PDF via browser print)
+        document.getElementById('downloadCertificate').addEventListener('click', function() {
+            const printContents = document.getElementById('certificateContainer').innerHTML;
+            const printWindow = window.open('', '_blank');
+            printWindow.document.write(`
+                <html>
+                <head>
+                    <title>Infaq Certificate</title>
+                    <style>
+                        body { font-family: Arial, sans-serif; padding: 40px; text-align: center; }
+                        .certificate { border: 5px solid #27ae60; padding: 40px; border-radius: 15px; max-width: 800px; margin: 0 auto; }
+                        h2 { color: #27ae60; font-size: 28px; }
+                        h3 { font-size: 24px; color: #2980b9; }
+                        .id { color: #27ae60; margin-top: 20px; }
+                    </style>
+                </head>
+                <body>
+                    <div class="certificate">
+                        ${printContents}
+                    </div>
+                    <script>window.onload = function() { window.print(); setTimeout(function() { window.close(); }, 500); }<\/script>
+                </body>
+                </html>
+            `);
+            printWindow.document.close();
+        });
+    </script>
+</body>
+</html>
