@@ -1,1 +1,1102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    
+    <!-- ============================================= -->
+    <!-- PRIMARY SEO META TAGS -->
+    <!-- ============================================= -->
+    <title>All Brands | 28+ Premium Luxury Brands | Fashion, Beauty, Home & More | Rizvi.Store</title>
+    <meta name="description" content="Explore all 28+ premium luxury brands at Rizvi.Store. From modest fashion to home services, beauty, kids, food, social impact, and business solutions. Find your perfect brand.">
+    <meta name="keywords" content="all brands, premium brands, luxury brands, brand directory, fashion brands, beauty brands, home brands, kids brands, social brands, Rizvi Store">
+    <meta name="author" content="Rizvi.Store">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://rizvi.store/brands/">
+    
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://rizvi.store/brands/">
+    <meta property="og:title" content="All Brands | 28+ Premium Luxury Brands | Rizvi.Store">
+    <meta property="og:description" content="Explore all 28+ premium luxury brands at Rizvi.Store. Find your perfect brand across fashion, beauty, home, kids, social, food, and business.">
+    <meta property="og:image" content="https://rizvi.store/images/brands-og.jpg">
+    <meta property="og:site_name" content="Rizvi.Store">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="All Brands | 28+ Premium Luxury Brands">
+    <meta name="twitter:description" content="Explore all 28+ premium luxury brands at Rizvi.Store. Find your perfect brand.">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <meta name="theme-color" content="#0A0A0F">
 
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-dark: #0A0A0F;
+            --cyan: #00FFFF;
+            --magenta: #FF00FF;
+            --green: #00FF80;
+            --gold: #FFD700;
+            --text-primary: #FFFFFF;
+            --text-secondary: rgba(255,255,255,0.75);
+            --text-muted: rgba(255,255,255,0.5);
+            --glass-bg: rgba(20,20,30,0.35);
+            --glass-border: rgba(255,255,255,0.08);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Animated Background */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            background: var(--bg-dark);
+        }
+
+        .bg-animation::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: 
+                radial-gradient(circle at 30% 40%, rgba(0,255,255,0.05) 0%, transparent 40%),
+                radial-gradient(circle at 70% 60%, rgba(255,0,255,0.05) 0%, transparent 40%);
+            animation: bgMove 20s ease-in-out infinite alternate;
+        }
+
+        @keyframes bgMove {
+            0% { transform: translate(0,0) rotate(0deg); }
+            100% { transform: translate(-5%,-3%) rotate(3deg); }
+        }
+
+        .orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.12;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .orb-1 { width: 500px; height: 500px; background: var(--cyan); top: -10%; right: -10%; }
+        .orb-2 { width: 600px; height: 600px; background: var(--magenta); bottom: -15%; left: -15%; }
+
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: var(--cyan);
+            color: var(--bg-dark);
+            padding: 8px 16px;
+            z-index: 10000;
+            border-radius: 0 0 8px 0;
+            transition: top 0.3s;
+        }
+        .skip-link:focus { top: 0; }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 32px;
+        }
+
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 16px 0;
+            transition: all 0.3s;
+            background: rgba(10,10,15,0.9);
+            backdrop-filter: blur(30px);
+            border-bottom: 1px solid rgba(0,255,255,0.1);
+        }
+
+        .header.scrolled {
+            padding: 10px 0;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(135deg, var(--cyan), var(--magenta), var(--green));
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            font-weight: 800;
+            color: var(--bg-dark);
+            transform: rotate(-3deg);
+            animation: logoGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes logoGlow {
+            0%,100% { box-shadow: 0 0 30px rgba(0,255,255,0.4); }
+            50% { box-shadow: 0 0 50px rgba(255,0,255,0.5); }
+        }
+
+        .logo-text h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--cyan), var(--magenta), var(--green));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .logo-text span {
+            font-size: 9px;
+            letter-spacing: 3px;
+            color: var(--text-muted);
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 4px;
+            background: rgba(255,255,255,0.02);
+            backdrop-filter: blur(20px);
+            padding: 4px;
+            border-radius: 50px;
+            border: 1px solid rgba(0,255,255,0.1);
+        }
+
+        .nav-item {
+            padding: 8px 20px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 13px;
+            border-radius: 50px;
+            transition: all 0.2s;
+        }
+
+        .nav-item:hover {
+            color: var(--text-primary);
+            background: rgba(0,255,255,0.06);
+        }
+
+        .nav-item.active {
+            background: linear-gradient(135deg, var(--cyan), var(--magenta));
+            color: var(--bg-dark);
+            font-weight: 600;
+        }
+
+        .whatsapp-btn {
+            padding: 10px 22px;
+            background: rgba(37,211,102,0.1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(37,211,102,0.3);
+            border-radius: 50px;
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s;
+        }
+
+        .whatsapp-btn:hover {
+            background: rgba(37,211,102,0.2);
+            transform: translateY(-2px);
+        }
+
+        .whatsapp-btn i { color: #25D366; font-size: 18px; }
+
+        .mobile-toggle {
+            display: none;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(0,255,255,0.2);
+            border-radius: 12px;
+            padding: 10px 14px;
+            color: white;
+            font-size: 22px;
+            cursor: pointer;
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            padding: 100px 0 20px;
+        }
+
+        .breadcrumb-nav {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        .breadcrumb-nav a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .breadcrumb-nav a:hover { color: var(--cyan); }
+        .breadcrumb-nav i { font-size: 10px; }
+        .breadcrumb-nav .current { color: var(--cyan); }
+
+        /* Page Header */
+        .page-header {
+            text-align: center;
+            padding: 40px 0 20px;
+        }
+
+        .page-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(36px, 5vw, 48px);
+            font-weight: 700;
+            margin-bottom: 16px;
+            background: linear-gradient(135deg, #fff, var(--cyan), var(--magenta));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .page-subtitle {
+            color: var(--text-secondary);
+            font-size: 16px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Stats Bar */
+        .stats-bar {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 60px;
+            padding: 16px 24px;
+            margin: 20px 0 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .stats-count {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        .stats-count span {
+            color: var(--cyan);
+            font-weight: 700;
+            font-size: 18px;
+        }
+
+        .search-sort {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .search-box {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 40px;
+            padding: 8px 16px;
+        }
+
+        .search-box i {
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+
+        .search-box input {
+            background: transparent;
+            border: none;
+            color: white;
+            font-size: 13px;
+            outline: none;
+            width: 200px;
+        }
+
+        .search-box input::placeholder {
+            color: var(--text-muted);
+        }
+
+        .sort-select {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 40px;
+            padding: 8px 16px;
+            color: white;
+            font-size: 13px;
+            cursor: pointer;
+            outline: none;
+        }
+
+        .sort-select option {
+            background: var(--bg-dark);
+        }
+
+        /* Category Pills */
+        .filter-section {
+            margin: 20px 0 30px;
+        }
+
+        .filter-pills {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .pill {
+            padding: 10px 22px;
+            background: rgba(255,255,255,0.02);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 50px;
+            color: var(--text-secondary);
+            font-weight: 500;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .pill:hover {
+            background: rgba(0,255,255,0.06);
+            border-color: rgba(0,255,255,0.2);
+            color: white;
+        }
+
+        .pill.active {
+            background: linear-gradient(135deg, var(--cyan), var(--magenta));
+            color: var(--bg-dark);
+            border-color: transparent;
+        }
+
+        .pill i {
+            font-size: 12px;
+        }
+
+        /* Brand Grid */
+        .brand-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 25px;
+            margin: 35px 0 50px;
+        }
+
+        .brand-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(25px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 28px 24px;
+            transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+            text-decoration: none;
+            color: inherit;
+            display: block;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .brand-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(0,255,255,0.25);
+            box-shadow: 0 30px 50px rgba(0,0,0,0.4), 0 0 30px rgba(0,255,255,0.1);
+        }
+
+        .card-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, rgba(0,255,255,0.1), rgba(255,0,255,0.1));
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid rgba(0,255,255,0.15);
+            margin-bottom: 20px;
+            transition: all 0.3s;
+        }
+
+        .brand-card:hover .card-icon {
+            transform: rotate(3deg) scale(1.05);
+            background: linear-gradient(135deg, rgba(0,255,255,0.18), rgba(255,0,255,0.18));
+        }
+
+        .card-icon i {
+            font-size: 28px;
+            color: var(--cyan);
+        }
+
+        .brand-card h3 {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .brand-category {
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            color: var(--green);
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+
+        .brand-desc {
+            color: var(--text-secondary);
+            font-size: 13px;
+            line-height: 1.6;
+            margin-bottom: 16px;
+        }
+
+        .brand-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .tag {
+            padding: 4px 10px;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 30px;
+            font-size: 9px;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        .card-hover {
+            position: absolute;
+            bottom: -50px;
+            left: 0;
+            right: 0;
+            padding: 14px;
+            background: linear-gradient(135deg, rgba(0,255,255,0.95), rgba(255,0,255,0.95));
+            text-align: center;
+            font-weight: 600;
+            color: var(--bg-dark);
+            font-size: 13px;
+            transition: bottom 0.3s;
+        }
+
+        .brand-card:hover .card-hover {
+            bottom: 0;
+        }
+
+        /* No Results */
+        .no-results {
+            text-align: center;
+            padding: 60px 20px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 30px;
+            margin: 40px 0;
+        }
+
+        .no-results i {
+            font-size: 64px;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+        }
+
+        .no-results h3 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .no-results p {
+            color: var(--text-secondary);
+        }
+
+        /* Footer */
+        .footer {
+            background: rgba(10,10,15,0.7);
+            backdrop-filter: blur(30px);
+            border-top: 1px solid rgba(255,255,255,0.05);
+            padding: 55px 0 25px;
+            margin-top: 50px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1.2fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-brand h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            margin-bottom: 18px;
+            background: linear-gradient(135deg, var(--cyan), var(--magenta));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .footer-brand p {
+            color: var(--text-muted);
+            font-size: 13px;
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 10px;
+        }
+
+        .social-links a {
+            width: 38px;
+            height: 38px;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+
+        .social-links a:hover {
+            background: var(--cyan);
+            color: var(--bg-dark);
+            transform: translateY(-3px);
+        }
+
+        .footer-links h4 {
+            font-size: 14px;
+            margin-bottom: 22px;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 13px;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .footer-links a:hover {
+            color: var(--cyan);
+            transform: translateX(4px);
+        }
+
+        .footer-links i {
+            color: var(--green);
+            font-size: 13px;
+            width: 16px;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            color: var(--text-muted);
+            font-size: 12px;
+        }
+
+        .footer-bottom a {
+            color: var(--cyan);
+            text-decoration: none;
+        }
+
+        /* Back to Top */
+        .back-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 45px;
+            height: 45px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0,255,255,0.2);
+            border-radius: 14px;
+            color: var(--cyan);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            font-size: 20px;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            z-index: 999;
+        }
+
+        .back-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-top:hover {
+            background: var(--cyan);
+            color: var(--bg-dark);
+        }
+
+        /* Responsive */
+        @media (max-width: 1100px) {
+            .brand-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 992px) {
+            .nav-menu {
+                display: none;
+            }
+            .mobile-toggle {
+                display: block;
+            }
+            .brand-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .footer-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .stats-bar {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 20px;
+            }
+            .logo-text span {
+                display: none;
+            }
+            .whatsapp-btn span {
+                display: none;
+            }
+            .whatsapp-btn {
+                padding: 10px 16px;
+            }
+            .brand-grid {
+                grid-template-columns: 1fr;
+            }
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+            .filter-pills {
+                gap: 6px;
+            }
+            .pill {
+                padding: 6px 14px;
+                font-size: 11px;
+            }
+            .search-box input {
+                width: 150px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <div class="bg-animation"></div>
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+
+    <header class="header" id="header">
+        <div class="container">
+            <div class="header-content">
+                <a href="/" class="logo">
+                    <div class="logo-icon">R</div>
+                    <div class="logo-text">
+                        <h1>RIZVI.STORE</h1>
+                        <span>HOUSE OF BRANDS</span>
+                    </div>
+                </a>
+                
+                <nav class="nav-menu" id="navMenu">
+                    <a href="/" class="nav-item">Home</a>
+                    <a href="/brands/" class="nav-item active">Brands</a>
+                    <a href="/#why" class="nav-item">Why Us</a>
+                    <a href="/#categories" class="nav-item">Categories</a>
+                </nav>
+                
+                <div style="display: flex; align-items: center; gap: 12px;">
+                    <a href="https://wa.me/918879952676" class="whatsapp-btn" target="_blank" rel="noopener">
+                        <i class="fab fa-whatsapp"></i>
+                        <span>+91 88799 52676</span>
+                    </a>
+                    <div class="mobile-toggle" id="mobileToggle" aria-label="Menu">
+                        <i class="fas fa-bars"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main id="main-content">
+        <div class="breadcrumb">
+            <div class="container">
+                <nav class="breadcrumb-nav">
+                    <a href="/">Home</a>
+                    <i class="fas fa-chevron-right"></i>
+                    <span class="current">All Brands</span>
+                </nav>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="page-header">
+                <h1 class="page-title">Our Brand Universe</h1>
+                <p class="page-subtitle">Discover 28+ premium brands across fashion, beauty, home, kids, food, services, and business</p>
+            </div>
+
+            <div class="stats-bar">
+                <div class="stats-count">
+                    <i class="fas fa-store"></i> Showing <span id="visibleCount">0</span> of <span id="totalCount">0</span> brands
+                </div>
+                <div class="search-sort">
+                    <div class="search-box">
+                        <i class="fas fa-search"></i>
+                        <input type="text" id="searchInput" placeholder="Search brands...">
+                    </div>
+                    <select id="sortSelect" class="sort-select">
+                        <option value="name">Sort by: Name A-Z</option>
+                        <option value="name-desc">Sort by: Name Z-A</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="filter-section">
+                <div class="filter-pills" id="filterPills">
+                    <button class="pill active" data-filter="all"><i class="fas fa-grid-2"></i> All (28)</button>
+                    <button class="pill" data-filter="fashion"><i class="fas fa-vest"></i> Fashion (5)</button>
+                    <button class="pill" data-filter="beauty"><i class="fas fa-palette"></i> Beauty (3)</button>
+                    <button class="pill" data-filter="home"><i class="fas fa-couch"></i> Home (5)</button>
+                    <button class="pill" data-filter="kids"><i class="fas fa-child"></i> Kids (1)</button>
+                    <button class="pill" data-filter="food"><i class="fas fa-utensils"></i> Food (2)</button>
+                    <button class="pill" data-filter="service"><i class="fas fa-calendar"></i> Services (5)</button>
+                    <button class="pill" data-filter="lifestyle"><i class="fas fa-leaf"></i> Lifestyle (3)</button>
+                    <button class="pill" data-filter="social"><i class="fas fa-hand-holding-heart"></i> Social (2)</button>
+                    <button class="pill" data-filter="business"><i class="fas fa-chart-simple"></i> Business (2)</button>
+                </div>
+            </div>
+
+            <div class="brand-grid" id="brandGrid"></div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h3>RIZVI.STORE</h3>
+                    <p>28+ premium brands across fashion, beauty, home, kids, social, food & services. Global reach, local excellence.</p>
+                    <div class="social-links">
+                        <a href="https://instagram.com/rizvistore" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="https://facebook.com/rizvistore" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://youtube.com/@rizvistore" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                        <a href="https://pinterest.com/rizvistore" aria-label="Pinterest"><i class="fab fa-pinterest-p"></i></a>
+                        <a href="https://wa.me/918879952676" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h4>Explore</h4>
+                    <ul>
+                        <li><a href="/brands/"><i class="fas fa-angle-right"></i> All Brands</a></li>
+                        <li><a href="/new-arrivals/"><i class="fas fa-angle-right"></i> New Arrivals</a></li>
+                        <li><a href="/best-sellers/"><i class="fas fa-angle-right"></i> Best Sellers</a></li>
+                        <li><a href="/gift-cards/"><i class="fas fa-angle-right"></i> Gift Cards</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="/help/"><i class="fas fa-angle-right"></i> Help Center</a></li>
+                        <li><a href="/shipping/"><i class="fas fa-angle-right"></i> Shipping Info</a></li>
+                        <li><a href="/returns/"><i class="fas fa-angle-right"></i> Returns</a></li>
+                        <li><a href="/track/"><i class="fas fa-angle-right"></i> Track Order</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Contact</h4>
+                    <ul>
+                        <li><a href="tel:+918879952676"><i class="fas fa-phone"></i> +91 88799 52676</a></li>
+                        <li><a href="mailto:hello@rizvi.store"><i class="fas fa-envelope"></i> hello@rizvi.store</a></li>
+                        <li><i class="fas fa-map-marker-alt"></i> Mumbai, India</li>
+                        <li><i class="fas fa-clock"></i> 24/7 Support</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Rizvi.Store — All rights reserved. | <a href="/privacy/">Privacy</a> | <a href="/terms/">Terms</a> | <a href="/sitemap/">Sitemap</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <a href="#" class="back-top" id="backTop" aria-label="Back to top"><i class="fas fa-arrow-up"></i></a>
+
+    <script>
+        // Complete Brand Database - 28 Brands
+        const allBrands = [
+            // FASHION (5)
+            { name: 'Aayat', category: 'fashion', categoryName: 'Fashion', desc: 'Premium abayas blending Middle Eastern grace with contemporary design. Breathable fabric, global shipping.', icon: 'vest', route: '/brand/aayat/', features: ['Global Delivery','Custom Tailoring','Premium Fabric'] },
+            { name: 'Sharmeen', category: 'fashion', categoryName: 'Fashion', desc: 'Exclusive niqab lines and designer hijabs. Multiple fabric options with sophisticated modest designs.', icon: 'user-tie', route: '/brand/sharmeen/', features: ['Modest Elegance','Custom Sizing','Global Delivery'] },
+            { name: 'Ruqayya', category: 'fashion', categoryName: 'Fashion', desc: 'Youthful modestwear for teens 13-19. Age-appropriate designs with trendy colors and comfort fit.', icon: 'child', route: '/brand/ruqayya/', features: ['Teen Fashion','School Friendly','Comfort Fit'] },
+            { name: 'Zaybaish', category: 'fashion', categoryName: 'Fashion', desc: 'Aari, Dardozi embroidery, intricate beadwork. Handmade bridal masterpieces for global couture collectors.', icon: 'crown', route: '/brand/zaybaish/', features: ['Indian Artistry','Bridal Couture','Handmade'] },
+            { name: 'Insiya', category: 'fashion', categoryName: 'Fashion', desc: 'Curated bags, belts, jewelry, and pins. Timeless elegance and trend-forward style for every occasion.', icon: 'ring', route: '/brand/insiya/', features: ['Premium Quality','Gift Ready','Trendsetting'] },
+            
+            // BEAUTY (3)
+            { name: 'Mehreen', category: 'beauty', categoryName: 'Beauty', desc: 'Authentic international beauty brands. High-end makeup and skincare with guaranteed authenticity.', icon: 'palette', route: '/brand/mehreen/', features: ['100% Authentic','Cruelty-Free','Premium Brands'] },
+            { name: 'Mahek', category: 'beauty', categoryName: 'Beauty', desc: 'Arabian-inspired fragrances with oud, rose, and amber. Crafted for longevity and sophisticated palates.', icon: 'wine-bottle', route: '/brand/mahek/', features: ['Long-Lasting','Oud Collection','Gift Sets'] },
+            { name: 'Zoya', category: 'beauty', categoryName: 'Beauty', desc: 'Premium beauty products with Mumbai salon partnerships. Professional stylists and bridal packages.', icon: 'spa', route: '/brand/zoya/', features: ['Salon Network','Bridal Packages','Home Services'] },
+            
+            // HOME (5)
+            { name: 'Asaish', category: 'home', categoryName: 'Home', desc: 'Handmade sofas, dining sets, and custom furniture. Timeless craftsmanship for global homes.', icon: 'couch', route: '/brand/asaish/', features: ['Custom Designs','White-Glove Delivery','International Shipping'] },
+            { name: 'Satayir', category: 'home', categoryName: 'Home', desc: 'Designer curtains, blinds, and drapery installations. Texture, light, and creativity worldwide.', icon: 'border-all', route: '/brand/satayir/', features: ['Custom Measurements','Professional Install','Luxury Fabrics'] },
+            { name: 'Araish', category: 'home', categoryName: 'Home', desc: 'From minimalist modern to royal Indian interiors. Spaces that reflect your personality worldwide.', icon: 'house', route: '/brand/araish/', features: ['Global Consultation','Turnkey Projects','Virtual Design'] },
+            { name: 'Naqqash', category: 'home', categoryName: 'Home', desc: 'Laser engraved metal, acrylic, wooden wall art and 3D tabletop items. Precision craftsmanship.', icon: 'cubes', route: '/brand/naqqash/', features: ['Custom Engraving','Corporate Gifting','3D Art'] },
+            { name: 'Fi Electronics', category: 'home', categoryName: 'Home', desc: 'Mobile, TV, fridge, washing machine and premium electronics. Quality guaranteed.', icon: 'tv', route: '/brand/fi-electronics/', features: ['Global Warranty','Best Prices','Export Ready'] },
+            
+            // KIDS (1)
+            { name: 'Kiddus', category: 'kids', categoryName: 'Kids', desc: 'From toddler diapers to kids dresses, shoes and accessories for both boys and girls. Complete kids collection.', icon: 'baby', route: '/brand/kiddus/', features: ['Toddler Diapers','Dresses & Shoes','Boys & Girls'] },
+            
+            // FOOD (2)
+            { name: 'Sheereen', category: 'food', categoryName: 'Food', desc: 'Vacuum-packed Indian mithai and dry sweets. Fresh, global shipping. Perfect for festivals and gifting.', icon: 'cake-candles', route: '/brand/sheereen/', features: ['Authentic Taste','Global Shipping','Festival Specials'] },
+            { name: 'Awadhi Zaiqa', category: 'food', categoryName: 'Food', desc: 'Authentic Lucknowi kebabs, biryanis, and parathas. Royal flavors delivered across Mumbai.', icon: 'utensils', route: '/brand/awadhi-zaiqa/', features: ['Royal Recipes','Quick Delivery','Catering Services'] },
+            
+            // SERVICES (5)
+            { name: 'Bazm', category: 'service', categoryName: 'Services', desc: 'Weddings, corporate events, and intimate gatherings. Full planning, décor, and catering.', icon: 'calendar', route: '/brand/bazm/', features: ['Seamless Execution','Full Planning','Corporate Events'] },
+            { name: 'Nawa', category: 'service', categoryName: 'Services', desc: 'Physiotherapy, nursing, elder care. Trained professionals ensuring comfort and dignity.', icon: 'heart-pulse', route: '/brand/nawa/', features: ['Trusted Care','24/7 Support','Rehabilitation'] },
+            { name: 'Madadgar', category: 'service', categoryName: 'Services', desc: 'Verified, trained maids, cooks, and domestic helpers across Mumbai. Background-checked professionals.', icon: 'people-group', route: '/brand/madadgar/', features: ['Verified Professionals','Replacement Guarantee','Trained Staff'] },
+            { name: 'Kareegar', category: 'service', categoryName: 'Services', desc: 'Custom metalwork, grills, gates for homes and offices. Strength meets artistry.', icon: 'gear', route: '/brand/kareegar/', features: ['Custom Designs','Durable','Installation'] },
+            { name: 'Narmosh', category: 'service', categoryName: 'Services', desc: 'Professional pre- and post-natal massage, traditional baby care at home.', icon: 'baby', route: '/brand/narmosh/', features: ['Nurturing Care','Professional Masseuse','Ayurvedic'] },
+            
+            // LIFESTYLE (3)
+            { name: 'Sanobar', category: 'lifestyle', categoryName: 'Lifestyle', desc: 'Preserved and luxury floral arrangements for global delivery. Art meets emotion across continents.', icon: 'leaf', route: '/brand/sanobar/', features: ['Worldwide Delivery','Luxury Arrangements','Wedding Flowers'] },
+            { name: 'Parwaaz', category: 'lifestyle', categoryName: 'Lifestyle', desc: 'Custom-branded kites with names, logos, and patterns. Perfect for events and export.', icon: 'wind', route: '/brand/parwaaz/', features: ['Custom Designs','Export Ready','Bulk Orders'] },
+            { name: 'Bushra', category: 'lifestyle', categoryName: 'Lifestyle', desc: 'Personalized custom gifts for every occasion. Corporate gifting, wedding favors, and unique presents.', icon: 'gift', route: '/brand/bushra/', features: ['Personalized Gifts','Corporate Gifting','Custom Designs'] },
+            
+            // SOCIAL (2)
+            { name: 'Infaq', category: 'social', categoryName: 'Social', desc: 'Connect your unused items with those who need them. Donate clothes, books, household items across Mumbai & Thane.', icon: 'hand-holding-heart', route: '/brand/infaq/', features: ['Zero Waste','Free Pickup','Tax Benefits'] },
+            { name: 'Shias.in', category: 'social', categoryName: 'Social', desc: 'A dedicated digital platform for the Shia community. Connect, share events, and access religious content.', icon: 'users', route: '/brand/shias/', features: ['Community Network','Event Listings','Religious Resources'] },
+            
+            // BUSINESS (2)
+            { name: 'Shahaab', category: 'business', categoryName: 'Business', desc: 'SEO, social media, PPC campaigns. Business gadgets and branding solutions for startups and enterprises.', icon: 'chart-simple', route: '/brand/shahaab/', features: ['Growth Solutions','Digital Strategy','ROI Focused'] },
+            { name: 'Anabiya', category: 'business', categoryName: 'Business', desc: 'Online courses in SEO, Ads Management, and digital marketing for students and professionals.', icon: 'graduation-cap', route: '/brand/anabiya/', features: ['Expert Trainers','Certificate','Job Placement'] }
+        ];
+
+        // DOM Elements
+        const brandGrid = document.getElementById('brandGrid');
+        const visibleCountSpan = document.getElementById('visibleCount');
+        const totalCountSpan = document.getElementById('totalCount');
+        const searchInput = document.getElementById('searchInput');
+        const sortSelect = document.getElementById('sortSelect');
+        let currentFilter = 'all';
+        let currentSearch = '';
+        let currentSort = 'name';
+
+        // Set total count
+        totalCountSpan.textContent = allBrands.length;
+
+        // Render brands
+        function renderBrands() {
+            let filtered = [...allBrands];
+            
+            // Apply category filter
+            if (currentFilter !== 'all') {
+                filtered = filtered.filter(b => b.category === currentFilter);
+            }
+            
+            // Apply search filter
+            if (currentSearch.trim()) {
+                const searchTerm = currentSearch.toLowerCase();
+                filtered = filtered.filter(b => 
+                    b.name.toLowerCase().includes(searchTerm) || 
+                    b.desc.toLowerCase().includes(searchTerm) ||
+                    b.categoryName.toLowerCase().includes(searchTerm)
+                );
+            }
+            
+            // Apply sorting
+            if (currentSort === 'name') {
+                filtered.sort((a, b) => a.name.localeCompare(b.name));
+            } else if (currentSort === 'name-desc') {
+                filtered.sort((a, b) => b.name.localeCompare(a.name));
+            }
+            
+            // Update visible count
+            visibleCountSpan.textContent = filtered.length;
+            
+            // Render or show no results
+            if (filtered.length === 0) {
+                brandGrid.innerHTML = `
+                    <div class="no-results" style="grid-column: 1/-1;">
+                        <i class="fas fa-search"></i>
+                        <h3>No brands found</h3>
+                        <p>Try adjusting your search or filter criteria</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            brandGrid.innerHTML = filtered.map(b => `
+                <a href="${b.route}" class="brand-card">
+                    <div class="card-icon">
+                        <i class="fas fa-${b.icon}"></i>
+                    </div>
+                    <h3>${b.name}</h3>
+                    <div class="brand-category">${b.categoryName}</div>
+                    <div class="brand-desc">${b.desc}</div>
+                    <div class="brand-tags">
+                        ${b.features.map(f => `<span class="tag">${f}</span>`).join('')}
+                    </div>
+                    <div class="card-hover">Explore ${b.name} <i class="fas fa-arrow-right"></i></div>
+                </a>
+            `).join('');
+        }
+
+        // Filter pills
+        document.querySelectorAll('.pill').forEach(pill => {
+            pill.addEventListener('click', function() {
+                document.querySelectorAll('.pill').forEach(p => p.classList.remove('active'));
+                this.classList.add('active');
+                currentFilter = this.dataset.filter;
+                renderBrands();
+            });
+        });
+
+        // Search input
+        searchInput.addEventListener('input', (e) => {
+            currentSearch = e.target.value;
+            renderBrands();
+        });
+
+        // Sort select
+        sortSelect.addEventListener('change', (e) => {
+            currentSort = e.target.value;
+            renderBrands();
+        });
+
+        // Initial render
+        renderBrands();
+
+        // Header scroll
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', () => header.classList.toggle('scrolled', window.scrollY > 100));
+
+        // Back to top
+        const backTop = document.getElementById('backTop');
+        window.addEventListener('scroll', () => backTop.classList.toggle('visible', window.scrollY > 400));
+        backTop.addEventListener('click', e => { e.preventDefault(); window.scrollTo({top: 0, behavior: 'smooth'}); });
+
+        // Mobile menu
+        const mobileToggle = document.getElementById('mobileToggle');
+        const navMenu = document.getElementById('navMenu');
+        mobileToggle.addEventListener('click', () => {
+            const icon = mobileToggle.querySelector('i');
+            if (navMenu.style.display === 'flex') {
+                navMenu.style.display = 'none';
+                icon.className = 'fas fa-bars';
+            } else {
+                navMenu.style.display = 'flex';
+                navMenu.style.flexDirection = 'column';
+                navMenu.style.position = 'absolute';
+                navMenu.style.top = '75px';
+                navMenu.style.left = '20px';
+                navMenu.style.right = '20px';
+                navMenu.style.background = 'rgba(10,10,15,0.98)';
+                navMenu.style.backdropFilter = 'blur(30px)';
+                navMenu.style.padding = '20px';
+                navMenu.style.borderRadius = '30px';
+                navMenu.style.border = '1px solid rgba(0,255,255,0.15)';
+                navMenu.style.gap = '8px';
+                navMenu.style.zIndex = '1000';
+                icon.className = 'fas fa-times';
+            }
+        });
+
+        // Close mobile on resize
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 992) {
+                navMenu.style.display = '';
+                if(mobileToggle.querySelector('i')) mobileToggle.querySelector('i').className = 'fas fa-bars';
+            }
+        });
+
+        console.log('✅ Brands Index Page Loaded - 28 Brands with Filter, Search & Sort');
+    </script>
+</body>
+</html>
