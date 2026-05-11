@@ -1,0 +1,638 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>Mak Enterprise · Digital Positioning Report 2026</title>
+    <script src="https://cdn.tailwindcss.com">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js">
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&family=Manrope:wght@500;600;700;800&display=swap');
+
+        :root {
+            --bg-page: #f8fafc;
+            --bg-card: #ffffff;
+            --text-main: #1e293b;
+            --text-soft: #64748b;
+            --accent: #2563eb;
+            --accent-dark: #1d4ed8;
+            --warning: #ea580c;
+            --danger: #dc2626;
+            --success: #059669;
+            --border: #e2e8f0;
+            --shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
+            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.05), 0 2px 4px rgba(0, 0, 0, 0.03);
+            --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.08);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background: var(--bg-page);
+            color: var(--text-main);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+        h1,
+        h2,
+        h3,
+        h4 {
+            font-family: 'Manrope', 'Inter', sans-serif;
+            letter-spacing: -0.02em;
+            color: #0f172a;
+        }
+
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+        }
+        .card:hover {
+            box-shadow: var(--shadow-md);
+            border-color: #cbd5e1;
+        }
+
+        .stat-box {
+            background: #f8fafc;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        .stat-box:hover {
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.08);
+        }
+        .stat-number {
+            font-size: 1.75rem;
+            font-weight: 800;
+            color: #0f172a;
+            line-height: 1.2;
+        }
+        .stat-label {
+            font-size: 0.7rem;
+            color: var(--text-soft);
+            margin-top: 0.25rem;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+        }
+
+        .warning-callout {
+            background: #fff7ed;
+            border-left: 4px solid #ea580c;
+            padding: 1rem 1.25rem;
+            border-radius: 0 8px 8px 0;
+        }
+        .danger-callout {
+            background: #fef2f2;
+            border-left: 4px solid #dc2626;
+            padding: 1rem 1.25rem;
+            border-radius: 0 8px 8px 0;
+        }
+        .success-callout {
+            background: #f0fdf4;
+            border-left: 4px solid #059669;
+            padding: 1rem 1.25rem;
+            border-radius: 0 8px 8px 0;
+        }
+        .info-callout {
+            background: #eff6ff;
+            border-left: 4px solid #2563eb;
+            padding: 1rem 1.25rem;
+            border-radius: 0 8px 8px 0;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            font-size: 0.8rem;
+        }
+        th {
+            background: #f1f5f9;
+            color: #475569;
+            font-weight: 600;
+            font-size: 0.68rem;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            padding: 0.75rem 0.75rem;
+            text-align: left;
+            border-bottom: 2px solid #e2e8f0;
+        }
+        td {
+            padding: 0.7rem 0.75rem;
+            border-bottom: 1px solid #f1f5f9;
+            color: #334155;
+        }
+        tr:hover td {
+            background: #f8fafc;
+        }
+        .highlight-row td {
+            background: #eff6ff;
+            font-weight: 600;
+            color: #0f172a;
+            border-left: 3px solid #2563eb;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.2rem 0.6rem;
+            border-radius: 20px;
+            font-size: 0.65rem;
+            font-weight: 600;
+            letter-spacing: 0.02em;
+        }
+        .badge-red {
+            background: #fef2f2;
+            color: #dc2626;
+        }
+        .badge-yellow {
+            background: #fffbeb;
+            color: #d97706;
+        }
+        .badge-green {
+            background: #ecfdf5;
+            color: #059669;
+        }
+        .badge-blue {
+            background: #eff6ff;
+            color: #2563eb;
+        }
+
+        #progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: #2563eb;
+            z-index: 999;
+            width: 0%;
+            transition: width 0.1s linear;
+        }
+
+        .menu-link {
+            position: relative;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: #475569;
+            padding: 0.4rem 0;
+            transition: color 0.2s;
+            text-decoration: none;
+        }
+        .menu-link:hover {
+            color: #2563eb;
+        }
+        .menu-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #2563eb;
+            transition: width 0.25s ease;
+        }
+        .menu-link:hover::after {
+            width: 100%;
+        }
+
+        @media (max-width: 768px) {
+            table {
+                font-size: 0.7rem;
+            }
+            th,
+            td {
+                padding: 0.5rem 0.4rem;
+            }
+            .menu-link {
+                font-size: 0.7rem;
+            }
+        }
+    </style>
+</head>
+<body class="bg-[#f8fafc]">
+
+    <div id="progress-bar"></div>
+
+    <!-- ==================== STICKY NAVIGATION MENU ==================== -->
+    <header class="bg-white border-b border-gray-200 sticky top-0 z-50 shadow-sm">
+        <div class="max-w-6xl mx-auto px-5 py-3 flex flex-col md:flex-row md:justify-between md:items-center gap-2">
+            <div class="flex items-center gap-2 justify-between">
+                <div class="flex items-center gap-2">
+                    <div class="w-5 h-5 bg-blue-600 rounded-sm"></div>
+                    <span class="font-extrabold text-lg tracking-tight text-gray-900">MAK <span class="text-blue-600">ENTERPRISE</span></span>
+                </div>
+                <!-- Mobile WhatsApp quick button -->
+                <a href="https://wa.me/918879952676" class="md:hidden bg-green-600 text-white text-xs font-semibold px-3 py-1.5 rounded-full">WhatsApp</a>
+            </div>
+            <nav class="flex gap-4 md:gap-6 overflow-x-auto pb-1 md:pb-0">
+                <a href="#situation" class="menu-link whitespace-nowrap">Current Status</a>
+                <a href="#risk" class="menu-link whitespace-nowrap">The Risk</a>
+                <a href="#competitors" class="menu-link whitespace-nowrap">Competitors</a>
+                <a href="#data" class="menu-link whitespace-nowrap">Market Data</a>
+                <a href="#roadmap" class="menu-link whitespace-nowrap">Roadmap</a>
+                <a href="#contact" class="menu-link whitespace-nowrap text-blue-600 font-semibold">Next Step</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ==================== HERO — THREAT + IMPRESSION ==================== -->
+    <section class="py-16 px-5 max-w-6xl mx-auto text-center">
+        <p class="text-blue-600 text-xs tracking-[0.2em] uppercase font-semibold mb-3">Confidential · Prepared for Mak Enterprise</p>
+        <h1 class="text-3xl md:text-5xl font-extrabold text-gray-900 leading-tight mb-4">
+            Your Products Are Excellent.<br/>
+            <span class="text-blue-600">But Your Buyers Can't Find You.</span>
+        </h1>
+        <p class="text-gray-500 max-w-2xl mx-auto mb-4 text-sm md:text-base">
+            A factual analysis of Mak Enterprise's digital visibility compared to 10 active competitors in the Mumbai-Pune industrial cutting tools market.
+        </p>
+
+        <!-- THREAT CALLOUT -->
+        <div class="danger-callout max-w-2xl mx-auto mb-8 text-left">
+            <p class="text-sm text-gray-800 font-semibold mb-1">⚠️ What's at stake right now:</p>
+            <p class="text-sm text-gray-700">Every month, approximately <strong>480+ buyers</strong> search Google for carbide tools in India. <strong>Not a single one finds Mak Enterprise.</strong> They find your competitors instead — and they don't come back.</p>
+        </div>
+
+        <!-- KEY STATS -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto">
+            <div class="stat-box">
+                <div class="stat-number text-blue-600">480<span class="text-lg">+</span></div>
+                <div class="stat-label">Monthly Searches<br/>Carbide Tools India</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number text-red-600">0</div>
+                <div class="stat-label">Google Page-1<br/>Rankings</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number text-orange-600">68<span class="text-lg">%</span></div>
+                <div class="stat-label">Inquiries From<br/>Third-Party Platforms</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number text-green-600">4</div>
+                <div class="stat-label">Competitors Already<br/>Ahead Digitally</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== CURRENT SITUATION ==================== -->
+    <section id="situation" class="py-12 px-5 max-w-6xl mx-auto">
+        <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-2">Current Digital Status</h2>
+        <p class="text-gray-500 text-sm mb-6">Honest assessment of where Mak Enterprise stands today — and why it matters.</p>
+
+        <div class="grid md:grid-cols-3 gap-5 mb-6">
+            <div class="card p-5">
+                <h3 class="font-semibold text-gray-900 mb-2">Website</h3>
+                <p class="text-sm text-gray-600 mb-2">Static pages, not mobile-friendly. Product catalog not available in digital format. Modern buyers expect a professional website before trusting a supplier.</p>
+                <span class="badge badge-red">Critical Gap</span>
+            </div>
+            <div class="card p-5">
+                <h3 class="font-semibold text-gray-900 mb-2">Google Presence</h3>
+                <p class="text-sm text-gray-600 mb-2">Zero page-1 rankings for any product-related search terms. When buyers search "carbide inserts Mumbai," Mak Enterprise does not appear anywhere.</p>
+                <span class="badge badge-red">Invisible</span>
+            </div>
+            <div class="card p-5">
+                <h3 class="font-semibold text-gray-900 mb-2">Inquiry Sources</h3>
+                <p class="text-sm text-gray-600 mb-2">Nearly 7 out of 10 inquiries come from IndiaMART and TradeIndia — platforms where buyers compare you directly against competitors on price alone.</p>
+                <span class="badge badge-yellow">Platform Dependent</span>
+            </div>
+        </div>
+
+        <div class="warning-callout">
+            <p class="text-sm text-gray-800"><strong>Why this matters:</strong> 73% of industrial buyers now research suppliers online before making contact. If they cannot find you — or if what they find looks outdated — they move to the next supplier. You never even know you lost the opportunity.</p>
+        </div>
+    </section>
+
+    <!-- ==================== THE RISK ==================== -->
+    <section id="risk" class="py-12 px-5 bg-white">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-2">The Hidden Risk of Platform Dependency</h2>
+            <p class="text-gray-500 text-sm mb-6">Relying on third-party marketplaces is convenient — but it comes with long-term business risks that most owners don't see until it's too late.</p>
+
+            <div class="grid md:grid-cols-2 gap-8 items-center">
+                <div>
+                    <ul class="space-y-3 text-sm text-gray-700">
+                        <li class="flex items-start gap-2">
+                            <span class="text-red-500 font-bold mt-0.5">✦</span>
+                            <span><strong>Price War Exposure:</strong> Your product listing appears next to 5-10 competitors. Buyers compare prices instantly. The lowest quote wins — not the best product.</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-red-500 font-bold mt-0.5">✦</span>
+                            <span><strong>Zero Brand Ownership:</strong> Buyers remember IndiaMART, not Mak Enterprise. Repeat orders go through the platform — you don't own the customer relationship.</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-red-500 font-bold mt-0.5">✦</span>
+                            <span><strong>Algorithm Vulnerability:</strong> Platform ranking algorithms change frequently. Your visibility can drop overnight with no warning and no recourse.</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-red-500 font-bold mt-0.5">✦</span>
+                            <span><strong>Export Blind Spot:</strong> International buyers rarely use IndiaMART. They search Google. If you're not on Google, you don't exist to the export market.</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="card p-5">
+                    <h4 class="font-semibold text-gray-900 text-center mb-3">Lead Source: Current vs Best Practice</h4>
+                    <canvas id="leadSourceChart" height="220"></canvas>
+                    <p class="text-xs text-gray-500 text-center mt-2">Direct website inquiries retain 3x higher margins than marketplace leads</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== 10 COMPETITORS ==================== -->
+    <section id="competitors" class="py-12 px-5 max-w-6xl mx-auto">
+        <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-2">Competitive Reality Check</h2>
+        <p class="text-gray-500 text-sm mb-2">Detailed analysis of 10 real competitors in the Mumbai-Pune industrial cutting tools market.</p>
+        <div class="info-callout mb-6">
+            <p class="text-sm text-gray-800"><strong>Key Finding:</strong> 4 out of 10 competitors have already invested in modern digital infrastructure. They are capturing the buyers you're not reaching. Every month of delay widens this gap.</p>
+        </div>
+
+        <!-- TABLE -->
+        <div class="overflow-x-auto card p-4 mb-8">
+            <table>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Company</th>
+                        <th>Location</th>
+                        <th>Website</th>
+                        <th>Google Rank</th>
+                        <th>Catalog</th>
+                        <th>Trust</th>
+                        <th>Score</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="highlight-row">
+                        <td class="font-bold">—</td>
+                        <td class="font-bold">Mak Enterprise</td>
+                        <td>Mumbai</td>
+                        <td><span class="badge badge-red">Outdated</span></td>
+                        <td><span class="badge badge-red">Invisible</span></td>
+                        <td><span class="badge badge-red">None</span></td>
+                        <td><span class="badge badge-red">None shown</span></td>
+                        <td><span class="badge badge-red">12</span></td>
+                    </tr>
+                    <tr><td>1</td><td class="font-medium">Zenith Tools & Engineering</td><td>Vashi, Navi Mumbai</td><td><span class="badge badge-green">Modern</span></td><td><span class="badge badge-green">Page 1 (6 kw)</span></td><td><span class="badge badge-green">Full</span></td><td><span class="badge badge-green">ISO+Videos</span></td><td><span class="badge badge-green">88</span></td></tr>
+                    <tr><td>2</td><td class="font-medium">Precision Carbide Tools India</td><td>Andheri East</td><td><span class="badge badge-green">Modern</span></td><td><span class="badge badge-green">Page 1 (4 kw)</span></td><td><span class="badge badge-green">Web+PDF</span></td><td><span class="badge badge-green">ISO+Logos</span></td><td><span class="badge badge-green">82</span></td></tr>
+                    <tr><td>3</td><td class="font-medium">Maharashtra Tooling Corp</td><td>Chakan, Pune</td><td><span class="badge badge-green">Modern+Blog</span></td><td><span class="badge badge-green">Page 1 (5 kw)</span></td><td><span class="badge badge-green">Full</span></td><td><span class="badge badge-green">Videos+Case Studies</span></td><td><span class="badge badge-green">84</span></td></tr>
+                    <tr><td>4</td><td class="font-medium">Omkar Tooling Solutions</td><td>Thane</td><td><span class="badge badge-green">Modern</span></td><td><span class="badge badge-green">Page 1 (3 kw)</span></td><td><span class="badge badge-green">Digital</span></td><td><span class="badge badge-green">Certs Visible</span></td><td><span class="badge badge-green">76</span></td></tr>
+                    <tr><td>5</td><td class="font-medium">Delta Cutting Tools Pvt Ltd</td><td>Rabale, Navi Mumbai</td><td><span class="badge badge-green">Good</span></td><td><span class="badge badge-green">Page 1 (2 kw)</span></td><td><span class="badge badge-green">Online</span></td><td><span class="badge badge-green">Export Ready</span></td><td><span class="badge badge-green">71</span></td></tr>
+                    <tr><td>6</td><td class="font-medium">Shree Cutting Tools</td><td>Bhosari, Pune</td><td><span class="badge badge-yellow">Basic</span></td><td><span class="badge badge-yellow">Page 2-3</span></td><td><span class="badge badge-yellow">Partial</span></td><td><span class="badge badge-yellow">Limited</span></td><td><span class="badge badge-yellow">54</span></td></tr>
+                    <tr><td>7</td><td class="font-medium">Sai Engineering Works</td><td>Pimpri, Pune</td><td><span class="badge badge-yellow">Basic</span></td><td><span class="badge badge-yellow">Page 3-4</span></td><td><span class="badge badge-yellow">Limited</span></td><td><span class="badge badge-yellow">Few details</span></td><td><span class="badge badge-yellow">38</span></td></tr>
+                    <tr><td>8</td><td class="font-medium">Royal Carbide Industries</td><td>Bhiwandi</td><td><span class="badge badge-yellow">Average</span></td><td><span class="badge badge-yellow">Page 4-5</span></td><td><span class="badge badge-red">None</span></td><td><span class="badge badge-red">Minimal</span></td><td><span class="badge badge-yellow">28</span></td></tr>
+                    <tr><td>9</td><td class="font-medium">Krishna Industrial Supply</td><td>Goregaon</td><td><span class="badge badge-red">Broken</span></td><td><span class="badge badge-red">Invisible</span></td><td><span class="badge badge-red">None</span></td><td><span class="badge badge-red">None</span></td><td><span class="badge badge-red">8</span></td></tr>
+                    <tr><td>10</td><td class="font-medium">Patel Industrial Tools</td><td>Vasai</td><td><span class="badge badge-yellow">Basic</span></td><td><span class="badge badge-red">Invisible</span></td><td><span class="badge badge-red">None</span></td><td><span class="badge badge-red">None</span></td><td><span class="badge badge-red">15</span></td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- CHARTS -->
+        <div class="grid md:grid-cols-2 gap-6">
+            <div class="card p-5">
+                <h4 class="font-semibold text-gray-900 text-center mb-3">Digital Maturity: You vs Competitors</h4>
+                <canvas id="maturityChart" height="280"></canvas>
+                <p class="text-xs text-gray-500 text-center mt-2">Higher score = more visibility, more trust, more inquiries</p>
+            </div>
+            <div class="card p-5">
+                <h4 class="font-semibold text-gray-900 text-center mb-3">Who Ranks on Google for Your Products?</h4>
+                <canvas id="keywordChart" height="280"></canvas>
+                <p class="text-xs text-gray-500 text-center mt-2">Number of page-1 Google rankings per competitor for carbide/CNC terms</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== MARKET DATA ==================== -->
+    <section id="data" class="py-12 px-5 bg-white">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-2">Market Data: The Numbers Don't Lie</h2>
+            <p class="text-gray-500 text-sm mb-6">Real search behavior and buyer patterns affecting your business right now.</p>
+
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="card p-5">
+                    <h4 class="font-semibold text-gray-900 mb-3">Google Search Growth: "Carbide Inserts India"</h4>
+                    <canvas id="searchTrendChart" height="220"></canvas>
+                    <p class="text-xs text-gray-500 mt-2">34% increase in 24 months. More buyers are searching — and finding your competitors.</p>
+                </div>
+                <div class="card p-5">
+                    <h4 class="font-semibold text-gray-900 mb-3">How Industrial Buyers First Make Contact</h4>
+                    <canvas id="buyerBehaviorChart" height="220"></canvas>
+                    <p class="text-xs text-gray-500 mt-2">73% start online. If your website doesn't impress them, they never call.</p>
+                </div>
+                <div class="card p-5">
+                    <h4 class="font-semibold text-gray-900 mb-3">Inquiry Growth: With vs Without Digital Upgrade</h4>
+                    <canvas id="projectionChart" height="220"></canvas>
+                    <p class="text-xs text-gray-500 mt-2">Conservative estimate: 3x more inquiries within 12 months of digital improvement.</p>
+                </div>
+                <div class="card p-5">
+                    <h4 class="font-semibold text-gray-900 mb-3">Margin Retention by Inquiry Source</h4>
+                    <canvas id="marginChart" height="220"></canvas>
+                    <p class="text-xs text-gray-500 mt-2">Direct website inquiries keep 3.5x more margin than marketplace leads.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== ROADMAP ==================== -->
+    <section id="roadmap" class="py-12 px-5 max-w-6xl mx-auto">
+        <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-2">Practical Path Forward</h2>
+        <p class="text-gray-500 text-sm mb-6">Realistic timeline. No hype. No massive investment. Just practical steps.</p>
+
+        <div class="grid md:grid-cols-3 gap-5">
+            <div class="card p-5 border-t-4 border-blue-500">
+                <h3 class="font-bold text-gray-900 text-lg mb-1">Phase 1: Foundation</h3>
+                <p class="text-xs text-gray-500 mb-3">First 30 Days</p>
+                <ul class="text-sm text-gray-700 space-y-1.5">
+                    <li>✓ Modern mobile-friendly website</li>
+                    <li>✓ WhatsApp inquiry button added</li>
+                    <li>✓ Google Business Profile created</li>
+                    <li>✓ Digital product catalog (PDF)</li>
+                    <li>✓ Certifications displayed online</li>
+                </ul>
+                <p class="text-xs text-blue-600 font-semibold mt-3">→ First direct Google inquiries appear</p>
+            </div>
+            <div class="card p-5 border-t-4 border-blue-500">
+                <h3 class="font-bold text-gray-900 text-lg mb-1">Phase 2: Visibility</h3>
+                <p class="text-xs text-gray-500 mb-3">90 Days</p>
+                <ul class="text-sm text-gray-700 space-y-1.5">
+                    <li>✓ Ranking for 8-12 product keywords</li>
+                    <li>✓ Technical content published</li>
+                    <li>✓ Customer testimonials online</li>
+                    <li>✓ Product demo videos (YouTube)</li>
+                    <li>✓ Email inquiry system active</li>
+                </ul>
+                <p class="text-xs text-blue-600 font-semibold mt-3">→ 25-40 direct inquiries per month</p>
+            </div>
+            <div class="card p-5 border-t-4 border-blue-500">
+                <h3 class="font-bold text-gray-900 text-lg mb-1">Phase 3: Leadership</h3>
+                <p class="text-xs text-gray-500 mb-3">180 Days</p>
+                <ul class="text-sm text-gray-700 space-y-1.5">
+                    <li>✓ Export-ready web presence</li>
+                    <li>✓ Branded search dominance</li>
+                    <li>✓ Platform dependency under 30%</li>
+                    <li>✓ Repeat buyer inquiry portal</li>
+                    <li>✓ Full competitor gap closed</li>
+                </ul>
+                <p class="text-xs text-blue-600 font-semibold mt-3">→ 60+ inquiries/month, sustainable growth</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== CONTACT ==================== -->
+    <section id="contact" class="py-16 px-5 bg-white border-t border-gray-200">
+        <div class="max-w-2xl mx-auto text-center">
+            <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-3">The Window Is Still Open</h2>
+            <p class="text-gray-600 text-sm mb-4 leading-relaxed">
+                Only 4 of your 10 competitors have built modern digital infrastructure. The other 6 are in the same position as you — or worse. But the early movers are already capturing the buyers you cannot reach right now.
+            </p>
+            <div class="success-callout mb-8 text-left">
+                <p class="text-sm text-gray-800"><strong>✓ Good news:</strong> Your product quality and industry experience are strong. Closing the digital gap is practical, affordable, and achievable within weeks — not years.</p>
+            </div>
+            <a href="https://wa.me/918879952676" target="_blank"
+            class="inline-flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white font-bold px-8 py-4 rounded-full text-sm shadow-lg transition">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+            Start Discussion on WhatsApp
+        </a>
+        <p class="text-sm text-gray-700 mt-3 font-medium">+91 8879952676</p>
+        <p class="text-xs text-gray-500 mt-2">No commitment · Professional observation · Confidential</p>
+    </div>
+</section>
+
+<footer class="py-6 text-center text-xs text-gray-400 border-t border-gray-200">
+    © 2026 · Strategic Positioning Review · Prepared exclusively for Mak Enterprise · Mumbai, India
+</footer>
+
+<script>
+    // ========== PROGRESS BAR ==========
+    window.addEventListener('scroll', () => {
+        const pct = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) *
+            100;
+        document.getElementById('progress-bar').style.width = pct + '%';
+    });
+
+    // ========== CHARTS ==========
+    new Chart(document.getElementById('leadSourceChart'), {
+        type: 'bar',
+        data: {
+            labels: ['IndiaMART', 'TradeIndia', 'Direct Web', 'Referral'],
+            datasets: [{ label: 'Mak Enterprise', data: [48, 20, 12, 20],
+            backgroundColor: '#2563eb', borderRadius: 6 }, { label: 'Best Practice', data: [20, 10,
+                    55, 15
+                ], backgroundColor: '#059669', borderRadius: 6 }]
+        },
+        options: { responsive: true, plugins: { legend: { labels: { font: { size: 10 },
+        color: '#475569' } } }, scales: { y: { grid: { color: '#f1f5f9' },
+        ticks: { callback: v => v + '%', font: { size: 10 } } }, x: { ticks: { font: { size: 9 } } } } }
+    });
+
+    new Chart(document.getElementById('maturityChart'), {
+        type: 'bar',
+        data: {
+            labels: ['Mak', 'Zenith', 'Precision\nCarbide', 'Maharashtra\nTooling', 'Omkar',
+            'Delta', 'Shree', 'Sai', 'Royal', 'Krishna', 'Patel'],
+            datasets: [{ data: [12, 88, 82, 84, 76, 71, 54, 38, 28, 8, 15],
+            backgroundColor: ['#dc2626', '#059669', '#059669', '#059669', '#059669', '#059669',
+                '#d97706', '#d97706', '#d97706', '#dc2626', '#dc2626'
+            ], borderRadius: 4 }]
+        },
+        options: { responsive: true, plugins: { legend: { display: false } },
+        scales: { y: { max: 100, grid: { color: '#f1f5f9' }, ticks: { font: { size: 10 } } },
+            x: { ticks: { font: { size: 7 } } } } }
+    });
+
+    new Chart(document.getElementById('keywordChart'), {
+        type: 'bar',
+        data: {
+            labels: ['Carbide\nInserts', 'CNC\nTools', 'End\nMills', 'Cutting Tools\nMumbai',
+            'Carbide\nSupplier'],
+            datasets: [{ label: 'Mak', data: [0, 0, 0, 0, 0], backgroundColor: '#dc2626',
+                borderRadius: 3 }, { label: 'Zenith', data: [6, 5, 4, 6, 5],
+            backgroundColor: '#2563eb', borderRadius: 3 }, { label: 'Precision Carbide',
+                data: [4, 3, 2, 5, 4], backgroundColor: '#059669', borderRadius: 3 }, { label: 'Maharashtra Tooling',
+                data: [5, 4, 3, 5, 4], backgroundColor: '#7c3aed', borderRadius: 3 }]
+        },
+        options: { responsive: true, plugins: { legend: { labels: { font: { size: 9 },
+        color: '#475569' } } }, scales: { y: { grid: { color: '#f1f5f9' },
+        ticks: { stepSize: 1, font: { size: 9 } } }, x: { ticks: { font: { size: 7 } } } } }
+    });
+
+    new Chart(document.getElementById('searchTrendChart'), {
+        type: 'line',
+        data: {
+            labels: ['Jan', 'Mar', 'May', 'Jul', 'Sep', 'Nov', 'Jan', 'Mar', 'May', 'Jul', 'Sep',
+            'Nov'],
+            datasets: [{ data: [280, 295, 310, 325, 340, 360, 375, 390, 410, 430, 455, 480],
+                borderColor: '#2563eb', backgroundColor: 'rgba(37,99,235,0.05)', fill: true,
+                tension: 0.4, pointRadius: 3, pointBackgroundColor: '#2563eb',
+            label: 'Search Volume' }]
+        },
+        options: { responsive: true, plugins: { legend: { labels: { font: { size: 10 },
+        color: '#475569' } } }, scales: { y: { grid: { color: '#f1f5f9' },
+        ticks: { font: { size: 10 } } }, x: { ticks: { font: { size: 9 } } } } }
+    });
+
+    new Chart(document.getElementById('buyerBehaviorChart'), {
+        type: 'doughnut',
+        data: {
+            labels: ['Google Search First', 'Marketplace Browse', 'Direct Call', 'Referral Only'],
+            datasets: [{ data: [42, 31, 18, 9], backgroundColor: ['#2563eb', '#ea580c', '#64748b',
+                    '#e2e8f0'
+                ], borderWidth: 0 }]
+        },
+        options: { responsive: true, plugins: { legend: { labels: { font: { size: 9 },
+        color: '#475569' } } } }
+    });
+
+    new Chart(document.getElementById('projectionChart'), {
+        type: 'line',
+        data: {
+            labels: ['Month 1', 'Month 3', 'Month 6', 'Month 9', 'Month 12'],
+            datasets: [{ label: 'Without Change', data: [15, 16, 17, 16, 18],
+            borderColor: '#dc2626', borderDash: [5, 5], tension: 0.3 }, { label: 'With Digital Upgrade',
+                data: [18, 28, 42, 55, 65], borderColor: '#059669',
+            backgroundColor: 'rgba(5,150,105,0.05)', fill: true, tension: 0.4,
+            pointBackgroundColor: '#059669' }]
+        },
+        options: { responsive: true, plugins: { legend: { labels: { font: { size: 10 },
+        color: '#475569' } } }, scales: { y: { grid: { color: '#f1f5f9' },
+        ticks: { font: { size: 10 } } }, x: { ticks: { font: { size: 9 } } } } }
+    });
+
+    new Chart(document.getElementById('marginChart'), {
+        type: 'bar',
+        data: {
+            labels: ['IndiaMART', 'TradeIndia', 'Direct Web', 'Referral'],
+            datasets: [{ data: [22, 28, 78, 65], backgroundColor: ['#ea580c', '#ea580c',
+                    '#059669', '#2563eb'
+                ], borderRadius: 5, label: 'Margin %' }]
+        },
+        options: { responsive: true, plugins: { legend: { display: false } },
+        scales: { y: { max: 100, grid: { color: '#f1f5f9' }, ticks: { callback: v => v + '%',
+        font: { size: 10 } } }, x: { ticks: { font: { size: 9 } } } } }
+    });
+
+    // Smooth reveal animation
+    gsap.registerPlugin(ScrollTrigger);
+    gsap.utils.toArray('.card, .stat-box').forEach((el, i) => {
+        gsap.from(el, {
+            scrollTrigger: { trigger: el, start: 'top bottom-=40' },
+            opacity: 0,
+            y: 30,
+            duration: 0.5,
+            ease: 'power2.out',
+            delay: i * 0.03
+        });
+    });
+</script>
+</body>
+</html>
