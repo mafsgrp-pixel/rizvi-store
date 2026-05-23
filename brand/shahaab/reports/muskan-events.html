@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>Muskan Events · Full Competitive Audit 2026 | Rahil Abbas</title>
+    <script src="https://cdn.tailwindcss.com">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js">
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800;14..32,900&family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;1,500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --bg: #0a0807;
+            --bg-alt: #120e0c;
+            --rose: #e8a598;
+            --gold: #d4a373;
+            --mauve: #b5838d;
+            --blush: #f4d3cb;
+            --red: #ef4444;
+            --green: #10b981;
+            --text: #f5f0ee;
+            --text-soft: #c5bdb8;
+            --border: rgba(232, 165, 152, 0.08);
+            --border-light: rgba(232, 165, 152, 0.12);
+            --glass: rgba(255, 248, 245, 0.03);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            overflow-x: hidden;
+            line-height: 1.7;
+        }
+
+        .glass {
+            background: var(--glass);
+            border: 1px solid var(--border-light);
+            backdrop-filter: blur(16px);
+        }
+        .glass-card {
+            background: var(--glass);
+            border: 1px solid var(--border-light);
+            backdrop-filter: blur(16px);
+            border-radius: 32px;
+            padding: 32px;
+            transition: all 0.4s cubic-bezier(0.22, 0.61, 0.36, 1);
+        }
+        .glass-card:hover {
+            transform: translateY(-6px);
+            border-color: var(--rose);
+            box-shadow: 0 25px 50px rgba(232, 165, 152, 0.15);
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1380px;
+            margin: auto;
+        }
+        .section {
+            padding: 100px 0;
+            position: relative;
+        }
+        .heading {
+            font-size: 2.8rem;
+            font-weight: 700;
+            line-height: 1.15;
+            margin-bottom: 20px;
+            letter-spacing: -0.02em;
+            font-family: 'Playfair Display', serif;
+        }
+        .sub {
+            font-size: 1.05rem;
+            line-height: 1.9;
+            color: var(--text-soft);
+        }
+        .rose {
+            color: var(--rose);
+        }
+        .gold {
+            color: var(--gold);
+        }
+        .metric {
+            font-size: 2.8rem;
+            font-weight: 700;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .fade {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .fade.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .badge {
+            padding: 8px 18px;
+            background: rgba(232, 165, 152, 0.08);
+            border: 1px solid rgba(232, 165, 152, 0.25);
+            border-radius: 999px;
+            display: inline-block;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            color: var(--rose);
+            font-weight: 500;
+        }
+        .badge-gold {
+            background: rgba(212, 163, 115, 0.08);
+            border-color: rgba(212, 163, 115, 0.3);
+            color: var(--gold);
+        }
+        .badge-red {
+            background: rgba(239, 68, 68, 0.08);
+            border-color: rgba(239, 68, 68, 0.25);
+            color: var(--red);
+        }
+        .badge-green {
+            background: rgba(16, 185, 129, 0.08);
+            border-color: rgba(16, 185, 129, 0.25);
+            color: var(--green);
+        }
+        .badge-mauve {
+            background: rgba(181, 131, 141, 0.1);
+            border-color: rgba(181, 131, 141, 0.3);
+            color: var(--mauve);
+        }
+
+        #progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--rose), var(--gold));
+            z-index: 9999;
+            width: 0%;
+            transition: width 0.08s linear;
+            box-shadow: 0 0 18px rgba(232, 165, 152, 0.5);
+        }
+
+        .nav-link {
+            font-size: 0.78rem;
+            font-weight: 500;
+            color: #b8a9a4;
+            text-decoration: none;
+            padding: 0.35rem 0;
+            transition: color 0.25s;
+            position: relative;
+            letter-spacing: 0.01em;
+        }
+        .nav-link:hover {
+            color: #fff;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--rose);
+            transition: width 0.3s;
+        }
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 100%;
+        }
+        .nav-link.active {
+            color: var(--rose);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.78rem;
+        }
+        th {
+            text-align: left;
+            padding: 0.9rem 0.6rem;
+            background: rgba(255, 255, 255, 0.02);
+            color: #b8a9a4;
+            font-weight: 600;
+            font-size: 0.68rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            border-bottom: 2px solid var(--border);
+        }
+        td {
+            padding: 0.7rem 0.6rem;
+            border-bottom: 1px solid var(--border);
+            color: #d6cec9;
+        }
+        tr:hover td {
+            background: rgba(232, 165, 152, 0.03);
+        }
+        .highlight-row td {
+            background: rgba(232, 165, 152, 0.07);
+            font-weight: 600;
+            color: #fff;
+        }
+
+        @keyframes pulse-cta {
+            0%,
+            100% {
+                box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.5);
+            }
+            50% {
+                box-shadow: 0 0 0 22px rgba(16, 185, 129, 0);
+            }
+        }
+        .pulse-cta {
+            animation: pulse-cta 2.2s infinite;
+        }
+
+        @media (max-width:768px) {
+            .heading {
+                font-size: 2rem;
+            }
+            .metric {
+                font-size: 2rem;
+            }
+            .glass-card {
+                padding: 20px;
+                border-radius: 24px;
+            }
+            table {
+                font-size: 0.65rem;
+            }
+            th,
+            td {
+                padding: 0.5rem 0.3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="progress-bar"></div>
+
+    <!-- ==================== NAVIGATION ==================== -->
+    <nav class="sticky top-0 z-50 bg-[#0a0807]/90 backdrop-blur-xl border-b border-white/5">
+        <div class="container py-3 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+                <div class="w-5 h-5 bg-rose-400 rounded-full shadow-[0_0_12px_rgba(232,165,152,0.6)]"></div>
+                <span class="font-bold text-lg tracking-tight text-white">MUSKAN <span class="text-rose-300">EVENTS</span></span>
+            </div>
+            <div class="hidden md:flex gap-5">
+                <a href="#snapshot" class="nav-link">Snapshot</a>
+                <a href="#scores" class="nav-link">Scores</a>
+                <a href="#competitors" class="nav-link">Competitors</a>
+                <a href="#gaps" class="nav-link">Gap Analysis</a>
+                <a href="#niches" class="nav-link">Win Strategy</a>
+                <a href="#roadmap" class="nav-link">Roadmap</a>
+            </div>
+            <a href="#contact" class="bg-rose-500/80 hover:bg-rose-500 transition px-5 py-2.5 rounded-full text-sm font-semibold text-white">Free Strategy</a>
+        </div>
+    </nav>
+
+    <!-- ==================== HERO ==================== -->
+    <section class="relative min-h-screen flex items-center"
+    style="background:linear-gradient(to right,rgba(8,6,5,.96),rgba(8,6,5,.85)),url('https://images.unsplash.com/photo-1519225421980-715cb0215aed?q=80&w=2000&auto=format&fit=crop');background-size:cover;background-position:center;">
+    <div class="absolute inset-0" style="background:linear-gradient(rgba(255,255,255,.015) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.015) 1px,transparent 1px);background-size:80px 80px;"></div>
+    <div class="container relative z-10 py-32">
+        <div class="grid lg:grid-cols-2 gap-16 items-center">
+            <div>
+                <div class="badge mb-6">Full Competitive Intelligence Audit</div>
+                <h1 class="text-5xl lg:text-7xl font-bold leading-none mb-6" style="font-family: 'Playfair Display', serif;">Muskan <span class="rose">Events</span></h1>
+                <div class="text-2xl lg:text-3xl text-gray-300 leading-relaxed mb-8 font-light">Tier 4 Local Player<br/><span class="text-rose-200">Transitioning Toward Tier 3</span></div>
+                <p class="sub max-w-2xl mb-10">Detailed comparison against 10 Mumbai competitors. Analysis of positioning, reviews, premium perception, Instagram readiness, corporate trust, and niche opportunities.</p>
+                <div class="flex flex-wrap gap-4">
+                    <a href="#competitors" class="bg-rose-500/80 hover:bg-rose-500 transition px-7 py-4 rounded-2xl font-semibold text-white">View Competitor Table</a>
+                    <a href="#gaps" class="border border-white/10 hover:border-rose-400 transition px-7 py-4 rounded-2xl text-gray-300">10 Strategic Gaps</a>
+                </div>
+                <p class="text-sm text-gray-500 mt-6 flex items-center gap-2"><i class="fas fa-user"></i> Rahil Abbas · +91 88799 52676</p>
+            </div>
+            <div class="grid grid-cols-2 gap-5">
+                <div class="glass-card text-center"><div class="metric rose">3.5<span class="text-lg">/10</span></div><div class="mt-3 text-sm text-gray-400">Overall Market Power</div></div>
+                <div class="glass-card text-center"><div class="metric gold">Tier 4</div><div class="mt-3 text-sm text-gray-400">Current Competitive Tier</div></div>
+                <div class="glass-card text-center"><div class="metric rose">10</div><div class="mt-3 text-sm text-gray-400">Competitors Analyzed</div></div>
+                <div class="glass-card text-center"><div class="metric gold">4</div><div class="mt-3 text-sm text-gray-400">High-Potential Niches</div></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== SNAPSHOT ==================== -->
+<section id="snapshot" class="section fade">
+    <div class="container">
+        <div class="max-w-4xl mb-14">
+            <h2 class="heading">Competitive <span class="rose">Landscape</span> Overview</h2>
+            <p class="sub">Muskan Events currently competes in Mumbai's mid-low visibility local event segment. Most competitors operate with stronger premium positioning, specialization, review authority, and corporate trust systems.</p>
+        </div>
+        <div class="grid lg:grid-cols-4 gap-6">
+            <div class="glass-card text-center"><div class="text-3xl font-bold rose mb-2">Tier 1</div><p class="text-sm text-gray-400">National / Premium Event Giants</p><p class="text-xs text-gray-500 mt-2">Wizcraft, Percept, DNA Networks</p></div>
+            <div class="glass-card text-center"><div class="text-3xl font-bold gold mb-2">Tier 2</div><p class="text-sm text-gray-400">Premium Wedding & Corporate Specialists</p><p class="text-xs text-gray-500 mt-2">ANR Planners, Bon Evento, SOS PARTY</p></div>
+            <div class="glass-card text-center"><div class="text-3xl font-bold text-white mb-2">Tier 3</div><p class="text-sm text-gray-400">Fast-Growing Digital-First Agencies</p><p class="text-xs text-gray-500 mt-2">Great Catwalk, SuperStar, Uours</p></div>
+            <div class="glass-card text-center border-rose-400/40"><div class="text-3xl font-bold rose mb-2">Tier 4</div><p class="text-sm text-gray-400 font-semibold">Small Local Event Players</p><p class="text-xs text-rose-300 mt-2">← Muskan Events (transitioning)</p></div>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== AUDIT SCORES ==================== -->
+<section id="scores" class="section bg-[#120e0c] fade">
+    <div class="container">
+        <div class="max-w-4xl mb-14">
+            <h2 class="heading">Digital <span class="gold">Audit Scores</span></h2>
+            <p class="sub">10 dimensions evaluated. Final estimated grade: <span class="badge-red">D+</span></p>
+        </div>
+        <div class="glass-card mb-10 overflow-x-auto">
+            <table>
+                <thead><tr><th>Category</th><th>Score</th><th>Rating</th><th>Priority</th></tr></thead>
+                <tbody>
+                    <tr><td>Branding & Positioning</td><td>5.5 / 10</td><td><span class="badge-gold">Average</span></td><td>High</td></tr>
+                    <tr><td>Website Experience</td><td>4.5 / 10</td><td><span class="badge-red">Weak</span></td><td>Critical</td></tr>
+                    <tr><td>SEO & Discoverability</td><td>3.5 / 10</td><td><span class="badge-red">Very Weak</span></td><td>Critical</td></tr>
+                    <tr><td>Google Business Presence</td><td>5 / 10</td><td><span class="badge-gold">Average</span></td><td>High</td></tr>
+                    <tr><td>Social Media Authority</td><td>4 / 10</td><td><span class="badge-red">Weak</span></td><td>High</td></tr>
+                    <tr class="highlight-row"><td>Conversion System</td><td>3 / 10</td><td><span class="badge-red">Critical</span></td><td>Immediate</td></tr>
+                    <tr><td>Trust & Reputation</td><td>4.5 / 10</td><td><span class="badge-red">Weak</span></td><td>High</td></tr>
+                    <tr><td>Service Packaging</td><td>4 / 10</td><td><span class="badge-red">Weak</span></td><td>Medium</td></tr>
+                    <tr><td>Local Market Dominance</td><td>3 / 10</td><td><span class="badge-red">Very Weak</span></td><td>Critical</td></tr>
+                    <tr><td>Competitive Positioning</td><td>3.5 / 10</td><td><span class="badge-red">Very Weak</span></td><td>High</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="grid lg:grid-cols-2 gap-10">
+            <div class="glass-card"><canvas id="scoreBarChart"></canvas></div>
+            <div class="glass-card"><canvas id="radarChart"></canvas></div>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== FULL COMPETITOR TABLE ==================== -->
+<section id="competitors" class="section fade">
+    <div class="container">
+        <h2 class="heading text-center mb-4">Top 10 Competitors <span class="rose">vs</span> Muskan Events</h2>
+        <p class="sub text-center max-w-4xl mx-auto mb-12">Comprehensive comparison based on positioning strength, review authority, premium perception, digital presence, Instagram potential, and corporate readiness.</p>
+        <div class="overflow-x-auto glass-card mb-10">
+            <table>
+                <thead>
+                    <tr><th>Brand</th><th>Positioning</th><th>Reviews</th><th>Premium</th><th>Digital</th><th>Instagram</th><th>Corporate</th><th>Score</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td class="font-medium">Wizcraft International</td><td><span class="badge-green">Elite</span></td><td>Very High</td><td>Elite</td><td>Very Strong</td><td>High</td><td>Elite</td><td><span class="badge-green">10/10</span></td></tr>
+                    <tr><td class="font-medium">Percept Limited</td><td><span class="badge-green">Very Strong</span></td><td>High</td><td>High</td><td>Strong</td><td>High</td><td>Elite</td><td><span class="badge-green">9.5/10</span></td></tr>
+                    <tr><td class="font-medium">DNA Entertainment</td><td><span class="badge-green">Strong</span></td><td>High</td><td>High</td><td>Strong</td><td>Very High</td><td>High</td><td><span class="badge-green">9/10</span></td></tr>
+                    <tr><td class="font-medium">ANR Planners</td><td><span class="badge-green">Wedding Specialist</span></td><td>Very High</td><td>Premium</td><td>Strong</td><td>Very High</td><td>Medium</td><td><span class="badge-green">8.7/10</span></td></tr>
+                    <tr><td class="font-medium">SOS PARTY</td><td><span class="badge-green">Strong</span></td><td>Very High</td><td>Med-High</td><td>Strong</td><td>Medium</td><td>High</td><td><span class="badge-green">8.5/10</span></td></tr>
+                    <tr><td class="font-medium">Bon Evento</td><td><span class="badge-green">Luxury Wedding</span></td><td>Medium</td><td>Premium</td><td>Strong</td><td>Strong</td><td>Medium</td><td><span class="badge-green">8.2/10</span></td></tr>
+                    <tr><td class="font-medium">Great Catwalk Events</td><td><span class="badge-gold">Balanced</span></td><td>High</td><td>Medium</td><td>Strong</td><td>Strong</td><td>Medium</td><td><span class="badge-gold">8/10</span></td></tr>
+                    <tr><td class="font-medium">Singularies Events</td><td><span class="badge-gold">Premium Corp/Wed</span></td><td>Medium</td><td>Premium</td><td>Med-Strong</td><td>Medium</td><td>High</td><td><span class="badge-gold">8/10</span></td></tr>
+                    <tr><td class="font-medium">Uours Events</td><td><span class="badge-gold">Wedding & Decor</span></td><td>High</td><td>Med-High</td><td>Strong</td><td>Strong</td><td>Medium</td><td><span class="badge-gold">7.8/10</span></td></tr>
+                    <tr><td class="font-medium">SuperStar Events</td><td><span class="badge-gold">Commercial</span></td><td>Medium</td><td>Medium</td><td>Medium</td><td>Strong</td><td>Medium</td><td><span class="badge-gold">7.5/10</span></td></tr>
+                    <tr class="highlight-row"><td class="font-bold">Muskan Events</td><td><span class="badge-red">Weak</span></td><td>Very Low</td><td>Low</td><td>Weak</td><td>Weak</td><td>Weak</td><td><span class="badge-red">3.5/10</span></td></tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="grid lg:grid-cols-2 gap-10">
+            <div class="glass-card"><canvas id="competitorBarChart"></canvas></div>
+            <div class="glass-card"><canvas id="gapRadarChart"></canvas></div>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== 10 STRATEGIC GAPS ==================== -->
+<section id="gaps" class="section bg-[#120e0c] fade">
+    <div class="container">
+        <h2 class="heading text-center mb-4">The 10 Biggest <span class="rose">Strategic Gaps</span></h2>
+        <p class="sub text-center max-w-4xl mx-auto mb-14">Where Muskan Events falls behind competitors — and where the biggest opportunities lie.</p>
+        <div class="grid lg:grid-cols-2 gap-6">
+            <div class="glass-card border-l-2 border-rose-400">
+                <h3 class="text-xl font-bold rose mb-3">1. Review Authority Gap</h3>
+                <p class="text-gray-400 text-sm">Muskan: Very low reviews. Competitors: 50–300+ reviews. This alone heavily affects conversion and trust.</p>
+            </div>
+            <div class="glass-card border-l-2 border-gold-400">
+                <h3 class="text-xl font-bold gold mb-3">2. Premium Branding Gap</h3>
+                <p class="text-gray-400 text-sm">Competitors use cinematic visuals, luxury imagery, emotional storytelling. Muskan feels template-driven and operational.</p>
+            </div>
+            <div class="glass-card border-l-2 border-rose-400">
+                <h3 class="text-xl font-bold rose mb-3">3. Specialization Gap</h3>
+                <p class="text-gray-400 text-sm">ANR owns weddings. SOS PARTY owns MICE. Muskan tries to do everything without owning any niche emotionally.</p>
+            </div>
+            <div class="glass-card border-l-2 border-gold-400">
+                <h3 class="text-xl font-bold gold mb-3">4. Instagram Competitiveness</h3>
+                <p class="text-gray-400 text-sm">Top brands act like media companies first. Muskan appears behind modern content standards and reel aesthetics.</p>
+            </div>
+            <div class="glass-card border-l-2 border-rose-400">
+                <h3 class="text-xl font-bold rose mb-3">5. Corporate Readiness</h3>
+                <p class="text-gray-400 text-sm">Competitors appear capable for annual retainers and conferences. Muskan looks more like "local celebrations."</p>
+            </div>
+            <div class="glass-card border-l-2 border-gold-400">
+                <h3 class="text-xl font-bold gold mb-3">6. Luxury Perception</h3>
+                <p class="text-gray-400 text-sm">Mumbai premium clients buy aesthetics, trust, status. Muskan lacks luxury photography and signature styling.</p>
+            </div>
+            <div class="glass-card border-l-2 border-rose-400">
+                <h3 class="text-xl font-bold rose mb-3">7. SEO Dominance Gap</h3>
+                <p class="text-gray-400 text-sm">Competitors rank better with more backlinks, content pages, and stronger Google authority signals.</p>
+            </div>
+            <div class="glass-card border-l-2 border-gold-400">
+                <h3 class="text-xl font-bold gold mb-3">8. Emotional Storytelling</h3>
+                <p class="text-gray-400 text-sm">Competitors sell "dream weddings" and "luxury moments." Muskan communicates mostly services — a major weakness.</p>
+            </div>
+            <div class="glass-card border-l-2 border-rose-400">
+                <h3 class="text-xl font-bold rose mb-3">9. Operational Confidence</h3>
+                <p class="text-gray-400 text-sm">Premium competitors appear organized and scalable. Muskan appears early-stage and less systemized.</p>
+            </div>
+            <div class="glass-card border-l-2 border-gold-400">
+                <h3 class="text-xl font-bold gold mb-3">10. Market Positioning</h3>
+                <p class="text-gray-400 text-sm">Competitors position as luxury designers or corporate experts. Muskan is still a generic "event planner."</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== IMMEDIATE THREATS ==================== -->
+<section class="section fade">
+    <div class="container">
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="heading">Most Dangerous <span class="rose">Immediate Threats</span></h2>
+            <p class="sub mb-10">These competitors dominate local SEO, reviews, social proof, and digital visibility in the same accessible market segment as Muskan Events.</p>
+            <div class="grid grid-cols-3 gap-6">
+                <div class="glass-card"><p class="text-2xl font-bold gold">Great Catwalk Events</p><p class="text-sm text-gray-400 mt-2">Balanced positioning, strong digital presence</p></div>
+                <div class="glass-card"><p class="text-2xl font-bold gold">SuperStar Events</p><p class="text-sm text-gray-400 mt-2">Commercial strength, strong Instagram</p></div>
+                <div class="glass-card"><p class="text-2xl font-bold gold">Uours Events</p><p class="text-sm text-gray-400 mt-2">Wedding & decor focus, high reviews</p></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== WIN STRATEGY ==================== -->
+<section id="niches" class="section bg-[#120e0c] fade">
+    <div class="container">
+        <h2 class="heading text-center mb-4">Where Muskan Events <span class="gold">CAN Win</span></h2>
+        <p class="sub text-center max-w-4xl mx-auto mb-14">Muskan cannot compete with giants immediately. But it CAN dominate specific micro-niches with focused positioning.</p>
+        <div class="grid lg:grid-cols-4 gap-6">
+            <div class="glass-card text-center border-t-2 border-rose-400">
+                <div class="text-4xl mb-4">🕌</div>
+                <h3 class="text-xl font-bold rose mb-3">Muslim Wedding Specialist</h3>
+                <p class="text-gray-400 text-sm">"Elegant Nikah & Walima Experience Studio" — low premium competition, huge Mumbai demand.</p>
+            </div>
+            <div class="glass-card text-center border-t-2 border-gold-400">
+                <div class="text-4xl mb-4">🎂</div>
+                <h3 class="text-xl font-bold gold mb-3">Kids Luxury Birthdays</h3>
+                <p class="text-gray-400 text-sm">High recurring demand. Dominate school parents, themed parties, Instagrammable setups.</p>
+            </div>
+            <div class="glass-card text-center border-t-2 border-rose-400">
+                <div class="text-4xl mb-4">📍</div>
+                <h3 class="text-xl font-bold rose mb-3">Hyperlocal Dominance</h3>
+                <p class="text-gray-400 text-sm">Own Trombay–Chembur–Mankhurd. Most premium competitors ignore the eastern belt.</p>
+            </div>
+            <div class="glass-card text-center border-t-2 border-gold-400">
+                <div class="text-4xl mb-4">💎</div>
+                <h3 class="text-xl font-bold gold mb-3">Affordable Premium</h3>
+                <p class="text-gray-400 text-sm">The middle segment between cheap decorators and luxury agencies is huge and underserved.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== STRATEGIC MARKET MAP ==================== -->
+<section class="section fade">
+    <div class="container">
+        <h2 class="heading text-center mb-4">Strategic Market <span class="rose">Position Map</span></h2>
+        <p class="sub text-center max-w-4xl mx-auto mb-12">Where major players sit — and where Muskan Events can carve a unique space.</p>
+        <div class="overflow-x-auto glass-card">
+            <table>
+                <thead><tr><th>Segment</th><th>Dominant Players</th><th>Muskan Opportunity</th></tr></thead>
+                <tbody>
+                    <tr><td>Elite Corporate Events</td><td>Wizcraft, Percept Limited</td><td><span class="badge-red">Not recommended now</span></td></tr>
+                    <tr><td>Premium Weddings</td><td>ANR Planners, Momente Weddings</td><td><span class="badge-gold">Long-term potential</span></td></tr>
+                    <tr><td>Corporate & MICE</td><td>SOS PARTY</td><td><span class="badge-gold">Medium-term</span></td></tr>
+                    <tr><td>Mid-Market Digital Brands</td><td>Great Catwalk Events</td><td><span class="badge-green">Viable target</span></td></tr>
+                    <tr class="highlight-row"><td>Local Celebration Segment</td><td>Muskan Events (currently)</td><td><span class="badge-green">Immediate dominance possible</span></td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== ROADMAP ==================== -->
+<section id="roadmap" class="section bg-[#120e0c] fade">
+    <div class="container">
+        <h2 class="heading text-center mb-4">Strategic <span class="gold">Improvement Roadmap</span></h2>
+        <p class="sub text-center max-w-4xl mx-auto mb-14">From Tier 4 to Tier 3 — and eventually toward premium niche dominance.</p>
+        <div class="grid lg:grid-cols-3 gap-8">
+            <div class="glass-card">
+                <h3 class="text-3xl font-bold rose mb-6">Phase 1 (0-15 days)</h3>
+                <ul class="space-y-3 text-gray-400 leading-relaxed text-sm">
+                    <li>• Remove ₹1 pricing immediately</li>
+                    <li>• Redesign homepage hero section</li>
+                    <li>• Add WhatsApp floating CTA</li>
+                    <li>• Professional portfolio gallery</li>
+                    <li>• Testimonials & review collection</li>
+                </ul>
+            </div>
+            <div class="glass-card">
+                <h3 class="text-3xl font-bold gold mb-6">Phase 2 (15-45 days)</h3>
+                <ul class="space-y-3 text-gray-400 leading-relaxed text-sm">
+                    <li>• Daily Instagram Reels strategy</li>
+                    <li>• Google review campaign (target 50+)</li>
+                    <li>• SEO landing pages for niches</li>
+                    <li>• Niche positioning selection</li>
+                    <li>• Vendor & venue partnerships</li>
+                </ul>
+            </div>
+            <div class="glass-card">
+                <h3 class="text-3xl font-bold rose mb-6">Phase 3 (45-90 days)</h3>
+                <ul class="space-y-3 text-gray-400 leading-relaxed text-sm">
+                    <li>• Premium package system launch</li>
+                    <li>• Corporate event vertical development</li>
+                    <li>• Influencer & community collaborations</li>
+                    <li>• Paid ads funnel with CRM</li>
+                    <li>• Lead tracking & automation</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== FINAL VERDICT ==================== -->
+<section class="section fade">
+    <div class="container text-center max-w-4xl mx-auto">
+        <h2 class="heading">Final <span class="rose">Strategic Verdict</span></h2>
+        <div class="glass-card text-left mb-10">
+            <p class="text-gray-300 leading-relaxed mb-4"><strong class="text-white">Current Reality:</strong> Muskan Events has a local operational base, flexible early-stage structure, and lower overhead than large agencies. But it suffers from low authority, weak differentiation, low review trust, weak premium identity, poor SEO, generic positioning, weak funnel systems, and weak storytelling.</p>
+            <p class="text-gray-300 leading-relaxed"><strong class="text-gold">The Path Forward:</strong> Muskan Events should NOT try to become "another general event planner." That market is overcrowded. Instead, it should become a <span class="rose font-semibold">highly recognizable niche-focused emotional experience brand</span>. That is the only realistic path to beating stronger Mumbai competitors long-term.</p>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== CONTACT ==================== -->
+<section id="contact" class="section fade">
+    <div class="container text-center">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-4xl lg:text-6xl font-bold leading-tight mb-8" style="font-family: 'Playfair Display', serif;">Event brands that build <span class="rose">digital trust early</span> will dominate Mumbai's celebration market.</h2>
+            <p class="sub text-lg mb-10">Muskan Events has the operational foundation. With niche positioning, Instagram strategy, SEO dominance, and conversion systems, the business can transform from a Tier 4 local decorator into a recognized Tier 3+ premium experience studio.</p>
+            <div class="glass-card inline-block text-left mb-8" style="max-width: 400px;">
+                <p class="text-white font-semibold text-lg mb-2">Rahil Abbas</p>
+                <p class="text-gray-400 flex items-center gap-2"><i class="fas fa-mobile-alt"></i> +91 88799 52676</p>
+                <p class="text-gray-500 text-sm mt-2">Digital Strategy & Web Services<br/>Free Audit · No Commitment</p>
+            </div>
+            <br/>
+            <a href="https://wa.me/918879952676" target="_blank"
+            class="inline-flex items-center gap-2 bg-green-500 hover:bg-green-600 transition px-10 py-5 rounded-2xl font-bold text-white text-lg pulse-cta">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+            Discuss Free Web Strategy on WhatsApp
+        </a>
+        <p class="text-gray-400 mt-4 text-sm">+91 8879952676 · Professional consultation · Muskan Events competitive audit</p>
+    </div>
+</div>
+</section>
+
+<footer class="py-8 text-center text-xs text-gray-600 border-t border-white/5">
+    © 2026 · Full Competitive Intelligence Audit · Prepared exclusively for Muskan Events · Trombay, Mumbai 400088<br/>Auditor: Rahil Abbas · +91 88799 52676 · muskanevents.com
+</footer>
+
+<script>
+    gsap.registerPlugin(ScrollTrigger);
+
+    window.addEventListener('scroll', () => {
+        const pct = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+        document.getElementById('progress-bar').style.width = pct + '%';
+    });
+
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-link');
+    window.addEventListener('scroll', () => {
+        let current = '';
+        sections.forEach(s => { if (window.scrollY >= s.offsetTop - 120) current = s.getAttribute('id'); });
+        navLinks.forEach(l => { l.classList.remove('active'); if (l.getAttribute('href') === '#' + current) l.classList.add('active'); });
+    });
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('show'); });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('.fade').forEach(el => observer.observe(el));
+
+    // Score Bar Chart
+    new Chart(document.getElementById('scoreBarChart'), {
+        type: 'bar',
+        data: {
+            labels: ['Branding', 'Website', 'SEO', 'GBP', 'Social', 'Conversion', 'Trust', 'Packaging', 'Local', 'Competitive'],
+            datasets: [{
+                data: [5.5, 4.5, 3.5, 5, 4, 3, 4.5, 4, 3, 3.5],
+                backgroundColor: ['#e8a598', '#d4a373', '#b5838d', '#e8a598', '#d4a373', '#ef4444', '#b5838d', '#d4a373', '#ef4444', '#b5838d'],
+                borderRadius: 10,
+                label: 'Score /10'
+            }]
+        },
+        options: {
+            plugins: { legend: { labels: { color: '#fff' } } },
+            scales: {
+                y: { max: 10, ticks: { color: '#aaa' }, grid: { color: 'rgba(255,255,255,.06)' } },
+                x: { ticks: { color: '#aaa', font: { size: 8 } }, grid: { display: false } }
+            }
+        }
+    });
+
+    // Radar Chart
+    new Chart(document.getElementById('radarChart'), {
+        type: 'radar',
+        data: {
+            labels: ['Website', 'SEO', 'Social', 'Reviews', 'Trust', 'Conversion'],
+            datasets: [
+                { label: 'Muskan (Current)', data: [4.5, 3.5, 4, 3.2, 4.5, 3], borderColor: '#e8a598', backgroundColor: 'rgba(232,165,152,.15)', borderWidth: 2 },
+                { label: 'Target (B+ Level)', data: [8, 7.5, 8.5, 8, 8.2, 8.5], borderColor: '#d4a373', backgroundColor: 'rgba(212,163,115,.08)', borderWidth: 2, borderDash: [6, 5] }
+            ]
+        },
+        options: {
+            plugins: { legend: { labels: { color: '#fff' } } },
+            scales: { r: { pointLabels: { color: '#fff' }, grid: { color: 'rgba(255,255,255,.1)' }, ticks: { display: false }, max: 10 } }
+        }
+    });
+
+    // Competitor Bar Chart
+    new Chart(document.getElementById('competitorBarChart'), {
+        type: 'bar',
+        data: {
+            labels: ['Wizcraft', 'Percept', 'DNA', 'ANR', 'SOS', 'Bon Evento', 'Great Catwalk', 'Singularies', 'Uours', 'SuperStar', 'Muskan'],
+            datasets: [{
+                data: [10, 9.5, 9, 8.7, 8.5, 8.2, 8, 8, 7.8, 7.5, 3.5],
+                backgroundColor: ['#10b981', '#10b981', '#10b981', '#10b981', '#10b981', '#10b981', '#d4a373', '#d4a373', '#d4a373', '#d4a373', '#ef4444'],
+                borderRadius: 8,
+                label: 'Market Power Score'
+            }]
+        },
+        options: {
+            plugins: { legend: { display: false } },
+            scales: {
+                y: { max: 10, ticks: { color: '#aaa' }, grid: { color: 'rgba(255,255,255,.06)' } },
+                x: { ticks: { color: '#aaa', font: { size: 7 } }, grid: { display: false } }
+            }
+        }
+    });
+
+    // Gap Radar Chart
+    new Chart(document.getElementById('gapRadarChart'), {
+        type: 'radar',
+        data: {
+            labels: ['Reviews', 'Branding', 'Specialization', 'Instagram', 'Corporate', 'Luxury', 'SEO', 'Storytelling', 'Operations', 'Positioning'],
+            datasets: [
+                { label: 'Top Competitors (Avg)', data: [8.5, 8, 8.5, 7.5, 8, 8, 7.5, 8, 8, 8.5], borderColor: '#10b981', backgroundColor: 'rgba(16,185,129,.08)', borderWidth: 2 },
+                { label: 'Muskan Events', data: [1.5, 2, 1.5, 2, 1.5, 1.5, 1.5, 1.5, 2, 1.5], borderColor: '#ef4444', backgroundColor: 'rgba(239,68,68,.15)', borderWidth: 2 }
+            ]
+        },
+        options: {
+            plugins: { legend: { labels: { color: '#fff' } } },
+            scales: { r: { pointLabels: { color: '#fff', font: { size: 8 } }, grid: { color: 'rgba(255,255,255,.1)' }, ticks: { display: false }, max: 10 } }
+        }
+    });
+</script>
+</body>
+</html>
