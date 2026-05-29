@@ -1,0 +1,1392 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RASAAI v3.0 – Mumbra Command Center</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+    <style>
+        :root {
+            --alpha: #4f46e5;
+            --prime: #10b981;
+            --elite: #f59e0b;
+            --delta: #e11d48;
+            --led: #3b82f6;
+            --audio: #8b5cf6;
+            --combo: #ec4899;
+            --profit-positive: #10b981;
+            --profit-negative: #ef4444;
+            --sidebar: #0f172a;
+            --primary-btn: #F97316;
+            --bg: #f1f5f9;
+            --card: #ffffff;
+            --text: #1e293b;
+            --text-secondary: #64748b;
+            --border: #e2e8f0;
+            --recovered-bg: #dcfce7;
+            --recovered-text: #15803d;
+            --pending-bg: #fff3e3;
+            --pending-text: #b45309;
+            --shadow: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.06);
+            --shadow-lg: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            display: flex;
+            min-height: 100vh;
+            line-height: 1.5;
+        }
+
+        /* SIDEBAR */
+        .sidebar {
+            width: 260px;
+            min-width: 260px;
+            background: var(--sidebar);
+            color: #e2e8f0;
+            display: flex;
+            flex-direction: column;
+            position: fixed;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            z-index: 100;
+            box-shadow: 4px 0 20px rgba(0,0,0,0.3);
+        }
+
+        .sidebar-header {
+            padding: 24px 20px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .sidebar-header i {
+            font-size: 28px;
+            color: var(--primary-btn);
+        }
+        .sidebar-header h1 {
+            font-size: 20px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+        .sidebar-header span {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #94a3b8;
+            display: block;
+        }
+
+        .sidebar-nav {
+            flex: 1;
+            padding: 12px 0;
+            overflow-y: auto;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 20px;
+            cursor: pointer;
+            transition: all 0.2s;
+            border-left: 3px solid transparent;
+            font-size: 14px;
+            color: #94a3b8;
+        }
+        .nav-item:hover {
+            background: rgba(255,255,255,0.05);
+            color: #e2e8f0;
+        }
+        .nav-item.active {
+            background: rgba(249,115,22,0.15);
+            color: #fff;
+            border-left-color: var(--primary-btn);
+            font-weight: 600;
+        }
+        .nav-item i {
+            width: 20px;
+            text-align: center;
+            font-size: 16px;
+        }
+        .nav-badge {
+            margin-left: auto;
+            background: var(--primary-btn);
+            color: #fff;
+            font-size: 10px;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-weight: 600;
+        }
+
+        .sidebar-footer {
+            padding: 16px 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 11px;
+            color: #64748b;
+            text-align: center;
+        }
+
+        /* MAIN CONTENT */
+        .main-content {
+            margin-left: 260px;
+            flex: 1;
+            padding: 24px;
+            min-height: 100vh;
+        }
+
+        .page {
+            display: none;
+        }
+        .page.active {
+            display: block;
+        }
+
+        .page-header {
+            margin-bottom: 24px;
+        }
+        .page-header h2 {
+            font-size: 26px;
+            font-weight: 700;
+            color: #0f172a;
+            letter-spacing: -0.5px;
+        }
+        .page-header p {
+            color: var(--text-secondary);
+            font-size: 14px;
+            margin-top: 4px;
+        }
+
+        /* CARDS */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .stat-card {
+            background: var(--card);
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+            transition: box-shadow 0.2s;
+        }
+        .stat-card:hover {
+            box-shadow: var(--shadow-lg);
+        }
+        .stat-card .stat-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            margin-bottom: 12px;
+        }
+        .stat-card .stat-value {
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: -1px;
+        }
+        .stat-card .stat-label {
+            font-size: 12px;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 2px;
+        }
+
+        /* TABLES */
+        .table-container {
+            background: var(--card);
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+            overflow: hidden;
+        }
+        .table-container h3 {
+            padding: 16px 20px;
+            font-size: 16px;
+            font-weight: 600;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .table-scroll {
+            overflow-x: auto;
+            max-height: 500px;
+            overflow-y: auto;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+        th {
+            background: #f8fafc;
+            padding: 10px 14px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-secondary);
+            border-bottom: 2px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 1;
+        }
+        td {
+            padding: 10px 14px;
+            border-bottom: 1px solid var(--border);
+        }
+        tr:hover td {
+            background: #f8fafc;
+        }
+
+        /* BADGES */
+        .badge {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+        }
+        .badge-recovered {
+            background: var(--recovered-bg);
+            color: var(--recovered-text);
+        }
+        .badge-pending {
+            background: var(--pending-bg);
+            color: var(--pending-text);
+        }
+        .badge-led {
+            background: #dbeafe;
+            color: #1d4ed8;
+        }
+        .badge-audio {
+            background: #ede9fe;
+            color: #6d28d9;
+        }
+        .badge-combo {
+            background: #fce7f3;
+            color: #be185d;
+        }
+        .badge-profit {
+            background: #dcfce7;
+            color: #15803d;
+        }
+        .badge-loss {
+            background: #fef2f2;
+            color: #dc2626;
+        }
+        .badge-zone {
+            padding: 3px 10px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 700;
+            color: #fff;
+        }
+        .zone-alpha {
+            background: var(--alpha);
+        }
+        .zone-prime {
+            background: var(--prime);
+        }
+        .zone-elite {
+            background: var(--elite);
+        }
+        .zone-delta {
+            background: var(--delta);
+        }
+
+        /* FORMS */
+        .form-card {
+            background: var(--card);
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+            margin-bottom: 24px;
+        }
+        .form-card h3 {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        .form-group label {
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-secondary);
+        }
+        .form-group input,
+        .form-group select {
+            padding: 10px 14px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 14px;
+            transition: border-color 0.2s;
+            font-family: inherit;
+        }
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--primary-btn);
+            box-shadow: 0 0 0 3px rgba(249,115,22,0.1);
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-family: inherit;
+        }
+        .btn-primary {
+            background: var(--primary-btn);
+            color: #fff;
+        }
+        .btn-primary:hover {
+            background: #ea580c;
+            box-shadow: 0 4px 12px rgba(249,115,22,0.3);
+        }
+        .btn-secondary {
+            background: #e2e8f0;
+            color: #475569;
+        }
+        .btn-secondary:hover {
+            background: #cbd5e1;
+        }
+        .btn-danger {
+            background: #ef4444;
+            color: #fff;
+        }
+        .btn-danger:hover {
+            background: #dc2626;
+        }
+        .btn-sm {
+            padding: 6px 12px;
+            font-size: 12px;
+        }
+
+        /* MAP */
+        #map {
+            height: 550px;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+            z-index: 1;
+        }
+        .map-legend {
+            background: #fff;
+            padding: 12px 16px;
+            border-radius: 8px;
+            box-shadow: var(--shadow-lg);
+            font-size: 12px;
+            line-height: 1.8;
+        }
+        .map-legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: help;
+        }
+        .map-legend-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        /* PROGRESS BAR */
+        .progress-bar-container {
+            background: #e2e8f0;
+            border-radius: 10px;
+            height: 10px;
+            overflow: hidden;
+            margin-top: 6px;
+        }
+        .progress-bar-fill {
+            height: 100%;
+            border-radius: 10px;
+            transition: width 0.5s;
+        }
+
+        /* ZONE OCCUPANCY */
+        .zone-occupancy-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+        .zone-occupancy-card {
+            background: var(--card);
+            border-radius: 12px;
+            padding: 16px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+        }
+        .zone-occupancy-card h4 {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 60px;
+                min-width: 60px;
+            }
+            .sidebar-header h1,
+            .sidebar-header span,
+            .nav-item span,
+            .nav-badge,
+            .sidebar-footer {
+                display: none;
+            }
+            .nav-item {
+                justify-content: center;
+                padding: 14px;
+            }
+            .nav-item i {
+                font-size: 20px;
+            }
+            .main-content {
+                margin-left: 60px;
+                padding: 16px;
+            }
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .profit-positive {
+            color: var(--profit-positive);
+            font-weight: 700;
+        }
+        .profit-negative {
+            color: var(--profit-negative);
+            font-weight: 700;
+        }
+        .text-muted {
+            color: var(--text-secondary);
+            font-size: 12px;
+        }
+        .highlight-box {
+            background: #fffbeb;
+            border: 1px solid #fcd34d;
+            border-radius: 8px;
+            padding: 12px 16px;
+            margin: 12px 0;
+            font-size: 13px;
+        }
+        .tooltip-trigger {
+            border-bottom: 1px dotted var(--text-secondary);
+            cursor: help;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <i class="fa-solid fa-rickshaw"></i>
+            <div>
+                <h1>RASAAI</h1>
+                <span>v3.0 · Mumbra Command</span>
+            </div>
+        </div>
+        <nav class="sidebar-nav">
+            <div class="nav-item active" data-page="dashboard">
+                <i class="fa-solid fa-chart-pie"></i> <span>Dashboard</span>
+            </div>
+            <div class="nav-item" data-page="map">
+                <i class="fa-solid fa-map-location-dot"></i> <span>Live Map</span>
+            </div>
+            <div class="nav-item" data-page="rickshaws">
+                <i class="fa-solid fa-truck-rickshaw"></i> <span>Rickshaws</span> <span class="nav-badge">200</span>
+            </div>
+            <div class="nav-item" data-page="clients">
+                <i class="fa-solid fa-building"></i> <span>Clients</span> <span class="nav-badge">10</span>
+            </div>
+            <div class="nav-item" data-page="led-campaigns">
+                <i class="fa-solid fa-tv"></i> <span>LED Campaigns</span>
+            </div>
+            <div class="nav-item" data-page="audio-campaigns">
+                <i class="fa-solid fa-volume-high"></i> <span>Audio Campaigns</span>
+            </div>
+            <div class="nav-item" data-page="calculator">
+                <i class="fa-solid fa-calculator"></i> <span>Budget Calculator</span>
+            </div>
+        </nav>
+        <div class="sidebar-footer">
+            Hybrid Cost Model · Mumbra Phase 1
+        </div>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+
+        <!-- PAGE 1: DASHBOARD -->
+        <div class="page active" id="page-dashboard">
+            <div class="page-header">
+                <h2>📊 Dashboard</h2>
+                <p>Real-time fleet overview & campaign performance</p>
+            </div>
+            <div class="stats-grid" id="dashboard-stats"></div>
+            <div class="zone-occupancy-grid" id="zone-occupancy"></div>
+            <div class="table-container" style="margin-top:24px;">
+                <h3><i class="fa-solid fa-list-check"></i> All Campaigns – Profit & Loss</h3>
+                <div class="table-scroll">
+                    <table id="dashboard-campaigns-table">
+                        <thead>
+                            <tr>
+                                <th>Date</th><th>Type</th><th>Client</th><th>Zone</th>
+                                <th>Ricks</th><th>Days</th><th>Revenue</th><th>Costs</th>
+                                <th>Profit</th><th>LED Status</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="highlight-box" style="margin-top:16px;">
+                <strong>📌 Monthly Fixed Burn:</strong> ₹40,000 (200 drivers × ₹200 retainer) &nbsp;|&nbsp;
+                <strong>Total Campaign Profits This Month:</strong> <span id="total-campaign-profit">₹0</span> &nbsp;|&nbsp;
+                <strong>Net Monthly:</strong> <span id="net-monthly-profit" style="font-weight:700;">-₹40,000</span>
+            </div>
+        </div>
+
+        <!-- PAGE 2: LIVE MAP -->
+        <div class="page" id="page-map">
+            <div class="page-header">
+                <h2>🗺️ Live Fleet Map</h2>
+                <p>48 rickshaws animated across 4 routes · Updated every 3 seconds</p>
+            </div>
+            <div id="map"></div>
+        </div>
+
+        <!-- PAGE 3: RICKSHAWS -->
+        <div class="page" id="page-rickshaws">
+            <div class="page-header">
+                <h2>🚛 Rickshaw Fleet (200)</h2>
+                <p>Manage drivers, track LED recovery & audio capability</p>
+            </div>
+            <div class="form-card">
+                <h3><i class="fa-solid fa-plus-circle"></i> Add New Rickshaw</h3>
+                <div class="form-row">
+                    <div class="form-group"><label>Driver Name</label><input type="text" id="new-driver-name" placeholder="Driver Name"></div>
+                    <div class="form-group"><label>Rickshaw Plate</label><input type="text" id="new-rickshaw-plate" placeholder="MH-04-X###"></div>
+                    <div class="form-group"><label>Zone</label><select id="new-rickshaw-zone"><option>Alpha</option><option>Prime</option><option>Elite</option><option>Delta</option></select></div>
+                    <div class="form-group"><label>Phone</label><input type="text" id="new-rickshaw-phone" placeholder="9876500xxx"></div>
+                    <div class="form-group" style="align-self:end;"><button class="btn btn-primary" onclick="addRickshaw()"><i class="fa-solid fa-plus"></i> Add</button></div>
+                </div>
+            </div>
+            <div class="table-container">
+                <h3><i class="fa-solid fa-list"></i> All Rickshaws</h3>
+                <div class="table-scroll">
+                    <table id="rickshaws-table">
+                        <thead>
+                            <tr><th>ID</th><th>Driver</th><th>Plate</th><th>Zone</th><th>Phone</th><th>LED Recovered</th><th>Audio Capable</th><th>Actions</th></tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- PAGE 4: CLIENTS -->
+        <div class="page" id="page-clients">
+            <div class="page-header">
+                <h2>🏢 Local Clients (10)</h2>
+                <p>Manage business clients in Mumbra region</p>
+            </div>
+            <div class="form-card">
+                <h3><i class="fa-solid fa-plus-circle"></i> Add Client</h3>
+                <div class="form-row">
+                    <div class="form-group"><label>Business Name</label><input type="text" id="new-client-name" placeholder="Business Name"></div>
+                    <div class="form-group"><label>Location</label><input type="text" id="new-client-location" placeholder="Location"></div>
+                    <div class="form-group"><label>Phone</label><input type="text" id="new-client-phone" placeholder="Phone"></div>
+                    <div class="form-group" style="align-self:end;"><button class="btn btn-primary" onclick="addClient()"><i class="fa-solid fa-plus"></i> Add</button></div>
+                </div>
+            </div>
+            <div class="table-container">
+                <h3><i class="fa-solid fa-building"></i> Client Directory</h3>
+                <div class="table-scroll">
+                    <table id="clients-table">
+                        <thead><tr><th>#</th><th>Business Name</th><th>Location</th><th>Phone</th><th>Actions</th></tr></thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- PAGE 5: LED CAMPAIGNS -->
+        <div class="page" id="page-led-campaigns">
+            <div class="page-header">
+                <h2>📺 LED Advertising Campaigns</h2>
+                <p>Create & track LED panel campaigns · Min 10 rickshaws, 14/30/60 days</p>
+            </div>
+            <div class="form-card">
+                <h3><i class="fa-solid fa-plus-circle"></i> Create LED Campaign</h3>
+                <div class="form-row">
+                    <div class="form-group"><label>Client</label><select id="led-campaign-client"></select></div>
+                    <div class="form-group"><label>Zone</label><select id="led-campaign-zone"><option>Alpha</option><option>Prime</option><option>Elite</option><option>Delta</option></select></div>
+                    <div class="form-group"><label>Rickshaw Count</label><input type="number" id="led-campaign-rickshaws" min="10" max="50" value="10"></div>
+                    <div class="form-group"><label>Duration (Days)</label><select id="led-campaign-days"><option value="14">14</option><option value="30">30</option><option value="60">60</option></select></div>
+                    <div class="form-group" style="align-self:end;"><button class="btn btn-primary" onclick="createLEDCampaign()"><i class="fa-solid fa-tv"></i> Create LED Campaign</button></div>
+                </div>
+                <div class="highlight-box" id="led-campaign-preview"></div>
+            </div>
+            <div class="table-container">
+                <h3><i class="fa-solid fa-history"></i> LED Campaign History</h3>
+                <div class="table-scroll">
+                    <table id="led-campaigns-table">
+                        <thead><tr><th>Date</th><th>Client</th><th>Zone</th><th>Ricks</th><th>Days</th><th>Revenue</th><th>Profit</th><th>LED Recovered</th><th>Actions</th></tr></thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- PAGE 6: AUDIO CAMPAIGNS -->
+        <div class="page" id="page-audio-campaigns">
+            <div class="page-header">
+                <h2>🔊 Audio Advertising Campaigns</h2>
+                <p>Create audio ad campaigns · ₹2,500 setup + ₹75/rickshaw/day · Bundle with LED for 10% off</p>
+            </div>
+            <div class="form-card">
+                <h3><i class="fa-solid fa-plus-circle"></i> Create Audio Campaign</h3>
+                <div class="form-row">
+                    <div class="form-group"><label>Client</label><select id="audio-campaign-client"></select></div>
+                    <div class="form-group"><label>Zone</label><select id="audio-campaign-zone"><option>Alpha</option><option>Prime</option><option>Elite</option><option>Delta</option></select></div>
+                    <div class="form-group"><label>Rickshaw Count</label><input type="number" id="audio-campaign-rickshaws" min="10" max="50" value="10"></div>
+                    <div class="form-group"><label>Duration (Days)</label><select id="audio-campaign-days"><option value="14">14</option><option value="30">30</option><option value="60">60</option></select></div>
+                    <div class="form-group"><label>Bundle with LED?</label><select id="audio-campaign-combo"><option value="no">No – Audio Only</option><option value="yes">Yes – Combo (10% off)</option></select></div>
+                    <div class="form-group" style="align-self:end;"><button class="btn btn-primary" onclick="createAudioCampaign()"><i class="fa-solid fa-volume-high"></i> Create Audio Campaign</button></div>
+                </div>
+                <div class="highlight-box" id="audio-campaign-preview">
+                    <strong>Audio Rate:</strong> ₹2,500 setup + ₹75/rickshaw/day · <strong>Combo Discount:</strong> 10% off combined LED+Audio
+                </div>
+            </div>
+            <div class="table-container">
+                <h3><i class="fa-solid fa-history"></i> Audio Campaign History</h3>
+                <div class="table-scroll">
+                    <table id="audio-campaigns-table">
+                        <thead><tr><th>Date</th><th>Type</th><th>Client</th><th>Zone</th><th>Ricks</th><th>Days</th><th>Revenue</th><th>Profit</th><th>Actions</th></tr></thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- PAGE 7: BUDGET CALCULATOR -->
+        <div class="page" id="page-calculator">
+            <div class="page-header">
+                <h2>💰 Client Budget Calculator</h2>
+                <p>Client-facing prices only · No internal costs visible</p>
+            </div>
+            <div class="form-card">
+                <h3><i class="fa-solid fa-sliders"></i> Calculate Campaign Price</h3>
+                <div class="form-row">
+                    <div class="form-group"><label>Ad Type</label><select id="calc-type" onchange="updateCalculator()"><option value="led">LED Only</option><option value="audio">Audio Only</option><option value="combo">LED + Audio Combo (10% off)</option></select></div>
+                    <div class="form-group"><label>Zone</label><select id="calc-zone" onchange="updateCalculator()"><option>Alpha (₹150 LED)</option><option>Prime (₹200 LED)</option><option>Elite (₹200 LED)</option><option>Delta (₹200 LED)</option></select></div>
+                    <div class="form-group"><label>Rickshaws</label><input type="number" id="calc-rickshaws" min="10" max="200" value="50" onchange="updateCalculator()"></div>
+                    <div class="form-group"><label>Days</label><select id="calc-days" onchange="updateCalculator()"><option value="14">14</option><option value="30">30</option><option value="60">60</option></select></div>
+                </div>
+                <div class="highlight-box" id="calculator-result" style="font-size:16px; font-weight:600;"></div>
+            </div>
+            <div class="table-container" style="margin-top:24px;">
+                <h3><i class="fa-solid fa-table"></i> Quick Reference – 14 Days Pricing</h3>
+                <div class="table-scroll">
+                    <table id="quick-reference-table">
+                        <thead><tr><th>Zone</th><th>10 Ricks</th><th>25 Ricks</th><th>50 Ricks</th><th>100 Ricks</th><th>150 Ricks</th><th>200 Ricks</th></tr></thead>
+                        <tbody id="quick-reference-body"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
+        // ==================== DATA LAYER ====================
+        const ZONES = ['Alpha', 'Prime', 'Elite', 'Delta'];
+        const ZONE_RATES = { Alpha: 150, Prime: 200, Elite: 200, Delta: 200 };
+        const ZONE_COLORS = { Alpha: '#4f46e5', Prime: '#10b981', Elite: '#f59e0b', Delta: '#e11d48' };
+        const ZONE_ROUTES = {
+            Alpha: { name: 'Mumbra → Kausa', start: [19.1905044, 73.0205953], end: [19.163273, 73.028658], popular: 'Mumbra Station Area, Kausa Market, Shahid Nagar, Amrut Nagar, Dargah Road' },
+            Prime: { name: 'Mumbra → Taloja via Shilphata', start: [19.1905044, 73.0205953], end: [19.095726, 73.073288], popular: 'Shilphata Junction, Taloja MIDC, D Mart Shilphata, Kharghar-Taloja Road' },
+            Elite: { name: 'Mumbra → Shilphata (Direct)', start: [19.1905044, 73.0205953], end: [19.212596, 72.977568], popular: 'Shilphata Market, Kohinoor Village, Mumbra Bypass, Toll Naka' },
+            Delta: { name: 'Mumbra → Kalwa', start: [19.1905044, 73.0205953], end: [19.196559, 72.98733], popular: 'Kalwa Station, Kalwa Market, Ganesh Ghat, Saket Complex, Manisha Nagar' }
+        };
+
+        const DEFAULT_CLIENTS = [
+            { id: 1, name: 'K Star Mall', location: 'Thane', phone: '022-25451234' },
+            { id: 2, name: 'Viviana Mall', location: 'Thane', phone: '022-61716000' },
+            { id: 3, name: 'Mumbra Central Plaza', location: 'Mumbra', phone: '9876543001' },
+            { id: 4, name: 'Hotel Shilphata', location: 'Shilphata', phone: '9876543002' },
+            { id: 5, name: 'Kalwa Market', location: 'Kalwa', phone: '9876543003' },
+            { id: 6, name: 'Majhiwada Shopping Complex', location: 'Majhiwada', phone: '9876543004' },
+            { id: 7, name: 'Dr. Patil Hospital', location: 'Mumbra', phone: '9876543005' },
+            { id: 8, name: 'Sai Darshan Hotel', location: 'Kausa', phone: '9876543006' },
+            { id: 9, name: 'Tata Motors Showroom', location: 'Thane', phone: '9876543007' },
+            { id: 10, name: 'Big Bazaar', location: 'Kalwa', phone: '9876543008' }
+        ];
+
+        function generateRickshaws() {
+            const ricks = [];
+            const zoneLetters = { Alpha: 'A', Prime: 'B', Elite: 'C', Delta: 'D' };
+            const zonePhonePrefix = { Alpha: '9876500', Prime: '9876501', Elite: '9876502', Delta: '9876503' };
+            let globalId = 1;
+            for (const zone of ZONES) {
+                const letter = zoneLetters[zone];
+                for (let i = 1; i <= 50; i++) {
+                    ricks.push({
+                        id: globalId,
+                        driver: `Driver ${globalId}`,
+                        rickshaw: `MH-04-${letter}${String(i).padStart(3, '0')}`,
+                        zone: zone,
+                        route: ZONE_ROUTES[zone].name,
+                        phone: `${zonePhonePrefix[zone]}${String(i).padStart(2, '0')}`,
+                        ledRecovered: false,
+                        audioCapable: true,
+                        firstCampaignDone: false,
+                        progress: Math.random() * 0.9 + 0.05
+                    });
+                    globalId++;
+                }
+            }
+            return ricks;
+        }
+
+        function getData(key, defaultValue) {
+            const stored = localStorage.getItem(key);
+            if (stored) return JSON.parse(stored);
+            return defaultValue;
+        }
+
+        function setData(key, value) {
+            localStorage.setItem(key, JSON.stringify(value));
+        }
+
+        let rickshaws = getData('rasaai_rickshaws_200_final', generateRickshaws());
+        let clients = getData('rasaai_clients_10_final', DEFAULT_CLIENTS);
+        let campaigns = getData('rasaai_campaigns_final', []);
+
+        function saveAll() {
+            setData('rasaai_rickshaws_200_final', rickshaws);
+            setData('rasaai_clients_10_final', clients);
+            setData('rasaai_campaigns_final', campaigns);
+        }
+
+        function getZoneRate(zone) { return ZONE_RATES[zone] || 200; }
+        function getNonRecoveredCount(zone) { return rickshaws.filter(r => r.zone === zone && !r.ledRecovered).length; }
+
+        function calculateCampaignProfit(campaign) {
+            const zoneRate = getZoneRate(campaign.zone);
+            const rCount = campaign.rickshawCount;
+            const days = campaign.days;
+
+            let ledRevenue = 0,
+                audioRevenue = 0;
+            if (campaign.type === 'led' || campaign.type === 'combo') {
+                ledRevenue = zoneRate * rCount * days;
+            }
+            if (campaign.type === 'audio' || campaign.type === 'combo') {
+                audioRevenue = (75 * rCount * days) + 2500;
+            }
+            let totalRevenue = ledRevenue + audioRevenue;
+            if (campaign.type === 'combo') totalRevenue = Math.round(totalRevenue * 0.9);
+
+            const printCost = (campaign.type === 'led' || campaign.type === 'combo') ? 500 * rCount : 0;
+            const ledHardwareCost = (campaign.type === 'led' || campaign.type === 'combo') ? 1000 * getNonRecoveredCount(campaign
+                .zone) : 0;
+            const audioSetupCost = (campaign.type === 'audio' || campaign.type === 'combo') ? 2500 : 0;
+
+            let driverLedBonus = 0,
+                driverAudioBonus = 0;
+            if (campaign.type === 'led') driverLedBonus = 600 * rCount;
+            if (campaign.type === 'audio') driverAudioBonus = 150 * rCount;
+            if (campaign.type === 'combo') { driverLedBonus = 750 * rCount;
+                driverAudioBonus = 0; }
+
+            const coordinatorPayout = 5 * rCount * days;
+            const marketerPayout = 15 * rCount * days;
+
+            const totalCosts = printCost + ledHardwareCost + audioSetupCost + driverLedBonus + driverAudioBonus +
+                coordinatorPayout + marketerPayout;
+            const profit = totalRevenue - totalCosts;
+
+            return {
+                ledRevenue,
+                audioRevenue,
+                totalRevenue,
+                printCost,
+                ledHardwareCost,
+                audioSetupCost,
+                driverLedBonus,
+                driverAudioBonus,
+                coordinatorPayout,
+                marketerPayout,
+                totalCosts,
+                profit
+            };
+        }
+
+        function getTotalCampaignProfit() {
+            return campaigns.reduce((sum, c) => sum + (c.profit || 0), 0);
+        }
+        const MONTHLY_FIXED_BURN = 40000;
+
+        // ==================== UI HELPERS ====================
+        function formatCurrency(amount) {
+            return '₹' + Math.round(amount).toLocaleString('en-IN');
+        }
+
+        function getZoneBadge(zone) {
+            const cls = zone === 'Alpha' ? 'zone-alpha' : zone === 'Prime' ? 'zone-prime' : zone === 'Elite' ?
+                'zone-elite' : 'zone-delta';
+            return `<span class="badge ${cls}">${zone}</span>`;
+        }
+
+        function getTypeBadge(type) {
+            if (type === 'led') return '<span class="badge badge-led">LED</span>';
+            if (type === 'audio') return '<span class="badge badge-audio">AUDIO</span>';
+            return '<span class="badge badge-combo">COMBO</span>';
+        }
+
+        function populateClientDropdowns() {
+            const dropdowns = ['led-campaign-client', 'audio-campaign-client'];
+            dropdowns.forEach(id => {
+                const sel = document.getElementById(id);
+                if (!sel) return;
+                sel.innerHTML = clients.map(c => `<option value="${c.id}">${c.name} (${c.location})</option>`)
+                    .join('');
+            });
+        }
+
+        function refreshAllUI() {
+            renderDashboard();
+            renderRickshawsTable();
+            renderClientsTable();
+            renderLEDCampaignsTable();
+            renderAudioCampaignsTable();
+            renderQuickReference();
+            updateCalculator();
+            populateClientDropdowns();
+            updateDashboardStats();
+        }
+
+        // ==================== NAVIGATION ====================
+        document.querySelectorAll('.nav-item').forEach(item => {
+            item.addEventListener('click', function() {
+                document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+                this.classList.add('active');
+                const pageName = this.dataset.page;
+                document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+                const targetPage = document.getElementById('page-' + pageName);
+                if (targetPage) targetPage.classList.add('active');
+                if (pageName === 'map') initMap();
+                refreshAllUI();
+            });
+        });
+
+        // ==================== DASHBOARD ====================
+        function updateDashboardStats() {
+            const totalProfit = getTotalCampaignProfit();
+            document.getElementById('total-campaign-profit').textContent = formatCurrency(totalProfit);
+            const netMonthly = totalProfit - MONTHLY_FIXED_BURN;
+            const netEl = document.getElementById('net-monthly-profit');
+            netEl.textContent = formatCurrency(netMonthly);
+            netEl.className = netMonthly >= 0 ? 'profit-positive' : 'profit-negative';
+        }
+
+        function renderDashboard() {
+            const totalProfit = getTotalCampaignProfit();
+            const netMonthly = totalProfit - MONTHLY_FIXED_BURN;
+            const ledCampaigns = campaigns.filter(c => c.type === 'led' || c.type === 'combo').length;
+            const audioCampaigns = campaigns.filter(c => c.type === 'audio' || c.type === 'combo').length;
+            const recoveredZones = new Set();
+            campaigns.forEach(c => { if (c.ledRecoveredTriggered) recoveredZones.add(c.zone); });
+            const recoveredCount = Array.from(recoveredZones).reduce((sum, z) => sum + rickshaws.filter(r => r.zone === z)
+                .length, 0);
+
+            document.getElementById('dashboard-stats').innerHTML = `
+            <div class="stat-card"><div class="stat-icon" style="background:#eff6ff;color:#3b82f6;"><i class="fa-solid fa-truck-rickshaw"></i></div><div class="stat-value">200</div><div class="stat-label">Total Rickshaws</div></div>
+            <div class="stat-card"><div class="stat-icon" style="background:#f0fdf4;color:#10b981;"><i class="fa-solid fa-map-pin"></i></div><div class="stat-value">4</div><div class="stat-label">Active Zones</div></div>
+            <div class="stat-card"><div class="stat-icon" style="background:#fef3c7;color:#f59e0b;"><i class="fa-solid fa-tv"></i></div><div class="stat-value">${ledCampaigns}</div><div class="stat-label">LED Campaigns</div></div>
+            <div class="stat-card"><div class="stat-icon" style="background:#ede9fe;color:#8b5cf6;"><i class="fa-solid fa-volume-high"></i></div><div class="stat-value">${audioCampaigns}</div><div class="stat-label">Audio Campaigns</div></div>
+            <div class="stat-card"><div class="stat-icon" style="background:#fce7f3;color:#ec4899;"><i class="fa-solid fa-indian-rupee-sign"></i></div><div class="stat-value ${totalProfit>=0?'profit-positive':'profit-negative'}">${formatCurrency(totalProfit)}</div><div class="stat-label">Campaign Profits</div></div>
+            <div class="stat-card"><div class="stat-icon" style="background:#fff7ed;color:#f97316;"><i class="fa-solid fa-chart-line"></i></div><div class="stat-value ${netMonthly>=0?'profit-positive':'profit-negative'}">${formatCurrency(netMonthly)}</div><div class="stat-label">Net Monthly (After ₹40K Burn)</div></div>
+          `;
+
+            document.getElementById('zone-occupancy').innerHTML = ZONES.map(zone => {
+                const count = rickshaws.filter(r => r.zone === zone).length;
+                const pct = Math.round((count / 50) * 100);
+                const recovered = rickshaws.filter(r => r.zone === zone && r.ledRecovered).length;
+                return `
+              <div class="zone-occupancy-card">
+                <h4><span class="badge zone-${zone.toLowerCase()}">${zone}</span> ${ZONE_ROUTES[zone].name}</h4>
+                <div style="font-size:24px;font-weight:700;">${count} <span style="font-size:12px;color:#64748b;">/ 50 rickshaws</span></div>
+                <div class="progress-bar-container"><div class="progress-bar-fill" style="width:${pct}%;background:${ZONE_COLORS[zone]};"></div></div>
+                <div style="margin-top:6px;font-size:12px;color:#64748b;">LED Recovered: ${recovered}/50 · Target: 50</div>
+              </div>`;
+            }).join('');
+
+            const tbody = document.querySelector('#dashboard-campaigns-table tbody');
+            tbody.innerHTML = campaigns.slice().reverse().map(c => {
+                const p = c.profit || 0;
+                return `
+              <tr>
+                <td>${c.date}</td><td>${getTypeBadge(c.type)}</td><td>${c.clientName}</td><td>${getZoneBadge(c.zone)}</td>
+                <td>${c.rickshawCount}</td><td>${c.days}</td><td>${formatCurrency(c.totalRevenue)}</td><td>${formatCurrency(c.totalCosts)}</td>
+                <td class="${p>=0?'profit-positive':'profit-negative'}">${formatCurrency(p)}</td>
+                <td>${c.ledRecoveredTriggered?'<span class="badge badge-recovered">Recovered</span>':'<span class="badge badge-pending">Pending</span>'}</td>
+              </tr>`;
+            }).join('');
+            if (campaigns.length === 0) tbody.innerHTML =
+                '<tr><td colspan="10" style="text-align:center;padding:24px;color:#94a3b8;">No campaigns yet. Create one from LED or Audio Campaigns page.</td></tr>';
+
+            updateDashboardStats();
+        }
+
+        // ==================== MAP ====================
+        let map;
+        let markers = [];
+        let animationInterval;
+
+        function initMap() {
+            if (map) {
+                map.invalidateSize();
+                return;
+            }
+            map = L.map('map').setView([19.175, 73.0], 13);
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; OpenStreetMap contributors',
+                maxZoom: 18
+            }).addTo(map);
+
+            ZONES.forEach(zone => {
+                const route = ZONE_ROUTES[zone];
+                const color = ZONE_COLORS[zone];
+                const polyline = L.polyline([route.start, route.end], {
+                    color: color,
+                    weight: 5,
+                    opacity: 0.7,
+                    dashArray: zone === 'Elite' ? '10,10' : null
+                }).addTo(map);
+                polyline.bindPopup(
+                    `<strong>${zone} Zone</strong><br>${route.name}<br><small>${route.popular}</small>`);
+            });
+
+            const legend = L.control({ position: 'bottomright' });
+            legend.onAdd = function() {
+                const div = L.DomUtil.create('div', 'map-legend');
+                div.innerHTML = ZONES.map(z =>
+                    `<div class="map-legend-item" title="${ZONE_ROUTES[z].popular}"><span class="map-legend-dot" style="background:${ZONE_COLORS[z]};"></span> <strong>${z}</strong>: ${ZONE_ROUTES[z].name.split('→')[1].trim().substring(0,20)}…</div>`
+                ).join('') +
+                    '<div style="margin-top:6px;font-size:11px;color:#64748b;">🖱️ Hover for popular areas</div>';
+                return div;
+            };
+            legend.addTo(map);
+
+            createMarkers();
+            startAnimation();
+        }
+
+        function createMarkers() {
+            markers.forEach(m => map.removeLayer(m));
+            markers = [];
+            const markerIcons = {};
+            ZONES.forEach(zone => {
+                markerIcons[zone] = L.divIcon({
+                    className: 'custom-marker',
+                    html: `<div style="background:${ZONE_COLORS[zone]};width:14px;height:14px;border-radius:50%;border:2px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,0.4);"></div>`,
+                    iconSize: [18, 18],
+                    iconAnchor: [9, 9]
+                });
+            });
+
+            ZONES.forEach(zone => {
+                const route = ZONE_ROUTES[zone];
+                for (let i = 0; i < 12; i++) {
+                    const t = i / 11;
+                    const lat = route.start[0] + (route.end[0] - route.start[0]) * t;
+                    const lng = route.start[1] + (route.end[1] - route.start[1]) * t;
+                    const rickshawData = rickshaws.find(r => r.zone === zone && r.id % 12 === i % 12) || rickshaws
+                        .find(r => r.zone === zone) || { driver: 'Unknown', rickshaw: 'N/A', ledRecovered: false,
+                            audioCapable: true };
+                    const marker = L.marker([lat, lng], { icon: markerIcons[zone] }).addTo(map);
+                    marker.bindPopup(`
+                <strong>${zone} Zone</strong><br>
+                🆔 ${rickshawData.rickshaw}<br>
+                👤 ${rickshawData.driver}<br>
+                📺 LED: ${rickshawData.ledRecovered?'<span style="color:#15803d;">Recovered</span>':'<span style="color:#b45309;">Pending</span>'}<br>
+                🔊 Audio: ${rickshawData.audioCapable?'<span style="color:#15803d;">Capable</span>':'<span style="color:#dc2626;">Not Capable</span>'}
+              `);
+                    marker._zone = zone;
+                    marker._baseLat = lat;
+                    marker._baseLng = lng;
+                    marker._index = i;
+                    markers.push(marker);
+                }
+            });
+        }
+
+        function startAnimation() {
+            if (animationInterval) clearInterval(animationInterval);
+            animationInterval = setInterval(() => {
+                markers.forEach(marker => {
+                    const offset = Math.sin(Date.now() / 2000 + marker._index) * 0.0008;
+                    const newLat = marker._baseLat + offset;
+                    const newLng = marker._baseLng + offset * 0.7;
+                    marker.setLatLng([newLat, newLng]);
+                });
+            }, 3000);
+        }
+
+        // ==================== RICKSHAWS TABLE ====================
+        function renderRickshawsTable() {
+            const tbody = document.querySelector('#rickshaws-table tbody');
+            tbody.innerHTML = rickshaws.map(r => `
+            <tr>
+              <td>${r.id}</td><td>${r.driver}</td><td>${r.rickshaw}</td><td>${getZoneBadge(r.zone)}</td>
+              <td>${r.phone}</td>
+              <td>${r.ledRecovered?'<span class="badge badge-recovered">Recovered</span>':'<span class="badge badge-pending">Pending</span>'}</td>
+              <td>${r.audioCapable?'<span class="badge badge-recovered">Yes</span>':'<span class="badge badge-pending">No</span>'}</td>
+              <td>
+                <button class="btn btn-sm btn-secondary" onclick="toggleAudioCapable(${r.id})" title="Toggle Audio">🔊</button>
+                <button class="btn btn-sm btn-danger" onclick="deleteRickshaw(${r.id})" title="Delete">🗑️</button>
+              </td>
+            </tr>`).join('');
+        }
+
+        function addRickshaw() {
+            const driver = document.getElementById('new-driver-name').value.trim();
+            const plate = document.getElementById('new-rickshaw-plate').value.trim();
+            const zone = document.getElementById('new-rickshaw-zone').value;
+            const phone = document.getElementById('new-rickshaw-phone').value.trim();
+            if (!driver || !plate || !phone) return alert('Please fill all fields');
+            const newId = rickshaws.length > 0 ? Math.max(...rickshaws.map(r => r.id)) + 1 : 1;
+            rickshaws.push({
+                id: newId,
+                driver,
+                rickshaw: plate,
+                zone,
+                route: ZONE_ROUTES[zone].name,
+                phone,
+                ledRecovered: false,
+                audioCapable: true,
+                firstCampaignDone: false,
+                progress: Math.random() * 0.9 + 0.05
+            });
+            saveAll();
+            refreshAllUI();
+            document.getElementById('new-driver-name').value = '';
+            document.getElementById('new-rickshaw-plate').value = '';
+            document.getElementById('new-rickshaw-phone').value = '';
+        }
+
+        function deleteRickshaw(id) {
+            if (!confirm('Delete this rickshaw?')) return;
+            rickshaws = rickshaws.filter(r => r.id !== id);
+            saveAll();
+            refreshAllUI();
+            if (map) { createMarkers();
+                startAnimation(); }
+        }
+
+        function toggleAudioCapable(id) {
+            const r = rickshaws.find(r => r.id === id);
+            if (r) { r.audioCapable = !r.audioCapable;
+                saveAll();
+                refreshAllUI(); }
+        }
+
+        // ==================== CLIENTS TABLE ====================
+        function renderClientsTable() {
+            const tbody = document.querySelector('#clients-table tbody');
+            tbody.innerHTML = clients.map((c, i) => `
+            <tr>
+              <td>${i+1}</td><td>${c.name}</td><td>${c.location}</td><td>${c.phone}</td>
+              <td><button class="btn btn-sm btn-danger" onclick="deleteClient(${c.id})">🗑️</button></td>
+            </tr>`).join('');
+        }
+
+        function addClient() {
+            const name = document.getElementById('new-client-name').value.trim();
+            const location = document.getElementById('new-client-location').value.trim();
+            const phone = document.getElementById('new-client-phone').value.trim();
+            if (!name || !location || !phone) return alert('Please fill all fields');
+            const newId = clients.length > 0 ? Math.max(...clients.map(c => c.id)) + 1 : 1;
+            clients.push({ id: newId, name, location, phone });
+            saveAll();
+            refreshAllUI();
+            document.getElementById('new-client-name').value = '';
+            document.getElementById('new-client-location').value = '';
+            document.getElementById('new-client-phone').value = '';
+        }
+
+        function deleteClient(id) {
+            if (!confirm('Delete this client?')) return;
+            clients = clients.filter(c => c.id !== id);
+            saveAll();
+            refreshAllUI();
+        }
+
+        // ==================== LED CAMPAIGNS ====================
+        function renderLEDCampaignsTable() {
+            const ledOnly = campaigns.filter(c => c.type === 'led' || c.type === 'combo');
+            const tbody = document.querySelector('#led-campaigns-table tbody');
+            tbody.innerHTML = ledOnly.slice().reverse().map(c => `
+            <tr>
+              <td>${c.date}</td><td>${c.clientName}</td><td>${getZoneBadge(c.zone)}</td>
+              <td>${c.rickshawCount}</td><td>${c.days}</td><td>${formatCurrency(c.totalRevenue)}</td>
+              <td class="${(c.profit||0)>=0?'profit-positive':'profit-negative'}">${formatCurrency(c.profit||0)}</td>
+              <td>${c.ledRecoveredTriggered?'<span class="badge badge-recovered">Yes</span>':'<span class="badge badge-pending">No</span>'}</td>
+              <td><button class="btn btn-sm btn-danger" onclick="deleteCampaign(${c.id})">🗑️</button></td>
+            </tr>`).join('');
+            if (ledOnly.length === 0) tbody.innerHTML =
+                '<tr><td colspan="9" style="text-align:center;padding:24px;color:#94a3b8;">No LED campaigns yet.</td></tr>';
+        }
+
+        function createLEDCampaign() {
+            const clientId = parseInt(document.getElementById('led-campaign-client').value);
+            const zone = document.getElementById('led-campaign-zone').value;
+            const rCount = parseInt(document.getElementById('led-campaign-rickshaws').value);
+            const days = parseInt(document.getElementById('led-campaign-days').value);
+            if (rCount < 10) return alert('Minimum 10 rickshaws required');
+            if (rCount > 50) return alert('Maximum 50 rickshaws per zone');
+            const client = clients.find(c => c.id === clientId);
+            if (!client) return alert('Client not found');
+
+            const campaign = {
+                id: Date.now(),
+                type: 'led',
+                clientName: client.name,
+                clientId: client.id,
+                zone,
+                rickshawCount: rCount,
+                days,
+                date: new Date().toISOString().split('T')[0],
+                ledRecoveredTriggered: false
+            };
+            const calc = calculateCampaignProfit(campaign);
+            Object.assign(campaign, calc);
+
+            if (calc.profit > 0 && getNonRecoveredCount(zone) > 0) {
+                campaign.ledRecoveredTriggered = true;
+                rickshaws.forEach(r => { if (r.zone === zone) r.ledRecovered = true; });
+            }
+
+            campaigns.push(campaign);
+            saveAll();
+            refreshAllUI();
+            updateLEDPreview();
+        }
+
+        function updateLEDPreview() {
+            const zone = document.getElementById('led-campaign-zone').value;
+            const rCount = parseInt(document.getElementById('led-campaign-rickshaws').value) || 10;
+            const days = parseInt(document.getElementById('led-campaign-days').value) || 14;
+            const zoneRate = getZoneRate(zone);
+            const revenue = zoneRate * rCount * days;
+            const nonRec = getNonRecoveredCount(zone);
+            const hwCost = 1000 * Math.min(nonRec, rCount);
+            document.getElementById('led-campaign-preview').innerHTML = `
+            <strong>LED Preview:</strong> ${formatCurrency(revenue)} revenue · ${rCount} rickshaws × ${days} days × ${formatCurrency(zoneRate)}/day · LED Hardware: ${formatCurrency(hwCost)} (${nonRec} non-recovered in ${zone})
+          `;
+        }
+        document.getElementById('led-campaign-zone')?.addEventListener('change', updateLEDPreview);
+        document.getElementById('led-campaign-rickshaws')?.addEventListener('input', updateLEDPreview);
+        document.getElementById('led-campaign-days')?.addEventListener('change', updateLEDPreview);
+
+        // ==================== AUDIO CAMPAIGNS ====================
+        function renderAudioCampaignsTable() {
+            const audioOnly = campaigns.filter(c => c.type === 'audio' || c.type === 'combo');
+            const tbody = document.querySelector('#audio-campaigns-table tbody');
+            tbody.innerHTML = audioOnly.slice().reverse().map(c => `
+            <tr>
+              <td>${c.date}</td><td>${getTypeBadge(c.type)}</td><td>${c.clientName}</td><td>${getZoneBadge(c.zone)}</td>
+              <td>${c.rickshawCount}</td><td>${c.days}</td><td>${formatCurrency(c.totalRevenue)}</td>
+              <td class="${(c.profit||0)>=0?'profit-positive':'profit-negative'}">${formatCurrency(c.profit||0)}</td>
+              <td><button class="btn btn-sm btn-danger" onclick="deleteCampaign(${c.id})">🗑️</button></td>
+            </tr>`).join('');
+            if (audioOnly.length === 0) tbody.innerHTML =
+                '<tr><td colspan="9" style="text-align:center;padding:24px;color:#94a3b8;">No audio campaigns yet.</td></tr>';
+        }
+
+        function createAudioCampaign() {
+            const clientId = parseInt(document.getElementById('audio-campaign-client').value);
+            const zone = document.getElementById('audio-campaign-zone').value;
+            const rCount = parseInt(document.getElementById('audio-campaign-rickshaws').value);
+            const days = parseInt(document.getElementById('audio-campaign-days').value);
+            const isCombo = document.getElementById('audio-campaign-combo').value === 'yes';
+            if (rCount < 10) return alert('Minimum 10 rickshaws required');
+            if (rCount > 50) return alert('Maximum 50 rickshaws per zone');
+            const client = clients.find(c => c.id === clientId);
+            if (!client) return alert('Client not found');
+
+            const campaign = {
+                id: Date.now(),
+                type: isCombo ? 'combo' : 'audio',
+                clientName: client.name,
+                clientId: client.id,
+                zone,
+                rickshawCount: rCount,
+                days,
+                date: new Date().toISOString().split('T')[0],
+                ledRecoveredTriggered: false
+            };
+            const calc = calculateCampaignProfit(campaign);
+            Object.assign(campaign, calc);
+
+            if (isCombo && calc.profit > 0 && getNonRecoveredCount(zone) > 0) {
+                campaign.ledRecoveredTriggered = true;
+                rickshaws.forEach(r => { if (r.zone === zone) r.ledRecovered = true; });
+            }
+
+            campaigns.push(campaign);
+            saveAll();
+            refreshAllUI();
+        }
+
+        function updateAudioPreview() {
+            const rCount = parseInt(document.getElementById('audio-campaign-rickshaws').value) || 10;
+            const days = parseInt(document.getElementById('audio-campaign-days').value) || 14;
+            const isCombo = document.getElementById('audio-campaign-combo').value === 'yes';
+            const zone = document.getElementById('audio-campaign-zone').value;
+            const audioRevenue = (75 * rCount * days) + 2500;
+            let msg = `<strong>Audio Rate:</strong> ${formatCurrency(audioRevenue)} (₹2,500 setup + ₹75×${rCount}×${days})`;
+            if (isCombo) {
+                const zoneRate = getZoneRate(zone);
+                const ledRevenue = zoneRate * rCount * days;
+                const comboRevenue = Math.round((ledRevenue + audioRevenue) * 0.9);
+                msg +=
+                    `<br><strong>Combo (10% off):</strong> LED ${formatCurrency(ledRevenue)} + Audio ${formatCurrency(audioRevenue)} = <strong>${formatCurrency(comboRevenue)}</strong>`;
+            }
+            document.getElementById('audio-campaign-preview').innerHTML = msg;
+        }
+        document.getElementById('audio-campaign-rickshaws')?.addEventListener('input', updateAudioPreview);
+        document.getElementById('audio-campaign-days')?.addEventListener('change', updateAudioPreview);
+        document.getElementById('audio-campaign-combo')?.addEventListener('change', updateAudioPreview);
+        document.getElementById('audio-campaign-zone')?.addEventListener('change', updateAudioPreview);
+
+        function deleteCampaign(id) {
+            if (!confirm('Delete this campaign? This cannot be undone.')) return;
+            campaigns = campaigns.filter(c => c.id !== id);
+            saveAll();
+            refreshAllUI();
+        }
+
+        // ==================== BUDGET CALCULATOR ====================
+        function updateCalculator() {
+            const type = document.getElementById('calc-type').value;
+            const zoneStr = document.getElementById('calc-zone').value;
+            const zone = zoneStr.includes('Alpha') ? 'Alpha' : zoneStr.includes('Prime') ? 'Prime' : zoneStr.includes(
+                'Elite') ? 'Elite' : 'Delta';
+            const rCount = parseInt(document.getElementById('calc-rickshaws').value) || 50;
+            const days = parseInt(document.getElementById('calc-days').value) || 14;
+            const zoneRate = getZoneRate(zone);
+
+            let ledPrice = 0,
+                audioPrice = 0,
+                total = 0;
+            if (type === 'led' || type === 'combo') ledPrice = zoneRate * rCount * days;
+            if (type === 'audio' || type === 'combo') audioPrice = (75 * rCount * days) + 2500;
+            total = ledPrice + audioPrice;
+            if (type === 'combo') total = Math.round(total * 0.9);
+
+            let resultHTML = '';
+            if (type === 'led') resultHTML =
+                `<strong>LED Campaign Price:</strong> ${formatCurrency(ledPrice)} (${rCount} rickshaws × ${days} days × ${formatCurrency(zoneRate)}/day)`;
+            else if (type === 'audio') resultHTML =
+                `<strong>Audio Campaign Price:</strong> ${formatCurrency(audioPrice)} (₹2,500 setup + ₹75×${rCount}×${days})`;
+            else resultHTML =
+                `<strong>Combo Price (10% off):</strong> ${formatCurrency(total)} <small>(LED: ${formatCurrency(ledPrice)} + Audio: ${formatCurrency(audioPrice)} = ${formatCurrency(ledPrice+audioPrice)} → 10% discount)</small>`;
+
+            document.getElementById('calculator-result').innerHTML = resultHTML;
+        }
+
+        function renderQuickReference() {
+            const tbody = document.getElementById('quick-reference-body');
+            const days = 14;
+            const counts = [10, 25, 50, 100, 150, 200];
+            tbody.innerHTML = ZONES.map(zone => {
+                const rate = getZoneRate(zone);
+                return `<tr>
+              <td><strong>${zone}</strong><br><small>LED ₹${rate}/day</small></td>
+              ${counts.map(c => `<td>${formatCurrency(rate * c * days)}</td>`).join('')}
+            </tr>`;
+            }).join('') + `
+            <tr style="background:#fefce8;">
+              <td><strong>Audio Add-on</strong><br><small>₹75/day + ₹2,500</small></td>
+              ${counts.map(c => `<td>${formatCurrency((75*c*days)+2500)}</td>`).join('')}
+            </tr>`;
+        }
+
+        // ==================== INITIALIZATION ====================
+        function init() {
+            refreshAllUI();
+            populateClientDropdowns();
+            updateLEDPreview();
+            updateAudioPreview();
+            updateCalculator();
+        }
+
+        init();
+        console.log('🚛 RASAAI v3.0 – Mumbra Command Center Ready');
+        console.log('📊 Hybrid Cost Model | LED + Audio Ads | 200 Rickshaws | 4 Zones');
+        console.log('💰 Monthly Fixed Burn: ₹40,000 | Campaign-Based Driver Payouts');
+    </script>
+</body>
+</html>
