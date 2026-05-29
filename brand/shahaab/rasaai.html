@@ -1,9 +1,10 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#0f172a">
     <title>RASAAI v3.0 – Mumbra Command Center</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
@@ -29,245 +30,242 @@
             --recovered-text: #15803d;
             --pending-bg: #fff3e3;
             --pending-text: #b45309;
-            --shadow: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.06);
-            --shadow-lg: 0 10px 25px rgba(0,0,0,0.1);
+            --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+            --shadow: 0 1px 3px rgba(0,0,0,0.1), 0 1px 2px rgba(0,0,0,0.06);
+            --radius: 12px;
+            --radius-sm: 8px;
+            --radius-xs: 6px;
+            --safe-bottom: env(safe-area-inset-bottom, 0px);
+            --header-h: 52px;
+            --nav-h: 60px;
         }
-
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
         }
-
         body {
-            font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', system-ui, sans-serif;
             background: var(--bg);
             color: var(--text);
-            display: flex;
             min-height: 100vh;
-            line-height: 1.5;
+            overflow-x: hidden;
+            padding-bottom: calc(var(--nav-h) + var(--safe-bottom) + 8px);
+            padding-top: var(--header-h);
+            -webkit-font-smoothing: antialiased;
+            line-height: 1.4;
         }
-
-        /* SIDEBAR */
-        .sidebar {
-            width: 260px;
-            min-width: 260px;
-            background: var(--sidebar);
-            color: #e2e8f0;
-            display: flex;
-            flex-direction: column;
+        .app-header {
             position: fixed;
             top: 0;
             left: 0;
-            bottom: 0;
-            z-index: 100;
-            box-shadow: 4px 0 20px rgba(0,0,0,0.3);
-        }
-
-        .sidebar-header {
-            padding: 24px 20px;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
+            right: 0;
+            z-index: 1000;
+            background: var(--sidebar);
+            color: #fff;
+            height: var(--header-h);
             display: flex;
             align-items: center;
-            gap: 12px;
+            padding: 0 14px;
+            gap: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
         }
-
-        .sidebar-header i {
-            font-size: 28px;
+        .app-header i {
+            font-size: 22px;
             color: var(--primary-btn);
         }
-        .sidebar-header h1 {
-            font-size: 20px;
-            font-weight: 700;
-            letter-spacing: -0.5px;
-        }
-        .sidebar-header span {
-            font-size: 10px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            color: #94a3b8;
-            display: block;
-        }
-
-        .sidebar-nav {
-            flex: 1;
-            padding: 12px 0;
-            overflow-y: auto;
-        }
-
-        .nav-item {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 12px 20px;
-            cursor: pointer;
-            transition: all 0.2s;
-            border-left: 3px solid transparent;
-            font-size: 14px;
-            color: #94a3b8;
-        }
-        .nav-item:hover {
-            background: rgba(255,255,255,0.05);
-            color: #e2e8f0;
-        }
-        .nav-item.active {
-            background: rgba(249,115,22,0.15);
-            color: #fff;
-            border-left-color: var(--primary-btn);
-            font-weight: 600;
-        }
-        .nav-item i {
-            width: 20px;
-            text-align: center;
+        .app-header h1 {
             font-size: 16px;
+            font-weight: 700;
+            flex: 1;
         }
-        .nav-badge {
-            margin-left: auto;
+        .app-header .badge {
             background: var(--primary-btn);
             color: #fff;
-            font-size: 10px;
-            padding: 2px 8px;
-            border-radius: 10px;
+            font-size: 9px;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-weight: 700;
+        }
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: #fff;
+            border-top: 1px solid var(--border);
+            display: flex;
+            height: var(--nav-h);
+            padding-bottom: var(--safe-bottom);
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.06);
+            overflow-x: auto;
+            scrollbar-width: none;
+        }
+        .bottom-nav::-webkit-scrollbar {
+            display: none;
+        }
+        .nav-tab {
+            flex: 1 0 auto;
+            min-width: 44px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 2px;
+            padding: 6px 2px;
+            cursor: pointer;
+            color: #94a3b8;
+            border: none;
+            background: none;
+            font-family: inherit;
+            font-size: 8px;
+            font-weight: 500;
+            position: relative;
+        }
+        .nav-tab i {
+            font-size: 17px;
+        }
+        .nav-tab.active {
+            color: var(--primary-btn);
             font-weight: 600;
         }
-
-        .sidebar-footer {
-            padding: 16px 20px;
-            border-top: 1px solid rgba(255,255,255,0.1);
-            font-size: 11px;
-            color: #64748b;
-            text-align: center;
+        .nav-tab.active::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 15%;
+            right: 15%;
+            height: 2px;
+            background: var(--primary-btn);
+            border-radius: 0 0 2px 2px;
         }
-
-        /* MAIN CONTENT */
         .main-content {
-            margin-left: 260px;
-            flex: 1;
-            padding: 24px;
-            min-height: 100vh;
+            padding: 6px 8px;
+            max-width: 960px;
+            margin: 0 auto;
         }
-
         .page {
             display: none;
+            animation: fadeIn 0.2s ease;
         }
         .page.active {
             display: block;
         }
-
-        .page-header {
-            margin-bottom: 24px;
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(5px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
-        .page-header h2 {
-            font-size: 26px;
+        .section-header {
+            margin: 10px 0 6px;
+        }
+        .section-header h2 {
+            font-size: 17px;
             font-weight: 700;
-            color: #0f172a;
-            letter-spacing: -0.5px;
         }
-        .page-header p {
+        .section-header p {
+            font-size: 10px;
             color: var(--text-secondary);
-            font-size: 14px;
-            margin-top: 4px;
         }
-
-        /* CARDS */
         .stats-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 16px;
-            margin-bottom: 24px;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 6px;
+            margin-bottom: 10px;
         }
-
         .stat-card {
             background: var(--card);
-            border-radius: 12px;
-            padding: 20px;
-            box-shadow: var(--shadow);
+            border-radius: var(--radius);
+            padding: 10px;
+            box-shadow: var(--shadow-sm);
             border: 1px solid var(--border);
-            transition: box-shadow 0.2s;
-        }
-        .stat-card:hover {
-            box-shadow: var(--shadow-lg);
         }
         .stat-card .stat-icon {
-            width: 44px;
-            height: 44px;
-            border-radius: 10px;
+            width: 28px;
+            height: 28px;
+            border-radius: 7px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 20px;
-            margin-bottom: 12px;
+            font-size: 13px;
+            margin-bottom: 4px;
         }
         .stat-card .stat-value {
-            font-size: 28px;
+            font-size: 18px;
             font-weight: 700;
-            letter-spacing: -1px;
         }
         .stat-card .stat-label {
-            font-size: 12px;
+            font-size: 8px;
             color: var(--text-secondary);
             text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-top: 2px;
+            letter-spacing: 0.4px;
         }
-
-        /* TABLES */
-        .table-container {
+        .card {
             background: var(--card);
-            border-radius: 12px;
-            box-shadow: var(--shadow);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-sm);
             border: 1px solid var(--border);
             overflow: hidden;
+            margin-bottom: 8px;
         }
-        .table-container h3 {
-            padding: 16px 20px;
-            font-size: 16px;
+        .card-header {
+            padding: 9px 12px;
+            font-size: 12px;
             font-weight: 600;
             border-bottom: 1px solid var(--border);
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
+            flex-wrap: wrap;
+            justify-content: space-between;
         }
-        .table-scroll {
+        .card-body {
+            padding: 8px 12px;
             overflow-x: auto;
-            max-height: 500px;
-            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+        .table-responsive {
+            width: 100%;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            font-size: 9px;
         }
         table {
             width: 100%;
             border-collapse: collapse;
-            font-size: 13px;
+            min-width: 450px;
         }
         th {
             background: #f8fafc;
-            padding: 10px 14px;
+            padding: 7px 6px;
             text-align: left;
             font-weight: 600;
-            font-size: 11px;
+            font-size: 8px;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.3px;
             color: var(--text-secondary);
             border-bottom: 2px solid var(--border);
-            position: sticky;
-            top: 0;
-            z-index: 1;
+            white-space: nowrap;
         }
         td {
-            padding: 10px 14px;
+            padding: 6px;
             border-bottom: 1px solid var(--border);
+            white-space: nowrap;
+            font-size: 10px;
         }
-        tr:hover td {
-            background: #f8fafc;
-        }
-
-        /* BADGES */
         .badge {
             display: inline-block;
-            padding: 3px 10px;
-            border-radius: 20px;
-            font-size: 11px;
+            padding: 2px 7px;
+            border-radius: 10px;
+            font-size: 8px;
             font-weight: 600;
-            letter-spacing: 0.3px;
         }
         .badge-recovered {
             background: var(--recovered-bg);
@@ -289,18 +287,10 @@
             background: #fce7f3;
             color: #be185d;
         }
-        .badge-profit {
-            background: #dcfce7;
-            color: #15803d;
-        }
-        .badge-loss {
-            background: #fef2f2;
-            color: #dc2626;
-        }
         .badge-zone {
-            padding: 3px 10px;
-            border-radius: 4px;
-            font-size: 11px;
+            padding: 2px 7px;
+            border-radius: 3px;
+            font-size: 9px;
             font-weight: 700;
             color: #fff;
         }
@@ -316,196 +306,164 @@
         .zone-delta {
             background: var(--delta);
         }
-
-        /* FORMS */
-        .form-card {
-            background: var(--card);
-            border-radius: 12px;
-            padding: 24px;
-            box-shadow: var(--shadow);
-            border: 1px solid var(--border);
-            margin-bottom: 24px;
+        .badge-draft {
+            background: #f1f5f9;
+            color: #475569;
         }
-        .form-card h3 {
-            font-size: 16px;
-            font-weight: 600;
-            margin-bottom: 16px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
+        .badge-active {
+            background: #dcfce7;
+            color: #15803d;
         }
-        .form-row {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 16px;
-            margin-bottom: 16px;
+        .badge-completed {
+            background: #dbeafe;
+            color: #1d4ed8;
+        }
+        .badge-paid {
+            background: #dcfce7;
+            color: #15803d;
+        }
+        .badge-partial {
+            background: #fef3c7;
+            color: #b45309;
         }
         .form-group {
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
+            margin-bottom: 6px;
         }
         .form-group label {
-            font-size: 12px;
+            display: block;
+            font-size: 9px;
             font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.3px;
             color: var(--text-secondary);
+            margin-bottom: 2px;
         }
         .form-group input,
         .form-group select {
-            padding: 10px 14px;
+            width: 100%;
+            padding: 8px 9px;
             border: 1px solid var(--border);
-            border-radius: 8px;
-            font-size: 14px;
-            transition: border-color 0.2s;
+            border-radius: var(--radius-xs);
+            font-size: 12px;
             font-family: inherit;
+            background: #fff;
+            -webkit-appearance: none;
         }
-        .form-group input:focus,
-        .form-group select:focus {
-            outline: none;
-            border-color: var(--primary-btn);
-            box-shadow: 0 0 0 3px rgba(249,115,22,0.1);
+        .form-group select {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 10 10'%3E%3Cpath d='M5 7L1 3h8z' fill='%2364748b'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 8px center;
+            padding-right: 24px;
         }
-
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6px;
+        }
         .btn {
-            padding: 10px 20px;
+            padding: 8px 12px;
             border: none;
-            border-radius: 8px;
-            font-size: 14px;
+            border-radius: var(--radius-xs);
+            font-size: 11px;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.2s;
             display: inline-flex;
             align-items: center;
-            gap: 8px;
+            justify-content: center;
+            gap: 4px;
             font-family: inherit;
+            white-space: nowrap;
+            min-height: 32px;
+            touch-action: manipulation;
+        }
+        .btn:active {
+            transform: scale(0.96);
         }
         .btn-primary {
             background: var(--primary-btn);
             color: #fff;
         }
-        .btn-primary:hover {
-            background: #ea580c;
-            box-shadow: 0 4px 12px rgba(249,115,22,0.3);
-        }
         .btn-secondary {
             background: #e2e8f0;
             color: #475569;
-        }
-        .btn-secondary:hover {
-            background: #cbd5e1;
         }
         .btn-danger {
             background: #ef4444;
             color: #fff;
         }
-        .btn-danger:hover {
-            background: #dc2626;
+        .btn-success {
+            background: #10b981;
+            color: #fff;
         }
         .btn-sm {
-            padding: 6px 12px;
-            font-size: 12px;
+            padding: 4px 7px;
+            font-size: 9px;
+            min-height: 22px;
         }
-
-        /* MAP */
+        .btn-xs {
+            padding: 2px 5px;
+            font-size: 8px;
+            min-height: 20px;
+        }
+        .btn-block {
+            width: 100%;
+        }
         #map {
-            height: 550px;
-            border-radius: 12px;
+            height: 350px;
+            border-radius: var(--radius);
             box-shadow: var(--shadow);
             border: 1px solid var(--border);
             z-index: 1;
         }
-        .map-legend {
-            background: #fff;
-            padding: 12px 16px;
-            border-radius: 8px;
-            box-shadow: var(--shadow-lg);
-            font-size: 12px;
-            line-height: 1.8;
+        .highlight-box {
+            background: #fffbeb;
+            border: 1px solid #fcd34d;
+            border-radius: var(--radius-sm);
+            padding: 8px 10px;
+            margin: 6px 0;
+            font-size: 10px;
         }
-        .map-legend-item {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            cursor: help;
+        .warning-box {
+            background: #fef2f2;
+            border: 1px solid #fca5a5;
+            border-radius: var(--radius-sm);
+            padding: 6px 8px;
+            margin: 4px 0;
+            font-size: 9px;
+            color: #dc2626;
         }
-        .map-legend-dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            display: inline-block;
-        }
-
-        /* PROGRESS BAR */
         .progress-bar-container {
             background: #e2e8f0;
-            border-radius: 10px;
-            height: 10px;
+            border-radius: 5px;
+            height: 5px;
             overflow: hidden;
-            margin-top: 6px;
+            margin-top: 3px;
         }
         .progress-bar-fill {
             height: 100%;
-            border-radius: 10px;
-            transition: width 0.5s;
+            border-radius: 5px;
         }
-
-        /* ZONE OCCUPANCY */
-        .zone-occupancy-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 16px;
-            margin-bottom: 24px;
-        }
-        .zone-occupancy-card {
-            background: var(--card);
-            border-radius: 12px;
-            padding: 16px;
-            box-shadow: var(--shadow);
-            border: 1px solid var(--border);
-        }
-        .zone-occupancy-card h4 {
-            font-size: 14px;
-            font-weight: 600;
-            margin-bottom: 8px;
+        .chip-group {
             display: flex;
-            align-items: center;
-            gap: 8px;
+            flex-wrap: wrap;
+            gap: 4px;
+            margin: 4px 0;
         }
-
-        /* RESPONSIVE */
-        @media (max-width: 768px) {
-            .sidebar {
-                width: 60px;
-                min-width: 60px;
-            }
-            .sidebar-header h1,
-            .sidebar-header span,
-            .nav-item span,
-            .nav-badge,
-            .sidebar-footer {
-                display: none;
-            }
-            .nav-item {
-                justify-content: center;
-                padding: 14px;
-            }
-            .nav-item i {
-                font-size: 20px;
-            }
-            .main-content {
-                margin-left: 60px;
-                padding: 16px;
-            }
-            .stats-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            .form-row {
-                grid-template-columns: 1fr;
-            }
+        .chip {
+            padding: 4px 9px;
+            border-radius: 12px;
+            font-size: 9px;
+            font-weight: 500;
+            cursor: pointer;
+            border: 1px solid var(--border);
+            background: #fff;
+            white-space: nowrap;
         }
-
+        .chip.active {
+            background: var(--primary-btn);
+            color: #fff;
+            border-color: var(--primary-btn);
+        }
         .profit-positive {
             color: var(--profit-positive);
             font-weight: 700;
@@ -516,249 +474,296 @@
         }
         .text-muted {
             color: var(--text-secondary);
-            font-size: 12px;
+            font-size: 9px;
         }
-        .highlight-box {
-            background: #fffbeb;
-            border: 1px solid #fcd34d;
-            border-radius: 8px;
-            padding: 12px 16px;
-            margin: 12px 0;
-            font-size: 13px;
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 30px;
+            height: 16px;
         }
-        .tooltip-trigger {
-            border-bottom: 1px dotted var(--text-secondary);
-            cursor: help;
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: #cbd5e1;
+            transition: .3s;
+            border-radius: 16px;
+        }
+        .toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 10px;
+            width: 10px;
+            left: 3px;
+            bottom: 3px;
+            background: #fff;
+            transition: .3s;
+            border-radius: 50%;
+        }
+        input:checked+.toggle-slider {
+            background: #10b981;
+        }
+        input:checked+.toggle-slider:before {
+            transform: translateX(14px);
+        }
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 2000;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+        }
+        .modal-sheet {
+            background: #fff;
+            border-radius: 14px 14px 0 0;
+            width: 100%;
+            max-width: 480px;
+            max-height: 78vh;
+            overflow-y: auto;
+            padding: 14px;
+            box-shadow: 0 -8px 30px rgba(0,0,0,0.2);
+            animation: slideUp 0.25s ease;
+        }
+        @keyframes slideUp {
+            from {
+                transform: translateY(100%);
+            }
+            to {
+                transform: translateY(0);
+            }
+        }
+        .modal-handle {
+            width: 30px;
+            height: 3px;
+            background: #cbd5e1;
+            border-radius: 2px;
+            margin: 0 auto 10px;
+        }
+        .modal-sheet h3 {
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+        @media (min-width: 769px) {
+            .stats-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            #map {
+                height: 440px;
+            }
+        }
+        @media (min-width: 1025px) {
+            body {
+                padding-left: 210px;
+                padding-bottom: 0;
+                padding-top: 0;
+            }
+            .app-header,
+            .bottom-nav {
+                display: none;
+            }
+            .desktop-sidebar {
+                display: flex !important;
+                position: fixed;
+                top: 0;
+                left: 0;
+                bottom: 0;
+                width: 210px;
+                background: var(--sidebar);
+                flex-direction: column;
+                z-index: 1000;
+                padding: 14px 0;
+                box-shadow: 4px 0 20px rgba(0,0,0,0.2);
+                overflow-y: auto;
+            }
+            .desktop-sidebar .sb-logo {
+                padding: 0 14px 14px;
+                border-bottom: 1px solid rgba(255,255,255,0.1);
+                margin-bottom: 6px;
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                color: #fff;
+                font-weight: 700;
+                font-size: 16px;
+            }
+            .desktop-sidebar .sb-logo i {
+                font-size: 22px;
+                color: var(--primary-btn);
+            }
+            .desktop-sidebar .nav-tab {
+                flex-direction: row;
+                justify-content: flex-start;
+                padding: 10px 14px;
+                gap: 8px;
+                font-size: 11px;
+                color: #94a3b8;
+                min-width: auto;
+            }
+            .desktop-sidebar .nav-tab i {
+                font-size: 14px;
+            }
+            .desktop-sidebar .nav-tab.active {
+                color: #fff;
+                background: rgba(249,115,22,0.15);
+                border-left: 3px solid var(--primary-btn);
+            }
+            .desktop-sidebar .nav-tab.active::after {
+                display: none;
+            }
+            .main-content {
+                max-width: 100%;
+                padding: 16px 24px;
+            }
+            .stats-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+            table {
+                min-width: auto;
+            }
         }
     </style>
 </head>
 <body>
 
-    <!-- SIDEBAR -->
-    <aside class="sidebar">
-        <div class="sidebar-header">
-            <i class="fa-solid fa-rickshaw"></i>
-            <div>
-                <h1>RASAAI</h1>
-                <span>v3.0 · Mumbra Command</span>
-            </div>
-        </div>
-        <nav class="sidebar-nav">
-            <div class="nav-item active" data-page="dashboard">
-                <i class="fa-solid fa-chart-pie"></i> <span>Dashboard</span>
-            </div>
-            <div class="nav-item" data-page="map">
-                <i class="fa-solid fa-map-location-dot"></i> <span>Live Map</span>
-            </div>
-            <div class="nav-item" data-page="rickshaws">
-                <i class="fa-solid fa-truck-rickshaw"></i> <span>Rickshaws</span> <span class="nav-badge">200</span>
-            </div>
-            <div class="nav-item" data-page="clients">
-                <i class="fa-solid fa-building"></i> <span>Clients</span> <span class="nav-badge">10</span>
-            </div>
-            <div class="nav-item" data-page="led-campaigns">
-                <i class="fa-solid fa-tv"></i> <span>LED Campaigns</span>
-            </div>
-            <div class="nav-item" data-page="audio-campaigns">
-                <i class="fa-solid fa-volume-high"></i> <span>Audio Campaigns</span>
-            </div>
-            <div class="nav-item" data-page="calculator">
-                <i class="fa-solid fa-calculator"></i> <span>Budget Calculator</span>
-            </div>
-        </nav>
-        <div class="sidebar-footer">
-            Hybrid Cost Model · Mumbra Phase 1
-        </div>
-    </aside>
+    <header class="app-header">
+        <i class="fa-solid fa-rickshaw"></i>
+        <h1>RASAAI v3.0</h1>
+        <span class="badge">Mumbra</span>
+    </header>
 
-    <!-- MAIN CONTENT -->
+    <nav class="desktop-sidebar" style="display:none;" id="desktop-sidebar">
+        <div class="sb-logo"><i class="fa-solid fa-rickshaw"></i> RASAAI v3.0</div>
+        <button class="nav-tab active" data-page="dashboard"><i class="fa-solid fa-chart-pie"></i> Dashboard</button>
+        <button class="nav-tab" data-page="map"><i class="fa-solid fa-map-location-dot"></i> Live Map</button>
+        <button class="nav-tab" data-page="rickshaws"><i class="fa-solid fa-truck-rickshaw"></i> Rickshaws</button>
+        <button class="nav-tab" data-page="clients"><i class="fa-solid fa-building"></i> Clients</button>
+        <button class="nav-tab" data-page="led-campaigns"><i class="fa-solid fa-tv"></i> LED Campaigns</button>
+        <button class="nav-tab" data-page="audio-campaigns"><i class="fa-solid fa-volume-high"></i> Audio Campaigns</button>
+        <button class="nav-tab" data-page="driver-payables"><i class="fa-solid fa-indian-rupee-sign"></i> Driver Pay</button>
+        <button class="nav-tab" data-page="partner-payables"><i class="fa-solid fa-user-tie"></i> Partners</button>
+        <button class="nav-tab" data-page="calculator"><i class="fa-solid fa-calculator"></i> Calculator</button>
+    </nav>
+
     <main class="main-content">
 
         <!-- PAGE 1: DASHBOARD -->
         <div class="page active" id="page-dashboard">
-            <div class="page-header">
-                <h2>📊 Dashboard</h2>
-                <p>Real-time fleet overview & campaign performance</p>
-            </div>
+            <div class="section-header"><h2>📊 Dashboard</h2><p>Mumbra Command Center · Hybrid Cost Model · 200 Rickshaws</p></div>
             <div class="stats-grid" id="dashboard-stats"></div>
-            <div class="zone-occupancy-grid" id="zone-occupancy"></div>
-            <div class="table-container" style="margin-top:24px;">
-                <h3><i class="fa-solid fa-list-check"></i> All Campaigns – Profit & Loss</h3>
-                <div class="table-scroll">
-                    <table id="dashboard-campaigns-table">
-                        <thead>
-                            <tr>
-                                <th>Date</th><th>Type</th><th>Client</th><th>Zone</th>
-                                <th>Ricks</th><th>Days</th><th>Revenue</th><th>Costs</th>
-                                <th>Profit</th><th>LED Status</th>
-                            </tr>
-                        </thead>
-                        <tbody></tbody>
-                    </table>
-                </div>
-            </div>
-            <div class="highlight-box" style="margin-top:16px;">
-                <strong>📌 Monthly Fixed Burn:</strong> ₹40,000 (200 drivers × ₹200 retainer) &nbsp;|&nbsp;
-                <strong>Total Campaign Profits This Month:</strong> <span id="total-campaign-profit">₹0</span> &nbsp;|&nbsp;
-                <strong>Net Monthly:</strong> <span id="net-monthly-profit" style="font-weight:700;">-₹40,000</span>
+            <div class="card"><div class="card-header">📍 Zone Occupancy <span class="text-muted">Target: 50 per zone</span></div><div class="card-body" id="zone-occupancy" style="display:grid;grid-template-columns:1fr 1fr;gap:6px;"></div></div>
+            <div class="card"><div class="card-header">📋 All Campaigns – P&L Overview</div><div class="card-body"><div class="table-responsive"><table id="dashboard-campaigns-table"><thead><tr><th>Date</th><th>Type</th><th>Client</th><th>Zone</th><th>Ricks</th><th>Days</th><th>Status</th><th>Revenue</th><th>Profit</th><th>Paid</th></tr></thead><tbody></tbody></table></div></div></div>
+            <div class="highlight-box">
+                <strong>📌 Monthly Fixed Burn:</strong> ₹40,000 (200×₹200) | <strong>Campaign Profits:</strong> <span id="total-campaign-profit">₹0</span> | <strong>Net Monthly:</strong> <span id="net-monthly-profit">-₹40,000</span> | <strong>Outstanding:</strong> <span id="outstanding-client">₹0</span>
             </div>
         </div>
 
         <!-- PAGE 2: LIVE MAP -->
         <div class="page" id="page-map">
-            <div class="page-header">
-                <h2>🗺️ Live Fleet Map</h2>
-                <p>48 rickshaws animated across 4 routes · Updated every 3 seconds</p>
-            </div>
+            <div class="section-header"><h2>🗺️ Live Fleet Map</h2><p>48 animated rickshaws · 4 routes · Updates every 3s</p></div>
             <div id="map"></div>
         </div>
 
         <!-- PAGE 3: RICKSHAWS -->
         <div class="page" id="page-rickshaws">
-            <div class="page-header">
-                <h2>🚛 Rickshaw Fleet (200)</h2>
-                <p>Manage drivers, track LED recovery & audio capability</p>
-            </div>
-            <div class="form-card">
-                <h3><i class="fa-solid fa-plus-circle"></i> Add New Rickshaw</h3>
-                <div class="form-row">
-                    <div class="form-group"><label>Driver Name</label><input type="text" id="new-driver-name" placeholder="Driver Name"></div>
-                    <div class="form-group"><label>Rickshaw Plate</label><input type="text" id="new-rickshaw-plate" placeholder="MH-04-X###"></div>
-                    <div class="form-group"><label>Zone</label><select id="new-rickshaw-zone"><option>Alpha</option><option>Prime</option><option>Elite</option><option>Delta</option></select></div>
-                    <div class="form-group"><label>Phone</label><input type="text" id="new-rickshaw-phone" placeholder="9876500xxx"></div>
-                    <div class="form-group" style="align-self:end;"><button class="btn btn-primary" onclick="addRickshaw()"><i class="fa-solid fa-plus"></i> Add</button></div>
-                </div>
-            </div>
-            <div class="table-container">
-                <h3><i class="fa-solid fa-list"></i> All Rickshaws</h3>
-                <div class="table-scroll">
-                    <table id="rickshaws-table">
-                        <thead>
-                            <tr><th>ID</th><th>Driver</th><th>Plate</th><th>Zone</th><th>Phone</th><th>LED Recovered</th><th>Audio Capable</th><th>Actions</th></tr>
-                        </thead>
-                        <tbody></tbody>
-                    </table>
-                </div>
-            </div>
+            <div class="section-header"><h2>🚛 Rickshaw Fleet (200)</h2><p>50 per zone · MH-04 format</p></div>
+            <div class="chip-group" id="rickshaw-filter-chips"><span class="chip active" data-filter="All">All</span><span class="chip" data-filter="Alpha">Alpha</span><span class="chip" data-filter="Prime">Prime</span><span class="chip" data-filter="Elite">Elite</span><span class="chip" data-filter="Delta">Delta</span></div>
+            <button class="btn btn-primary btn-block" onclick="openModal('add-rickshaw-modal')"><i class="fa-solid fa-plus"></i> Add Rickshaw</button>
+            <div class="card" style="margin-top:6px;"><div class="card-body"><div class="table-responsive"><table id="rickshaws-table"><thead><tr><th>ID</th><th>Driver</th><th>Plate</th><th>Zone</th><th>LED Rec</th><th>Audio</th><th>Panel</th><th>Act</th></tr></thead><tbody></tbody></table></div></div></div>
         </div>
 
         <!-- PAGE 4: CLIENTS -->
         <div class="page" id="page-clients">
-            <div class="page-header">
-                <h2>🏢 Local Clients (10)</h2>
-                <p>Manage business clients in Mumbra region</p>
-            </div>
-            <div class="form-card">
-                <h3><i class="fa-solid fa-plus-circle"></i> Add Client</h3>
-                <div class="form-row">
-                    <div class="form-group"><label>Business Name</label><input type="text" id="new-client-name" placeholder="Business Name"></div>
-                    <div class="form-group"><label>Location</label><input type="text" id="new-client-location" placeholder="Location"></div>
-                    <div class="form-group"><label>Phone</label><input type="text" id="new-client-phone" placeholder="Phone"></div>
-                    <div class="form-group" style="align-self:end;"><button class="btn btn-primary" onclick="addClient()"><i class="fa-solid fa-plus"></i> Add</button></div>
-                </div>
-            </div>
-            <div class="table-container">
-                <h3><i class="fa-solid fa-building"></i> Client Directory</h3>
-                <div class="table-scroll">
-                    <table id="clients-table">
-                        <thead><tr><th>#</th><th>Business Name</th><th>Location</th><th>Phone</th><th>Actions</th></tr></thead>
-                        <tbody></tbody>
-                    </table>
-                </div>
-            </div>
+            <div class="section-header"><h2>🏢 Local Clients (10)</h2><p>Mumbra region businesses</p></div>
+            <button class="btn btn-primary btn-block" onclick="openModal('add-client-modal')"><i class="fa-solid fa-plus"></i> Add Client</button>
+            <div class="card" style="margin-top:6px;"><div class="card-body"><div class="table-responsive"><table id="clients-table"><thead><tr><th>#</th><th>Business</th><th>Location</th><th>Phone</th><th>Billed</th><th>Paid</th><th>Due</th><th>Act</th></tr></thead><tbody></tbody></table></div></div></div>
         </div>
 
         <!-- PAGE 5: LED CAMPAIGNS -->
         <div class="page" id="page-led-campaigns">
-            <div class="page-header">
-                <h2>📺 LED Advertising Campaigns</h2>
-                <p>Create & track LED panel campaigns · Min 10 rickshaws, 14/30/60 days</p>
-            </div>
-            <div class="form-card">
-                <h3><i class="fa-solid fa-plus-circle"></i> Create LED Campaign</h3>
-                <div class="form-row">
-                    <div class="form-group"><label>Client</label><select id="led-campaign-client"></select></div>
-                    <div class="form-group"><label>Zone</label><select id="led-campaign-zone"><option>Alpha</option><option>Prime</option><option>Elite</option><option>Delta</option></select></div>
-                    <div class="form-group"><label>Rickshaw Count</label><input type="number" id="led-campaign-rickshaws" min="10" max="50" value="10"></div>
-                    <div class="form-group"><label>Duration (Days)</label><select id="led-campaign-days"><option value="14">14</option><option value="30">30</option><option value="60">60</option></select></div>
-                    <div class="form-group" style="align-self:end;"><button class="btn btn-primary" onclick="createLEDCampaign()"><i class="fa-solid fa-tv"></i> Create LED Campaign</button></div>
-                </div>
-                <div class="highlight-box" id="led-campaign-preview"></div>
-            </div>
-            <div class="table-container">
-                <h3><i class="fa-solid fa-history"></i> LED Campaign History</h3>
-                <div class="table-scroll">
-                    <table id="led-campaigns-table">
-                        <thead><tr><th>Date</th><th>Client</th><th>Zone</th><th>Ricks</th><th>Days</th><th>Revenue</th><th>Profit</th><th>LED Recovered</th><th>Actions</th></tr></thead>
-                        <tbody></tbody>
-                    </table>
-                </div>
-            </div>
+            <div class="section-header"><h2>📺 LED Advertising Campaigns</h2><p>Create LED panel campaigns · Min 10 rickshaws · 14/30/60 days</p></div>
+            <div class="card"><div class="card-header">Create LED Campaign</div><div class="card-body">
+                    <div class="form-row"><div class="form-group"><label>Client</label><select id="led-client"></select></div><div class="form-group"><label>Zone</label><select id="led-zone"><option>Alpha</option><option>Prime</option><option>Elite</option><option>Delta</option></select></div></div>
+                    <div class="form-row"><div class="form-group"><label>Rickshaws (≥10)</label><input type="number" id="led-rickshaws" min="10" max="50" value="10"></div><div class="form-group"><label>Days</label><select id="led-days"><option value="14">14 Days</option><option value="30">30 Days</option><option value="60">60 Days</option></select></div></div>
+                    <button class="btn btn-primary btn-block" onclick="createLEDCampaign()"><i class="fa-solid fa-tv"></i> Create LED Campaign</button>
+                    <div class="highlight-box" id="led-preview"></div>
+            </div></div>
+            <div class="card"><div class="card-header">LED Campaign History</div><div class="card-body"><div class="table-responsive"><table id="led-history-table"><thead><tr><th>Date</th><th>Client</th><th>Zone</th><th>Ricks</th><th>Days</th><th>Status</th><th>Revenue</th><th>Profit</th><th>LED Rec</th><th>Paid</th><th>Act</th></tr></thead><tbody></tbody></table></div></div></div>
         </div>
 
         <!-- PAGE 6: AUDIO CAMPAIGNS -->
         <div class="page" id="page-audio-campaigns">
-            <div class="page-header">
-                <h2>🔊 Audio Advertising Campaigns</h2>
-                <p>Create audio ad campaigns · ₹2,500 setup + ₹75/rickshaw/day · Bundle with LED for 10% off</p>
-            </div>
-            <div class="form-card">
-                <h3><i class="fa-solid fa-plus-circle"></i> Create Audio Campaign</h3>
-                <div class="form-row">
-                    <div class="form-group"><label>Client</label><select id="audio-campaign-client"></select></div>
-                    <div class="form-group"><label>Zone</label><select id="audio-campaign-zone"><option>Alpha</option><option>Prime</option><option>Elite</option><option>Delta</option></select></div>
-                    <div class="form-group"><label>Rickshaw Count</label><input type="number" id="audio-campaign-rickshaws" min="10" max="50" value="10"></div>
-                    <div class="form-group"><label>Duration (Days)</label><select id="audio-campaign-days"><option value="14">14</option><option value="30">30</option><option value="60">60</option></select></div>
-                    <div class="form-group"><label>Bundle with LED?</label><select id="audio-campaign-combo"><option value="no">No – Audio Only</option><option value="yes">Yes – Combo (10% off)</option></select></div>
-                    <div class="form-group" style="align-self:end;"><button class="btn btn-primary" onclick="createAudioCampaign()"><i class="fa-solid fa-volume-high"></i> Create Audio Campaign</button></div>
-                </div>
-                <div class="highlight-box" id="audio-campaign-preview">
-                    <strong>Audio Rate:</strong> ₹2,500 setup + ₹75/rickshaw/day · <strong>Combo Discount:</strong> 10% off combined LED+Audio
-                </div>
-            </div>
-            <div class="table-container">
-                <h3><i class="fa-solid fa-history"></i> Audio Campaign History</h3>
-                <div class="table-scroll">
-                    <table id="audio-campaigns-table">
-                        <thead><tr><th>Date</th><th>Type</th><th>Client</th><th>Zone</th><th>Ricks</th><th>Days</th><th>Revenue</th><th>Profit</th><th>Actions</th></tr></thead>
-                        <tbody></tbody>
-                    </table>
-                </div>
-            </div>
+            <div class="section-header"><h2>🔊 Audio Advertising Campaigns</h2><p>Standalone audio ads · ₹2,500 setup + ₹75/day · Combo option available</p></div>
+            <div class="card"><div class="card-header">Create Audio Campaign</div><div class="card-body">
+                    <div class="form-row"><div class="form-group"><label>Client</label><select id="audio-client"></select></div><div class="form-group"><label>Zone</label><select id="audio-zone"><option>Alpha</option><option>Prime</option><option>Elite</option><option>Delta</option></select></div></div>
+                    <div class="form-row"><div class="form-group"><label>Rickshaws (≥10)</label><input type="number" id="audio-rickshaws" min="10" max="50" value="10"></div><div class="form-group"><label>Days</label><select id="audio-days"><option value="14">14 Days</option><option value="30">30 Days</option><option value="60">60 Days</option></select></div></div>
+                    <div class="form-group"><label>Campaign Type</label><select id="audio-type"><option value="audio">Audio Only</option><option value="combo">LED + Audio Combo (10% off)</option></select></div>
+                    <button class="btn btn-primary btn-block" onclick="createAudioCampaign()"><i class="fa-solid fa-volume-high"></i> Create Audio Campaign</button>
+                    <div class="highlight-box" id="audio-preview"></div>
+            </div></div>
+            <div class="card"><div class="card-header">Audio Campaign History</div><div class="card-body"><div class="table-responsive"><table id="audio-history-table"><thead><tr><th>Date</th><th>Type</th><th>Client</th><th>Zone</th><th>Ricks</th><th>Days</th><th>Status</th><th>Revenue</th><th>Profit</th><th>Paid</th><th>Act</th></tr></thead><tbody></tbody></table></div></div></div>
         </div>
 
-        <!-- PAGE 7: BUDGET CALCULATOR -->
+        <!-- PAGE 7: DRIVER PAYABLES -->
+        <div class="page" id="page-driver-payables">
+            <div class="section-header"><h2>💰 Driver Payables</h2><p>Monthly retainer ₹200 + campaign bonuses</p></div>
+            <div class="highlight-box"><strong id="current-month-display"></strong> | Due: <span id="total-driver-due">₹0</span> | Paid: <span id="total-driver-paid">₹0</span> <button class="btn btn-success btn-sm" onclick="markAllDriversPaid()">Pay All</button></div>
+            <div class="chip-group" id="driver-filter-chips"><span class="chip active" data-filter="All">All</span><span class="chip" data-filter="Alpha">Alpha</span><span class="chip" data-filter="Prime">Prime</span><span class="chip" data-filter="Elite">Elite</span><span class="chip" data-filter="Delta">Delta</span><span class="chip" data-filter="Pending">Pending</span></div>
+            <div class="card"><div class="card-body"><div class="table-responsive"><table id="driver-payables-table"><thead><tr><th>Driver</th><th>Zone</th><th>Retainer</th><th>LED Bonus</th><th>Audio Bonus</th><th>Combo Bonus</th><th>Total</th><th>Status</th><th>Act</th></tr></thead><tbody></tbody></table></div></div></div>
+        </div>
+
+        <!-- PAGE 8: PARTNER PAYABLES -->
+        <div class="page" id="page-partner-payables">
+            <div class="section-header"><h2>👔 Partner Payables</h2><p>Coordinator ₹5/rick/day · Marketer ₹15/rick/day</p></div>
+            <div class="highlight-box">Coordinator Due: <span id="total-coordinator-due">₹0</span> | Marketer Due: <span id="total-marketer-due">₹0</span></div>
+            <div class="card"><div class="card-body"><div class="table-responsive"><table id="partner-payables-table"><thead><tr><th>Campaign</th><th>Coord Amt</th><th>Coord</th><th>Mark Amt</th><th>Mark</th></tr></thead><tbody></tbody></table></div></div></div>
+        </div>
+
+        <!-- PAGE 9: BUDGET CALCULATOR -->
         <div class="page" id="page-calculator">
-            <div class="page-header">
-                <h2>💰 Client Budget Calculator</h2>
-                <p>Client-facing prices only · No internal costs visible</p>
-            </div>
-            <div class="form-card">
-                <h3><i class="fa-solid fa-sliders"></i> Calculate Campaign Price</h3>
-                <div class="form-row">
-                    <div class="form-group"><label>Ad Type</label><select id="calc-type" onchange="updateCalculator()"><option value="led">LED Only</option><option value="audio">Audio Only</option><option value="combo">LED + Audio Combo (10% off)</option></select></div>
-                    <div class="form-group"><label>Zone</label><select id="calc-zone" onchange="updateCalculator()"><option>Alpha (₹150 LED)</option><option>Prime (₹200 LED)</option><option>Elite (₹200 LED)</option><option>Delta (₹200 LED)</option></select></div>
-                    <div class="form-group"><label>Rickshaws</label><input type="number" id="calc-rickshaws" min="10" max="200" value="50" onchange="updateCalculator()"></div>
-                    <div class="form-group"><label>Days</label><select id="calc-days" onchange="updateCalculator()"><option value="14">14</option><option value="30">30</option><option value="60">60</option></select></div>
-                </div>
-                <div class="highlight-box" id="calculator-result" style="font-size:16px; font-weight:600;"></div>
-            </div>
-            <div class="table-container" style="margin-top:24px;">
-                <h3><i class="fa-solid fa-table"></i> Quick Reference – 14 Days Pricing</h3>
-                <div class="table-scroll">
-                    <table id="quick-reference-table">
-                        <thead><tr><th>Zone</th><th>10 Ricks</th><th>25 Ricks</th><th>50 Ricks</th><th>100 Ricks</th><th>150 Ricks</th><th>200 Ricks</th></tr></thead>
-                        <tbody id="quick-reference-body"></tbody>
-                    </table>
-                </div>
-            </div>
+            <div class="section-header"><h2>💰 Client Budget Calculator</h2><p>Client-facing prices only · No internal costs</p></div>
+            <div class="card"><div class="card-body">
+                    <div class="form-row"><div class="form-group"><label>Ad Type</label><select id="calc-type" onchange="updateCalculator()"><option value="led">LED Only</option><option value="audio">Audio Only</option><option value="combo">LED + Audio Combo</option></select></div><div class="form-group"><label>Zone</label><select id="calc-zone" onchange="updateCalculator()"><option>Alpha</option><option>Prime</option><option>Elite</option><option>Delta</option></select></div></div>
+                    <div class="form-row"><div class="form-group"><label>Rickshaws</label><input type="number" id="calc-rickshaws" min="10" max="200" value="50" onchange="updateCalculator()"></div><div class="form-group"><label>Days</label><select id="calc-days" onchange="updateCalculator()"><option value="14">14</option><option value="30">30</option><option value="60">60</option></select></div></div>
+                    <div class="highlight-box" id="calculator-result" style="font-size:13px;font-weight:600;"></div>
+            </div></div>
+            <div class="card"><div class="card-header">Quick Reference – 14 Days Pricing (PRD Section 6.4)</div><div class="card-body"><div class="table-responsive"><table id="quick-ref-table"><thead><tr><th>Zone</th><th>10 Ricks</th><th>25 Ricks</th><th>50 Ricks</th><th>100 Ricks</th><th>150 Ricks</th><th>200 Ricks</th></tr></thead><tbody id="quick-ref-body"></tbody></table></div></div></div>
         </div>
-
     </main>
+
+    <nav class="bottom-nav" id="bottom-nav">
+        <button class="nav-tab active" data-page="dashboard"><i class="fa-solid fa-chart-pie"></i><span>Home</span></button>
+        <button class="nav-tab" data-page="map"><i class="fa-solid fa-map-location-dot"></i><span>Map</span></button>
+        <button class="nav-tab" data-page="rickshaws"><i class="fa-solid fa-truck-rickshaw"></i><span>Fleet</span></button>
+        <button class="nav-tab" data-page="led-campaigns"><i class="fa-solid fa-tv"></i><span>LED</span></button>
+        <button class="nav-tab" data-page="audio-campaigns"><i class="fa-solid fa-volume-high"></i><span>Audio</span></button>
+        <button class="nav-tab" data-page="driver-payables"><i class="fa-solid fa-indian-rupee-sign"></i><span>Pay</span></button>
+        <button class="nav-tab" data-page="calculator"><i class="fa-solid fa-calculator"></i><span>Calc</span></button>
+    </nav>
+
+    <!-- MODALS -->
+    <div class="modal-overlay" id="add-rickshaw-modal" style="display:none;"><div class="modal-sheet"><div class="modal-handle"></div><h3>Add Rickshaw</h3><div class="form-group"><label>Driver Name</label><input type="text" id="new-driver" placeholder="Driver Name"></div><div class="form-row"><div class="form-group"><label>Plate</label><input type="text" id="new-plate" placeholder="MH-04-X###"></div><div class="form-group"><label>Zone</label><select id="new-zone"><option>Alpha</option><option>Prime</option><option>Elite</option><option>Delta</option></select></div></div><div class="form-group"><label>Phone</label><input type="text" id="new-phone" placeholder="9876500xxx"></div><button class="btn btn-primary btn-block" onclick="addRickshaw()">Add Rickshaw</button><button class="btn btn-secondary btn-block" style="margin-top:4px;" onclick="closeModal('add-rickshaw-modal')">Cancel</button></div></div>
+    <div class="modal-overlay" id="add-client-modal" style="display:none;"><div class="modal-sheet"><div class="modal-handle"></div><h3>Add Client</h3><div class="form-group"><label>Business Name</label><input type="text" id="new-client-name" placeholder="Name"></div><div class="form-group"><label>Location</label><input type="text" id="new-client-loc" placeholder="Location"></div><div class="form-group"><label>Phone</label><input type="text" id="new-client-phone" placeholder="Phone"></div><button class="btn btn-primary btn-block" onclick="addClient()">Add Client</button><button class="btn btn-secondary btn-block" style="margin-top:4px;" onclick="closeModal('add-client-modal')">Cancel</button></div></div>
+    <div class="modal-overlay" id="activation-modal" style="display:none;"><div class="modal-sheet"><div class="modal-handle"></div><h3>🔧 Manage Rickshaws</h3><p style="font-size:10px;color:#64748b;">Campaign: <strong id="act-camp-name"></strong></p><div style="max-height:280px;overflow-y:auto;"><table><thead><tr><th>On</th><th>Driver</th><th>Panel</th><th>Conflicts</th></tr></thead><tbody id="act-rick-list"></tbody></table></div><button class="btn btn-primary btn-block" onclick="saveActivation()" style="margin-top:6px;">Save</button><button class="btn btn-secondary btn-block" style="margin-top:3px;" onclick="closeModal('activation-modal')">Cancel</button></div></div>
+    <div class="modal-overlay" id="payment-modal" style="display:none;"><div class="modal-sheet"><div class="modal-handle"></div><h3>💳 Record Payment</h3><p style="font-size:10px;">Campaign: <strong id="pay-camp-name"></strong> | Billed: <strong id="pay-billed"></strong> | Paid: <strong id="pay-paid"></strong></p><div class="form-group"><label>Amount</label><input type="number" id="pay-amount" placeholder="₹"></div><div class="form-group"><label>Date</label><input type="date" id="pay-date"></div><button class="btn btn-success btn-block" onclick="recordPayment()">Record</button><button class="btn btn-secondary btn-block" style="margin-top:3px;" onclick="closeModal('payment-modal')">Cancel</button></div></div>
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script>
-        // ==================== DATA LAYER ====================
+        // ==================== DATA ====================
         const ZONES = ['Alpha', 'Prime', 'Elite', 'Delta'];
         const ZONE_RATES = { Alpha: 150, Prime: 200, Elite: 200, Delta: 200 };
         const ZONE_COLORS = { Alpha: '#4f46e5', Prime: '#10b981', Elite: '#f59e0b', Delta: '#e11d48' };
@@ -768,8 +773,7 @@
             Elite: { name: 'Mumbra → Shilphata (Direct)', start: [19.1905044, 73.0205953], end: [19.212596, 72.977568], popular: 'Shilphata Market, Kohinoor Village, Mumbra Bypass, Toll Naka' },
             Delta: { name: 'Mumbra → Kalwa', start: [19.1905044, 73.0205953], end: [19.196559, 72.98733], popular: 'Kalwa Station, Kalwa Market, Ganesh Ghat, Saket Complex, Manisha Nagar' }
         };
-
-        const DEFAULT_CLIENTS = [
+        const CLIENTS_PRD = [
             { id: 1, name: 'K Star Mall', location: 'Thane', phone: '022-25451234' },
             { id: 2, name: 'Viviana Mall', location: 'Thane', phone: '022-61716000' },
             { id: 3, name: 'Mumbra Central Plaza', location: 'Mumbra', phone: '9876543001' },
@@ -782,611 +786,412 @@
             { id: 10, name: 'Big Bazaar', location: 'Kalwa', phone: '9876543008' }
         ];
 
-        function generateRickshaws() {
-            const ricks = [];
-            const zoneLetters = { Alpha: 'A', Prime: 'B', Elite: 'C', Delta: 'D' };
-            const zonePhonePrefix = { Alpha: '9876500', Prime: '9876501', Elite: '9876502', Delta: '9876503' };
-            let globalId = 1;
-            for (const zone of ZONES) {
-                const letter = zoneLetters[zone];
-                for (let i = 1; i <= 50; i++) {
-                    ricks.push({
-                        id: globalId,
-                        driver: `Driver ${globalId}`,
-                        rickshaw: `MH-04-${letter}${String(i).padStart(3, '0')}`,
-                        zone: zone,
-                        route: ZONE_ROUTES[zone].name,
-                        phone: `${zonePhonePrefix[zone]}${String(i).padStart(2, '0')}`,
-                        ledRecovered: false,
-                        audioCapable: true,
-                        firstCampaignDone: false,
-                        progress: Math.random() * 0.9 + 0.05
-                    });
-                    globalId++;
-                }
-            }
-            return ricks;
+        function genRicks() {
+            const r = [];
+            const zl = { Alpha: 'A', Prime: 'B', Elite: 'C', Delta: 'D' };
+            const zp = { Alpha: '9876500', Prime: '9876501', Elite: '9876502', Delta: '9876503' };
+            let g = 1;
+            for (const z of ZONES)
+                for (let i = 1; i <= 50; i++) r.push({ id: g, driver: `Driver ${g}`, rickshaw: `MH-04-${zl[z]}${String(i).padStart(3,'0')}`, zone: z, route: ZONE_ROUTES[z].name, phone: `${zp[z]}${String(i).padStart(2,'0')}`, ledRecovered: false, audioCapable: true, firstCampaignDone: false, progress: Math.random(), panelCondition: 'Working', driverStatus: 'Active' });
+            g++;
+            return r;
         }
 
-        function getData(key, defaultValue) {
-            const stored = localStorage.getItem(key);
-            if (stored) return JSON.parse(stored);
-            return defaultValue;
+        function gd(k, d) { try { return JSON.parse(localStorage.getItem(k)) || d; } catch (e) { return d; } }
+
+        function sd(k, v) { localStorage.setItem(k, JSON.stringify(v)); }
+
+        function fc(a) { return '₹' + Math.round(a).toLocaleString('en-IN'); }
+        const CMONTH = new Date().toLocaleString('default', { month: 'long', year: 'numeric' });
+        const MBURN = 40000;
+
+        function demoCampaigns() {
+            return [
+                { id: 1001, type: 'led', clientName: 'K Star Mall', clientId: 1, zone: 'Alpha', rickshawCount: 25, days: 14, date: '2026-05-01', status: 'completed', hasAudio: false, ledRecoveredTriggered: true, totalRevenue: 52500, totalCosts: 32500, profit: 20000, ledImpressions: 140000, audioImpressions: 0, comboDiscount: 0, coordinatorPayout: 1750, marketerPayout: 5250 },
+                { id: 1002, type: 'combo', clientName: 'Viviana Mall', clientId: 2, zone: 'Prime', rickshawCount: 50, days: 14, date: '2026-05-10', status: 'active', hasAudio: true, ledRecoveredTriggered: false, totalRevenue: 144000, totalCosts: 98000, profit: 46000, ledImpressions: 280000, audioImpressions: 67200, comboDiscount: 16000, coordinatorPayout: 3500, marketerPayout: 10500 },
+                { id: 1003, type: 'audio', clientName: 'Mumbra Central Plaza', clientId: 3, zone: 'Delta', rickshawCount: 10, days: 30, date: '2026-05-15', status: 'active', hasAudio: true, ledRecoveredTriggered: false, totalRevenue: 25000, totalCosts: 15000, profit: 10000, ledImpressions: 0, audioImpressions: 28800, comboDiscount: 0, coordinatorPayout: 1500, marketerPayout: 4500 }
+            ];
         }
 
-        function setData(key, value) {
-            localStorage.setItem(key, JSON.stringify(value));
-        }
+        let rickshaws = gd('r3_ricks', genRicks());
+        let clients = gd('r3_clients', CLIENTS_PRD);
+        let campaigns = gd('r3_camps', demoCampaigns());
+        let activationMap = gd('r3_actmap', {});
+        let driverPayments = gd('r3_drvpay', {});
+        let partnerPayments = gd('r3_prtpay', {});
+        let paymentLog = gd('r3_paylog', []);
 
-        let rickshaws = getData('rasaai_rickshaws_200_final', generateRickshaws());
-        let clients = getData('rasaai_clients_10_final', DEFAULT_CLIENTS);
-        let campaigns = getData('rasaai_campaigns_final', []);
+        function saveAll() { sd('r3_ricks', rickshaws);
+            sd('r3_clients', clients);
+            sd('r3_camps', campaigns);
+            sd('r3_actmap', activationMap);
+            sd('r3_drvpay', driverPayments);
+            sd('r3_prtpay', partnerPayments);
+            sd('r3_paylog', paymentLog); }
 
-        function saveAll() {
-            setData('rasaai_rickshaws_200_final', rickshaws);
-            setData('rasaai_clients_10_final', clients);
-            setData('rasaai_campaigns_final', campaigns);
-        }
+        function getActiveIds(cid) { const m = activationMap[cid]; if (!m) { const c = campaigns.find(x => x.id === cid); if (!c) return [];
+                const zr = rickshaws.filter(r => r.zone === c.zone); return zr.slice(0, c.rickshawCount).map(r => r.id); } return Object.entries(m).filter(([_, v]) => v).map(([k, _]) => parseInt(k)); }
 
-        function getZoneRate(zone) { return ZONE_RATES[zone] || 200; }
-        function getNonRecoveredCount(zone) { return rickshaws.filter(r => r.zone === zone && !r.ledRecovered).length; }
+        function getActiveCount(cid) { return getActiveIds(cid).length || campaigns.find(c => c.id === cid)?.rickshawCount || 0; }
 
-        function calculateCampaignProfit(campaign) {
-            const zoneRate = getZoneRate(campaign.zone);
-            const rCount = campaign.rickshawCount;
-            const days = campaign.days;
+        function getNonRec(z) { return rickshaws.filter(r => r.zone === z && !r.ledRecovered).length; }
 
-            let ledRevenue = 0,
-                audioRevenue = 0;
-            if (campaign.type === 'led' || campaign.type === 'combo') {
-                ledRevenue = zoneRate * rCount * days;
-            }
-            if (campaign.type === 'audio' || campaign.type === 'combo') {
-                audioRevenue = (75 * rCount * days) + 2500;
-            }
-            let totalRevenue = ledRevenue + audioRevenue;
-            if (campaign.type === 'combo') totalRevenue = Math.round(totalRevenue * 0.9);
+        function calcProfit(c) { const zr = ZONE_RATES[c.zone] || 200;
+            const ac = getActiveCount(c.id) || c.rickshawCount;
+            const d = c.days;
+            const ha = c.hasAudio || c.type === 'audio' || c.type === 'combo';
+            const isLED = c.type === 'led' || c.type === 'combo';
+            let lr = isLED ? zr * ac * d : 0;
+            let ar = ha ? (75 * ac * d) + 2500 : 0;
+            let tr = lr + ar;
+            let cd = 0; if (isLED && ha && c.type === 'combo') { cd = Math.round(tr * 0.1);
+                tr -= cd; }
+            const pc = isLED ? 500 * ac : 0;
+            const hw = isLED ? 1000 * getNonRec(c.zone) : 0;
+            const as = (ha && !isLED) ? 2500 : 0;
+            let dlb = 0; if (isLED && ha) dlb = 750 * ac;
+            else if (isLED) dlb = 600 * ac;
+            else if (ha && !isLED) dlb = 150 * ac;
+            const cp = 5 * ac * d;
+            const mp = 15 * ac * d;
+            const tc = pc + hw + as + dlb + cp + mp;
+            const pr = tr - tc;
+            const li = isLED ? ac * d * 400 : 0;
+            const ai = ha ? ac * d * 96 : 0;
+            return { ...c, ledRevenue: lr, audioRevenue: ar, totalRevenue: tr, comboDiscount: cd, printCost: pc, ledHardwareCost: hw, audioSetupCost: as, driverLedBonus: dlb, coordinatorPayout: cp, marketerPayout: mp, totalCosts: tc, profit: pr, activeRickshawCount: ac, ledImpressions: li, audioImpressions: ai }; }
 
-            const printCost = (campaign.type === 'led' || campaign.type === 'combo') ? 500 * rCount : 0;
-            const ledHardwareCost = (campaign.type === 'led' || campaign.type === 'combo') ? 1000 * getNonRecoveredCount(campaign
-                .zone) : 0;
-            const audioSetupCost = (campaign.type === 'audio' || campaign.type === 'combo') ? 2500 : 0;
+        function getPayments(cid) { return paymentLog.filter(p => p.campaignId === cid).reduce((s, p) => s + p.amount, 0); }
 
-            let driverLedBonus = 0,
-                driverAudioBonus = 0;
-            if (campaign.type === 'led') driverLedBonus = 600 * rCount;
-            if (campaign.type === 'audio') driverAudioBonus = 150 * rCount;
-            if (campaign.type === 'combo') { driverLedBonus = 750 * rCount;
-                driverAudioBonus = 0; }
+        function getPayStatus(cid) { const c = campaigns.find(x => x.id === cid); if (!c) return 'N/A';
+            const p = getPayments(cid); if (p >= (c.totalRevenue || 0)) return 'paid'; if (p > 0) return 'partial'; return 'pending'; }
 
-            const coordinatorPayout = 5 * rCount * days;
-            const marketerPayout = 15 * rCount * days;
-
-            const totalCosts = printCost + ledHardwareCost + audioSetupCost + driverLedBonus + driverAudioBonus +
-                coordinatorPayout + marketerPayout;
-            const profit = totalRevenue - totalCosts;
-
-            return {
-                ledRevenue,
-                audioRevenue,
-                totalRevenue,
-                printCost,
-                ledHardwareCost,
-                audioSetupCost,
-                driverLedBonus,
-                driverAudioBonus,
-                coordinatorPayout,
-                marketerPayout,
-                totalCosts,
-                profit
-            };
-        }
-
-        function getTotalCampaignProfit() {
-            return campaigns.reduce((sum, c) => sum + (c.profit || 0), 0);
-        }
-        const MONTHLY_FIXED_BURN = 40000;
-
-        // ==================== UI HELPERS ====================
-        function formatCurrency(amount) {
-            return '₹' + Math.round(amount).toLocaleString('en-IN');
-        }
-
-        function getZoneBadge(zone) {
-            const cls = zone === 'Alpha' ? 'zone-alpha' : zone === 'Prime' ? 'zone-prime' : zone === 'Elite' ?
-                'zone-elite' : 'zone-delta';
-            return `<span class="badge ${cls}">${zone}</span>`;
-        }
-
-        function getTypeBadge(type) {
-            if (type === 'led') return '<span class="badge badge-led">LED</span>';
-            if (type === 'audio') return '<span class="badge badge-audio">AUDIO</span>';
-            return '<span class="badge badge-combo">COMBO</span>';
-        }
-
-        function populateClientDropdowns() {
-            const dropdowns = ['led-campaign-client', 'audio-campaign-client'];
-            dropdowns.forEach(id => {
-                const sel = document.getElementById(id);
-                if (!sel) return;
-                sel.innerHTML = clients.map(c => `<option value="${c.id}">${c.name} (${c.location})</option>`)
-                    .join('');
-            });
-        }
-
-        function refreshAllUI() {
-            renderDashboard();
-            renderRickshawsTable();
-            renderClientsTable();
-            renderLEDCampaignsTable();
-            renderAudioCampaignsTable();
-            renderQuickReference();
-            updateCalculator();
-            populateClientDropdowns();
-            updateDashboardStats();
-        }
+        function getRickCamps(rid) { return campaigns.filter(c => c.status === 'active' && getActiveIds(c.id).includes(rid)); }
 
         // ==================== NAVIGATION ====================
-        document.querySelectorAll('.nav-item').forEach(item => {
-            item.addEventListener('click', function() {
-                document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-                this.classList.add('active');
-                const pageName = this.dataset.page;
-                document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-                const targetPage = document.getElementById('page-' + pageName);
-                if (targetPage) targetPage.classList.add('active');
-                if (pageName === 'map') initMap();
-                refreshAllUI();
-            });
-        });
+        function navTo(p) { document.querySelectorAll('.page').forEach(x => x.classList.remove('active'));
+            document.getElementById('page-' + p)?.classList.add('active');
+            document.querySelectorAll('.bottom-nav .nav-tab,.desktop-sidebar .nav-tab').forEach(t => { t.classList.remove('active'); if (t.dataset.page === p) t.classList.add('active'); }); if (p === 'map') initMap();
+            refreshAll();
+            window.scrollTo(0, 0); }
+        document.querySelectorAll('.bottom-nav .nav-tab').forEach(t => t.onclick = () => navTo(t.dataset.page));
+        document.querySelectorAll('.desktop-sidebar .nav-tab').forEach(t => t.onclick = () => navTo(t.dataset.page));
+        document.addEventListener('click', function(e) { if (e.target.classList.contains('chip') && e.target.parentElement.classList.contains('chip-group')) { e.target.parentElement.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+                e.target.classList.add('active');
+                refreshAll(); } });
 
-        // ==================== DASHBOARD ====================
-        function updateDashboardStats() {
-            const totalProfit = getTotalCampaignProfit();
-            document.getElementById('total-campaign-profit').textContent = formatCurrency(totalProfit);
-            const netMonthly = totalProfit - MONTHLY_FIXED_BURN;
-            const netEl = document.getElementById('net-monthly-profit');
-            netEl.textContent = formatCurrency(netMonthly);
-            netEl.className = netMonthly >= 0 ? 'profit-positive' : 'profit-negative';
-        }
+        function openModal(id) { document.getElementById(id).style.display = 'flex'; }
 
-        function renderDashboard() {
-            const totalProfit = getTotalCampaignProfit();
-            const netMonthly = totalProfit - MONTHLY_FIXED_BURN;
-            const ledCampaigns = campaigns.filter(c => c.type === 'led' || c.type === 'combo').length;
-            const audioCampaigns = campaigns.filter(c => c.type === 'audio' || c.type === 'combo').length;
-            const recoveredZones = new Set();
-            campaigns.forEach(c => { if (c.ledRecoveredTriggered) recoveredZones.add(c.zone); });
-            const recoveredCount = Array.from(recoveredZones).reduce((sum, z) => sum + rickshaws.filter(r => r.zone === z)
-                .length, 0);
+        function closeModal(id) { document.getElementById(id).style.display = 'none'; }
+        document.querySelectorAll('.modal-overlay').forEach(m => m.addEventListener('click', function(e) { if (e.target === this) closeModal(this.id); }));
 
+        function refreshAll() { renderDashboard();
+            renderRicksTable();
+            renderClientsTable();
+            renderLEDHistory();
+            renderAudioHistory();
+            renderDriverPayables();
+            renderPartnerPayables();
+            renderQuickRef();
+            updateCalculator();
+            popDropdowns();
+            updateStats();
+            updateLEDPreview();
+            updateAudioPreview(); }
+
+        function updateStats() { const tp = campaigns.reduce((s, c) => s + (c.profit || 0), 0);
+            document.getElementById('total-campaign-profit').textContent = fc(tp);
+            document.getElementById('net-monthly-profit').textContent = fc(tp - MBURN);
+            document.getElementById('net-monthly-profit').className = (tp - MBURN) >= 0 ? 'profit-positive' : 'profit-negative'; let o = 0;
+            campaigns.forEach(c => o += Math.max(0, (c.totalRevenue || 0) - getPayments(c.id)));
+            document.getElementById('outstanding-client').textContent = fc(o);
+            document.getElementById('current-month-display').textContent = CMONTH; }
+
+        function renderDashboard() { const tp = campaigns.reduce((s, c) => s + (c.profit || 0), 0);
+            const ac = campaigns.filter(c => c.status === 'active').length;
+            const rz = new Set();
+            campaigns.forEach(c => { if (c.ledRecoveredTriggered) rz.add(c.zone); });
+            const rc = Array.from(rz).reduce((s, z) => s + rickshaws.filter(r => r.zone === z).length, 0);
             document.getElementById('dashboard-stats').innerHTML = `
-            <div class="stat-card"><div class="stat-icon" style="background:#eff6ff;color:#3b82f6;"><i class="fa-solid fa-truck-rickshaw"></i></div><div class="stat-value">200</div><div class="stat-label">Total Rickshaws</div></div>
-            <div class="stat-card"><div class="stat-icon" style="background:#f0fdf4;color:#10b981;"><i class="fa-solid fa-map-pin"></i></div><div class="stat-value">4</div><div class="stat-label">Active Zones</div></div>
-            <div class="stat-card"><div class="stat-icon" style="background:#fef3c7;color:#f59e0b;"><i class="fa-solid fa-tv"></i></div><div class="stat-value">${ledCampaigns}</div><div class="stat-label">LED Campaigns</div></div>
-            <div class="stat-card"><div class="stat-icon" style="background:#ede9fe;color:#8b5cf6;"><i class="fa-solid fa-volume-high"></i></div><div class="stat-value">${audioCampaigns}</div><div class="stat-label">Audio Campaigns</div></div>
-            <div class="stat-card"><div class="stat-icon" style="background:#fce7f3;color:#ec4899;"><i class="fa-solid fa-indian-rupee-sign"></i></div><div class="stat-value ${totalProfit>=0?'profit-positive':'profit-negative'}">${formatCurrency(totalProfit)}</div><div class="stat-label">Campaign Profits</div></div>
-            <div class="stat-card"><div class="stat-icon" style="background:#fff7ed;color:#f97316;"><i class="fa-solid fa-chart-line"></i></div><div class="stat-value ${netMonthly>=0?'profit-positive':'profit-negative'}">${formatCurrency(netMonthly)}</div><div class="stat-label">Net Monthly (After ₹40K Burn)</div></div>
+            <div class="stat-card"><div class="stat-icon" style="background:#eff6ff;color:#3b82f6;"><i class="fa-solid fa-truck-rickshaw"></i></div><div class="stat-value">${rickshaws.length}</div><div class="stat-label">Total Rickshaws</div></div>
+            <div class="stat-card"><div class="stat-icon" style="background:#f0fdf4;color:#10b981;"><i class="fa-solid fa-tv"></i></div><div class="stat-value">${ac}</div><div class="stat-label">Active Campaigns</div></div>
+            <div class="stat-card"><div class="stat-icon" style="background:#fce7f3;color:#ec4899;"><i class="fa-solid fa-indian-rupee-sign"></i></div><div class="stat-value ${tp>=0?'profit-positive':'profit-negative'}">${fc(tp)}</div><div class="stat-label">Campaign Profits</div></div>
+            <div class="stat-card"><div class="stat-icon" style="background:#fff7ed;color:#f97316;"><i class="fa-solid fa-chart-line"></i></div><div class="stat-value ${(tp-MBURN)>=0?'profit-positive':'profit-negative'}">${fc(tp-MBURN)}</div><div class="stat-label">Net Monthly</div></div>
+            <div class="stat-card"><div class="stat-icon" style="background:#dcfce7;color:#15803d;"><i class="fa-solid fa-check-circle"></i></div><div class="stat-value">${rc}/${rickshaws.length}</div><div class="stat-label">LED Recovered</div></div>
           `;
+            document.getElementById('zone-occupancy').innerHTML = ZONES.map(z => { const c = rickshaws.filter(r => r.zone === z).length,
+                    rec = rickshaws.filter(r => r.zone === z && r.ledRecovered).length,
+                    nr = rickshaws.filter(r => r.zone === z && !r.ledRecovered).length; return `<div class="card" style="margin:0;"><div class="card-body" style="padding:8px;"><h4 style="font-size:11px;margin-bottom:3px;"><span class="badge zone-${z.toLowerCase()}">${z}</span></h4><div style="font-size:16px;font-weight:700;">${c}<span style="font-size:9px;">/50</span></div><div class="progress-bar-container"><div class="progress-bar-fill" style="width:${Math.round(rec/Math.max(c,1)*100)}%;background:${ZONE_COLORS[z]};"></div></div><div style="font-size:8px;">Rec: ${rec} | HW: ${fc(nr*1000)}</div></div></div>`; })
+                .join('');
+            const tb = document.querySelector('#dashboard-campaigns-table tbody');
+            tb.innerHTML = campaigns.slice().reverse().map(c => { const ps = getPayStatus(c.id); return `<tr><td>${c.date}</td><td>${c.type==='combo'?'<span class="badge badge-combo">CMB</span>':c.type==='audio'?'<span class="badge badge-audio">AUD</span>':'<span class="badge badge-led">LED</span>'}</td><td>${c.clientName.substring(0,12)}</td><td><span class="badge zone-${c.zone.toLowerCase()}">${c.zone.substring(0,2)}</span></td><td>${getActiveCount(c.id)||c.rickshawCount}</td><td>${c.days}</td><td><span class="badge badge-${c.status||'draft'}">${(c.status||'draft').toUpperCase()}</span></td><td>${fc(c.totalRevenue)}</td><td class="${(c.profit||0)>=0?'profit-positive':'profit-negative'}">${fc(c.profit||0)}</td><td>${ps==='paid'?'✅':ps==='partial'?'🟡':'🔴'}</td></tr>`; })
+                .join('');
+            updateStats(); }
 
-            document.getElementById('zone-occupancy').innerHTML = ZONES.map(zone => {
-                const count = rickshaws.filter(r => r.zone === zone).length;
-                const pct = Math.round((count / 50) * 100);
-                const recovered = rickshaws.filter(r => r.zone === zone && r.ledRecovered).length;
-                return `
-              <div class="zone-occupancy-card">
-                <h4><span class="badge zone-${zone.toLowerCase()}">${zone}</span> ${ZONE_ROUTES[zone].name}</h4>
-                <div style="font-size:24px;font-weight:700;">${count} <span style="font-size:12px;color:#64748b;">/ 50 rickshaws</span></div>
-                <div class="progress-bar-container"><div class="progress-bar-fill" style="width:${pct}%;background:${ZONE_COLORS[zone]};"></div></div>
-                <div style="margin-top:6px;font-size:12px;color:#64748b;">LED Recovered: ${recovered}/50 · Target: 50</div>
-              </div>`;
-            }).join('');
+        function renderRicksTable() { const af = document.querySelector('#rickshaw-filter-chips .chip.active');
+            const f = af ? af.dataset.filter : 'All';
+            let d = [...rickshaws]; if (ZONES.includes(f)) d = d.filter(r => r.zone === f);
+            document.querySelector('#rickshaws-table tbody').innerHTML = d.slice(0, 100).map(r => { const ac = getRickCamps(r.id); return `<tr><td>${r.id}</td><td>${r.driver}</td><td>${r.rickshaw}</td><td><span class="badge zone-${r.zone.toLowerCase()}">${r.zone}</span></td><td>${r.ledRecovered?'<span class="badge badge-recovered">Yes</span>':'<span class="badge badge-pending">No</span>'}</td><td>${r.audioCapable?'<span class="badge badge-recovered">Yes</span>':'<span class="badge badge-pending">No</span>'}</td><td><span class="badge ${r.panelCondition==='Working'?'badge-recovered':'badge-pending'}">${r.panelCondition}</span></td><td>${ac.length?ac.map(c=>`<span class="badge ${c.type==='combo'?'badge-combo':'badge-led'}">${c.clientName.substring(0,6)}</span>`).join(' '):'—'}</td></tr>`; })
+                .join(''); }
 
-            const tbody = document.querySelector('#dashboard-campaigns-table tbody');
-            tbody.innerHTML = campaigns.slice().reverse().map(c => {
-                const p = c.profit || 0;
-                return `
-              <tr>
-                <td>${c.date}</td><td>${getTypeBadge(c.type)}</td><td>${c.clientName}</td><td>${getZoneBadge(c.zone)}</td>
-                <td>${c.rickshawCount}</td><td>${c.days}</td><td>${formatCurrency(c.totalRevenue)}</td><td>${formatCurrency(c.totalCosts)}</td>
-                <td class="${p>=0?'profit-positive':'profit-negative'}">${formatCurrency(p)}</td>
-                <td>${c.ledRecoveredTriggered?'<span class="badge badge-recovered">Recovered</span>':'<span class="badge badge-pending">Pending</span>'}</td>
-              </tr>`;
-            }).join('');
-            if (campaigns.length === 0) tbody.innerHTML =
-                '<tr><td colspan="10" style="text-align:center;padding:24px;color:#94a3b8;">No campaigns yet. Create one from LED or Audio Campaigns page.</td></tr>';
+        function renderClientsTable() { document.querySelector('#clients-table tbody').innerHTML = clients.map((c, i) => { const cc = campaigns.filter(ca => ca.clientId === c.id),
+                    tb = cc.reduce((s, ca) => s + (ca.totalRevenue || 0), 0),
+                    tp = paymentLog.filter(p => cc.some(ca => ca.id === p.campaignId)).reduce((s, p) => s + p.amount, 0); return `<tr><td>${i+1}</td><td>${c.name}</td><td>${c.location}</td><td>${c.phone}</td><td>${fc(tb)}</td><td>${fc(tp)}</td><td class="${tb-tp>0?'profit-negative':''}">${fc(tb-tp)}</td><td><button class="btn btn-xs btn-danger" onclick="delClient(${c.id})">🗑</button></td></tr>`; })
+                .join(''); }
 
-            updateDashboardStats();
-        }
+        function renderLEDHistory() { const lo = campaigns.filter(c => c.type === 'led' || c.type === 'combo');
+            document.querySelector('#led-history-table tbody').innerHTML = lo.reverse().map(c => { const ps = getPayStatus(c.id); return `<tr><td>${c.date}</td><td>${c.clientName.substring(0,14)}</td><td><span class="badge zone-${c.zone.toLowerCase()}">${c.zone}</span></td><td>${getActiveCount(c.id)||c.rickshawCount}</td><td>${c.days}</td><td><span class="badge badge-${c.status||'draft'}">${(c.status||'draft').toUpperCase()}</span></td><td>${fc(c.totalRevenue)}</td><td class="${(c.profit||0)>=0?'profit-positive':'profit-negative'}">${fc(c.profit||0)}</td><td>${c.ledRecoveredTriggered?'<span class="badge badge-recovered">Yes</span>':'<span class="badge badge-pending">No</span>'}</td><td>${ps==='paid'?'✅':ps==='partial'?'🟡':'🔴'}</td><td><button class="btn btn-xs btn-secondary" onclick="openActModal(${c.id})">🔧</button> <button class="btn btn-xs btn-success" onclick="openPayModal(${c.id})">💳</button> <select onchange="updateStatus(${c.id},this.value)" style="font-size:8px;width:55px;"><option ${c.status==='draft'?'selected':''}>draft</option><option ${c.status==='active'?'selected':''}>active</option><option ${c.status==='completed'?'selected':''}>completed</option></select> <button class="btn btn-xs btn-primary" onclick="downloadPDF(${c.id})">📄</button></td></tr>`; })
+                .join('') || '<tr><td colspan="11" style="text-align:center;">No LED campaigns</td></tr>'; }
 
-        // ==================== MAP ====================
-        let map;
-        let markers = [];
-        let animationInterval;
+        function renderAudioHistory() { const ao = campaigns.filter(c => c.type === 'audio' || c.type === 'combo');
+            document.querySelector('#audio-history-table tbody').innerHTML = ao.reverse().map(c => { const ps = getPayStatus(c.id); return `<tr><td>${c.date}</td><td>${c.type==='combo'?'<span class="badge badge-combo">Combo</span>':'<span class="badge badge-audio">Audio</span>'}</td><td>${c.clientName.substring(0,14)}</td><td><span class="badge zone-${c.zone.toLowerCase()}">${c.zone}</span></td><td>${getActiveCount(c.id)||c.rickshawCount}</td><td>${c.days}</td><td><span class="badge badge-${c.status||'draft'}">${(c.status||'draft').toUpperCase()}</span></td><td>${fc(c.totalRevenue)}</td><td class="${(c.profit||0)>=0?'profit-positive':'profit-negative'}">${fc(c.profit||0)}</td><td>${ps==='paid'?'✅':ps==='partial'?'🟡':'🔴'}</td><td><button class="btn btn-xs btn-secondary" onclick="openActModal(${c.id})">🔧</button> <button class="btn btn-xs btn-success" onclick="openPayModal(${c.id})">💳</button> <select onchange="updateStatus(${c.id},this.value)" style="font-size:8px;width:55px;"><option ${c.status==='draft'?'selected':''}>draft</option><option ${c.status==='active'?'selected':''}>active</option><option ${c.status==='completed'?'selected':''}>completed</option></select> <button class="btn btn-xs btn-primary" onclick="downloadPDF(${c.id})">📄</button></td></tr>`; })
+                .join('') || '<tr><td colspan="11" style="text-align:center;">No audio campaigns</td></tr>'; }
 
-        function initMap() {
-            if (map) {
-                map.invalidateSize();
-                return;
-            }
-            map = L.map('map').setView([19.175, 73.0], 13);
-            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                attribution: '&copy; OpenStreetMap contributors',
-                maxZoom: 18
-            }).addTo(map);
+        function renderDriverPayables() { const af = document.querySelector('#driver-filter-chips .chip.active');
+            const f = af ? af.dataset.filter : 'All';
+            let rows = [];
+            rickshaws.forEach(r => { const dp = (driverPayments[r.id] && driverPayments[r.id][CMONTH]) || { retainer: 200, ledBonus: 0, audioBonus: 0, comboBonus: 0, total: 200, status: 'pending' }; if (f === 'Pending' && dp.status !== 'pending') return; if (ZONES.includes(f) && r.zone !== f) return;
+                rows.push({ ...r, dp }); });
+            document.getElementById('total-driver-due').textContent = fc(rows.reduce((s, r) => s + (r.dp.status === 'pending' ? r.dp.total : 0), 0));
+            document.getElementById('total-driver-paid').textContent = fc(rows.reduce((s, r) => s + (r.dp.status === 'paid' ? r.dp.total : 0), 0));
+            document.querySelector('#driver-payables-table tbody').innerHTML = rows.slice(0, 60).map(r => `<tr><td>${r.driver}</td><td><span class="badge zone-${r.zone.toLowerCase()}">${r.zone}</span></td><td>${fc(r.dp.retainer)}</td><td>${fc(r.dp.ledBonus)}</td><td>${fc(r.dp.audioBonus)}</td><td>${fc(r.dp.comboBonus)}</td><td><strong>${fc(r.dp.total)}</strong></td><td>${r.dp.status==='paid'?'<span class="badge badge-paid">Paid</span>':'<span class="badge badge-pending">Pending</span>'}</td><td>${r.dp.status==='pending'?`<button class="btn btn-xs btn-success" onclick="markDrvPaid(${r.id})">Pay</button>`:`<button class="btn btn-xs btn-secondary" onclick="markDrvUnpaid(${r.id})">Undo</button>`}</td></tr>`)
+                .join('') || '<tr><td colspan="9">No data</td></tr>'; }
 
-            ZONES.forEach(zone => {
-                const route = ZONE_ROUTES[zone];
-                const color = ZONE_COLORS[zone];
-                const polyline = L.polyline([route.start, route.end], {
-                    color: color,
-                    weight: 5,
-                    opacity: 0.7,
-                    dashArray: zone === 'Elite' ? '10,10' : null
-                }).addTo(map);
-                polyline.bindPopup(
-                    `<strong>${zone} Zone</strong><br>${route.name}<br><small>${route.popular}</small>`);
-            });
+        function renderPartnerPayables() { let tc = 0,
+                tm = 0;
+            const rows = campaigns.map(c => { const ca = c.coordinatorPayout || (5 * getActiveCount(c.id) * c.days),
+                    ma = c.marketerPayout || (15 * getActiveCount(c.id) * c.days),
+                    pp = partnerPayments[c.id] || { coordStatus: 'pending', markStatus: 'pending' }; if (pp.coordStatus === 'pending') tc += ca; if (pp.markStatus === 'pending') tm += ma; return { c, ca, ma, pp }; });
+            document.getElementById('total-coordinator-due').textContent = fc(tc);
+            document.getElementById('total-marketer-due').textContent = fc(tm);
+            document.querySelector('#partner-payables-table tbody').innerHTML = rows.map(r => `<tr><td>${r.c.clientName.substring(0,12)}</td><td>${fc(r.ca)}</td><td>${r.pp.coordStatus==='paid'?'✅':`<button class="btn btn-xs btn-success" onclick="markPrtPaid(${r.c.id},'coord')">Pay</button>`}</td><td>${fc(r.ma)}</td><td>${r.pp.markStatus==='paid'?'✅':`<button class="btn btn-xs btn-success" onclick="markPrtPaid(${r.c.id},'mark')">Pay</button>`}</td></tr>`)
+                .join('') || '<tr><td colspan="5">No data</td></tr>'; }
 
-            const legend = L.control({ position: 'bottomright' });
-            legend.onAdd = function() {
-                const div = L.DomUtil.create('div', 'map-legend');
-                div.innerHTML = ZONES.map(z =>
-                    `<div class="map-legend-item" title="${ZONE_ROUTES[z].popular}"><span class="map-legend-dot" style="background:${ZONE_COLORS[z]};"></span> <strong>${z}</strong>: ${ZONE_ROUTES[z].name.split('→')[1].trim().substring(0,20)}…</div>`
-                ).join('') +
-                    '<div style="margin-top:6px;font-size:11px;color:#64748b;">🖱️ Hover for popular areas</div>';
-                return div;
-            };
-            legend.addTo(map);
+        function updateCalculator() { const t = document.getElementById('calc-type')?.value || 'led';
+            const z = document.getElementById('calc-zone')?.value || 'Alpha';
+            const rc = parseInt(document.getElementById('calc-rickshaws')?.value) || 50;
+            const d = parseInt(document.getElementById('calc-days')?.value) || 14;
+            const zr = ZONE_RATES[z] || 200;
+            let lr = 0,
+                ar = 0,
+                tr = 0; if (t === 'led' || t === 'combo') lr = zr * rc * d; if (t === 'audio' || t === 'combo') ar = (75 * rc * d) + 2500;
+            tr = lr + ar; if (t === 'combo') tr = Math.round(tr * 0.9);
+            document.getElementById('calculator-result').innerHTML = `<strong>Client Price:</strong> ${fc(tr)} ${t==='combo'?'<small>(10% off)</small>':''}<br>📺 LED Impressions: ~${(t==='led'||t==='combo'?rc*d*400:0).toLocaleString('en-IN')} | 🔊 Audio Plays: ~${(t==='audio'||t==='combo'?rc*d*96:0).toLocaleString('en-IN')}`; }
 
-            createMarkers();
-            startAnimation();
-        }
+        function renderQuickRef() { const d = 14;
+            const cnt = [10, 25, 50, 100, 150, 200];
+            document.getElementById('quick-ref-body').innerHTML = ZONES.map(z => { const rt = ZONE_RATES[z]; return `<tr><td><span class="badge zone-${z.toLowerCase()}">${z}</span></td>${cnt.map(c=>`<td>${fc(rt*c*d)}</td>`).join('')}</tr>`; }).join('') + `<tr style="background:#fefce8;"><td><strong>Audio+</strong></td>${cnt.map(c=>`<td>${fc((75*c*d)+2500)}</td>`).join('')}</tr>`; }
 
-        function createMarkers() {
-            markers.forEach(m => map.removeLayer(m));
-            markers = [];
-            const markerIcons = {};
-            ZONES.forEach(zone => {
-                markerIcons[zone] = L.divIcon({
-                    className: 'custom-marker',
-                    html: `<div style="background:${ZONE_COLORS[zone]};width:14px;height:14px;border-radius:50%;border:2px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,0.4);"></div>`,
-                    iconSize: [18, 18],
-                    iconAnchor: [9, 9]
-                });
-            });
+        function popDropdowns() { ['led-client', 'audio-client'].forEach(id => { const s = document.getElementById(id); if (s) s.innerHTML = clients.map(c => `<option value="${c.id}">${c.name}</option>`).join(''); }); }
 
-            ZONES.forEach(zone => {
-                const route = ZONE_ROUTES[zone];
-                for (let i = 0; i < 12; i++) {
-                    const t = i / 11;
-                    const lat = route.start[0] + (route.end[0] - route.start[0]) * t;
-                    const lng = route.start[1] + (route.end[1] - route.start[1]) * t;
-                    const rickshawData = rickshaws.find(r => r.zone === zone && r.id % 12 === i % 12) || rickshaws
-                        .find(r => r.zone === zone) || { driver: 'Unknown', rickshaw: 'N/A', ledRecovered: false,
-                            audioCapable: true };
-                    const marker = L.marker([lat, lng], { icon: markerIcons[zone] }).addTo(map);
-                    marker.bindPopup(`
-                <strong>${zone} Zone</strong><br>
-                🆔 ${rickshawData.rickshaw}<br>
-                👤 ${rickshawData.driver}<br>
-                📺 LED: ${rickshawData.ledRecovered?'<span style="color:#15803d;">Recovered</span>':'<span style="color:#b45309;">Pending</span>'}<br>
-                🔊 Audio: ${rickshawData.audioCapable?'<span style="color:#15803d;">Capable</span>':'<span style="color:#dc2626;">Not Capable</span>'}
-              `);
-                    marker._zone = zone;
-                    marker._baseLat = lat;
-                    marker._baseLng = lng;
-                    marker._index = i;
-                    markers.push(marker);
-                }
-            });
-        }
+        function updateLEDPreview() { const z = document.getElementById('led-zone')?.value || 'Alpha';
+            const rc = parseInt(document.getElementById('led-rickshaws')?.value) || 10;
+            const d = parseInt(document.getElementById('led-days')?.value) || 14;
+            document.getElementById('led-preview').innerHTML = `<strong>Est. Revenue:</strong> ${fc(ZONE_RATES[z]*rc*d)} | Impressions: ~${(rc*d*400).toLocaleString('en-IN')} | HW Cost: ${fc(1000*getNonRec(z))}`; }
 
-        function startAnimation() {
-            if (animationInterval) clearInterval(animationInterval);
-            animationInterval = setInterval(() => {
-                markers.forEach(marker => {
-                    const offset = Math.sin(Date.now() / 2000 + marker._index) * 0.0008;
-                    const newLat = marker._baseLat + offset;
-                    const newLng = marker._baseLng + offset * 0.7;
-                    marker.setLatLng([newLat, newLng]);
-                });
-            }, 3000);
-        }
+        function updateAudioPreview() { const rc = parseInt(document.getElementById('audio-rickshaws')?.value) || 10;
+            const d = parseInt(document.getElementById('audio-days')?.value) || 14;
+            const t = document.getElementById('audio-type')?.value || 'audio';
+            const z = document.getElementById('audio-zone')?.value || 'Alpha';
+            const ar = (75 * rc * d) + 2500; if (t === 'audio') document.getElementById('audio-preview').innerHTML = `<strong>Audio Only:</strong> ${fc(ar)} | Plays: ~${(rc*d*96).toLocaleString('en-IN')}`; else { const lr = ZONE_RATES[z] * rc * d;
+                document.getElementById('audio-preview').innerHTML = `<strong>Combo (10% off):</strong> ${fc(Math.round((lr+ar)*0.9))} | LED Impr: ~${(rc*d*400).toLocaleString('en-IN')} | Audio: ~${(rc*d*96).toLocaleString('en-IN')}`; } }
+        document.getElementById('led-zone')?.addEventListener('change', updateLEDPreview);
+        document.getElementById('led-rickshaws')?.addEventListener('input', updateLEDPreview);
+        document.getElementById('led-days')?.addEventListener('change', updateLEDPreview);
+        document.getElementById('audio-zone')?.addEventListener('change', updateAudioPreview);
+        document.getElementById('audio-rickshaws')?.addEventListener('input', updateAudioPreview);
+        document.getElementById('audio-days')?.addEventListener('change', updateAudioPreview);
+        document.getElementById('audio-type')?.addEventListener('change', updateAudioPreview);
 
-        // ==================== RICKSHAWS TABLE ====================
-        function renderRickshawsTable() {
-            const tbody = document.querySelector('#rickshaws-table tbody');
-            tbody.innerHTML = rickshaws.map(r => `
-            <tr>
-              <td>${r.id}</td><td>${r.driver}</td><td>${r.rickshaw}</td><td>${getZoneBadge(r.zone)}</td>
-              <td>${r.phone}</td>
-              <td>${r.ledRecovered?'<span class="badge badge-recovered">Recovered</span>':'<span class="badge badge-pending">Pending</span>'}</td>
-              <td>${r.audioCapable?'<span class="badge badge-recovered">Yes</span>':'<span class="badge badge-pending">No</span>'}</td>
-              <td>
-                <button class="btn btn-sm btn-secondary" onclick="toggleAudioCapable(${r.id})" title="Toggle Audio">🔊</button>
-                <button class="btn btn-sm btn-danger" onclick="deleteRickshaw(${r.id})" title="Delete">🗑️</button>
-              </td>
-            </tr>`).join('');
-        }
-
-        function addRickshaw() {
-            const driver = document.getElementById('new-driver-name').value.trim();
-            const plate = document.getElementById('new-rickshaw-plate').value.trim();
-            const zone = document.getElementById('new-rickshaw-zone').value;
-            const phone = document.getElementById('new-rickshaw-phone').value.trim();
-            if (!driver || !plate || !phone) return alert('Please fill all fields');
-            const newId = rickshaws.length > 0 ? Math.max(...rickshaws.map(r => r.id)) + 1 : 1;
-            rickshaws.push({
-                id: newId,
-                driver,
-                rickshaw: plate,
-                zone,
-                route: ZONE_ROUTES[zone].name,
-                phone,
-                ledRecovered: false,
-                audioCapable: true,
-                firstCampaignDone: false,
-                progress: Math.random() * 0.9 + 0.05
-            });
+        // ==================== ACTIONS ====================
+        function addRickshaw() { const dr = document.getElementById('new-driver').value.trim(),
+                pl = document.getElementById('new-plate').value.trim(),
+                zn = document.getElementById('new-zone').value,
+                ph = document.getElementById('new-phone').value.trim(); if (!dr || !pl || !ph) return alert('Fill all');
+            rickshaws.push({ id: Math.max(...rickshaws.map(r => r.id)) + 1, driver: dr, rickshaw: pl, zone: zn, route: ZONE_ROUTES[zn].name, phone: ph, ledRecovered: false, audioCapable: true, firstCampaignDone: false, progress: Math.random(), panelCondition: 'Working', driverStatus: 'Active' });
             saveAll();
-            refreshAllUI();
-            document.getElementById('new-driver-name').value = '';
-            document.getElementById('new-rickshaw-plate').value = '';
-            document.getElementById('new-rickshaw-phone').value = '';
-        }
+            closeModal('add-rickshaw-modal');
+            refreshAll(); }
 
-        function deleteRickshaw(id) {
-            if (!confirm('Delete this rickshaw?')) return;
-            rickshaws = rickshaws.filter(r => r.id !== id);
+        function addClient() { const nm = document.getElementById('new-client-name').value.trim(),
+                lc = document.getElementById('new-client-loc').value.trim(),
+                ph = document.getElementById('new-client-phone').value.trim(); if (!nm || !lc || !ph) return alert('Fill all');
+            clients.push({ id: Math.max(...clients.map(c => c.id)) + 1, name: nm, location: lc, phone: ph });
             saveAll();
-            refreshAllUI();
-            if (map) { createMarkers();
-                startAnimation(); }
-        }
+            closeModal('add-client-modal');
+            refreshAll(); }
 
-        function toggleAudioCapable(id) {
-            const r = rickshaws.find(r => r.id === id);
-            if (r) { r.audioCapable = !r.audioCapable;
-                saveAll();
-                refreshAllUI(); }
-        }
-
-        // ==================== CLIENTS TABLE ====================
-        function renderClientsTable() {
-            const tbody = document.querySelector('#clients-table tbody');
-            tbody.innerHTML = clients.map((c, i) => `
-            <tr>
-              <td>${i+1}</td><td>${c.name}</td><td>${c.location}</td><td>${c.phone}</td>
-              <td><button class="btn btn-sm btn-danger" onclick="deleteClient(${c.id})">🗑️</button></td>
-            </tr>`).join('');
-        }
-
-        function addClient() {
-            const name = document.getElementById('new-client-name').value.trim();
-            const location = document.getElementById('new-client-location').value.trim();
-            const phone = document.getElementById('new-client-phone').value.trim();
-            if (!name || !location || !phone) return alert('Please fill all fields');
-            const newId = clients.length > 0 ? Math.max(...clients.map(c => c.id)) + 1 : 1;
-            clients.push({ id: newId, name, location, phone });
-            saveAll();
-            refreshAllUI();
-            document.getElementById('new-client-name').value = '';
-            document.getElementById('new-client-location').value = '';
-            document.getElementById('new-client-phone').value = '';
-        }
-
-        function deleteClient(id) {
-            if (!confirm('Delete this client?')) return;
+        function delClient(id) { if (!confirm('Delete?')) return;
             clients = clients.filter(c => c.id !== id);
             saveAll();
-            refreshAllUI();
-        }
+            refreshAll(); }
 
-        // ==================== LED CAMPAIGNS ====================
-        function renderLEDCampaignsTable() {
-            const ledOnly = campaigns.filter(c => c.type === 'led' || c.type === 'combo');
-            const tbody = document.querySelector('#led-campaigns-table tbody');
-            tbody.innerHTML = ledOnly.slice().reverse().map(c => `
-            <tr>
-              <td>${c.date}</td><td>${c.clientName}</td><td>${getZoneBadge(c.zone)}</td>
-              <td>${c.rickshawCount}</td><td>${c.days}</td><td>${formatCurrency(c.totalRevenue)}</td>
-              <td class="${(c.profit||0)>=0?'profit-positive':'profit-negative'}">${formatCurrency(c.profit||0)}</td>
-              <td>${c.ledRecoveredTriggered?'<span class="badge badge-recovered">Yes</span>':'<span class="badge badge-pending">No</span>'}</td>
-              <td><button class="btn btn-sm btn-danger" onclick="deleteCampaign(${c.id})">🗑️</button></td>
-            </tr>`).join('');
-            if (ledOnly.length === 0) tbody.innerHTML =
-                '<tr><td colspan="9" style="text-align:center;padding:24px;color:#94a3b8;">No LED campaigns yet.</td></tr>';
-        }
-
-        function createLEDCampaign() {
-            const clientId = parseInt(document.getElementById('led-campaign-client').value);
-            const zone = document.getElementById('led-campaign-zone').value;
-            const rCount = parseInt(document.getElementById('led-campaign-rickshaws').value);
-            const days = parseInt(document.getElementById('led-campaign-days').value);
-            if (rCount < 10) return alert('Minimum 10 rickshaws required');
-            if (rCount > 50) return alert('Maximum 50 rickshaws per zone');
-            const client = clients.find(c => c.id === clientId);
-            if (!client) return alert('Client not found');
-
-            const campaign = {
-                id: Date.now(),
-                type: 'led',
-                clientName: client.name,
-                clientId: client.id,
-                zone,
-                rickshawCount: rCount,
-                days,
-                date: new Date().toISOString().split('T')[0],
-                ledRecoveredTriggered: false
-            };
-            const calc = calculateCampaignProfit(campaign);
-            Object.assign(campaign, calc);
-
-            if (calc.profit > 0 && getNonRecoveredCount(zone) > 0) {
-                campaign.ledRecoveredTriggered = true;
-                rickshaws.forEach(r => { if (r.zone === zone) r.ledRecovered = true; });
-            }
-
-            campaigns.push(campaign);
+        function createLEDCampaign() { const cid = parseInt(document.getElementById('led-client').value),
+                zn = document.getElementById('led-zone').value,
+                rc = parseInt(document.getElementById('led-rickshaws').value),
+                dy = parseInt(document.getElementById('led-days').value); if (rc < 10) return alert('Min 10');
+            const cl = clients.find(c => c.id === cid); if (!cl) return;
+            const camp = { id: Date.now(), type: 'led', clientName: cl.name, clientId: cl.id, zone: zn, rickshawCount: rc, days: dy, date: new Date().toISOString().split('T')[0], status: 'draft', hasAudio: false, ledRecoveredTriggered: false };
+            const aa = rickshaws.filter(r => r.zone === zn).slice(0, rc);
+            activationMap[camp.id] = {};
+            aa.forEach(r => activationMap[camp.id][r.id] = true);
+            Object.assign(camp, calcProfit(camp));
+            campaigns.push(camp);
             saveAll();
-            refreshAllUI();
-            updateLEDPreview();
-        }
+            refreshAll(); }
 
-        function updateLEDPreview() {
-            const zone = document.getElementById('led-campaign-zone').value;
-            const rCount = parseInt(document.getElementById('led-campaign-rickshaws').value) || 10;
-            const days = parseInt(document.getElementById('led-campaign-days').value) || 14;
-            const zoneRate = getZoneRate(zone);
-            const revenue = zoneRate * rCount * days;
-            const nonRec = getNonRecoveredCount(zone);
-            const hwCost = 1000 * Math.min(nonRec, rCount);
-            document.getElementById('led-campaign-preview').innerHTML = `
-            <strong>LED Preview:</strong> ${formatCurrency(revenue)} revenue · ${rCount} rickshaws × ${days} days × ${formatCurrency(zoneRate)}/day · LED Hardware: ${formatCurrency(hwCost)} (${nonRec} non-recovered in ${zone})
-          `;
-        }
-        document.getElementById('led-campaign-zone')?.addEventListener('change', updateLEDPreview);
-        document.getElementById('led-campaign-rickshaws')?.addEventListener('input', updateLEDPreview);
-        document.getElementById('led-campaign-days')?.addEventListener('change', updateLEDPreview);
-
-        // ==================== AUDIO CAMPAIGNS ====================
-        function renderAudioCampaignsTable() {
-            const audioOnly = campaigns.filter(c => c.type === 'audio' || c.type === 'combo');
-            const tbody = document.querySelector('#audio-campaigns-table tbody');
-            tbody.innerHTML = audioOnly.slice().reverse().map(c => `
-            <tr>
-              <td>${c.date}</td><td>${getTypeBadge(c.type)}</td><td>${c.clientName}</td><td>${getZoneBadge(c.zone)}</td>
-              <td>${c.rickshawCount}</td><td>${c.days}</td><td>${formatCurrency(c.totalRevenue)}</td>
-              <td class="${(c.profit||0)>=0?'profit-positive':'profit-negative'}">${formatCurrency(c.profit||0)}</td>
-              <td><button class="btn btn-sm btn-danger" onclick="deleteCampaign(${c.id})">🗑️</button></td>
-            </tr>`).join('');
-            if (audioOnly.length === 0) tbody.innerHTML =
-                '<tr><td colspan="9" style="text-align:center;padding:24px;color:#94a3b8;">No audio campaigns yet.</td></tr>';
-        }
-
-        function createAudioCampaign() {
-            const clientId = parseInt(document.getElementById('audio-campaign-client').value);
-            const zone = document.getElementById('audio-campaign-zone').value;
-            const rCount = parseInt(document.getElementById('audio-campaign-rickshaws').value);
-            const days = parseInt(document.getElementById('audio-campaign-days').value);
-            const isCombo = document.getElementById('audio-campaign-combo').value === 'yes';
-            if (rCount < 10) return alert('Minimum 10 rickshaws required');
-            if (rCount > 50) return alert('Maximum 50 rickshaws per zone');
-            const client = clients.find(c => c.id === clientId);
-            if (!client) return alert('Client not found');
-
-            const campaign = {
-                id: Date.now(),
-                type: isCombo ? 'combo' : 'audio',
-                clientName: client.name,
-                clientId: client.id,
-                zone,
-                rickshawCount: rCount,
-                days,
-                date: new Date().toISOString().split('T')[0],
-                ledRecoveredTriggered: false
-            };
-            const calc = calculateCampaignProfit(campaign);
-            Object.assign(campaign, calc);
-
-            if (isCombo && calc.profit > 0 && getNonRecoveredCount(zone) > 0) {
-                campaign.ledRecoveredTriggered = true;
-                rickshaws.forEach(r => { if (r.zone === zone) r.ledRecovered = true; });
-            }
-
-            campaigns.push(campaign);
+        function createAudioCampaign() { const cid = parseInt(document.getElementById('audio-client').value),
+                zn = document.getElementById('audio-zone').value,
+                rc = parseInt(document.getElementById('audio-rickshaws').value),
+                dy = parseInt(document.getElementById('audio-days').value),
+                tp = document.getElementById('audio-type').value; if (rc < 10) return alert('Min 10');
+            const cl = clients.find(c => c.id === cid); if (!cl) return;
+            const camp = { id: Date.now(), type: tp, clientName: cl.name, clientId: cl.id, zone: zn, rickshawCount: rc, days: dy, date: new Date().toISOString().split('T')[0], status: 'draft', hasAudio: true, ledRecoveredTriggered: false };
+            const aa = rickshaws.filter(r => r.zone === zn).slice(0, rc);
+            activationMap[camp.id] = {};
+            aa.forEach(r => activationMap[camp.id][r.id] = true);
+            Object.assign(camp, calcProfit(camp));
+            campaigns.push(camp);
             saveAll();
-            refreshAllUI();
-        }
+            refreshAll(); }
 
-        function updateAudioPreview() {
-            const rCount = parseInt(document.getElementById('audio-campaign-rickshaws').value) || 10;
-            const days = parseInt(document.getElementById('audio-campaign-days').value) || 14;
-            const isCombo = document.getElementById('audio-campaign-combo').value === 'yes';
-            const zone = document.getElementById('audio-campaign-zone').value;
-            const audioRevenue = (75 * rCount * days) + 2500;
-            let msg = `<strong>Audio Rate:</strong> ${formatCurrency(audioRevenue)} (₹2,500 setup + ₹75×${rCount}×${days})`;
-            if (isCombo) {
-                const zoneRate = getZoneRate(zone);
-                const ledRevenue = zoneRate * rCount * days;
-                const comboRevenue = Math.round((ledRevenue + audioRevenue) * 0.9);
-                msg +=
-                    `<br><strong>Combo (10% off):</strong> LED ${formatCurrency(ledRevenue)} + Audio ${formatCurrency(audioRevenue)} = <strong>${formatCurrency(comboRevenue)}</strong>`;
-            }
-            document.getElementById('audio-campaign-preview').innerHTML = msg;
-        }
-        document.getElementById('audio-campaign-rickshaws')?.addEventListener('input', updateAudioPreview);
-        document.getElementById('audio-campaign-days')?.addEventListener('change', updateAudioPreview);
-        document.getElementById('audio-campaign-combo')?.addEventListener('change', updateAudioPreview);
-        document.getElementById('audio-campaign-zone')?.addEventListener('change', updateAudioPreview);
-
-        function deleteCampaign(id) {
-            if (!confirm('Delete this campaign? This cannot be undone.')) return;
-            campaigns = campaigns.filter(c => c.id !== id);
+        function updateStatus(cid, st) { const c = campaigns.find(x => x.id === cid); if (!c) return;
+            c.status = st; if (st === 'active' && (c.type === 'led' || c.type === 'combo') && (c.profit || 0) > 0 && getNonRec(c.zone) > 0) { c.ledRecoveredTriggered = true;
+                rickshaws.forEach(r => { if (r.zone === c.zone) r.ledRecovered = true; }); } if (st === 'completed') { Object.assign(c, calcProfit(c));
+                genDriverPayments(c); }
             saveAll();
-            refreshAllUI();
-        }
+            refreshAll(); }
 
-        // ==================== BUDGET CALCULATOR ====================
-        function updateCalculator() {
-            const type = document.getElementById('calc-type').value;
-            const zoneStr = document.getElementById('calc-zone').value;
-            const zone = zoneStr.includes('Alpha') ? 'Alpha' : zoneStr.includes('Prime') ? 'Prime' : zoneStr.includes(
-                'Elite') ? 'Elite' : 'Delta';
-            const rCount = parseInt(document.getElementById('calc-rickshaws').value) || 50;
-            const days = parseInt(document.getElementById('calc-days').value) || 14;
-            const zoneRate = getZoneRate(zone);
+        function genDriverPayments(c) { if (c.status !== 'completed') return;
+            const ids = getActiveIds(c.id);
+            ids.forEach(rid => { if (!driverPayments[rid]) driverPayments[rid] = {}; if (!driverPayments[rid][CMONTH]) driverPayments[rid][CMONTH] = { retainer: 200, ledBonus: 0, audioBonus: 0, comboBonus: 0, total: 200, status: 'pending' };
+                const dp = driverPayments[rid][CMONTH]; if (c.type === 'combo') dp.comboBonus += 750; else if (c.type === 'led') dp.ledBonus += 600; else if (c.type === 'audio') dp.audioBonus += 150;
+                dp.total = dp.retainer + dp.ledBonus + dp.audioBonus + dp.comboBonus; });
+            saveAll(); }
 
-            let ledPrice = 0,
-                audioPrice = 0,
-                total = 0;
-            if (type === 'led' || type === 'combo') ledPrice = zoneRate * rCount * days;
-            if (type === 'audio' || type === 'combo') audioPrice = (75 * rCount * days) + 2500;
-            total = ledPrice + audioPrice;
-            if (type === 'combo') total = Math.round(total * 0.9);
+        let actCid = null;
 
-            let resultHTML = '';
-            if (type === 'led') resultHTML =
-                `<strong>LED Campaign Price:</strong> ${formatCurrency(ledPrice)} (${rCount} rickshaws × ${days} days × ${formatCurrency(zoneRate)}/day)`;
-            else if (type === 'audio') resultHTML =
-                `<strong>Audio Campaign Price:</strong> ${formatCurrency(audioPrice)} (₹2,500 setup + ₹75×${rCount}×${days})`;
-            else resultHTML =
-                `<strong>Combo Price (10% off):</strong> ${formatCurrency(total)} <small>(LED: ${formatCurrency(ledPrice)} + Audio: ${formatCurrency(audioPrice)} = ${formatCurrency(ledPrice+audioPrice)} → 10% discount)</small>`;
+        function openActModal(cid) { actCid = cid;
+            const c = campaigns.find(x => x.id === cid); if (!c) return;
+            document.getElementById('act-camp-name').textContent = c.clientName;
+            const zr = rickshaws.filter(r => r.zone === c.zone),
+                ai = getActiveIds(cid);
+            document.getElementById('act-rick-list').innerHTML = zr.map(r => { const ia = ai.includes(r.id),
+                    cf = getRickCamps(r.id).filter(x => x.id !== cid); return `<tr><td><label class="toggle-switch"><input type="checkbox" ${ia?'checked':''} data-rid="${r.id}" class="atoggle"><span class="toggle-slider"></span></label></td><td>${r.driver}</td><td><span class="badge ${r.panelCondition==='Working'?'badge-recovered':'badge-pending'}">${r.panelCondition}</span></td><td>${cf.length?cf.map(x=>x.clientName.substring(0,6)).join(', '):'—'}</td></tr>`; })
+                .join('');
+            openModal('activation-modal'); }
 
-            document.getElementById('calculator-result').innerHTML = resultHTML;
-        }
+        function saveActivation() { if (!actCid) return;
+            const tg = document.querySelectorAll('.atoggle'),
+                m = {};
+            tg.forEach(t => m[t.dataset.rid] = t.checked);
+            activationMap[actCid] = m;
+            const c = campaigns.find(x => x.id === actCid); if (c) Object.assign(c, calcProfit(c));
+            saveAll();
+            closeModal('activation-modal');
+            refreshAll(); }
 
-        function renderQuickReference() {
-            const tbody = document.getElementById('quick-reference-body');
-            const days = 14;
-            const counts = [10, 25, 50, 100, 150, 200];
-            tbody.innerHTML = ZONES.map(zone => {
-                const rate = getZoneRate(zone);
-                return `<tr>
-              <td><strong>${zone}</strong><br><small>LED ₹${rate}/day</small></td>
-              ${counts.map(c => `<td>${formatCurrency(rate * c * days)}</td>`).join('')}
-            </tr>`;
-            }).join('') + `
-            <tr style="background:#fefce8;">
-              <td><strong>Audio Add-on</strong><br><small>₹75/day + ₹2,500</small></td>
-              ${counts.map(c => `<td>${formatCurrency((75*c*days)+2500)}</td>`).join('')}
-            </tr>`;
-        }
+        let payCid = null;
 
-        // ==================== INITIALIZATION ====================
-        function init() {
-            refreshAllUI();
-            populateClientDropdowns();
+        function openPayModal(cid) { payCid = cid;
+            const c = campaigns.find(x => x.id === cid); if (!c) return;
+            document.getElementById('pay-camp-name').textContent = c.clientName;
+            document.getElementById('pay-billed').textContent = fc(c.totalRevenue || 0);
+            document.getElementById('pay-paid').textContent = fc(getPayments(cid));
+            document.getElementById('pay-amount').value = '';
+            document.getElementById('pay-date').value = new Date().toISOString().split('T')[0];
+            openModal('payment-modal'); }
+
+        function recordPayment() { if (!payCid) return;
+            const a = parseFloat(document.getElementById('pay-amount').value),
+                d = document.getElementById('pay-date').value; if (!a || a <= 0) return alert('Amount?');
+            paymentLog.push({ id: Date.now(), campaignId: payCid, amount: a, date: d });
+            saveAll();
+            closeModal('payment-modal');
+            refreshAll(); }
+
+        function markDrvPaid(rid) { if (!driverPayments[rid]) driverPayments[rid] = {}; if (!driverPayments[rid][CMONTH]) driverPayments[rid][CMONTH] = { retainer: 200, ledBonus: 0, audioBonus: 0, comboBonus: 0, total: 200, status: 'pending' };
+            driverPayments[rid][CMONTH].status = 'paid';
+            saveAll();
+            refreshAll(); }
+
+        function markDrvUnpaid(rid) { if (driverPayments[rid]?.[CMONTH]) { driverPayments[rid][CMONTH].status = 'pending';
+                saveAll();
+                refreshAll(); } }
+
+        function markAllDriversPaid() { if (!confirm('Mark all pending as paid?')) return;
+            rickshaws.forEach(r => { if (!driverPayments[r.id]) driverPayments[r.id] = {}; if (!driverPayments[r.id][CMONTH]) driverPayments[r.id][CMONTH] = { retainer: 200, ledBonus: 0, audioBonus: 0, comboBonus: 0, total: 200, status: 'pending' }; if (driverPayments[r.id][CMONTH].status === 'pending') driverPayments[r.id][CMONTH].status = 'paid'; });
+            saveAll();
+            refreshAll(); }
+
+        function markPrtPaid(cid, role) { if (!partnerPayments[cid]) partnerPayments[cid] = { coordStatus: 'pending', markStatus: 'pending' }; if (role === 'coord') partnerPayments[cid].coordStatus = 'paid'; else partnerPayments[cid].markStatus = 'paid';
+            saveAll();
+            refreshAll(); }
+
+        function downloadPDF(cid) { const c = campaigns.find(x => x.id === cid); if (!c) return;
+            const w = window.open('', '_blank', 'width=750,height=550');
+            const zf = ZONE_ROUTES[c.zone],
+                pd = getPayments(cid); w.document.write(`<html><head><title>RASAAI Report</title><style>body{font-family:Arial;padding:24px;color:#1e293b}h1{color:#F97316;font-size:20px}h2{font-size:14px;color:#64748b}table{width:100%;border-collapse:collapse;margin:12px 0}th,td{padding:8px 10px;border:1px solid #e2e8f0;font-size:12px}th{background:#f8fafc}.hl{background:#fffbeb;padding:10px;border-radius:6px;margin:10px 0}</style></head><body><h1>🚛 RASAAI v3.0 – Campaign Report</h1><h2>Mumbra Command Center | ${c.date}</h2><table><tr><th>Client</th><td>${c.clientName}</td><th>Type</th><td>${c.type==='combo'?'LED+Audio Combo':c.type==='audio'?'Audio Only':'LED Only'}</td></tr><tr><th>Zone</th><td>${c.zone} – ${zf.name}</td><th>Duration</th><td>${c.days} Days</td></tr><tr><th>Rickshaws</th><td>${getActiveCount(c.id)||c.rickshawCount}</td><th>Status</th><td>${c.status?.toUpperCase()}</td></tr><tr><th>Route</th><td colspan="3">${zf.popular}</td></tr></table><div class="hl"><strong>📺 LED Impressions:</strong> ~${(c.ledImpressions||0).toLocaleString('en-IN')}<br><strong>🔊 Audio Plays:</strong> ~${(c.audioImpressions||0).toLocaleString('en-IN')}<br><strong>📍 Total Reach:</strong> ~${((c.ledImpressions||0)+(c.audioImpressions||0)).toLocaleString('en-IN')}</div><table><tr><th>LED Revenue</th><td>${fc(c.ledRevenue||0)}</td><th>Audio Revenue</th><td>${fc(c.audioRevenue||0)}</td></tr><tr><th>Discount</th><td>${fc(c.comboDiscount||0)}</td><th>Total Revenue</th><td><strong>${fc(c.totalRevenue||0)}</strong></td></tr><tr><th>Received</th><td>${fc(pd)}</td><th>Balance</th><td>${fc((c.totalRevenue||0)-pd)}</td></tr></table><p style="font-size:9px;color:#94a3b8">Generated by RASAAI v3.0 – Mumbra Command Center</p></body></html>`);
+            w.document.close();
+            w.print(); }
+
+        // ==================== MAP ====================
+        let map, markers = [],
+            animInt;
+
+        function initMap() { if (map) { map.invalidateSize(); return; }
+            map = L.map('map').setView([19.175, 73.0], 13);
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 18 }).addTo(map);
+            ZONES.forEach(z => { const r = ZONE_ROUTES[z];
+                L.polyline([r.start, r.end], { color: ZONE_COLORS[z], weight: 3, opacity: 0.7 }).addTo(map).bindPopup(`<strong>${z}</strong><br>${r.name}<br><small>${r.popular}</small>`); });
+            const lg = L.control({ position: 'bottomright' });
+            lg.onAdd = function() { const d = L.DomUtil.create('div', 'map-legend');
+                d.style = 'background:#fff;padding:6px 10px;border-radius:6px;font-size:9px;box-shadow:0 2px 8px rgba(0,0,0,0.15);';
+                d.innerHTML = ZONES.map(z => `<div style="display:flex;align-items:center;gap:5px;cursor:help;" title="${ZONE_ROUTES[z].popular}"><span style="width:8px;height:8px;border-radius:50%;background:${ZONE_COLORS[z]};"></span>${z}: ${ZONE_ROUTES[z].name.split('→')[1].trim().substring(0,12)}…</div>`).join(''); return d; };
+            lg.addTo(map);
+            createMarkers();
+            startAnim(); }
+
+        function createMarkers() { if (!map) return;
+            markers.forEach(m => map.removeLayer(m));
+            markers = [];
+            const ic = {};
+            ZONES.forEach(z => { ic[z] = L.divIcon({ html: `<div style="background:${ZONE_COLORS[z]};width:10px;height:10px;border-radius:50%;border:2px solid #fff;box-shadow:0 1px 3px rgba(0,0,0,0.4);"></div>`, iconSize: [14, 14], iconAnchor: [7, 7] }); });
+            ZONES.forEach(z => { const r = ZONE_ROUTES[z]; for (let i = 0; i < 12; i++) { const t = i / 11,
+                        lt = r.start[0] + (r.end[0] - r.start[0]) * t,
+                        ln = r.start[1] + (r.end[1] - r.start[1]) * t,
+                        rd = rickshaws.find(rr => rr.zone === z && rr.id % 12 === i % 12) || { driver: 'N/A', rickshaw: 'N/A', ledRecovered: false, audioCapable: true, panelCondition: '?' },
+                        ac = rd.id ? getRickCamps(rd.id) : [],
+                        m = L.marker([lt, ln], { icon: ic[z] }).addTo(map);
+                    m.bindPopup(`<strong>${z}</strong><br>🆔 ${rd.rickshaw}<br>👤 ${rd.driver}<br>📺 LED: ${rd.ledRecovered?'✅':'⚠️'}<br>🔊 Audio: ${rd.audioCapable?'✅':'❌'}<br>📋 ${ac.length?ac.map(x=>x.clientName).join(', '):'None'}`);
+                    m._bl = lt;
+                    m._bn = ln;
+                    m._ix = i;
+                    markers.push(m); } }); }
+
+        function startAnim() { if (animInt) clearInterval(animInt);
+            animInt = setInterval(() => { markers.forEach(m => { const o = Math.sin(Date.now() / 2000 + m._ix) * 0.0007;
+                    m.setLatLng([m._bl + o, m._bn + o * 0.6]); }); }, 3000); }
+
+        function setupResp() { const dk = window.innerWidth >= 1025;
+            document.getElementById('desktop-sidebar').style.display = dk ? 'flex' : 'none';
+            document.getElementById('bottom-nav').style.display = dk ? 'none' : 'flex';
+            document.querySelector('.app-header').style.display = dk ? 'none' : 'flex';
+            document.body.style.paddingTop = dk ? '0' : 'var(--header-h)';
+            document.body.style.paddingBottom = dk ? '0' : 'calc(var(--nav-h) + var(--safe-bottom) + 8px)'; }
+        window.addEventListener('resize', setupResp);
+
+        function init() { rickshaws.forEach(r => { if (!driverPayments[r.id]) driverPayments[r.id] = {}; if (!driverPayments[r.id][CMONTH]) driverPayments[r.id][CMONTH] = { retainer: 200, ledBonus: 0, audioBonus: 0, comboBonus: 0, total: 200, status: 'pending' }; });
+            campaigns.forEach(c => { if (!c.profit || !c.totalRevenue) Object.assign(c, calcProfit(c)); });
+            const alphaCamp = campaigns.find(c => c.zone === 'Alpha' && c.ledRecoveredTriggered); if (alphaCamp) rickshaws.forEach(r => { if (r.zone === 'Alpha') r.ledRecovered = true; });
+            saveAll();
+            setupResp();
+            refreshAll();
+            popDropdowns();
             updateLEDPreview();
             updateAudioPreview();
             updateCalculator();
-        }
-
+            console.log('✅ RASAAI v3.0 Ready – PRD Verified'); }
         init();
-        console.log('🚛 RASAAI v3.0 – Mumbra Command Center Ready');
-        console.log('📊 Hybrid Cost Model | LED + Audio Ads | 200 Rickshaws | 4 Zones');
-        console.log('💰 Monthly Fixed Burn: ₹40,000 | Campaign-Based Driver Payouts');
     </script>
 </body>
 </html>
