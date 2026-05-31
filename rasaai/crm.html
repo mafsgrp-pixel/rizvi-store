@@ -1,1 +1,145 @@
-
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=5.0">
+    <meta name="theme-color" content="#6C4DF6">
+    <title>CRM & Sales - RASAAI</title>
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="canonical" href="https://rizvi.store/rasaai/crm.html">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%236C4DF6'/><text x='50' y='68' font-size='55' text-anchor='middle' fill='white' font-weight='bold'>R</text></svg>">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .crm-body{display:flex;min-height:100vh;background:var(--bg)}
+        body.dark-mode .crm-body{background:var(--dark-bg)}
+        .crm-sidebar{width:260px;background:var(--glass-bg);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-right:1px solid var(--glass-border);padding:24px 16px;position:fixed;top:0;left:0;height:100vh;z-index:200;display:flex;flex-direction:column;overflow-y:auto;transition:transform 0.3s}
+        body.dark-mode .crm-sidebar{background:var(--dark-glass-bg);border-right-color:var(--dark-glass-border)}
+        .crm-logo{display:flex;align-items:center;gap:12px;padding:8px 12px;margin-bottom:32px;font-size:22px;font-weight:800;background:linear-gradient(135deg,var(--primary),var(--accent-cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;cursor:pointer}
+        .crm-logo-icon{width:36px;height:36px;background:linear-gradient(135deg,var(--primary),var(--accent-cyan));border-radius:12px;display:flex;align-items:center;justify-content:center;color:#FFF;font-size:18px;font-weight:900;-webkit-text-fill-color:#FFF;flex-shrink:0}
+        .crm-nav{flex:1;display:flex;flex-direction:column;gap:4px}
+        .crm-nav-link{display:flex;align-items:center;gap:12px;padding:12px 16px;border-radius:12px;font-weight:500;font-size:14px;color:var(--text-secondary);cursor:pointer;transition:all 0.2s}
+        .crm-nav-link:hover{background:rgba(108,77,246,0.08);color:var(--primary)}
+        .crm-nav-link.active{background:rgba(108,77,246,0.12);color:var(--primary);font-weight:600}
+        body.dark-mode .crm-nav-link{color:var(--dark-muted)}
+        .crm-nav-link:hover{background:rgba(139,124,255,0.1);color:var(--dark-primary)}
+        .crm-nav-link.active{background:rgba(139,124,255,0.15);color:var(--dark-primary)}
+        .crm-nav-icon{font-size:20px;width:24px;text-align:center;flex-shrink:0}
+        .crm-sidebar-footer{border-top:1px solid var(--border);padding-top:16px;margin-top:auto}
+        body.dark-mode .crm-sidebar-footer{border-top-color:var(--dark-border)}
+        .crm-main{margin-left:260px;flex:1;padding:32px;min-height:100vh;transition:margin-left 0.3s}
+        .crm-topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;flex-wrap:wrap;gap:16px}
+        .crm-topbar h1{font-size:28px;font-weight:800}
+        .crm-section{display:none}
+        .crm-section.active{display:block}
+        .stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px;margin-bottom:24px}
+        .stat-card{background:var(--card);border-radius:16px;padding:20px;border:1px solid var(--border)}
+        body.dark-mode .stat-card{background:var(--dark-card);border-color:var(--dark-border)}
+        .stat-card-value{font-size:24px;font-weight:800}
+        .stat-card-label{font-size:13px;color:var(--text-secondary)}
+        body.dark-mode .stat-card-label{color:var(--dark-muted)}
+        .pipeline-row{display:flex;gap:16px;overflow-x:auto;padding-bottom:16px}
+        .pipeline-col{min-width:240px;background:var(--card);border-radius:16px;padding:16px;border:1px solid var(--border)}
+        body.dark-mode .pipeline-col{background:var(--dark-card);border-color:var(--dark-border)}
+        .pipeline-col h4{font-size:14px;font-weight:600;margin-bottom:12px;display:flex;justify-content:space-between}
+        .pipeline-col .count{background:rgba(108,77,246,0.15);padding:2px 10px;border-radius:10px;font-size:12px}
+        .lead-card{background:var(--bg);border-radius:10px;padding:12px;margin-bottom:8px;cursor:pointer;border:1px solid var(--border);transition:all 0.2s}
+        .lead-card:hover{border-color:var(--primary)}
+        body.dark-mode .lead-card{background:var(--dark-bg);border-color:var(--dark-border)}
+        .lead-card strong{display:block;font-size:14px;margin-bottom:4px}
+        .lead-card p{font-size:12px;color:var(--text-secondary)}
+        body.dark-mode .lead-card p{color:var(--dark-muted)}
+        .badge{display:inline-block;padding:3px 10px;border-radius:12px;font-size:11px;font-weight:600}
+        .badge-success{background:rgba(0,200,150,0.1);color:#00C896}
+        .badge-warning{background:rgba(255,181,71,0.1);color:#FFB547}
+        .data-card{background:var(--card);border-radius:20px;padding:24px;border:1px solid var(--border);margin-bottom:24px}
+        body.dark-mode .data-card{background:var(--dark-card);border-color:var(--dark-border)}
+        .data-card h3{font-size:18px;font-weight:700;margin-bottom:16px}
+        .mobile-toggle{display:none;width:44px;height:44px;border-radius:12px;background:var(--card);border:1px solid var(--border);cursor:pointer;font-size:20px;align-items:center;justify-content:center}
+        body.dark-mode .mobile-toggle{background:var(--dark-card);border-color:var(--dark-border);color:var(--dark-text)}
+        @media(max-width:992px){.crm-sidebar{transform:translateX(-100%)}.crm-sidebar.open{transform:translateX(0)}.crm-main{margin-left:0!important}.mobile-toggle{display:flex}}
+        @media(max-width:768px){.crm-main{padding:20px}.stat-grid{grid-template-columns:repeat(2,1fr)}}
+    </style>
+</head>
+<body>
+<div class="crm-body">
+<div id="sidebar-overlay" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:199" onclick="CRMPage.toggleSidebar()"></div>
+<aside class="crm-sidebar" id="crm-sidebar">
+    <div class="crm-logo" onclick="window.location.href='index.html'"><div class="crm-logo-icon">R</div><span>RASAAI CRM</span></div>
+    <nav class="crm-nav">
+        <a class="crm-nav-link active" data-section="pipeline" onclick="CRMPage.loadSection('pipeline')"><span class="crm-nav-icon">🎯</span>Pipeline</a>
+        <a class="crm-nav-link" data-section="leads" onclick="CRMPage.loadSection('leads')"><span class="crm-nav-icon">👥</span>All Leads</a>
+        <a class="crm-nav-link" data-section="tasks" onclick="CRMPage.loadSection('tasks')"><span class="crm-nav-icon">📋</span>Tasks</a>
+        <a class="crm-nav-link" data-section="analytics" onclick="CRMPage.loadSection('analytics')"><span class="crm-nav-icon">📈</span>Analytics</a>
+    </nav>
+    <div class="crm-sidebar-footer">
+        <a class="crm-nav-link" href="dashboard.html"><span class="crm-nav-icon">📊</span>Dashboard</a>
+        <a class="crm-nav-link" onclick="Auth.logout()" style="cursor:pointer"><span class="crm-nav-icon">🚪</span>Logout</a>
+    </div>
+</aside>
+<main class="crm-main">
+    <div class="crm-topbar">
+        <div style="display:flex;align-items:center;gap:12px">
+            <button class="mobile-toggle" onclick="CRMPage.toggleSidebar()">☰</button>
+            <div><h1 id="crm-title">Sales Pipeline</h1><p style="color:var(--text-secondary);font-size:14px">CRM & Sales Management</p></div>
+        </div>
+        <button class="btn btn-primary" onclick="CRMPage.openNewLeadModal()">+ New Lead</button>
+    </div>
+    <div id="crm-content">
+        <div class="crm-section active" id="sec-pipeline"></div>
+        <div class="crm-section" id="sec-leads"></div>
+        <div class="crm-section" id="sec-tasks"></div>
+        <div class="crm-section" id="sec-analytics"></div>
+    </div>
+</main>
+</div>
+<div id="notification-container" class="notification-container" aria-live="polite" role="status"></div>
+<script src="app.js"></script>
+<script>
+const CRMPage={
+    user:null,currentSection:'pipeline',
+    init(){
+        this.user=Auth.getCurrentUser();
+        if(!this.user){window.location.href='login.html?redirect=crm.html';return;}
+        this.loadSection('pipeline');
+    },
+    toggleSidebar(){const s=document.getElementById('crm-sidebar'),o=document.getElementById('sidebar-overlay');s.classList.toggle('open');o.style.display=s.classList.contains('open')?'block':'none';},
+    loadSection(section){
+        this.currentSection=section;
+        document.querySelectorAll('.crm-nav-link').forEach(l=>l.classList.remove('active'));
+        document.querySelector(`[data-section="${section}"]`)?.classList.add('active');
+        document.querySelectorAll('.crm-section').forEach(s=>s.classList.remove('active'));
+        document.getElementById('sec-'+section)?.classList.add('active');
+        document.getElementById('crm-title').textContent={pipeline:'Sales Pipeline',leads:'All Leads',tasks:'My Tasks',analytics:'CRM Analytics'}[section]||'CRM';
+        switch(section){case'pipeline':this.renderPipeline();break;case'leads':this.renderLeads();break;case'tasks':this.renderTasks();break;case'analytics':this.renderAnalytics();break;}
+    },
+    renderPipeline(){
+        const stats=CRMManager.getPipelineStats();
+        document.getElementById('sec-pipeline').innerHTML=`
+            <div class="stat-grid"><div class="stat-card"><div class="stat-card-value">${stats.total}</div><div class="stat-card-label">Total Leads</div></div><div class="stat-card"><div class="stat-card-value">${stats.Won?.length||0}</div><div class="stat-card-label">Won</div></div><div class="stat-card"><div class="stat-card-value">${CRMManager.getConversionRate()}%</div><div class="stat-card-label">Conversion</div></div><div class="stat-card"><div class="stat-card-value">₹${(stats.totalValue||0).toLocaleString()}</div><div class="stat-card-label">Pipeline Value</div></div></div>
+            <div class="pipeline-row">${CRMManager.STATUSES.map(s=>`<div class="pipeline-col"><h4>${s}<span class="count">${(stats[s]||[]).length}</span></h4>${(stats[s]||[]).slice(0,10).map(l=>`<div class="lead-card" onclick="CRMPage.viewLead('${l.id}')"><strong>${l.name}</strong><p>${l.company||'N/A'} ${l.value?`· ₹${l.value.toLocaleString()}`:''}</p></div>`).join('')}</div>`).join('')}</div>`;
+    },
+    renderLeads(){
+        const leads=CRMManager.getAllLeads();
+        document.getElementById('sec-leads').innerHTML=`<div class="data-card"><div style="display:flex;justify-content:space-between;margin-bottom:16px"><h3>All Leads (${leads.length})</h3><input type="search" placeholder="🔍 Search..." oninput="CRMPage.filterLeads(this.value)" style="max-width:250px;padding:10px 16px;border-radius:20px;border:1px solid var(--border)"></div><div style="overflow-x:auto"><table style="width:100%;border-collapse:collapse" id="leads-table"><thead><tr style="text-align:left;border-bottom:2px solid var(--border)"><th style="padding:12px">Name</th><th style="padding:12px">Company</th><th style="padding:12px">Phone</th><th style="padding:12px">Status</th><th style="padding:12px">Value</th><th style="padding:12px">Actions</th></tr></thead><tbody>${leads.reverse().map(l=>`<tr style="border-bottom:1px solid var(--border)"><td style="padding:12px"><strong>${l.name}</strong></td><td style="padding:12px">${l.company||'N/A'}</td><td style="padding:12px">${l.phone||'N/A'}</td><td style="padding:12px"><span class="badge badge-${l.status==='Won'?'success':l.status==='Lost'?'warning':''}">${l.status}</span></td><td style="padding:12px">₹${(l.value||0).toLocaleString()}</td><td style="padding:12px"><button class="btn btn-outline btn-sm" onclick="CRMPage.editLead('${l.id}')">Edit</button></td></tr>`).join('')||'<tr><td colspan="6" style="padding:40px;text-align:center">No leads yet</td></tr>'}</tbody></table></div></div>`;
+    },
+    renderTasks(){
+        const tasks=CRMManager.getTasks(this.user.id);
+        document.getElementById('sec-tasks').innerHTML=`<div style="display:flex;justify-content:space-between;margin-bottom:24px"><h3>My Tasks (${tasks.length})</h3><button class="btn btn-primary btn-sm" onclick="CRMPage.openNewTaskModal()">+ New Task</button></div>${tasks.filter(t=>t.status==='pending').map(t=>`<div style="background:var(--card);border-radius:12px;padding:16px;margin-bottom:12px;border:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px"><div><strong>${t.title}</strong><p style="font-size:12px;color:var(--text-secondary)">Due: ${t.dueDate} | ${t.priority}</p>${t.notes?`<p style="font-size:12px">${t.notes}</p>`:''}</div><button class="btn btn-primary btn-sm" onclick="CRMManager.completeTask('${t.id}');CRMPage.renderTasks();Notify.success('Done!')">✓</button></div>`).join('')||'<p class="text-muted">No pending tasks</p>'}`;
+    },
+    renderAnalytics(){
+        const rate=CRMManager.getConversionRate();
+        const stats=CRMManager.getPipelineStats();
+        document.getElementById('sec-analytics').innerHTML=`<div class="stat-grid"><div class="stat-card"><div class="stat-card-value">${stats.total}</div><div class="stat-card-label">Total Leads</div></div><div class="stat-card"><div class="stat-card-value">${rate}%</div><div class="stat-card-label">Conversion Rate</div></div><div class="stat-card"><div class="stat-card-value">₹${(stats.wonValue||0).toLocaleString()}</div><div class="stat-card-label">Revenue Won</div></div><div class="stat-card"><div class="stat-card-value">₹${(stats.totalValue||0).toLocaleString()}</div><div class="stat-card-label">Pipeline Value</div></div></div>`;
+    },
+    filterLeads(q){document.querySelectorAll('#leads-table tbody tr').forEach(r=>r.style.display=r.textContent.toLowerCase().includes(q.toLowerCase())?'':'none');},
+    viewLead(id){const l=CRMManager.getAllLeads().find(x=>x.id===id);if(l)Notify.info(`${l.name} | ${l.status} | ₹${(l.value||0).toLocaleString()}`);},
+    editLead(id){const l=CRMManager.getAllLeads().find(x=>x.id===id);if(!l)return;const s=prompt('New status (New/Contacted/Qualified/Proposal Sent/Won/Lost):',l.status);if(s&&CRMManager.STATUSES.includes(s)){CRMManager.updateLead(id,{status:s});Notify.success('Updated!');this.loadSection(this.currentSection);}},
+    openNewLeadModal(){const n=prompt('Lead Name:');if(!n)return;const p=prompt('Phone:');const c=prompt('Company (optional):');const v=parseInt(prompt('Estimated Value (₹):','0'))||0;CRMManager.createLead({name:n,phone:p||'',company:c||'',value:v,assignedTo:this.user.id});Notify.success('Lead created!');this.loadSection(this.currentSection);},
+    openNewTaskModal(){const t=prompt('Task Title:');if(!t)return;const d=prompt('Due Date (YYYY-MM-DD):',new Date().toISOString().split('T')[0]);CRMManager.createTask({title:t,dueDate:d||new Date().toISOString().split('T')[0],assignedTo:this.user.id,priority:'medium'});Notify.success('Task created!');this.renderTasks();}
+};
+document.addEventListener('DOMContentLoaded',()=>CRMPage.init());
+if(document.readyState!=='loading')CRMPage.init();
+</script>
+</body>
+</html>
