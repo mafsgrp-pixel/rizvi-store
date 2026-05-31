@@ -1,1 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Rasaai Outdoor Advertising Network</title>
+
+<meta name="description"
+content="Advertise your business on illuminated LED Rickshaw Displays across Mumbra, Thane and Navi Mumbai">
+
+<link rel="stylesheet" href="style.css">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+
+<!-- HEADER -->
+
+<header class="header">
+
+<div class="container">
+
+<div class="logo">
+RASAAI
+</div>
+
+<nav class="nav">
+
+<a href="#routes">Routes</a>
+<a href="#pricing">Pricing</a>
+<a href="#bonus">Bonus</a>
+<a href="#faq">FAQ</a>
+
+</nav>
+
+<div class="header-actions">
+
+<button id="themeToggle" class="theme-btn">
+🌙
+</button>
+
+<a href="#booking" class="btn-primary">
+Book Campaign
+</a>
+
+</div>
+
+</div>
+
+</header>
+
+<!-- HERO -->
+
+<section class="hero">
+
+<div class="container hero-grid">
+
+<div class="hero-content">
+
+<div class="badge">
+WORLD'S FIRST PHYGITAL LOCAL BRANDING PLATFORM
+</div>
+
+<h1>
+
+Advertise On Moving LED Rickshaws Across Mumbra & Thane
+
+</h1>
+
+<p>
+
+Reach thousands daily through illuminated LED advertising panels installed on moving rickshaws.
+
+</p>
+
+<div class="hero-buttons">
+
+<a href="#booking" class="btn-primary">
+
+Start Campaign
+
+</a>
+
+<a href="#routes" class="btn-secondary">
+
+Explore Routes
+
+</a>
+
+</div>
+
+<div class="stats">
+
+<div class="stat">
+
+<h3>50L+</h3>
+
+<p>Monthly Views</p>
+
+</div>
+
+<div class="stat">
+
+<h3>100+</h3>
+
+<p>Rickshaws</p>
+
+</div>
+
+<div class="stat">
+
+<h3>4</h3>
+
+<p>Premium Zones</p>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="hero-card">
+
+<div class="live-rate">
+
+<div class="small-label">
+TODAY'S PROMOTIONAL RATE
+</div>
+
+<div class="price" id="livePrice">
+
+₹1238
+
+</div>
+
+<div class="small-label">
+Per Rickshaw / Per Day
+</div>
+
+<div id="countdown">
+
+14:59
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- PANEL SHOWCASE -->
+
+<section class="section">
+
+<div class="container">
+
+<h2 class="section-title">
+
+LED DISPLAY PANEL
+
+</h2>
+
+<p class="section-subtitle">
+
+16:9 Acrylic Display With Four-Side LED Frame
+
+</p>
+
+<div class="panel-features">
+
+<div class="feature-card">
+
+Night Visibility
+
+</div>
+
+<div class="feature-card">
+
+Quick Mount
+
+</div>
+
+<div class="feature-card">
+
+Quick Unmount
+
+</div>
+
+<div class="feature-card">
+
+Replaceable Banner
+
+</div>
+
+</div>
+
+<div class="panel-image">
+
+<img
+src="images/panel-mockup.jpg"
+alt="Rasaai LED Rickshaw Panel">
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ROUTES -->
+
+<section id="routes" class="section">
+
+<div class="container">
+
+<h2 class="section-title">
+
+Choose Your Advertising Zone
+
+</h2>
+
+<div class="route-grid">
+
+<div class="route-card">
+
+<h3>Zone 1</h3>
+
+<p>Mumbra ↔ Kausa</p>
+
+<span>9K–18K Daily Views</span>
+
+</div>
+
+<div class="route-card">
+
+<h3>Zone 2</h3>
+
+<p>MM Valley → Shilphata → Taloja</p>
+
+<span>10K–22K Daily Views</span>
+
+</div>
+
+<div class="route-card featured">
+
+<div class="popular">
+
+MOST POPULAR
+
+</div>
+
+<h3>Zone 3</h3>
+
+<p>Retibunder → Check Naka → Majiwada</p>
+
+<span>16K–33K Daily Views</span>
+
+</div>
+
+<div class="route-card">
+
+<h3>Zone 4</h3>
+
+<p>Parsik → Kalwa Naka</p>
+
+<span>10K–20K Daily Views</span>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- BOOKING -->
+
+<section id="booking" class="section">
+
+<div class="container">
+
+<h2 class="section-title">
+
+Build Your Campaign
+
+</h2>
+
+<form id="campaignForm" class="booking-form">
+
+<input
+type="text"
+placeholder="Full Name"
+required>
+
+<input
+type="tel"
+placeholder="Phone Number"
+required>
+
+<input
+type="email"
+placeholder="Email Address">
+
+<input
+type="text"
+placeholder="Business Name"
+required>
+
+<select id="language">
+
+<option>English</option>
+
+<option>Hindi</option>
+
+<option>Urdu</option>
+
+<option>Marathi</option>
+
+<option>Hinglish</option>
+
+</select>
+
+<select id="zone">
+
+<option>Zone 1</option>
+
+<option>Zone 2</option>
+
+<option>Zone 3</option>
+
+<option>Zone 4</option>
+
+</select>
+
+<select id="rickshaws">
+
+<option>10 Rickshaws</option>
+
+<option>25 Rickshaws</option>
+
+<option>50 Rickshaws</option>
+
+<option>100 Rickshaws</option>
+
+</select>
+
+<select id="duration">
+
+<option>1 Day</option>
+
+<option>3 Days</option>
+
+<option>7 Days</option>
+
+<option>15 Days</option>
+
+<option>30 Days</option>
+
+</select>
+
+<button
+type="button"
+id="calculateBtn"
+class="btn-primary full-width">
+
+Calculate Campaign
+
+</button>
+
+</form>
+
+</div>
+
+</section>
+
+<!-- PRICING -->
+
+<section id="pricing" class="section">
+
+<div class="container">
+
+<h2 class="section-title">
+
+Campaign Estimate
+
+</h2>
+
+<div class="pricing-card">
+
+<div class="estimate-row">
+
+<span>Total Cost</span>
+
+<strong id="totalCost">
+₹0
+</strong>
+
+</div>
+
+<div class="estimate-row">
+
+<span>Estimated Views</span>
+
+<strong id="estimatedViews">
+0
+</strong>
+
+</div>
+
+<div class="estimate-row">
+
+<span>Estimated Reach</span>
+
+<strong id="estimatedReach">
+0
+</strong>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- BONUS -->
+
+<section id="bonus" class="section">
+
+<div class="container">
+
+<div class="bonus-box">
+
+<h2>
+
+FREE 30 SOCIAL MEDIA CREATIVES
+
+</h2>
+
+<p>
+
+First-Time Advertisers Only
+
+</p>
+
+<ul>
+
+<li>Instagram Posts</li>
+
+<li>Instagram Stories</li>
+
+<li>WhatsApp Status Designs</li>
+
+<li>Festival Creatives</li>
+
+<li>Promotional Posts</li>
+
+</ul>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- PAYMENT -->
+
+<section class="section">
+
+<div class="container">
+
+<h2 class="section-title">
+
+Payment & Confirmation
+
+</h2>
+
+<div class="payment-box">
+
+<img
+src="images/qr.png"
+alt="QR Payment"
+class="qr-image">
+
+<h3>
+
+PhonePe / UPI
+
+</h3>
+
+<p>
+
++91 95943 06625
+
+</p>
+
+<input
+type="text"
+placeholder="Transaction ID">
+
+<input
+type="file">
+
+<a
+id="whatsappBooking"
+href="#"
+class="btn-primary">
+
+Confirm Booking On WhatsApp
+
+</a>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- FAQ -->
+
+<section id="faq" class="section">
+
+<div class="container">
+
+<h2 class="section-title">
+
+Frequently Asked Questions
+
+</h2>
+
+<div class="faq-item">
+
+<h3>
+When will my campaign start?
+</h3>
+
+<p>
+Within 3 working days after payment confirmation.
+</p>
+
+</div>
+
+<div class="faq-item">
+
+<h3>
+Do I get creative support?
+</h3>
+
+<p>
+Yes. First-time advertisers receive 30 free social media creatives.
+</p>
+
+</div>
+
+<div class="faq-item">
+
+<h3>
+Can I advertise in Urdu?
+</h3>
+
+<p>
+Yes. English, Hindi, Urdu, Marathi and Hinglish are supported.
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- FOOTER -->
+
+<footer class="footer">
+
+<div class="container">
+
+<div class="footer-logo">
+
+RASAAI
+
+</div>
+
+<p>
+
+Local Brands. Real Visibility.
+
+</p>
+
+<p>
+
+WhatsApp:
++91 95943 06625
+
+</p>
+
+</div>
+
+</footer>
+
+<script src="app.js"></script>
+
+</body>
+
+</html>
