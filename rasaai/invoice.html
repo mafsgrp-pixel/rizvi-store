@@ -1,1 +1,68 @@
-
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invoice - RASAAI</title>
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="canonical" href="https://rizvi.store/rasaai/invoice.html">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%236C4DF6'/><text x='50' y='68' font-size='55' text-anchor='middle' fill='white' font-weight='bold'>R</text></svg>">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .invoice-page{max-width:800px;margin:40px auto;padding:40px;background:var(--card);border-radius:24px;border:1px solid var(--border);box-shadow:var(--shadow)}
+        body.dark-mode .invoice-page{background:var(--dark-card);border-color:var(--dark-border)}
+        .inv-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:40px;padding-bottom:20px;border-bottom:2px solid var(--primary);flex-wrap:wrap;gap:20px}
+        .inv-company{font-size:28px;font-weight:900;color:var(--primary)}
+        .inv-title{font-size:32px;font-weight:800;text-align:right}
+        .inv-number{font-size:14px;color:var(--text-secondary);text-align:right}
+        body.dark-mode .inv-number{color:var(--dark-muted)}
+        .inv-section{margin-bottom:30px}
+        .inv-section h4{font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;color:var(--primary);margin-bottom:12px}
+        .inv-table{width:100%;border-collapse:collapse;margin:20px 0}
+        .inv-table th{background:rgba(0,0,0,0.03);padding:12px;text-align:left;font-size:12px;font-weight:600;text-transform:uppercase;border-bottom:1px solid var(--border)}
+        body.dark-mode .inv-table th{background:rgba(255,255,255,0.03)}
+        .inv-table td{padding:12px;border-bottom:1px solid var(--border);font-size:14px}
+        .inv-totals{text-align:right;margin-top:20px}
+        .inv-totals p{font-size:14px;line-height:2}
+        .inv-totals .grand{font-size:24px;font-weight:800;color:var(--primary);border-top:2px solid var(--primary);padding-top:12px;margin-top:8px}
+        .btn-row{display:flex;gap:12px;margin-top:32px;flex-wrap:wrap}
+        @media print{body{background:#FFF!important}.btn-row,.no-print{display:none!important}.invoice-page{box-shadow:none;border:none;padding:20px}}
+        @media(max-width:768px){.invoice-page{padding:24px}.inv-header{flex-direction:column}}
+    </style>
+</head>
+<body>
+    <div class="invoice-page" id="invoice-content">
+        <p style="text-align:center;padding:40px">Loading invoice...</p>
+    </div>
+    <div id="notification-container" class="notification-container" aria-live="polite" role="status"></div>
+    <script src="app.js"></script>
+    <script>
+        const InvoicePage={
+            init(){
+                const user=Auth.getCurrentUser();
+                if(!user){window.location.href='login.html?redirect=invoice.html';return;}
+                const params=new URLSearchParams(window.location.search);
+                const id=params.get('id');
+                if(id){this.renderInvoice(id);}else{this.renderList(user);}
+            },
+            renderInvoice(id){
+                const inv=InvoiceManager.getInvoiceById(id);
+                if(!inv){document.getElementById('invoice-content').innerHTML='<p style="text-align:center;padding:40px">Invoice not found</p>';return;}
+                document.getElementById('invoice-content').innerHTML=`
+                    <div class="inv-header"><div><div class="inv-company">RASAAI</div><p>Mumbra Rickshaw Advertising</p><p>hello@rasaai.com</p><p>📞 +91 9594306625</p></div><div><div class="inv-title">INVOICE</div><div class="inv-number">#${inv.invoiceNumber}</div><p style="text-align:right;margin-top:8px"><span class="badge badge-${inv.status==='paid'?'success':'warning'}">${inv.status.toUpperCase()}</span></p></div></div>
+                    <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:20px;margin-bottom:30px"><div class="inv-section"><h4>Bill To</h4><p><strong>${inv.customerName}</strong></p>${inv.customerCompany?`<p>${inv.customerCompany}</p>`:''}${inv.customerEmail?`<p>${inv.customerEmail}</p>`:''}${inv.customerGST?`<p>GST: ${inv.customerGST}</p>`:''}</div><div class="inv-section"><h4>Details</h4><p>Date: ${new Date(inv.createdAt).toLocaleDateString('en-IN',{day:'numeric',month:'long',year:'numeric'})}</p><p>Due: ${inv.dueDate}</p>${inv.paidAt?`<p>Paid: ${new Date(inv.paidAt).toLocaleDateString()}</p>`:''}</div></div>
+                    <table class="inv-table"><thead><tr><th>Description</th><th>Zone</th><th>Qty</th><th>Days</th><th>Rate</th><th>Amount</th></tr></thead><tbody><tr><td>${inv.campaignType?.toUpperCase()} - ${inv.campaignName}</td><td>${inv.zone}</td><td>${inv.quantity} Rickshaws</td><td>${inv.days}</td><td>₹${Math.round(inv.subtotal/(inv.quantity*inv.days))}</td><td>₹${inv.subtotal.toLocaleString()}</td></tr></tbody></table>
+                    <div class="inv-totals"><p>Subtotal: ₹${inv.subtotal.toLocaleString()}</p><p>GST (18%): ₹${inv.gst.toLocaleString()}</p><p class="grand">Total: ₹${inv.total.toLocaleString()}</p></div>
+                    <div class="btn-row"><button class="btn btn-primary" onclick="InvoiceManager.downloadInvoice('${inv.id}')">📥 Download</button><button class="btn btn-outline" onclick="InvoiceManager.printInvoice('${inv.id}')">🖨️ Print</button><button class="btn btn-outline" onclick="window.location.href='dashboard.html'">← Dashboard</button></div>`;
+            },
+            renderList(user){
+                const invoices=InvoiceManager.getInvoices(user.id);
+                document.getElementById('invoice-content').innerHTML=`<h2 style="margin-bottom:24px">My Invoices</h2>${invoices.length===0?'<p>No invoices yet</p>':invoices.reverse().map(inv=>`<div style="background:var(--card);border-radius:16px;padding:20px;margin-bottom:12px;border:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px"><div><strong>${inv.invoiceNumber}</strong><p style="font-size:14px;color:var(--text-secondary)">${inv.campaignName} | ${new Date(inv.createdAt).toLocaleDateString()}</p></div><div style="text-align:right"><strong>₹${inv.total.toLocaleString()}</strong><br><span class="badge badge-${inv.status==='paid'?'success':'warning'}">${inv.status}</span></div><a href="?id=${inv.id}" class="btn btn-outline btn-sm">View</a></div>`).join('')}`;
+            }
+        };
+        document.addEventListener('DOMContentLoaded',()=>InvoicePage.init());
+        if(document.readyState!=='loading')InvoicePage.init();
+    </script>
+</body>
+</html>
