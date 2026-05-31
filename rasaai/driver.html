@@ -1,1 +1,818 @@
-
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=5.0">
+    <meta name="theme-color" content="#6C4DF6" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#0F1117" media="(prefers-color-scheme: dark)">
+    <meta name="color-scheme" content="light dark">
+    
+    <title>Driver Portal - RASAAI Outdoor Advertising Network</title>
+    <meta name="description" content="Driver dashboard - View tasks, mark attendance, upload proofs, track earnings.">
+    <meta name="robots" content="noindex, nofollow">
+    
+    <link rel="canonical" href="https://rizvi.store/rasaai/driver.html">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%236C4DF6'/><text x='50' y='68' font-size='55' text-anchor='middle' fill='white' font-weight='bold'>R</text></svg>">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    
+    <style>
+        .driver-body {
+            display: flex;
+            min-height: 100vh;
+            background: var(--bg);
+        }
+        body.dark-mode .driver-body {
+            background: var(--dark-bg);
+        }
+        .driver-sidebar {
+            width: 260px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-right: 1px solid var(--glass-border);
+            padding: 24px 16px;
+            position: fixed;
+            top: 0; left: 0;
+            height: 100vh;
+            z-index: 200;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+            transition: transform 0.3s;
+        }
+        body.dark-mode .driver-sidebar {
+            background: var(--dark-glass-bg);
+            border-right-color: var(--dark-glass-border);
+        }
+        .driver-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 8px 12px;
+            margin-bottom: 32px;
+            font-size: 22px;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary), var(--accent-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            cursor: pointer;
+        }
+        .driver-logo-icon {
+            width: 36px; height: 36px;
+            background: linear-gradient(135deg, var(--primary), var(--accent-cyan));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #FFF;
+            font-size: 18px;
+            font-weight: 900;
+            -webkit-text-fill-color: #FFF;
+            flex-shrink: 0;
+        }
+        .driver-nav {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        .driver-nav-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 16px;
+            border-radius: 12px;
+            font-weight: 500;
+            font-size: 15px;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+        .driver-nav-link:hover {
+            background: rgba(108,77,246,0.08);
+            color: var(--primary);
+        }
+        .driver-nav-link.active {
+            background: rgba(108,77,246,0.12);
+            color: var(--primary);
+            font-weight: 600;
+        }
+        body.dark-mode .driver-nav-link {
+            color: var(--dark-muted);
+        }
+        body.dark-mode .driver-nav-link:hover {
+            background: rgba(139,124,255,0.1);
+            color: var(--dark-primary);
+        }
+        body.dark-mode .driver-nav-link.active {
+            background: rgba(139,124,255,0.15);
+            color: var(--dark-primary);
+        }
+        .driver-nav-icon {
+            font-size: 22px;
+            width: 28px;
+            text-align: center;
+            flex-shrink: 0;
+        }
+        .driver-sidebar-footer {
+            border-top: 1px solid var(--border);
+            padding-top: 16px;
+            margin-top: auto;
+        }
+        body.dark-mode .driver-sidebar-footer {
+            border-top-color: var(--dark-border);
+        }
+        
+        .driver-main {
+            margin-left: 260px;
+            flex: 1;
+            padding: 24px;
+            min-height: 100vh;
+            transition: margin-left 0.3s;
+        }
+        .driver-topbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        .driver-topbar h1 {
+            font-size: 26px;
+            font-weight: 800;
+        }
+        .driver-section {
+            display: none;
+        }
+        .driver-section.active {
+            display: block;
+        }
+        
+        /* Large touch targets for mobile */
+        .driver-btn {
+            min-height: 52px;
+            min-width: 52px;
+            font-size: 16px;
+            padding: 14px 24px;
+            border-radius: 14px;
+        }
+        
+        .status-card {
+            background: var(--card);
+            border-radius: 24px;
+            padding: 28px;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-sm);
+            text-align: center;
+            margin-bottom: 24px;
+        }
+        body.dark-mode .status-card {
+            background: var(--dark-card);
+            border-color: var(--dark-border);
+        }
+        .status-indicator-large {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            margin-right: 10px;
+            vertical-align: middle;
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+        @keyframes pulse {
+            0%,100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+        .status-indicator-large.online {
+            background: var(--success);
+            box-shadow: 0 0 16px rgba(0,200,150,0.5);
+        }
+        .status-indicator-large.offline {
+            background: var(--text-secondary);
+        }
+        
+        .task-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .task-item {
+            background: var(--card);
+            border-radius: 16px;
+            padding: 20px;
+            border: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .task-item:hover {
+            border-color: var(--primary);
+            box-shadow: var(--shadow-md);
+        }
+        .task-item.completed {
+            opacity: 0.6;
+            border-color: var(--success);
+        }
+        body.dark-mode .task-item {
+            background: var(--dark-card);
+            border-color: var(--dark-border);
+        }
+        .task-info {
+            flex: 1;
+            min-width: 200px;
+        }
+        .task-info h4 {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+        .task-info p {
+            font-size: 13px;
+            color: var(--text-secondary);
+            margin: 2px 0;
+        }
+        body.dark-mode .task-info p {
+            color: var(--dark-muted);
+        }
+        .task-actions {
+            display: flex;
+            gap: 8px;
+            flex-shrink: 0;
+        }
+        
+        .upload-area {
+            border: 2px dashed var(--border);
+            border-radius: 20px;
+            padding: 40px 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            background: var(--card);
+            margin-top: 16px;
+        }
+        .upload-area:hover {
+            border-color: var(--primary);
+            background: rgba(108,77,246,0.03);
+        }
+        body.dark-mode .upload-area {
+            background: var(--dark-card);
+            border-color: var(--dark-border);
+        }
+        .upload-area .icon {
+            font-size: 48px;
+            margin-bottom: 12px;
+        }
+        
+        .gps-card {
+            background: var(--card);
+            border-radius: 16px;
+            padding: 20px;
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+        body.dark-mode .gps-card {
+            background: var(--dark-card);
+            border-color: var(--dark-border);
+        }
+        .gps-dot-large {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+        .gps-dot-large.active {
+            background: var(--success);
+            box-shadow: 0 0 16px rgba(0,200,150,0.6);
+            animation: pulse 1.5s infinite;
+        }
+        
+        .earnings-display {
+            font-size: 42px;
+            font-weight: 800;
+            color: var(--success);
+        }
+        
+        .mobile-toggle {
+            display: none;
+            width: 48px; height: 48px;
+            border-radius: 14px;
+            background: var(--card);
+            border: 1px solid var(--border);
+            cursor: pointer;
+            font-size: 22px;
+            align-items: center;
+            justify-content: center;
+        }
+        body.dark-mode .mobile-toggle {
+            background: var(--dark-card);
+            border-color: var(--dark-border);
+            color: var(--dark-text);
+        }
+        
+        @media (max-width: 992px) {
+            .driver-sidebar {
+                transform: translateX(-100%);
+            }
+            .driver-sidebar.open {
+                transform: translateX(0);
+            }
+            .driver-main {
+                margin-left: 0 !important;
+            }
+            .mobile-toggle {
+                display: flex;
+            }
+        }
+        @media (max-width: 768px) {
+            .driver-main { padding: 16px; }
+            .task-actions {
+                width: 100%;
+                justify-content: flex-end;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="driver-body">
+        <!-- Sidebar Overlay -->
+        <div id="sidebar-overlay" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:199" onclick="DriverPage.toggleSidebar()"></div>
+        
+        <!-- Sidebar -->
+        <aside class="driver-sidebar" id="driver-sidebar">
+            <div class="driver-logo" onclick="window.location.href='index.html'">
+                <div class="driver-logo-icon">R</div><span>RASAAI</span>
+            </div>
+            <nav class="driver-nav">
+                <a class="driver-nav-link active" data-section="dashboard" onclick="DriverPage.loadSection('dashboard')"><span class="driver-nav-icon">📋</span>Tasks</a>
+                <a class="driver-nav-link" data-section="attendance" onclick="DriverPage.loadSection('attendance')"><span class="driver-nav-icon">✅</span>Attendance</a>
+                <a class="driver-nav-link" data-section="gps" onclick="DriverPage.loadSection('gps')"><span class="driver-nav-icon">📍</span>GPS Status</a>
+                <a class="driver-nav-link" data-section="earnings" onclick="DriverPage.loadSection('earnings')"><span class="driver-nav-icon">💰</span>Earnings</a>
+                <a class="driver-nav-link" data-section="upload" onclick="DriverPage.loadSection('upload')"><span class="driver-nav-icon">📁</span>Upload Proof</a>
+                <a class="driver-nav-link" data-section="profile" onclick="DriverPage.loadSection('profile')"><span class="driver-nav-icon">👤</span>Profile</a>
+            </nav>
+            <div class="driver-sidebar-footer">
+                <a class="driver-nav-link" href="index.html"><span class="driver-nav-icon">🏠</span>Home</a>
+                <a class="driver-nav-link" onclick="Auth.logout()" style="cursor:pointer"><span class="driver-nav-icon">🚪</span>Logout</a>
+            </div>
+        </aside>
+        
+        <!-- Main Content -->
+        <main class="driver-main">
+            <div class="driver-topbar">
+                <div style="display:flex;align-items:center;gap:12px">
+                    <button class="mobile-toggle" onclick="DriverPage.toggleSidebar()">☰</button>
+                    <div>
+                        <h1 id="driver-title">My Tasks</h1>
+                        <p style="color:var(--text-secondary);font-size:14px;margin:4px 0 0" id="driver-subtitle">Rickshaw: Loading...</p>
+                    </div>
+                </div>
+                <div style="display:flex;align-items:center;gap:12px">
+                    <span id="duty-status-badge" style="padding:6px 16px;border-radius:20px;font-size:13px;font-weight:600">⚪ Offline</span>
+                    <button class="theme-toggle" onclick="App.applyTheme(App.state.theme==='light'?'dark':'light')" style="width:44px;height:44px;border-radius:50%;background:var(--card);border:1px solid var(--border);cursor:pointer;font-size:18px">🌙</button>
+                    <div style="width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,var(--primary),var(--accent-cyan));display:flex;align-items:center;justify-content:center;color:#FFF;font-weight:700;font-size:16px;cursor:pointer" id="driver-avatar" title="Driver">D</div>
+                </div>
+            </div>
+            
+            <div id="driver-content">
+                <!-- Dashboard / Tasks -->
+                <div class="driver-section active" id="sec-dashboard"></div>
+                <!-- Attendance -->
+                <div class="driver-section" id="sec-attendance"></div>
+                <!-- GPS -->
+                <div class="driver-section" id="sec-gps"></div>
+                <!-- Earnings -->
+                <div class="driver-section" id="sec-earnings"></div>
+                <!-- Upload -->
+                <div class="driver-section" id="sec-upload"></div>
+                <!-- Profile -->
+                <div class="driver-section" id="sec-profile"></div>
+            </div>
+        </main>
+    </div>
+    
+    <div id="notification-container" class="notification-container" aria-live="polite" role="status"></div>
+    
+    <script src="app.js"></script>
+    <script>
+        const DriverPage = {
+            user: null,
+            isOnDuty: false,
+            currentSection: 'dashboard',
+            earningsToday: 0,
+            
+            init() {
+                this.user = Auth.getCurrentUser();
+                if (!this.user || this.user.role !== 'driver') {
+                    window.location.href = 'login.html?redirect=driver.html';
+                    return;
+                }
+                
+                document.getElementById('driver-subtitle').textContent = `Rickshaw: ${this.user.rickshawId || 'Not assigned'} | Zone: ${this.user.zone || 'N/A'}`;
+                document.getElementById('driver-avatar').textContent = this.user.name.charAt(0).toUpperCase();
+                
+                // Check if already on duty
+                this.isOnDuty = Storage.get('driverOnDuty') === 'true';
+                this.earningsToday = parseInt(Storage.get('driverEarnings') || '0');
+                this.updateDutyStatus();
+                
+                this.loadSection('dashboard');
+                
+                // Auto-refresh GPS every 30 seconds if on duty
+                if (this.isOnDuty) {
+                    this.startGPSTracking();
+                    this.startAudioEngine();
+                }
+            },
+            
+            toggleSidebar() {
+                const sidebar = document.getElementById('driver-sidebar');
+                const overlay = document.getElementById('sidebar-overlay');
+                sidebar.classList.toggle('open');
+                overlay.style.display = sidebar.classList.contains('open') ? 'block' : 'none';
+            },
+            
+            loadSection(section) {
+                this.currentSection = section;
+                document.querySelectorAll('.driver-nav-link').forEach(l => l.classList.remove('active'));
+                document.querySelector(`[data-section="${section}"]`)?.classList.add('active');
+                document.querySelectorAll('.driver-section').forEach(s => s.classList.remove('active'));
+                const sec = document.getElementById('sec-' + section);
+                if (sec) sec.classList.add('active');
+                
+                const titles = {dashboard:'My Tasks', attendance:'Attendance', gps:'GPS Status', earnings:'My Earnings', upload:'Upload Proof', profile:'Profile'};
+                document.getElementById('driver-title').textContent = titles[section] || 'Dashboard';
+                
+                switch(section) {
+                    case 'dashboard': this.renderTasks(); break;
+                    case 'attendance': this.renderAttendance(); break;
+                    case 'gps': this.renderGPS(); break;
+                    case 'earnings': this.renderEarnings(); break;
+                    case 'upload': this.renderUpload(); break;
+                    case 'profile': this.renderProfile(); break;
+                }
+            },
+            
+            // ==================== DUTY MANAGEMENT ====================
+            startDuty() {
+                this.isOnDuty = true;
+                Storage.set('driverOnDuty', 'true');
+                this.updateDutyStatus();
+                this.startGPSTracking();
+                this.startAudioEngine();
+                this.markAttendance();
+                Notify.success('Duty started! GPS & Audio active. 🚀');
+                if (this.currentSection === 'dashboard') this.renderTasks();
+            },
+            
+            pauseDuty() {
+                this.isOnDuty = false;
+                Storage.set('driverOnDuty', 'false');
+                this.updateDutyStatus();
+                GPSTracker.stopTracking();
+                if (App.state.audioTimer) clearInterval(App.state.audioTimer);
+                Notify.warning('Duty paused. GPS & Audio stopped.');
+                if (this.currentSection === 'dashboard') this.renderTasks();
+            },
+            
+            endDuty() {
+                this.isOnDuty = false;
+                Storage.set('driverOnDuty', 'false');
+                Storage.set('driverEarnings', this.earningsToday.toString());
+                this.updateDutyStatus();
+                GPSTracker.stopTracking();
+                if (App.state.audioTimer) clearInterval(App.state.audioTimer);
+                Notify.info(`Duty ended. Today's earnings: ₹${this.earningsToday}`);
+                if (this.currentSection === 'dashboard') this.renderTasks();
+            },
+            
+            updateDutyStatus() {
+                const badge = document.getElementById('duty-status-badge');
+                if (!badge) return;
+                if (this.isOnDuty) {
+                    badge.innerHTML = '🟢 On Duty';
+                    badge.style.background = 'rgba(0,200,150,0.15)';
+                    badge.style.color = '#00C896';
+                } else {
+                    badge.innerHTML = '⚪ Offline';
+                    badge.style.background = 'rgba(107,114,128,0.1)';
+                    badge.style.color = '#6B7280';
+                }
+            },
+            
+            startGPSTracking() {
+                GPSTracker.init();
+                if (!GPSTracker.tracking) GPSTracker.startTracking();
+                // Simulate earnings accumulation
+                if (!this._earningsInterval) {
+                    this._earningsInterval = setInterval(() => {
+                        if (this.isOnDuty) {
+                            this.earningsToday += Math.floor(Math.random() * 20) + 10;
+                            Storage.set('driverEarnings', this.earningsToday.toString());
+                        }
+                    }, 60000); // Every minute
+                }
+            },
+            
+            startAudioEngine() {
+                AudioEngine.init();
+            },
+            
+            // ==================== RENDERERS ====================
+            renderTasks() {
+                const tasks = CRMManager.getTasks(this.user.id);
+                const pending = tasks.filter(t => t.status === 'pending');
+                const completed = tasks.filter(t => t.status === 'completed');
+                
+                document.getElementById('sec-dashboard').innerHTML = `
+                    <!-- Duty Status Card -->
+                    <div class="status-card">
+                        <h3 style="margin-bottom:12px">
+                            <span class="status-indicator-large ${this.isOnDuty ? 'online' : 'offline'}"></span>
+                            ${this.isOnDuty ? 'You are ON DUTY' : 'You are OFFLINE'}
+                        </h3>
+                        <p style="color:var(--text-secondary);margin-bottom:20px">
+                            ${this.isOnDuty ? 'GPS tracking active. Audio ads playing every 15 minutes.' : 'Start your duty to begin tracking and earning.'}
+                        </p>
+                        <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+                            ${!this.isOnDuty ? `
+                                <button class="btn btn-success driver-btn" onclick="DriverPage.startDuty()">▶ Start Duty</button>
+                            ` : `
+                                <button class="btn btn-warning driver-btn" onclick="DriverPage.pauseDuty()">⏸ Pause Duty</button>
+                                <button class="btn btn-danger driver-btn" onclick="DriverPage.endDuty()">⏹ End Duty</button>
+                            `}
+                        </div>
+                    </div>
+                    
+                    <!-- Pending Tasks -->
+                    <h3 style="margin-bottom:16px">📋 Pending Tasks (${pending.length})</h3>
+                    <div class="task-list">
+                        ${pending.length === 0 ? '<div class="status-card"><p style="color:var(--text-secondary)">✅ No pending tasks. Great job!</p></div>' : ''}
+                        ${pending.map(t => `
+                            <div class="task-item">
+                                <div class="task-info">
+                                    <h4>${t.title}</h4>
+                                    ${t.notes ? `<p>📝 ${t.notes}</p>` : ''}
+                                    <p>📅 Due: ${new Date(t.dueDate).toLocaleDateString()} | 🔴 Priority: ${t.priority || 'medium'}</p>
+                                </div>
+                                <div class="task-actions">
+                                    <button class="btn btn-primary driver-btn" onclick="DriverPage.completeTask('${t.id}')">✓ Complete</button>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                    
+                    <!-- Completed Tasks -->
+                    ${completed.length > 0 ? `
+                        <h3 style="margin:24px 0 16px">✅ Completed (${completed.length})</h3>
+                        <div class="task-list">
+                            ${completed.slice(0, 10).map(t => `
+                                <div class="task-item completed">
+                                    <div class="task-info">
+                                        <h4>✅ ${t.title}</h4>
+                                        <p>Completed: ${new Date(t.completedAt).toLocaleDateString()}</p>
+                                    </div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    ` : ''}
+                `;
+            },
+            
+            completeTask(taskId) {
+                CRMManager.completeTask(taskId);
+                // Add to earnings
+                this.earningsToday += 50;
+                Storage.set('driverEarnings', this.earningsToday.toString());
+                Notify.success('Task completed! +₹50 earned');
+                this.renderTasks();
+            },
+            
+            renderAttendance() {
+                const attendance = Storage.get('attendance', []);
+                const today = new Date().toDateString();
+                const markedToday = attendance.find(a => a.date === today);
+                
+                document.getElementById('sec-attendance').innerHTML = `
+                    <div class="status-card">
+                        <h3>📅 Today's Attendance</h3>
+                        <div style="font-size:64px;margin:20px 0">${markedToday ? '✅' : '❌'}</div>
+                        <p style="font-size:18px;font-weight:600">${markedToday ? 'Attendance Marked!' : 'Not Marked Yet'}</p>
+                        <p style="color:var(--text-secondary)">${today}</p>
+                        ${!markedToday ? `<button class="btn btn-primary driver-btn mt-4" onclick="DriverPage.markAttendance()">✅ Mark Attendance</button>` : ''}
+                    </div>
+                    <div class="status-card">
+                        <h3>📊 Attendance History</h3>
+                        ${attendance.length === 0 ? '<p style="color:var(--text-secondary)">No records yet</p>' : `
+                            <div style="max-height:300px;overflow-y:auto">
+                                ${attendance.slice(-30).reverse().map(a => `
+                                    <div style="display:flex;justify-content:space-between;padding:12px;border-bottom:1px solid var(--border)">
+                                        <span>${new Date(a.timestamp).toLocaleDateString()}</span>
+                                        <span class="badge badge-active">Present</span>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        `}
+                    </div>
+                `;
+            },
+            
+            markAttendance() {
+                const attendance = Storage.get('attendance', []);
+                const today = new Date().toDateString();
+                if (attendance.find(a => a.date === today)) {
+                    Notify.warning('Attendance already marked today');
+                    return;
+                }
+                attendance.push({ date: today, timestamp: new Date().toISOString(), status: 'present' });
+                Storage.set('attendance', attendance);
+                this.earningsToday += 100;
+                Storage.set('driverEarnings', this.earningsToday.toString());
+                Notify.success('Attendance marked! +₹100 daily bonus');
+                this.renderAttendance();
+            },
+            
+            renderGPS() {
+                const pos = GPSTracker.getCurrentPosition ? GPSTracker.getCurrentPosition() : App.state.currentGPS;
+                const distance = GPSTracker.getDistanceTraveled ? GPSTracker.getDistanceTraveled(this.user.id, new Date().toDateString()) : 0;
+                
+                document.getElementById('sec-gps').innerHTML = `
+                    <div class="gps-card">
+                        <div class="gps-dot-large ${GPSTracker.tracking ? 'active' : ''}"></div>
+                        <div>
+                            <strong style="font-size:18px">GPS ${GPSTracker.tracking ? 'Active' : 'Inactive'}</strong>
+                            <p style="color:var(--text-secondary)">${GPSTracker.tracking ? 'Tracking your rickshaw location' : 'Start duty to enable GPS'}</p>
+                        </div>
+                    </div>
+                    <div class="status-card">
+                        <h3>📍 Current Location</h3>
+                        <div style="font-size:18px;margin:16px 0">
+                            <p>Latitude: <strong>${pos.lat.toFixed(6)}</strong></p>
+                            <p>Longitude: <strong>${pos.lng.toFixed(6)}</strong></p>
+                        </div>
+                        <p style="color:var(--text-secondary)">Speed: ${Math.floor(Math.random()*30)+5} km/h | Heading: ${Math.floor(Math.random()*360)}°</p>
+                    </div>
+                    <div class="status-card">
+                        <h3>🛣️ Today's Distance</h3>
+                        <div style="font-size:48px;font-weight:800;color:var(--primary);margin:16px 0">${distance.toFixed(1)} km</div>
+                        <p style="color:var(--text-secondary)">Total distance traveled today</p>
+                    </div>
+                `;
+            },
+            
+            renderEarnings() {
+                const earningsLog = Storage.get('earningsLog', []).filter(e => e.userId === this.user.id);
+                const totalEarnings = earningsLog.reduce((s, e) => s + (e.amount || 0), 0) + this.earningsToday;
+                
+                document.getElementById('sec-earnings').innerHTML = `
+                    <div class="status-card">
+                        <h3>💰 Today's Earnings</h3>
+                        <div class="earnings-display">₹${this.earningsToday.toLocaleString()}</div>
+                        <p style="color:var(--text-secondary)">From tasks, attendance & audio plays</p>
+                    </div>
+                    <div class="status-card">
+                        <h3>📊 Total Earnings</h3>
+                        <div style="font-size:36px;font-weight:800;color:var(--primary);margin:16px 0">₹${totalEarnings.toLocaleString()}</div>
+                        <p style="color:var(--text-secondary)">All time earnings</p>
+                    </div>
+                    ${earningsLog.length > 0 ? `
+                        <div class="status-card">
+                            <h3>📋 Recent Earnings</h3>
+                            ${earningsLog.slice(-10).reverse().map(e => `
+                                <div style="display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border)">
+                                    <span>${new Date(e.date).toLocaleDateString()}</span>
+                                    <strong style="color:var(--success)">+₹${e.amount}</strong>
+                                </div>
+                            `).join('')}
+                        </div>
+                    ` : ''}
+                `;
+            },
+            
+            renderUpload() {
+                document.getElementById('sec-upload').innerHTML = `
+                    <div class="status-card">
+                        <h3>📁 Upload Campaign Proof</h3>
+                        <p style="color:var(--text-secondary);margin-bottom:16px">Upload photos of the rickshaw with LED screen or audio proof</p>
+                    </div>
+                    <div class="upload-area" onclick="document.getElementById('file-input').click()">
+                        <div class="icon">📸</div>
+                        <h3>Tap to Upload</h3>
+                        <p style="color:var(--text-secondary)">JPG, PNG, WEBP, PDF, MP3, WAV (Max 10MB)</p>
+                        <input type="file" id="file-input" accept="image/*,audio/*,.pdf" style="display:none" onchange="DriverPage.handleUpload(this)" multiple>
+                    </div>
+                    <div id="upload-history" style="margin-top:24px">
+                        <h4 style="margin-bottom:12px">📋 Recent Uploads</h4>
+                        <p style="color:var(--text-secondary)" id="no-uploads-msg">No uploads yet</p>
+                    </div>
+                `;
+                this.renderUploadHistory();
+            },
+            
+            handleUpload(input) {
+                const files = input.files;
+                if (!files || files.length === 0) return;
+                
+                const uploads = Storage.get('driverUploads', []);
+                
+                Array.from(files).forEach(file => {
+                    if (file.size > 10 * 1024 * 1024) {
+                        Notify.error(`${file.name} is too large. Max 10MB.`);
+                        return;
+                    }
+                    
+                    uploads.push({
+                        id: 'UPL' + Date.now().toString(36),
+                        fileName: file.name,
+                        fileType: file.type,
+                        fileSize: file.size,
+                        uploadedAt: new Date().toISOString(),
+                        driverId: this.user.id
+                    });
+                    
+                    Notify.success(`${file.name} uploaded!`);
+                });
+                
+                Storage.set('driverUploads', uploads);
+                input.value = '';
+                this.renderUploadHistory();
+            },
+            
+            renderUploadHistory() {
+                const uploads = Storage.get('driverUploads', []).filter(u => u.driverId === this.user.id);
+                const container = document.getElementById('upload-history');
+                const noUploads = document.getElementById('no-uploads-msg');
+                
+                if (!container) return;
+                
+                if (uploads.length === 0) {
+                    if (noUploads) noUploads.style.display = 'block';
+                    return;
+                }
+                
+                if (noUploads) noUploads.style.display = 'none';
+                
+                container.innerHTML = `
+                    <h4 style="margin-bottom:12px">📋 Recent Uploads (${uploads.length})</h4>
+                    ${uploads.slice(-10).reverse().map(u => `
+                        <div style="display:flex;justify-content:space-between;align-items:center;padding:12px;border-bottom:1px solid var(--border);background:var(--card);border-radius:8px;margin-bottom:8px">
+                            <div>
+                                <strong>${u.fileName}</strong>
+                                <p style="font-size:12px;color:var(--text-secondary)">${new Date(u.uploadedAt).toLocaleString()} | ${(u.fileSize/1024).toFixed(1)} KB</p>
+                            </div>
+                            <span class="badge badge-active">✅ Uploaded</span>
+                        </div>
+                    `).join('')}
+                `;
+            },
+            
+            renderProfile() {
+                document.getElementById('sec-profile').innerHTML = `
+                    <div class="status-card" style="text-align:left;max-width:500px">
+                        <h3>👤 My Profile</h3>
+                        <form onsubmit="return false" style="margin-top:16px">
+                            <div class="form-group"><label>Name</label><input type="text" id="prof-name" value="${this.user.name||''}"></div>
+                            <div class="form-group"><label>Phone</label><input type="tel" id="prof-phone" value="${this.user.phone||''}"></div>
+                            <div class="form-group"><label>Rickshaw ID</label><input type="text" value="${this.user.rickshawId||'Not assigned'}" disabled></div>
+                            <div class="form-group"><label>Assigned Zone</label><input type="text" value="${this.user.zone||'N/A'}" disabled></div>
+                            <div class="form-group"><label>New Password</label><input type="password" id="prof-password" placeholder="Leave blank"></div>
+                            <button type="button" class="btn btn-primary driver-btn mt-4" onclick="DriverPage.updateProfile()">💾 Update</button>
+                        </form>
+                    </div>`;
+            },
+            
+            updateProfile() {
+                const updates = {
+                    name: document.getElementById('prof-name')?.value,
+                    phone: document.getElementById('prof-phone')?.value
+                };
+                const password = document.getElementById('prof-password')?.value;
+                if (password) updates.password = password;
+                
+                if (Auth.updateProfile(updates)) {
+                    this.user = Auth.getCurrentUser();
+                    document.getElementById('driver-subtitle').textContent = `Rickshaw: ${this.user.rickshawId || 'Not assigned'} | Zone: ${this.user.zone || 'N/A'}`;
+                    document.getElementById('driver-avatar').textContent = this.user.name.charAt(0).toUpperCase();
+                    Notify.success('Profile updated!');
+                }
+            }
+        };
+        
+        document.addEventListener('DOMContentLoaded', () => DriverPage.init());
+        if (document.readyState !== 'loading') DriverPage.init();
+    </script>
+</body>
+</html>
