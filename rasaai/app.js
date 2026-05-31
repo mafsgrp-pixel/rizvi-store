@@ -1,320 +1,218 @@
-/* ===================================
+/* =========================================
    RASAAI APP.JS
-=================================== */
+========================================= */
 
-document.addEventListener("DOMContentLoaded", () => {
+/* THEME SYSTEM */
 
-    initTheme();
-    initPriceEngine();
-    initCalculator();
-    initWhatsApp();
+const themeToggle = document.getElementById("themeToggle");
 
-});
-
-/* ===================================
-   THEME SYSTEM
-=================================== */
-
-function initTheme() {
-
-    const themeBtn = document.getElementById("themeToggle");
-
-    const savedTheme =
-        localStorage.getItem("rasaai_theme");
-
-    if (savedTheme === "dark") {
-        document.body.classList.add("dark");
-        themeBtn.innerHTML = "☀️";
-    }
-
-    themeBtn.addEventListener("click", () => {
-
-        document.body.classList.toggle("dark");
-
-        const isDark =
-            document.body.classList.contains("dark");
-
-        if (isDark) {
-
-            localStorage.setItem(
-                "rasaai_theme",
-                "dark"
-            );
-
-            themeBtn.innerHTML = "☀️";
-
-        } else {
-
-            localStorage.setItem(
-                "rasaai_theme",
-                "light"
-            );
-
-            themeBtn.innerHTML = "🌙";
-        }
-
-    });
-
+function applyTheme(theme) {
+  if (theme === "dark") {
+    document.body.classList.add("dark");
+    if (themeToggle) themeToggle.innerHTML = "☀️";
+  } else {
+    document.body.classList.remove("dark");
+    if (themeToggle) themeToggle.innerHTML = "🌙";
+  }
 }
 
-/* ===================================
-   LIVE PRICE ENGINE
-=================================== */
+const savedTheme = localStorage.getItem("rasaai_theme") || "light";
+applyTheme(savedTheme);
 
-let currentRate = 1238;
+if (themeToggle) {
+  themeToggle.addEventListener("click", () => {
+    const current = document.body.classList.contains("dark")
+      ? "dark"
+      : "light";
 
-function generateRandomRate() {
+    const next = current === "dark" ? "light" : "dark";
 
-    return Math.floor(
-        Math.random() * (1647 - 1238 + 1)
-    ) + 1238;
+    localStorage.setItem("rasaai_theme", next);
 
+    applyTheme(next);
+  });
 }
 
-function initPriceEngine() {
+/* =========================================
+   RANDOM PRICE ENGINE
+========================================= */
 
-    const priceEl =
-        document.getElementById("livePrice");
+const livePriceEl = document.getElementById("livePrice");
 
-    const countdownEl =
-        document.getElementById("countdown");
+let currentPrice = generateRandomPrice();
 
-    currentRate =
-        generateRandomRate();
-
-    priceEl.innerText =
-        "₹" + currentRate.toLocaleString();
-
-    let seconds = 15 * 60;
-
-    setInterval(() => {
-
-        seconds--;
-
-        const mins =
-            Math.floor(seconds / 60);
-
-        const secs =
-            seconds % 60;
-
-        countdownEl.innerText =
-            `${String(mins).padStart(2, "0")}:${String(secs).padStart(2, "0")}`;
-
-        if (seconds <= 0) {
-
-            currentRate =
-                generateRandomRate();
-
-            priceEl.innerText =
-                "₹" + currentRate.toLocaleString();
-
-            seconds = 15 * 60;
-
-            calculateCampaign();
-        }
-
-    }, 1000);
-
+function generateRandomPrice() {
+  return Math.floor(Math.random() * (1647 - 1238 + 1)) + 1238;
 }
 
-/* ===================================
-   CALCULATOR
-=================================== */
+function updatePrice() {
+  currentPrice = generateRandomPrice();
 
-function initCalculator() {
-
-    const btn =
-        document.getElementById(
-            "calculateBtn"
-        );
-
-    if (!btn) return;
-
-    btn.addEventListener(
-        "click",
-        calculateCampaign
-    );
-
+  if (livePriceEl) {
+    livePriceEl.innerText =
+      "₹" + currentPrice.toLocaleString("en-IN");
+  }
 }
+
+updatePrice();
+
+/* =========================================
+   15 MIN COUNTDOWN
+========================================= */
+
+const countdownEl = document.getElementById("countdown");
+
+let secondsLeft = 15 * 60;
+
+function updateCountdown() {
+  const min = Math.floor(secondsLeft / 60);
+  const sec = secondsLeft % 60;
+
+  if (countdownEl) {
+    countdownEl.innerText =
+      String(min).padStart(2, "0") +
+      ":" +
+      String(sec).padStart(2, "0");
+  }
+
+  secondsLeft--;
+
+  if (secondsLeft < 0) {
+    updatePrice();
+    secondsLeft = 15 * 60;
+  }
+}
+
+setInterval(updateCountdown, 1000);
+
+updateCountdown();
+
+/* =========================================
+   CAMPAIGN CALCULATOR
+========================================= */
+
+const calculateBtn =
+  document.getElementById("calculateBtn");
+
+const totalCostEl =
+  document.getElementById("totalCost");
+
+const estimatedViewsEl =
+  document.getElementById("estimatedViews");
+
+const estimatedReachEl =
+  document.getElementById("estimatedReach");
 
 function getRickshawCount() {
+  const value =
+    document.getElementById("rickshaws").value;
 
-    const value =
-        document.getElementById(
-            "rickshaws"
-        ).value;
-
-    return parseInt(value);
-
+  return parseInt(value);
 }
 
-function getDurationDays() {
+function getDays() {
+  const value =
+    document.getElementById("duration").value;
 
-    const value =
-        document.getElementById(
-            "duration"
-        ).value;
-
-    return parseInt(value);
-
-}
-
-function getZoneViews(zone) {
-
-    switch (zone) {
-
-        case "Zone 1":
-            return 13500;
-
-        case "Zone 2":
-            return 16000;
-
-        case "Zone 3":
-            return 24500;
-
-        case "Zone 4":
-            return 15000;
-
-        default:
-            return 12000;
-    }
-
+  return parseInt(value);
 }
 
 function calculateCampaign() {
+  const rickshaws = getRickshawCount();
 
-    const zone =
-        document.getElementById(
-            "zone"
-        ).value;
+  const days = getDays();
 
-    const rickshaws =
-        getRickshawCount();
+  const cost =
+    currentPrice *
+    rickshaws *
+    days;
 
-    const days =
-        getDurationDays();
+  const views =
+    rickshaws *
+    days *
+    15000;
 
-    const totalCost =
-        currentRate *
-        rickshaws *
-        days;
+  const reach =
+    Math.floor(views * 0.40);
 
-    const dailyViews =
-        getZoneViews(zone);
+  if (totalCostEl) {
+    totalCostEl.innerText =
+      "₹" + cost.toLocaleString("en-IN");
+  }
 
-    const estimatedViews =
-        dailyViews *
-        rickshaws *
-        days;
+  if (estimatedViewsEl) {
+    estimatedViewsEl.innerText =
+      views.toLocaleString("en-IN");
+  }
 
-    const estimatedReach =
-        Math.round(
-            estimatedViews * 0.35
-        );
-
-    document.getElementById(
-        "totalCost"
-    ).innerText =
-        "₹" +
-        totalCost.toLocaleString();
-
-    document.getElementById(
-        "estimatedViews"
-    ).innerText =
-        estimatedViews.toLocaleString();
-
-    document.getElementById(
-        "estimatedReach"
-    ).innerText =
-        estimatedReach.toLocaleString();
-
+  if (estimatedReachEl) {
+    estimatedReachEl.innerText =
+      reach.toLocaleString("en-IN");
+  }
 }
 
-/* ===================================
+if (calculateBtn) {
+  calculateBtn.addEventListener(
+    "click",
+    calculateCampaign
+  );
+}
+
+/* =========================================
    WHATSAPP BOOKING
-=================================== */
+========================================= */
 
-function initWhatsApp() {
+const whatsappBtn =
+  document.getElementById("whatsappBooking");
 
-    const btn =
-        document.getElementById(
-            "whatsappBooking"
-        );
+if (whatsappBtn) {
+  whatsappBtn.addEventListener("click", function (e) {
+    e.preventDefault();
 
-    if (!btn) return;
+    const name =
+      document.querySelector(
+        'input[placeholder="Full Name"]'
+      )?.value || "";
 
-    btn.addEventListener(
-        "click",
-        function (e) {
+    const phone =
+      document.querySelector(
+        'input[placeholder="Phone Number"]'
+      )?.value || "";
 
-            e.preventDefault();
+    const email =
+      document.querySelector(
+        'input[placeholder="Email Address"]'
+      )?.value || "";
 
-            const name =
-                document.querySelector(
-                    'input[placeholder="Full Name"]'
-                ).value;
+    const business =
+      document.querySelector(
+        'input[placeholder="Business Name"]'
+      )?.value || "";
 
-            const phone =
-                document.querySelector(
-                    'input[placeholder="Phone Number"]'
-                ).value;
+    const language =
+      document.getElementById("language").value;
 
-            const email =
-                document.querySelector(
-                    'input[placeholder="Email Address"]'
-                ).value;
+    const zone =
+      document.getElementById("zone").value;
 
-            const business =
-                document.querySelector(
-                    'input[placeholder="Business Name"]'
-                ).value;
+    const rickshaws =
+      document.getElementById("rickshaws").value;
 
-            const language =
-                document.getElementById(
-                    "language"
-                ).value;
+    const duration =
+      document.getElementById("duration").value;
 
-            const zone =
-                document.getElementById(
-                    "zone"
-                ).value;
+    const transaction =
+      document.querySelector(
+        'input[placeholder="Transaction ID"]'
+      )?.value || "";
 
-            const rickshaws =
-                document.getElementById(
-                    "rickshaws"
-                ).value;
+    const message =
+`Hello Rasaai,
 
-            const duration =
-                document.getElementById(
-                    "duration"
-                ).value;
-
-            const totalCost =
-                document.getElementById(
-                    "totalCost"
-                ).innerText;
-
-            if (
-                !name ||
-                !phone ||
-                !business
-            ) {
-
-                alert(
-                    "Please fill Name, Phone and Business Name."
-                );
-
-                return;
-            }
-
-            const message =
-
-`*RASAAI CAMPAIGN BOOKING*
+I would like to book a campaign.
 
 Name: ${name}
-
 Phone: ${phone}
-
 Email: ${email}
 
 Business: ${business}
@@ -323,30 +221,61 @@ Language: ${language}
 
 Zone: ${zone}
 
-Rickshaws: ${rickshaws}
+Fleet Size: ${rickshaws}
 
 Duration: ${duration}
 
-Campaign Cost: ${totalCost}
+Current Rate: ₹${currentPrice}
 
-Campaign Setup Time:
-3 Working Days
+Transaction ID: ${transaction}
 
-First Time Advertiser Bonus:
-30 FREE Social Media Creatives`;
+Please contact me for campaign activation.`;
 
-            const whatsappNumber =
-                "919594306625";
+    const whatsappNumber =
+      "919594306625";
 
-            const url =
-                `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+    const url =
+      "https://wa.me/" +
+      whatsappNumber +
+      "?text=" +
+      encodeURIComponent(message);
 
-            window.open(
-                url,
-                "_blank"
-            );
-
-        }
-    );
-
+    window.open(url, "_blank");
+  });
 }
+
+/* =========================================
+   BASIC FORM VALIDATION
+========================================= */
+
+const campaignForm =
+  document.getElementById("campaignForm");
+
+if (campaignForm) {
+  campaignForm.addEventListener("submit", function (e) {
+    e.preventDefault();
+  });
+}
+
+/* =========================================
+   AUTO CALCULATE ON CHANGE
+========================================= */
+
+[
+  "rickshaws",
+  "duration"
+].forEach(id => {
+  const el = document.getElementById(id);
+
+  if (el) {
+    el.addEventListener("change", calculateCampaign);
+  }
+});
+
+/* =========================================
+   INITIAL CALCULATION
+========================================= */
+
+calculateCampaign();
+
+console.log("RASAAI READY");
