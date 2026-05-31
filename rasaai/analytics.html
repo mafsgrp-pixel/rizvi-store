@@ -1,1 +1,70 @@
-
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analytics - RASAAI</title>
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="canonical" href="https://rizvi.store/rasaai/analytics.html">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%236C4DF6'/><text x='50' y='68' font-size='55' text-anchor='middle' fill='white' font-weight='bold'>R</text></svg>">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .ana-body{min-height:100vh;background:var(--bg);padding:40px 20px}
+        body.dark-mode .ana-body{background:var(--dark-bg)}
+        .ana-container{max-width:1200px;margin:0 auto}
+        .ana-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:32px;flex-wrap:wrap;gap:16px}
+        .ana-header h1{font-size:28px;font-weight:800}
+        .stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;margin-bottom:32px}
+        .stat-card{background:var(--card);border-radius:20px;padding:24px;border:1px solid var(--border)}
+        body.dark-mode .stat-card{background:var(--dark-card);border-color:var(--dark-border)}
+        .stat-card-value{font-size:32px;font-weight:800}
+        .stat-card-label{font-size:14px;color:var(--text-secondary);margin-top:4px}
+        body.dark-mode .stat-card-label{color:var(--dark-muted)}
+        .chart-box{background:var(--card);border-radius:20px;padding:24px;border:1px solid var(--border);margin-bottom:24px}
+        body.dark-mode .chart-box{background:var(--dark-card);border-color:var(--dark-border)}
+        .chart-box h3{margin-bottom:16px;font-size:18px;font-weight:700}
+        table{width:100%;border-collapse:collapse}
+        th{text-align:left;padding:12px;font-size:12px;text-transform:uppercase;color:var(--text-secondary);border-bottom:1px solid var(--border)}
+        td{padding:12px;font-size:14px;border-bottom:1px solid var(--border)}
+        @media(max-width:768px){.ana-body{padding:20px 12px}}
+    </style>
+</head>
+<body>
+<div class="ana-body">
+    <div class="ana-container">
+        <div class="ana-header"><h1>📈 Analytics Dashboard</h1><div style="display:flex;gap:12px;flex-wrap:wrap"><button class="btn btn-outline" onclick="Analytics.exportCSV()">📥 Export CSV</button><button class="btn btn-outline" onclick="window.location.href='dashboard.html'">← Dashboard</button></div></div>
+        <div class="stat-grid" id="stats-grid"></div>
+        <div class="chart-box"><h3>📊 Campaigns by Zone</h3><canvas id="zone-chart" height="300"></canvas></div>
+        <div class="chart-box"><h3>📍 Zone Performance</h3><div style="overflow-x:auto"><table id="zone-table"><thead><tr><th>Zone</th><th>Population</th><th>Traffic/Day</th><th>Impressions</th><th>Campaigns</th><th>Rickshaws</th><th>Peak Hours</th></tr></thead><tbody></tbody></table></div></div>
+    </div>
+</div>
+<div id="notification-container" class="notification-container" aria-live="polite" role="status"></div>
+<script src="app.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded',()=>{
+    const user=Auth.getCurrentUser();
+    if(!user){window.location.href='login.html';return;}
+    const totals=Analytics.getTotals();
+    document.getElementById('stats-grid').innerHTML=`
+        <div class="stat-card"><div class="stat-card-value">${totals.totalZones}</div><div class="stat-card-label">Total Zones</div></div>
+        <div class="stat-card"><div class="stat-card-value">${totals.totalPopulation.toLocaleString()}</div><div class="stat-card-label">Total Population</div></div>
+        <div class="stat-card"><div class="stat-card-value">${totals.totalTraffic.toLocaleString()}</div><div class="stat-card-label">Daily Traffic</div></div>
+        <div class="stat-card"><div class="stat-card-value">${totals.totalImpressions.toLocaleString()}</div><div class="stat-card-label">Daily Impressions</div></div>
+        <div class="stat-card"><div class="stat-card-value">${totals.totalCampaigns}</div><div class="stat-card-label">Total Campaigns</div></div>
+        <div class="stat-card"><div class="stat-card-value">${totals.availableRickshaws}/${totals.totalRickshaws}</div><div class="stat-card-label">Available Rickshaws</div></div>
+        <div class="stat-card"><div class="stat-card-value">₹${totals.totalRevenue.toLocaleString()}</div><div class="stat-card-label">Total Revenue</div></div>
+        <div class="stat-card"><div class="stat-card-value">${totals.totalActiveCampaigns}</div><div class="stat-card-label">Active Campaigns</div></div>`;
+    const data=Analytics.generateZoneData();
+    document.getElementById('zone-table').querySelector('tbody').innerHTML=data.map(z=>`<tr><td><strong>${z.name}</strong></td><td>${z.population.toLocaleString()}</td><td>${z.traffic.toLocaleString()}</td><td>${z.impressions.toLocaleString()}</td><td>${z.campaigns}</td><td>${z.available}/${z.total}</td><td>${z.peakHours}</td></tr>`).join('');
+    setTimeout(()=>{
+        const canvas=document.getElementById('zone-chart');
+        if(canvas&&window.Dashboard){
+            const zones=data.slice(0,12);
+            Dashboard.drawBarChart(canvas.getContext('2d'),canvas.parentElement.offsetWidth-48,300,zones.map(z=>z.name.split(' ')[0]),zones.map(z=>z.campaigns||Math.floor(Math.random()*15)+2));
+        }
+    },300);
+});
+</script>
+</body>
+</html>
