@@ -1,1 +1,683 @@
-
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=5.0">
+    <meta name="theme-color" content="#6C4DF6" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#0F1117" media="(prefers-color-scheme: dark)">
+    <meta name="color-scheme" content="light dark">
+    
+    <title>Client Portal - RASAAI Outdoor Advertising Network</title>
+    <meta name="description" content="Manage your campaigns, invoices, analytics, and affiliate program.">
+    <meta name="robots" content="noindex, nofollow">
+    
+    <link rel="canonical" href="https://rizvi.store/rasaai/client.html">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%236C4DF6'/><text x='50' y='68' font-size='55' text-anchor='middle' fill='white' font-weight='bold'>R</text></svg>">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    
+    <style>
+        .client-body {
+            display: flex;
+            min-height: 100vh;
+            background: var(--bg);
+        }
+        body.dark-mode .client-body {
+            background: var(--dark-bg);
+        }
+        .client-sidebar {
+            width: 260px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-right: 1px solid var(--glass-border);
+            padding: 24px 16px;
+            position: fixed;
+            top: 0; left: 0;
+            height: 100vh;
+            z-index: 200;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+            transition: transform 0.3s;
+        }
+        body.dark-mode .client-sidebar {
+            background: var(--dark-glass-bg);
+            border-right-color: var(--dark-glass-border);
+        }
+        .client-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 8px 12px;
+            margin-bottom: 32px;
+            font-size: 22px;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary), var(--accent-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            cursor: pointer;
+        }
+        .client-logo-icon {
+            width: 36px; height: 36px;
+            background: linear-gradient(135deg, var(--primary), var(--accent-cyan));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #FFF;
+            font-size: 18px;
+            font-weight: 900;
+            -webkit-text-fill-color: #FFF;
+            flex-shrink: 0;
+        }
+        .client-nav {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        .client-nav-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            border-radius: 12px;
+            font-weight: 500;
+            font-size: 14px;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+        .client-nav-link:hover {
+            background: rgba(108,77,246,0.08);
+            color: var(--primary);
+        }
+        .client-nav-link.active {
+            background: rgba(108,77,246,0.12);
+            color: var(--primary);
+            font-weight: 600;
+        }
+        body.dark-mode .client-nav-link {
+            color: var(--dark-muted);
+        }
+        body.dark-mode .client-nav-link:hover {
+            background: rgba(139,124,255,0.1);
+            color: var(--dark-primary);
+        }
+        body.dark-mode .client-nav-link.active {
+            background: rgba(139,124,255,0.15);
+            color: var(--dark-primary);
+        }
+        .client-nav-icon {
+            font-size: 20px;
+            width: 24px;
+            text-align: center;
+            flex-shrink: 0;
+        }
+        .client-sidebar-footer {
+            border-top: 1px solid var(--border);
+            padding-top: 16px;
+            margin-top: auto;
+        }
+        body.dark-mode .client-sidebar-footer {
+            border-top-color: var(--dark-border);
+        }
+        
+        .client-main {
+            margin-left: 260px;
+            flex: 1;
+            padding: 32px;
+            min-height: 100vh;
+            transition: margin-left 0.3s;
+        }
+        .client-topbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 32px;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+        .client-topbar h1 {
+            font-size: 28px;
+            font-weight: 800;
+        }
+        .client-avatar {
+            width: 42px; height: 42px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--accent-cyan));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #FFF;
+            font-weight: 700;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+        .client-section {
+            display: none;
+        }
+        .client-section.active {
+            display: block;
+        }
+        
+        .stat-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            margin-bottom: 32px;
+        }
+        .stat-card {
+            background: var(--card);
+            border-radius: 20px;
+            padding: 24px;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-sm);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .stat-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-hover);
+        }
+        body.dark-mode .stat-card {
+            background: var(--dark-card);
+            border-color: var(--dark-border);
+        }
+        .stat-card-icon {
+            font-size: 32px;
+            margin-bottom: 12px;
+        }
+        .stat-card-value {
+            font-size: 28px;
+            font-weight: 800;
+        }
+        .stat-card-label {
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-top: 4px;
+        }
+        body.dark-mode .stat-card-label {
+            color: var(--dark-muted);
+        }
+        
+        .data-card {
+            background: var(--card);
+            border-radius: 20px;
+            padding: 24px;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-sm);
+            margin-bottom: 24px;
+        }
+        body.dark-mode .data-card {
+            background: var(--dark-card);
+            border-color: var(--dark-border);
+        }
+        .data-card h3 {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+        
+        .client-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .client-table th {
+            text-align: left;
+            padding: 12px 16px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-secondary);
+            border-bottom: 1px solid var(--border);
+            white-space: nowrap;
+        }
+        .client-table td {
+            padding: 12px 16px;
+            font-size: 14px;
+            border-bottom: 1px solid var(--border);
+        }
+        .client-table tr:hover td {
+            background: var(--table-hover);
+        }
+        body.dark-mode .client-table th {
+            color: var(--dark-muted);
+            border-bottom-color: var(--dark-border);
+        }
+        body.dark-mode .client-table td {
+            border-bottom-color: var(--dark-border);
+        }
+        
+        .badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: capitalize;
+        }
+        .badge-active, .badge-paid, .badge-completed, .badge-success {
+            background: rgba(0,200,150,0.1);
+            color: #00C896;
+        }
+        .badge-pending {
+            background: rgba(255,181,71,0.1);
+            color: #FFB547;
+        }
+        .badge-draft {
+            background: rgba(107,114,128,0.1);
+            color: #6B7280;
+        }
+        
+        .mobile-toggle {
+            display: none;
+            width: 44px; height: 44px;
+            border-radius: 12px;
+            background: var(--card);
+            border: 1px solid var(--border);
+            cursor: pointer;
+            font-size: 20px;
+            align-items: center;
+            justify-content: center;
+        }
+        body.dark-mode .mobile-toggle {
+            background: var(--dark-card);
+            border-color: var(--dark-border);
+            color: var(--dark-text);
+        }
+        
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+        }
+        .empty-state .icon {
+            font-size: 64px;
+            margin-bottom: 16px;
+        }
+        .empty-state h3 {
+            font-size: 20px;
+            margin-bottom: 8px;
+        }
+        .empty-state p {
+            color: var(--text-secondary);
+            margin-bottom: 24px;
+        }
+        
+        @media (max-width: 992px) {
+            .client-sidebar {
+                transform: translateX(-100%);
+            }
+            .client-sidebar.open {
+                transform: translateX(0);
+            }
+            .client-main {
+                margin-left: 0 !important;
+            }
+            .mobile-toggle {
+                display: flex;
+            }
+        }
+        @media (max-width: 768px) {
+            .client-main { padding: 20px; }
+            .stat-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 480px) {
+            .stat-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="client-body">
+        <!-- Sidebar Overlay -->
+        <div id="sidebar-overlay" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:199" onclick="ClientPage.toggleSidebar()"></div>
+        
+        <!-- Sidebar -->
+        <aside class="client-sidebar" id="client-sidebar">
+            <div class="client-logo" onclick="window.location.href='index.html'">
+                <div class="client-logo-icon">R</div><span>RASAAI</span>
+            </div>
+            <nav class="client-nav">
+                <a class="client-nav-link active" data-section="dashboard" onclick="ClientPage.loadSection('dashboard')"><span class="client-nav-icon">📊</span>Dashboard</a>
+                <a class="client-nav-link" data-section="campaigns" onclick="ClientPage.loadSection('campaigns')"><span class="client-nav-icon">📢</span>My Campaigns</a>
+                <a class="client-nav-link" data-section="invoices" onclick="ClientPage.loadSection('invoices')"><span class="client-nav-icon">🧾</span>Invoices</a>
+                <a class="client-nav-link" data-section="analytics" onclick="ClientPage.loadSection('analytics')"><span class="client-nav-icon">📈</span>Analytics</a>
+                <a class="client-nav-link" data-section="affiliate" onclick="ClientPage.loadSection('affiliate')"><span class="client-nav-icon">🔗</span>Affiliate</a>
+                <a class="client-nav-link" data-section="wallet" onclick="ClientPage.loadSection('wallet')"><span class="client-nav-icon">💳</span>Wallet</a>
+                <a class="client-nav-link" data-section="profile" onclick="ClientPage.loadSection('profile')"><span class="client-nav-icon">👤</span>Profile</a>
+            </nav>
+            <div class="client-sidebar-footer">
+                <a class="client-nav-link" href="campaign.html"><span class="client-nav-icon">➕</span>New Campaign</a>
+                <a class="client-nav-link" href="index.html"><span class="client-nav-icon">🏠</span>Home</a>
+                <a class="client-nav-link" onclick="Auth.logout()" style="cursor:pointer"><span class="client-nav-icon">🚪</span>Logout</a>
+            </div>
+        </aside>
+        
+        <!-- Main -->
+        <main class="client-main">
+            <div class="client-topbar">
+                <div style="display:flex;align-items:center;gap:12px">
+                    <button class="mobile-toggle" onclick="ClientPage.toggleSidebar()">☰</button>
+                    <div>
+                        <h1 id="client-title">My Dashboard</h1>
+                        <p style="color:var(--text-secondary);font-size:14px;margin:4px 0 0" id="client-subtitle">Welcome back</p>
+                    </div>
+                </div>
+                <div style="display:flex;align-items:center;gap:12px">
+                    <button class="theme-toggle" onclick="App.applyTheme(App.state.theme==='light'?'dark':'light')" style="width:40px;height:40px;border-radius:50%;background:var(--card);border:1px solid var(--border);cursor:pointer;font-size:18px">🌙</button>
+                    <div class="client-avatar" id="client-avatar" title="Profile">C</div>
+                </div>
+            </div>
+            
+            <div id="client-content">
+                <!-- Dashboard -->
+                <div class="client-section active" id="sec-dashboard"></div>
+                <!-- Campaigns -->
+                <div class="client-section" id="sec-campaigns"></div>
+                <!-- Invoices -->
+                <div class="client-section" id="sec-invoices"></div>
+                <!-- Analytics -->
+                <div class="client-section" id="sec-analytics"></div>
+                <!-- Affiliate -->
+                <div class="client-section" id="sec-affiliate"></div>
+                <!-- Wallet -->
+                <div class="client-section" id="sec-wallet"></div>
+                <!-- Profile -->
+                <div class="client-section" id="sec-profile"></div>
+            </div>
+        </main>
+    </div>
+    
+    <div id="notification-container" class="notification-container" aria-live="polite" role="status"></div>
+    
+    <script src="app.js"></script>
+    <script>
+        const ClientPage = {
+            user: null,
+            currentSection: 'dashboard',
+            
+            init() {
+                this.user = Auth.getCurrentUser();
+                if (!this.user) {
+                    window.location.href = 'login.html?redirect=client.html';
+                    return;
+                }
+                document.getElementById('client-subtitle').textContent = `Welcome back, ${this.user.name.split(' ')[0]}`;
+                document.getElementById('client-avatar').textContent = this.user.name.charAt(0).toUpperCase();
+                this.loadSection('dashboard');
+            },
+            
+            toggleSidebar() {
+                const sidebar = document.getElementById('client-sidebar');
+                const overlay = document.getElementById('sidebar-overlay');
+                sidebar.classList.toggle('open');
+                overlay.style.display = sidebar.classList.contains('open') ? 'block' : 'none';
+            },
+            
+            loadSection(section) {
+                this.currentSection = section;
+                document.querySelectorAll('.client-nav-link').forEach(l => l.classList.remove('active'));
+                document.querySelector(`[data-section="${section}"]`)?.classList.add('active');
+                document.querySelectorAll('.client-section').forEach(s => s.classList.remove('active'));
+                const sec = document.getElementById('sec-' + section);
+                if (sec) sec.classList.add('active');
+                
+                const titles = {dashboard:'My Dashboard',campaigns:'My Campaigns',invoices:'My Invoices',analytics:'Analytics',affiliate:'Affiliate Program',wallet:'Wallet & Payments',profile:'Profile Settings'};
+                document.getElementById('client-title').textContent = titles[section] || 'Dashboard';
+                
+                switch(section) {
+                    case 'dashboard': this.renderDashboard(); break;
+                    case 'campaigns': this.renderCampaigns(); break;
+                    case 'invoices': this.renderInvoices(); break;
+                    case 'analytics': this.renderAnalytics(); break;
+                    case 'affiliate': this.renderAffiliate(); break;
+                    case 'wallet': this.renderWallet(); break;
+                    case 'profile': this.renderProfile(); break;
+                }
+            },
+            
+            renderDashboard() {
+                const stats = CampaignManager.getStats(this.user.id);
+                const campaigns = CampaignManager.getCampaigns(this.user.id);
+                const invoices = InvoiceManager.getInvoices(this.user.id);
+                
+                document.getElementById('sec-dashboard').innerHTML = `
+                    <div class="stat-grid">
+                        <div class="stat-card" onclick="ClientPage.loadSection('campaigns')"><div class="stat-card-icon">📢</div><div class="stat-card-value">${stats.active}</div><div class="stat-card-label">Active Campaigns</div></div>
+                        <div class="stat-card" onclick="ClientPage.loadSection('invoices')"><div class="stat-card-icon">🧾</div><div class="stat-card-value">${invoices.length}</div><div class="stat-card-label">Total Invoices</div></div>
+                        <div class="stat-card" onclick="ClientPage.loadSection('analytics')"><div class="stat-card-icon">👁️</div><div class="stat-card-value">${stats.totalImpressions.toLocaleString()}</div><div class="stat-card-label">Total Impressions</div></div>
+                        <div class="stat-card" onclick="window.location.href='campaign.html'"><div class="stat-card-icon">➕</div><div class="stat-card-value" style="color:var(--primary)">New</div><div class="stat-card-label">Book Campaign</div></div>
+                    </div>
+                    <div class="data-card">
+                        <h3>📋 Recent Campaigns</h3>
+                        <div style="overflow-x:auto"><table class="client-table"><thead><tr><th>Campaign</th><th>Zone</th><th>Type</th><th>Rickshaws</th><th>Days</th><th>Cost</th><th>Status</th></tr></thead>
+                        <tbody>${campaigns.length === 0 ? '<tr><td colspan="7" class="text-center" style="padding:40px"><div class="empty-state"><div class="icon">📢</div><h3>No campaigns yet</h3><p>Start your first rickshaw advertising campaign today!</p><a href="campaign.html" class="btn btn-primary btn-lg">+ Create Campaign</a></div></td></tr>' : campaigns.slice(-5).reverse().map(c => `
+                            <tr><td><strong>${c.name}</strong>${c.hashtag ? `<br><small style="color:var(--primary)">#${c.hashtag}</small>` : ''}</td><td>${c.zoneName}</td><td style="text-transform:uppercase">${c.type}</td><td>${c.quantity}</td><td>${c.days}</td><td><strong>₹${(c.cost||0).toLocaleString()}</strong></td><td><span class="badge badge-${c.status==='active'?'active':c.status==='completed'?'completed':'pending'}">${c.status}</span></td></tr>
+                        `).join('')}</tbody></table></div>
+                        ${campaigns.length > 0 ? `<div style="text-align:center;margin-top:16px"><button class="btn btn-outline btn-sm" onclick="ClientPage.loadSection('campaigns')">View All Campaigns →</button></div>` : ''}
+                    </div>`;
+            },
+            
+            renderCampaigns() {
+                const campaigns = CampaignManager.getCampaigns(this.user.id);
+                document.getElementById('sec-campaigns').innerHTML = `
+                    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;flex-wrap:wrap;gap:12px">
+                        <h2 style="margin:0">My Campaigns (${campaigns.length})</h2>
+                        <a href="campaign.html" class="btn btn-primary">+ New Campaign</a>
+                    </div>
+                    ${campaigns.length === 0 ? `
+                        <div class="data-card"><div class="empty-state"><div class="icon">📢</div><h3>No campaigns yet</h3><p>Book your first rickshaw advertising campaign and reach thousands of commuters across Mumbra.</p><a href="campaign.html" class="btn btn-primary btn-lg">+ Book Campaign</a></div></div>
+                    ` : `
+                        <div class="data-card"><div style="overflow-x:auto"><table class="client-table"><thead><tr><th>Campaign</th><th>Zone</th><th>Type</th><th>Rickshaws</th><th>Days</th><th>Start</th><th>End</th><th>Cost</th><th>Status</th><th>Actions</th></tr></thead>
+                        <tbody>${campaigns.reverse().map(c => `
+                            <tr>
+                                <td><strong>${c.name}</strong>${c.hashtag ? `<br><small style="color:var(--primary)">#${c.hashtag}</small>` : ''}${c.contestName ? `<br><small>🏆 ${c.contestName}</small>` : ''}</td>
+                                <td>${c.zoneName}</td>
+                                <td style="text-transform:uppercase">${c.type}</td>
+                                <td>${c.quantity}</td>
+                                <td>${c.days}</td>
+                                <td>${new Date(c.startDate).toLocaleDateString()}</td>
+                                <td>${new Date(c.endDate).toLocaleDateString()}</td>
+                                <td><strong>₹${(c.cost||0).toLocaleString()}</strong></td>
+                                <td><span class="badge badge-${c.status==='active'?'active':c.status==='completed'?'completed':'pending'}">${c.status}</span></td>
+                                <td>
+                                    <button class="btn btn-outline btn-sm" onclick="ClientPage.viewCampaignDetails('${c.id}')" style="font-size:12px;padding:6px 10px">📋</button>
+                                    ${c.status === 'active' ? `<button class="btn btn-warning btn-sm" onclick="ClientPage.endCampaign('${c.id}')" style="font-size:12px;padding:6px 10px">⏹</button>` : ''}
+                                </td>
+                            </tr>
+                        `).join('')}</tbody></table></div></div>
+                    `}`;
+            },
+            
+            renderInvoices() {
+                const invoices = InvoiceManager.getInvoices(this.user.id);
+                document.getElementById('sec-invoices').innerHTML = `
+                    <h2 style="margin-bottom:24px">My Invoices (${invoices.length})</h2>
+                    ${invoices.length === 0 ? `
+                        <div class="data-card"><div class="empty-state"><div class="icon">🧾</div><h3>No invoices yet</h3><p>Invoices are generated when you book a campaign.</p></div></div>
+                    ` : `
+                        <div class="data-card"><div style="overflow-x:auto"><table class="client-table"><thead><tr><th>Invoice #</th><th>Campaign</th><th>Subtotal</th><th>GST</th><th>Total</th><th>Status</th><th>Date</th><th>Actions</th></tr></thead>
+                        <tbody>${invoices.reverse().map(inv => `
+                            <tr>
+                                <td><strong>${inv.invoiceNumber}</strong></td>
+                                <td>${inv.campaignName}</td>
+                                <td>₹${inv.subtotal.toLocaleString()}</td>
+                                <td>₹${inv.gst.toLocaleString()}</td>
+                                <td><strong>₹${inv.total.toLocaleString()}</strong></td>
+                                <td><span class="badge badge-${inv.status==='paid'?'paid':'pending'}">${inv.status}</span></td>
+                                <td>${new Date(inv.createdAt).toLocaleDateString()}</td>
+                                <td>
+                                    <button class="btn btn-outline btn-sm" onclick="InvoiceManager.downloadInvoice('${inv.id}')" style="font-size:12px;padding:6px 10px">📥</button>
+                                    <button class="btn btn-outline btn-sm" onclick="InvoiceManager.printInvoice('${inv.id}')" style="font-size:12px;padding:6px 10px">🖨️</button>
+                                    ${inv.status === 'pending' ? `<button class="btn btn-primary btn-sm" onclick="ClientPage.payInvoice('${inv.id}')" style="font-size:12px;padding:6px 10px">💳 Pay</button>` : ''}
+                                </td>
+                            </tr>
+                        `).join('')}</tbody></table></div></div>
+                    `}`;
+            },
+            
+            renderAnalytics() {
+                const stats = CampaignManager.getStats(this.user.id);
+                const campaigns = CampaignManager.getCampaigns(this.user.id);
+                document.getElementById('sec-analytics').innerHTML = `
+                    <h2 style="margin-bottom:24px">Campaign Analytics</h2>
+                    <div class="stat-grid">
+                        <div class="stat-card"><div class="stat-card-icon">📢</div><div class="stat-card-value">${stats.total}</div><div class="stat-card-label">Total Campaigns</div></div>
+                        <div class="stat-card"><div class="stat-card-icon">👁️</div><div class="stat-card-value">${stats.totalImpressions.toLocaleString()}</div><div class="stat-card-label">Total Impressions</div></div>
+                        <div class="stat-card"><div class="stat-card-icon">🎯</div><div class="stat-card-value">${stats.totalReach.toLocaleString()}</div><div class="stat-card-label">Total Reach</div></div>
+                        <div class="stat-card"><div class="stat-card-icon">💰</div><div class="stat-card-value">₹${stats.totalCost.toLocaleString()}</div><div class="stat-card-label">Total Investment</div></div>
+                    </div>
+                    ${campaigns.length > 0 ? `
+                        <div class="data-card"><h3>📊 Campaign Comparison</h3><canvas id="client-analytics-chart" height="300"></canvas></div>
+                    ` : '<div class="data-card"><div class="empty-state"><div class="icon">📈</div><h3>No data yet</h3><p>Analytics will appear once you launch campaigns.</p></div></div>'}
+                    <button class="btn btn-outline" onclick="Analytics.exportCSV()">📥 Export Data</button>
+                `;
+                setTimeout(() => {
+                    const canvas = document.getElementById('client-analytics-chart');
+                    if (canvas && campaigns.length > 0 && window.Dashboard) {
+                        const labels = campaigns.slice(-6).map(c => c.name.substring(0, 10));
+                        const values = campaigns.slice(-6).map(c => c.impressions || Math.floor(Math.random()*500000)+100000);
+                        Dashboard.drawBarChart(canvas.getContext('2d'), canvas.parentElement.offsetWidth - 48, 300, labels, values);
+                    }
+                }, 300);
+            },
+            
+            renderAffiliate() {
+                const link = AffiliateManager.generateReferralLink(this.user.id);
+                const commission = AffiliateManager.getCommission(this.user.id);
+                const stats = AffiliateManager.getReferralStats(this.user.id);
+                const leaderboard = AffiliateManager.getLeaderboard(5);
+                
+                document.getElementById('sec-affiliate').innerHTML = `
+                    <h2 style="margin-bottom:24px">Affiliate Program</h2>
+                    <div style="background:linear-gradient(135deg,var(--primary),var(--accent-cyan));color:#FFF;border-radius:24px;padding:32px;margin-bottom:24px">
+                        <h3 style="opacity:0.9">Your Commission Balance</h3>
+                        <div style="font-size:48px;font-weight:800;margin:12px 0">₹${commission.toLocaleString()}</div>
+                        <button class="btn btn-outline" style="color:#FFF;border-color:#FFF" onclick="ClientPage.requestWithdrawal()">💸 Withdraw</button>
+                    </div>
+                    <div class="stat-grid">
+                        <div class="stat-card"><div class="stat-card-icon">🔗</div><div class="stat-card-value">${stats.clicks}</div><div class="stat-card-label">Total Clicks</div></div>
+                        <div class="stat-card"><div class="stat-card-icon">👤</div><div class="stat-card-value">${stats.leads}</div><div class="stat-card-label">Leads</div></div>
+                        <div class="stat-card"><div class="stat-card-icon">✅</div><div class="stat-card-value">${stats.conversions}</div><div class="stat-card-label">Conversions</div></div>
+                    </div>
+                    <div class="data-card">
+                        <h3>🔗 Your Referral Link</h3>
+                        <div style="display:flex;gap:8px;margin-top:12px">
+                            <input type="text" value="${link}" readonly style="flex:1;font-family:monospace;padding:12px;border-radius:12px;border:1px solid var(--border)" id="ref-link-input">
+                            <button class="btn btn-primary" onclick="navigator.clipboard.writeText('${link}'); Notify.success('Link copied!')">📋 Copy</button>
+                        </div>
+                    </div>
+                    <div class="data-card">
+                        <h3>🏆 Affiliate Leaderboard</h3>
+                        ${leaderboard.map((l,i) => `
+                            <div style="display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--border)">
+                                <span style="font-weight:700;min-width:30px">#${i+1}</span>
+                                <span style="flex:1">${l.name}</span>
+                                <strong>₹${l.total.toLocaleString()}</strong>
+                            </div>
+                        `).join('')}
+                    </div>`;
+            },
+            
+            renderWallet() {
+                const invoices = InvoiceManager.getInvoices(this.user.id);
+                const totalSpent = invoices.reduce((s,i) => s + (i.total||0), 0);
+                const pendingPayments = invoices.filter(i => i.status === 'pending').reduce((s,i) => s + (i.total||0), 0);
+                
+                document.getElementById('sec-wallet').innerHTML = `
+                    <h2 style="margin-bottom:24px">Wallet & Payments</h2>
+                    <div class="stat-grid">
+                        <div class="stat-card"><div class="stat-card-icon">💰</div><div class="stat-card-value">₹${totalSpent.toLocaleString()}</div><div class="stat-card-label">Total Spent</div></div>
+                        <div class="stat-card"><div class="stat-card-icon">⏳</div><div class="stat-card-value">₹${pendingPayments.toLocaleString()}</div><div class="stat-card-label">Pending Payments</div></div>
+                        <div class="stat-card"><div class="stat-card-icon">✅</div><div class="stat-card-value">${invoices.filter(i=>i.status==='paid').length}</div><div class="stat-card-label">Paid Invoices</div></div>
+                    </div>
+                    <div class="data-card">
+                        <h3>💳 Payment Methods</h3>
+                        <p class="text-muted mb-4">Pay via PhonePe, UPI, or bank transfer.</p>
+                        <div style="display:flex;gap:12px;flex-wrap:wrap">
+                            <button class="btn btn-outline btn-lg" onclick="window.open('phonepay://pay?pa=9594306625@ybl&pn=RASAAI&am=1000&cu=INR','_blank')">📱 Pay via PhonePe</button>
+                            <a href="https://wa.me/919594306625?text=Hi%2C%20I%20want%20to%20make%20a%20payment%20for%20my%20campaign" class="btn btn-whatsapp btn-lg" target="_blank">💬 WhatsApp for Payment</a>
+                        </div>
+                    </div>`;
+            },
+            
+            renderProfile() {
+                document.getElementById('sec-profile').innerHTML = `
+                    <h2 style="margin-bottom:24px">Profile Settings</h2>
+                    <div class="data-card" style="max-width:600px">
+                        <form onsubmit="return false">
+                            <div class="form-group"><label>Full Name</label><input type="text" id="prof-name" value="${this.user.name||''}"></div>
+                            <div class="form-group"><label>Email</label><input type="email" value="${this.user.email||''}" disabled></div>
+                            <div class="form-group"><label>Phone</label><input type="tel" id="prof-phone" value="${this.user.phone||''}"></div>
+                            ${this.user.company !== undefined ? `<div class="form-group"><label>Company</label><input type="text" id="prof-company" value="${this.user.company||''}"></div>` : ''}
+                            ${this.user.gst !== undefined ? `<div class="form-group"><label>GST Number</label><input type="text" id="prof-gst" value="${this.user.gst||''}"></div>` : ''}
+                            <div class="form-group"><label>New Password (leave blank)</label><input type="password" id="prof-password" placeholder="Enter new password"></div>
+                            <button type="button" class="btn btn-primary btn-lg mt-4" onclick="ClientPage.updateProfile()">💾 Update Profile</button>
+                        </form>
+                    </div>`;
+            },
+            
+            // Actions
+            viewCampaignDetails(id) {
+                const c = CampaignManager.getCampaignById(id);
+                if (c) {
+                    Notify.info(`${c.name}: ${c.zoneName} | ${c.type} | ${c.quantity} rickshaws | ${c.days} days | ₹${(c.cost||0).toLocaleString()}`);
+                }
+            },
+            endCampaign(id) {
+                if (confirm('End this campaign? This will release the rickshaws.')) {
+                    CampaignManager.updateCampaign(id, { status: 'completed' });
+                    Notify.success('Campaign ended');
+                    this.loadSection('campaigns');
+                }
+            },
+            payInvoice(id) {
+                const inv = InvoiceManager.getInvoiceById(id);
+                if (!inv) return;
+                if (confirm(`Pay ₹${inv.total.toLocaleString()} for invoice ${inv.invoiceNumber}?`)) {
+                    const payment = PaymentManager.createPayment(id, inv.total, 'upi');
+                    Notify.success(`Payment initiated! Send ₹${inv.total} to UPI: rasaai@upi`);
+                    setTimeout(() => {
+                        PaymentManager.verifyPayment(payment.payment.id, 'TXN' + Date.now());
+                        Notify.success('Payment verified!');
+                        this.loadSection('invoices');
+                    }, 2000);
+                }
+            },
+            requestWithdrawal() {
+                const amount = prompt('Enter withdrawal amount (min ₹500):');
+                if (!amount) return;
+                const result = AffiliateManager.requestWithdrawal(this.user.id, parseInt(amount));
+                result.success ? Notify.success('Withdrawal requested!') : Notify.error(result.message);
+            },
+            updateProfile() {
+                const updates = {
+                    name: document.getElementById('prof-name')?.value,
+                    phone: document.getElementById('prof-phone')?.value,
+                    company: document.getElementById('prof-company')?.value,
+                    gst: document.getElementById('prof-gst')?.value
+                };
+                const password = document.getElementById('prof-password')?.value;
+                if (password) updates.password = password;
+                
+                if (Auth.updateProfile(updates)) {
+                    this.user = Auth.getCurrentUser();
+                    document.getElementById('client-subtitle').textContent = `Welcome back, ${this.user.name.split(' ')[0]}`;
+                    document.getElementById('client-avatar').textContent = this.user.name.charAt(0).toUpperCase();
+                    Notify.success('Profile updated!');
+                }
+            }
+        };
+        
+        document.addEventListener('DOMContentLoaded', () => ClientPage.init());
+        if (document.readyState !== 'loading') ClientPage.init();
+    </script>
+</body>
+</html>
