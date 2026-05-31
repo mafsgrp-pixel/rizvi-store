@@ -1,1 +1,765 @@
-
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=5.0">
+    <meta name="theme-color" content="#6C4DF6" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#0F1117" media="(prefers-color-scheme: dark)">
+    <meta name="color-scheme" content="light dark">
+    
+    <title>Book Campaign - RASAAI Outdoor Advertising Network</title>
+    <meta name="description" content="Book your rickshaw advertising campaign. LED & Audio ads across 12 Mumbra zones. Starting at ₹1,238/day.">
+    <meta name="robots" content="noindex, nofollow">
+    
+    <link rel="canonical" href="https://rizvi.store/rasaai/campaign.html">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%236C4DF6'/><text x='50' y='68' font-size='55' text-anchor='middle' fill='white' font-weight='bold'>R</text></svg>">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    
+    <style>
+        .campaign-page {
+            min-height: 100vh;
+            background: var(--bg);
+            padding: 40px 20px;
+        }
+        body.dark-mode .campaign-page {
+            background: var(--dark-bg);
+        }
+        .campaign-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .campaign-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 32px;
+            flex-wrap: wrap;
+        }
+        .campaign-header .back-btn {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: var(--card);
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 20px;
+            transition: all 0.2s;
+        }
+        .campaign-header .back-btn:hover {
+            background: var(--primary);
+            color: #FFF;
+        }
+        body.dark-mode .campaign-header .back-btn {
+            background: var(--dark-card);
+            border-color: var(--dark-border);
+        }
+        .campaign-card {
+            background: var(--card);
+            border-radius: var(--radius-lg);
+            padding: 40px;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-card);
+            margin-bottom: 24px;
+        }
+        body.dark-mode .campaign-card {
+            background: var(--dark-card);
+            border-color: var(--dark-border);
+            box-shadow: var(--dark-shadow);
+        }
+        .campaign-card h2 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+        .campaign-card .subtitle {
+            color: var(--text-secondary);
+            font-size: 14px;
+            margin-bottom: 24px;
+        }
+        body.dark-mode .campaign-card .subtitle {
+            color: var(--dark-muted);
+        }
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        @media (max-width: 600px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            .campaign-card {
+                padding: 24px;
+            }
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            font-size: 14px;
+            color: var(--text);
+        }
+        .form-group label .required {
+            color: var(--danger);
+        }
+        body.dark-mode .form-group label {
+            color: var(--dark-text);
+        }
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 14px 16px;
+            font-size: 15px;
+            border-radius: var(--radius-input);
+            border: 1px solid var(--border);
+            background: var(--input-bg);
+            color: var(--text);
+            transition: all 0.2s;
+        }
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(108,77,246,0.1);
+            outline: none;
+        }
+        body.dark-mode .form-group input,
+        body.dark-mode .form-group select,
+        body.dark-mode .form-group textarea {
+            background: var(--dark-input-bg);
+            border-color: var(--dark-border);
+            color: var(--dark-text);
+        }
+        .form-group input.input-error {
+            border-color: var(--danger) !important;
+        }
+        .field-error {
+            font-size: 12px;
+            color: var(--danger);
+            margin-top: 4px;
+            display: none;
+        }
+        .field-error.show {
+            display: block;
+        }
+        .field-hint {
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin-top: 4px;
+        }
+        body.dark-mode .field-hint {
+            color: var(--dark-muted);
+        }
+        
+        /* Pricing summary */
+        .pricing-summary {
+            background: linear-gradient(135deg, rgba(108,77,246,0.05), rgba(0,212,255,0.05));
+            border-radius: var(--radius-card);
+            padding: 24px;
+            border: 1px solid rgba(108,77,246,0.15);
+            margin-top: 24px;
+        }
+        body.dark-mode .pricing-summary {
+            background: linear-gradient(135deg, rgba(139,124,255,0.08), rgba(0,212,255,0.05));
+            border-color: rgba(139,124,255,0.2);
+        }
+        .pricing-summary h4 {
+            margin-bottom: 16px;
+            font-size: 16px;
+        }
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            font-size: 14px;
+            border-bottom: 1px solid var(--border);
+        }
+        body.dark-mode .summary-row {
+            border-bottom-color: var(--dark-border);
+        }
+        .summary-row:last-child {
+            border-bottom: none;
+        }
+        .summary-row.total {
+            font-size: 20px;
+            font-weight: 800;
+            color: var(--primary);
+            border-top: 2px solid var(--primary);
+            padding-top: 12px;
+            margin-top: 8px;
+        }
+        body.dark-mode .summary-row.total {
+            color: var(--dark-primary);
+            border-top-color: var(--dark-primary);
+        }
+        .summary-row .discount-text {
+            color: var(--success);
+            font-weight: 600;
+        }
+        
+        /* Zone selector cards */
+        .zone-selector {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 12px;
+            margin-top: 8px;
+        }
+        .zone-option {
+            padding: 14px;
+            border: 2px solid var(--border);
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.2s;
+            background: var(--card);
+        }
+        .zone-option:hover {
+            border-color: var(--primary);
+            background: rgba(108,77,246,0.04);
+        }
+        .zone-option.selected {
+            border-color: var(--primary);
+            background: rgba(108,77,246,0.08);
+            font-weight: 600;
+        }
+        body.dark-mode .zone-option {
+            background: var(--dark-card);
+            border-color: var(--dark-border);
+        }
+        body.dark-mode .zone-option.selected {
+            border-color: var(--dark-primary);
+            background: rgba(139,124,255,0.1);
+        }
+        .zone-option-name {
+            font-weight: 600;
+            font-size: 14px;
+        }
+        .zone-option-info {
+            font-size: 11px;
+            color: var(--text-secondary);
+            margin-top: 4px;
+        }
+        
+        /* Slider styles */
+        .range-slider-container {
+            position: relative;
+        }
+        .range-slider {
+            width: 100%;
+            height: 8px;
+            -webkit-appearance: none;
+            appearance: none;
+            background: linear-gradient(to right, var(--primary), var(--accent-cyan));
+            border-radius: 4px;
+            outline: none;
+            margin: 12px 0;
+        }
+        .range-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 28px;
+            height: 28px;
+            background: #FFF;
+            border-radius: 50%;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+            cursor: pointer;
+            border: 3px solid var(--primary);
+        }
+        .range-labels {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+        
+        /* Success card */
+        .success-card {
+            text-align: center;
+            padding: 60px 40px;
+        }
+        .success-card .icon {
+            font-size: 80px;
+            margin-bottom: 20px;
+        }
+        .success-card h2 {
+            font-size: 28px;
+            margin-bottom: 12px;
+        }
+        .success-card .invoice-link {
+            color: var(--primary);
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: underline;
+        }
+        
+        /* Loading overlay */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 999;
+        }
+        .loading-overlay .spinner-card {
+            background: var(--card);
+            border-radius: var(--radius-lg);
+            padding: 40px;
+            text-align: center;
+        }
+        body.dark-mode .loading-overlay .spinner-card {
+            background: var(--dark-card);
+        }
+        .spinner {
+            width: 48px;
+            height: 48px;
+            border: 4px solid var(--border);
+            border-top-color: var(--primary);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin: 0 auto 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="campaign-page">
+        <div class="campaign-container">
+            
+            <!-- Header -->
+            <div class="campaign-header">
+                <button class="back-btn" onclick="window.location.href='dashboard.html'" aria-label="Back to dashboard" title="Back">←</button>
+                <div>
+                    <h1 style="font-size:28px;font-weight:800;margin:0">Book New Campaign</h1>
+                    <p style="color:var(--text-secondary);font-size:14px;margin:4px 0 0">Advertise on moving rickshaws across Mumbra</p>
+                </div>
+            </div>
+            
+            <!-- Campaign Form -->
+            <div id="campaign-form-container">
+                <form id="campaign-form" onsubmit="return false;" novalidate>
+                    
+                    <!-- Step 1: Campaign Details -->
+                    <div class="campaign-card" id="step-1-card">
+                        <h2>📋 Step 1: Campaign Details</h2>
+                        <p class="subtitle">Give your campaign a name and choose the advertising type</p>
+                        
+                        <div class="form-group">
+                            <label for="camp-name">Campaign Name <span class="required">*</span></label>
+                            <input type="text" id="camp-name" placeholder="e.g., Mumbra Pizza Festival Promo" required maxlength="100">
+                            <div class="field-error" id="error-name"></div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="camp-type">Campaign Type <span class="required">*</span></label>
+                                <select id="camp-type" required onchange="CampaignPage.updatePricing()">
+                                    <option value="">Select type</option>
+                                    <option value="led">📺 LED Screen Campaign</option>
+                                    <option value="audio">🔊 Audio Campaign</option>
+                                    <option value="combo">🔥 Combo (LED + Audio)</option>
+                                </select>
+                                <div class="field-hint" id="type-hint"></div>
+                            </div>
+                            <div class="form-group">
+                                <label for="camp-zone">Target Zone <span class="required">*</span></label>
+                                <select id="camp-zone" required onchange="CampaignPage.updatePricing()">
+                                    <option value="">Select zone</option>
+                                </select>
+                                <div class="field-hint" id="zone-hint"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="camp-quantity">Number of Rickshaws <span class="required">*</span></label>
+                                <div class="range-slider-container">
+                                    <input type="range" id="camp-quantity" min="1" max="50" value="5" class="range-slider" oninput="CampaignPage.updateSliderLabel('quantity')">
+                                    <div class="range-labels"><span>1</span><span id="quantity-label">5 Rickshaws</span><span>50</span></div>
+                                </div>
+                                <div class="field-hint">10+ rickshaws = 10% discount!</div>
+                            </div>
+                            <div class="form-group">
+                                <label for="camp-days">Duration (Days) <span class="required">*</span></label>
+                                <div class="range-slider-container">
+                                    <input type="range" id="camp-days" min="1" max="90" value="7" class="range-slider" oninput="CampaignPage.updateSliderLabel('days')">
+                                    <div class="range-labels"><span>1 Day</span><span id="days-label">7 Days</span><span>90 Days</span></div>
+                                </div>
+                                <div class="field-hint">Min 1 day, Max 90 days</div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="camp-start-date">Start Date</label>
+                                <input type="date" id="camp-start-date" onchange="CampaignPage.updatePricing()">
+                            </div>
+                            <div class="form-group">
+                                <label for="camp-hashtag">Hashtag (Optional)</label>
+                                <input type="text" id="camp-hashtag" placeholder="#YourCampaign" maxlength="50">
+                                <div class="field-hint">Track your campaign with a unique hashtag</div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="camp-contest">Contest Name (Optional)</label>
+                                <input type="text" id="camp-contest" placeholder="e.g., Mumbra Selfie Contest" maxlength="100">
+                                <div class="field-hint">Run a contest with your campaign</div>
+                            </div>
+                            <div class="form-group">
+                                <label for="camp-notes">Notes (Optional)</label>
+                                <textarea id="camp-notes" rows="2" placeholder="Any special instructions..." maxlength="500"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Step 2: Pricing Summary -->
+                    <div class="campaign-card" id="step-2-card">
+                        <h2>💰 Step 2: Pricing Summary</h2>
+                        <p class="subtitle">Review your campaign cost before booking</p>
+                        
+                        <div class="pricing-summary" id="pricing-summary">
+                            <h4>📊 Cost Breakdown</h4>
+                            <div class="summary-row"><span>Campaign Type</span><span id="summary-type">-</span></div>
+                            <div class="summary-row"><span>Zone</span><span id="summary-zone">-</span></div>
+                            <div class="summary-row"><span>Rickshaws</span><span id="summary-quantity">-</span></div>
+                            <div class="summary-row"><span>Duration</span><span id="summary-days">-</span></div>
+                            <div class="summary-row"><span>Price per Rickshaw/Day</span><span id="summary-rate">-</span></div>
+                            <div class="summary-row"><span>Subtotal</span><span id="summary-subtotal">-</span></div>
+                            <div class="summary-row"><span>Discount</span><span id="summary-discount" class="discount-text">-</span></div>
+                            <div class="summary-row total"><span>Total Cost</span><span id="summary-total">-</span></div>
+                            <div class="summary-row"><span>Est. Daily Reach</span><span id="summary-reach">-</span></div>
+                            <div class="summary-row"><span>Est. Total Impressions</span><span id="summary-impressions">-</span></div>
+                            <div class="summary-row"><span>Est. ROI</span><span id="summary-roi" style="color:var(--success);font-weight:600">-</span></div>
+                        </div>
+                        
+                        <div style="display:flex;gap:12px;margin-top:24px;flex-wrap:wrap">
+                            <button type="button" class="btn btn-primary btn-lg" onclick="CampaignPage.submitCampaign()" id="submit-btn">
+                                🚀 Book Campaign Now
+                            </button>
+                            <button type="button" class="btn btn-outline btn-lg" onclick="window.location.href='dashboard.html'">
+                                Cancel
+                            </button>
+                            <a href="https://wa.me/919594306625?text=Hi%2C%20I%20want%20to%20book%20a%20campaign" class="btn btn-whatsapp btn-lg" target="_blank" rel="noopener">
+                                💬 Book via WhatsApp
+                            </a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            
+            <!-- Success Message (Hidden by default) -->
+            <div class="campaign-card success-card" id="success-card" style="display:none">
+                <div class="icon">🎉</div>
+                <h2>Campaign Booked Successfully!</h2>
+                <p class="text-muted mb-4">Your rickshaw advertising campaign has been created.</p>
+                <div id="success-details" style="text-align:left;max-width:400px;margin:0 auto 24px"></div>
+                <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+                    <button class="btn btn-primary btn-lg" onclick="CampaignPage.viewInvoice()">🧾 View Invoice</button>
+                    <button class="btn btn-outline btn-lg" onclick="window.location.href='dashboard.html'">📊 Go to Dashboard</button>
+                    <button class="btn btn-outline btn-lg" onclick="CampaignPage.bookAnother()">➕ Book Another</button>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    
+    <!-- Notification Container -->
+    <div id="notification-container" class="notification-container" aria-live="polite" role="status"></div>
+    
+    <script src="app.js"></script>
+    <script>
+        // =====================================================
+        // CAMPAIGN PAGE CONTROLLER
+        // =====================================================
+        const CampaignPage = {
+            lastInvoice: null,
+            lastCampaign: null,
+            
+            init() {
+                // Check auth
+                const user = Auth.getCurrentUser();
+                if (!user) {
+                    window.location.href = 'login.html?redirect=campaign.html';
+                    return;
+                }
+                
+                // Populate zone selector
+                this.populateZones();
+                
+                // Set default start date (tomorrow)
+                const tomorrow = new Date();
+                tomorrow.setDate(tomorrow.getDate() + 1);
+                document.getElementById('camp-start-date').value = tomorrow.toISOString().split('T')[0];
+                
+                // Initial pricing update
+                this.updatePricing();
+                
+                // Live price updates
+                document.addEventListener('pricesUpdated', () => this.updatePricing());
+                
+                // Handle URL params for quick booking
+                const params = new URLSearchParams(window.location.search);
+                if (params.get('zone')) document.getElementById('camp-zone').value = params.get('zone');
+                if (params.get('type')) document.getElementById('camp-type').value = params.get('type');
+                if (params.get('quantity')) {
+                    document.getElementById('camp-quantity').value = params.get('quantity');
+                    this.updateSliderLabel('quantity');
+                }
+                if (params.get('days')) {
+                    document.getElementById('camp-days').value = params.get('days');
+                    this.updateSliderLabel('days');
+                }
+                if (params.get('zone') || params.get('type')) this.updatePricing();
+            },
+            
+            populateZones() {
+                const select = document.getElementById('camp-zone');
+                if (!select || typeof CampaignCalculator === 'undefined') return;
+                
+                select.innerHTML = '<option value="">Select zone</option>';
+                CampaignCalculator.getZones().forEach(zone => {
+                    const available = Inventory.getAvailable(zone.id);
+                    select.innerHTML += `<option value="${zone.id}">${zone.name} (${available} rickshaws available)</option>`;
+                });
+            },
+            
+            updateSliderLabel(type) {
+                const input = document.getElementById('camp-' + type);
+                const label = document.getElementById(type + '-label');
+                if (!input || !label) return;
+                
+                const val = parseInt(input.value);
+                if (type === 'quantity') {
+                    label.textContent = val + ' Rickshaw' + (val > 1 ? 's' : '');
+                    if (val >= 10) {
+                        label.textContent += ' 🎉';
+                        label.style.color = 'var(--success)';
+                    } else {
+                        label.style.color = '';
+                    }
+                } else if (type === 'days') {
+                    label.textContent = val + ' Day' + (val > 1 ? 's' : '');
+                }
+                
+                this.updatePricing();
+            },
+            
+            updatePricing() {
+                const type = document.getElementById('camp-type').value;
+                const zoneId = document.getElementById('camp-zone').value;
+                const quantity = parseInt(document.getElementById('camp-quantity').value) || 1;
+                const days = parseInt(document.getElementById('camp-days').value) || 1;
+                
+                if (!type || !zoneId) return;
+                
+                const zone = CampaignCalculator.getZoneById(zoneId);
+                if (!zone) return;
+                
+                const cost = PricingEngine.calculateCost(type, quantity, days);
+                const basePrice = type === 'led' ? PricingEngine.getLEDPrice() : 
+                                 type === 'audio' ? PricingEngine.getAudioPrice() : 
+                                 PricingEngine.getLEDPrice() + PricingEngine.getAudioPrice();
+                const subtotal = basePrice * quantity * days;
+                const discount = quantity >= 10 ? Math.round(subtotal * 0.10) : 0;
+                const dailyReach = Math.floor(zone.traffic * 0.4 * quantity);
+                const totalReach = dailyReach * days;
+                const totalImpressions = Math.floor(totalReach * 2.8);
+                const roi = cost > 0 ? Math.round(((totalImpressions * 0.002 * 0.15 * 5000 - cost) / cost) * 100) : 0;
+                
+                // Update type hint
+                const typeHint = document.getElementById('type-hint');
+                if (typeHint) {
+                    typeHint.textContent = type === 'led' ? `LED: ₹${PricingEngine.getLEDPrice().toLocaleString()}/day/rickshaw` :
+                                          type === 'audio' ? `Audio: ₹${PricingEngine.getAudioPrice().toLocaleString()}/day/rickshaw` :
+                                          `Combo: LED + Audio on each rickshaw`;
+                }
+                
+                // Update zone hint
+                const zoneHint = document.getElementById('zone-hint');
+                if (zoneHint && zone) {
+                    zoneHint.textContent = `Population: ${zone.population.toLocaleString()} | Traffic: ${zone.traffic.toLocaleString()}/day | Peak: ${zone.peakHours}`;
+                }
+                
+                // Update summary
+                document.getElementById('summary-type').textContent = type.toUpperCase() + ' Campaign';
+                document.getElementById('summary-zone').textContent = zone.name;
+                document.getElementById('summary-quantity').textContent = quantity + ' Rickshaw' + (quantity > 1 ? 's' : '');
+                document.getElementById('summary-days').textContent = days + ' Day' + (days > 1 ? 's' : '');
+                document.getElementById('summary-rate').textContent = '₹' + basePrice.toLocaleString();
+                document.getElementById('summary-subtotal').textContent = '₹' + subtotal.toLocaleString();
+                document.getElementById('summary-discount').textContent = discount > 0 ? '-₹' + discount.toLocaleString() + ' (10% off!)' : 'No discount';
+                document.getElementById('summary-discount').className = discount > 0 ? 'discount-text' : '';
+                document.getElementById('summary-total').textContent = '₹' + cost.toLocaleString();
+                document.getElementById('summary-reach').textContent = totalReach.toLocaleString();
+                document.getElementById('summary-impressions').textContent = totalImpressions.toLocaleString();
+                document.getElementById('summary-roi').textContent = roi + '%';
+                
+                // Store calculation
+                this.lastCalculation = {
+                    type, zone: zoneId, zoneName: zone.name, quantity, days,
+                    cost, subtotal, discount, basePrice,
+                    reach: totalReach, impressions: totalImpressions, roi
+                };
+            },
+            
+            validateForm() {
+                let valid = true;
+                const name = document.getElementById('camp-name').value.trim();
+                const type = document.getElementById('camp-type').value;
+                const zone = document.getElementById('camp-zone').value;
+                
+                // Name
+                if (!name || name.length < 2) {
+                    this.showError('error-name', 'Campaign name must be at least 2 characters');
+                    valid = false;
+                } else {
+                    this.showError('error-name', '');
+                }
+                
+                // Type
+                if (!type) {
+                    Notify.warning('Please select a campaign type');
+                    valid = false;
+                }
+                
+                // Zone
+                if (!zone) {
+                    Notify.warning('Please select a target zone');
+                    valid = false;
+                }
+                
+                return valid;
+            },
+            
+            submitCampaign() {
+                if (!this.validateForm()) return;
+                
+                const user = Auth.getCurrentUser();
+                if (!user) {
+                    window.location.href = 'login.html?redirect=campaign.html';
+                    return;
+                }
+                
+                // Show loading
+                const submitBtn = document.getElementById('submit-btn');
+                const originalText = submitBtn.textContent;
+                submitBtn.disabled = true;
+                submitBtn.textContent = '⏳ Booking...';
+                
+                // Simulate processing
+                setTimeout(() => {
+                    const data = {
+                        name: document.getElementById('camp-name').value.trim(),
+                        type: document.getElementById('camp-type').value,
+                        zone: document.getElementById('camp-zone').value,
+                        quantity: parseInt(document.getElementById('camp-quantity').value),
+                        days: parseInt(document.getElementById('camp-days').value),
+                        startDate: document.getElementById('camp-start-date').value,
+                        hashtag: document.getElementById('camp-hashtag').value.trim(),
+                        contestName: document.getElementById('camp-contest').value.trim(),
+                        notes: document.getElementById('camp-notes').value.trim(),
+                        cost: this.lastCalculation?.cost || 0,
+                        impressions: this.lastCalculation?.impressions || 0,
+                        reach: this.lastCalculation?.reach || 0,
+                        discount: this.lastCalculation?.discount || 0,
+                        zoneName: this.lastCalculation?.zoneName || ''
+                    };
+                    
+                    // Create campaign
+                    const campaign = CampaignManager.createCampaign(data);
+                    this.lastCampaign = campaign;
+                    
+                    // Generate invoice
+                    const invoice = InvoiceManager.generateInvoice({
+                        ...campaign,
+                        customerName: user.name,
+                        userId: user.id
+                    });
+                    this.lastInvoice = invoice;
+                    
+                    // Handle referral tracking
+                    const refCode = Storage.get('referralCode');
+                    if (refCode && campaign.cost > 0) {
+                        AffiliateManager.trackConversion(refCode, campaign.cost, campaign.id);
+                        Storage.remove('referralCode');
+                    }
+                    
+                    // Show success
+                    document.getElementById('campaign-form-container').style.display = 'none';
+                    document.getElementById('success-card').style.display = 'block';
+                    
+                    const detailsDiv = document.getElementById('success-details');
+                    detailsDiv.innerHTML = `
+                        <div class="summary-row"><span>Campaign</span><strong>${campaign.name}</strong></div>
+                        <div class="summary-row"><span>Type</span><span>${campaign.type.toUpperCase()}</span></div>
+                        <div class="summary-row"><span>Zone</span><span>${campaign.zoneName}</span></div>
+                        <div class="summary-row"><span>Rickshaws</span><span>${campaign.quantity}</span></div>
+                        <div class="summary-row"><span>Duration</span><span>${campaign.days} days</span></div>
+                        <div class="summary-row"><span>Total Cost</span><strong>₹${campaign.cost.toLocaleString()}</strong></div>
+                        <div class="summary-row"><span>Invoice</span><span>${invoice.invoiceNumber}</span></div>
+                        ${campaign.hashtag ? `<div class="summary-row"><span>Hashtag</span><span style="color:var(--primary)">#${campaign.hashtag}</span></div>` : ''}
+                    `;
+                    
+                    Notify.success('Campaign booked successfully!');
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = originalText;
+                    
+                    // Scroll to success
+                    document.getElementById('success-card').scrollIntoView({ behavior: 'smooth' });
+                    
+                }, 800);
+            },
+            
+            viewInvoice() {
+                if (this.lastInvoice) {
+                    InvoiceManager.downloadInvoice(this.lastInvoice.id);
+                }
+            },
+            
+            bookAnother() {
+                document.getElementById('campaign-form-container').style.display = 'block';
+                document.getElementById('success-card').style.display = 'none';
+                document.getElementById('camp-name').value = '';
+                document.getElementById('camp-hashtag').value = '';
+                document.getElementById('camp-contest').value = '';
+                document.getElementById('camp-notes').value = '';
+                document.getElementById('campaign-form-container').scrollIntoView({ behavior: 'smooth' });
+                this.updatePricing();
+            },
+            
+            showError(id, message) {
+                const el = document.getElementById(id);
+                if (!el) return;
+                el.textContent = message;
+                el.classList.toggle('show', !!message);
+                
+                // Highlight input
+                const inputId = id.replace('error-', 'camp-');
+                const input = document.getElementById(inputId);
+                if (input) input.classList.toggle('input-error', !!message);
+            }
+        };
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => CampaignPage.init());
+        if (document.readyState === 'interactive' || document.readyState === 'complete') {
+            CampaignPage.init();
+        }
+    </script>
+</body>
+</html>
