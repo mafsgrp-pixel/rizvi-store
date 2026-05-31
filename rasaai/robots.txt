@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /driver/
+Disallow: /affiliate/
+Disallow: /sales/
+Disallow: /assets/js/
+Sitemap: https://rizvi.store/rasaai/sitemap.xml
+
+# Crawl-delay: 10
