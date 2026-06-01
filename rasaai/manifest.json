@@ -1,5 +1,5 @@
 {
-  "name": "RASAAI - Rickshaw Advertising Network",
+  "name": "RASAAI - Rickshaw Advertising",
   "short_name": "RASAAI",
   "description": "Advertise on moving rickshaws across Mumbra. LED & Audio campaigns starting at ₹1,238/day.",
   "start_url": "/rasaai/",
@@ -13,8 +13,14 @@
   "scope": "/rasaai/",
   "icons": [
     {
-      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%236C4DF6'/><text x='50' y='68' font-size='55' text-anchor='middle' fill='white' font-weight='bold'>R</text></svg>",
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><rect width='512' height='512' rx='100' fill='%236C4DF6'/><text x='256' y='340' font-size='280' text-anchor='middle' fill='white' font-weight='900' font-family='Inter,sans-serif'>R</text></svg>",
       "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'><rect width='192' height='192' rx='38' fill='%236C4DF6'/><text x='96' y='128' font-size='105' text-anchor='middle' fill='white' font-weight='900' font-family='Inter,sans-serif'>R</text></svg>",
+      "sizes": "192x192",
       "type": "image/svg+xml",
       "purpose": "any maskable"
     }
@@ -22,13 +28,17 @@
   "shortcuts": [
     {
       "name": "Book Campaign",
+      "short_name": "Book",
+      "description": "Book a new advertising campaign",
       "url": "/rasaai/campaign.html",
-      "description": "Book a new advertising campaign"
+      "icons": [{ "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 96 96'><rect width='96' height='96' rx='20' fill='%236C4DF6'/><text x='48' y='64' font-size='50' text-anchor='middle' fill='white'>+</text></svg>", "sizes": "96x96" }]
     },
     {
       "name": "Dashboard",
+      "short_name": "Dashboard",
+      "description": "View your dashboard",
       "url": "/rasaai/dashboard.html",
-      "description": "View your dashboard"
+      "icons": [{ "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 96 96'><rect width='96' height='96' rx='20' fill='%236C4DF6'/><text x='48' y='64' font-size='50' text-anchor='middle' fill='white'>📊</text></svg>", "sizes": "96x96" }]
     }
   ],
   "related_applications": [],
