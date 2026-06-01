@@ -1,0 +1,104 @@
+<!--
+ * Filename: scan.html
+ * Path: /pages/scan.html
+ * Project: RASAAI - Auto Rickshaw Advertising Network
+ * Description: QR Code Scanner Page - Passenger engagement
+ * Role: passenger, client, admin, super_admin
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#221F60">
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="icon" type="image/x-icon" href="/rasaai/assets/images/favicon.ico">
+    <link rel="manifest" href="/rasaai/manifest.json">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/rasaai/css/main.css">
+    <link rel="stylesheet" href="/rasaai/css/layout.css">
+    <link rel="stylesheet" href="/rasaai/css/components.css">
+    <link rel="stylesheet" href="/rasaai/css/dashboard.css">
+    <link rel="stylesheet" href="/rasaai/css/mobile.css">
+    <link rel="stylesheet" href="/rasaai/css/animations.css">
+    <title>Scan QR - RASAAI</title>
+</head>
+<body class="dashboard-body">
+    <main class="dashboard-main" style="margin-left:0;">
+        <header class="dashboard-header">
+            <div class="dashboard-header-left"><a href="/rasaai/index.html" style="font-size:20px;font-weight:900;color:#221F60;">RASAAI</a></div>
+            <div class="dashboard-header-right"><button class="header-user-btn" onclick="logout()"><div class="header-user-avatar" id="header-avatar">U</div><span class="header-user-name" id="header-name">User</span></button></div>
+        </header>
+        <div class="dashboard-content" style="max-width:500px;margin:0 auto;">
+            <div class="scanner-container" id="scanner-container">
+                <div class="scanner-header text-center mb-xl">
+                    <div style="font-size:64px;margin-bottom:12px;">📷</div>
+                    <h3>Scan QR Code</h3>
+                    <p style="color:#6C757D;">Scan a QR code on any RASAAI rickshaw to earn coins!</p>
+                </div>
+                <div id="scanner-video-container" class="scanner-video-container" style="background:#1A1D23;border-radius:24px;height:300px;display:flex;align-items:center;justify-content:center;margin-bottom:20px;">
+                    <video id="scanner-video" autoplay playsinline style="width:100%;height:100%;object-fit:cover;border-radius:24px;display:none;"></video>
+                    <div id="scanner-placeholder" style="text-align:center;color:#8B91B0;">
+                        <div style="font-size:48px;">📱</div>
+                        <p>Camera preview here</p>
+                    </div>
+                </div>
+                <div id="scan-result"></div>
+                <div class="scanner-actions text-center">
+                    <button class="btn btn-orange btn-lg btn-full mb-base" onclick="handleScan()">📷 Start Scanning</button>
+                    <button class="btn btn-outline btn-full" onclick="handleSimulateScan()">🎯 Simulate Scan (Demo)</button>
+                </div>
+                <div class="scanner-stats flex-between mt-xl" style="background:#F8F9FA;border-radius:16px;padding:20px;">
+                    <div style="text-align:center;"><div style="font-size:24px;font-weight:800;color:#221F60;" id="today-scans">0</div><div style="font-size:11px;color:#6C757D;">Today</div></div>
+                    <div style="text-align:center;"><div style="font-size:24px;font-weight:800;color:#221F60;" id="total-coins">0</div><div style="font-size:11px;color:#6C757D;">Coins</div></div>
+                    <div style="text-align:center;"><div style="font-size:24px;font-weight:800;color:#221F60;" id="streak-count">0</div><div style="font-size:11px;color:#6C757D;">Day Streak</div></div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script src="/rasaai/js/data/constants.js"></script>
+    <script src="/rasaai/js/data/demo-users.js"></script>
+    <script src="/rasaai/js/utils/helpers.js"></script>
+    <script src="/rasaai/js/utils/formatters.js"></script>
+    <script src="/rasaai/js/core/config.js"></script>
+    <script src="/rasaai/js/core/auth.js"></script>
+    <script src="/rasaai/js/core/router.js"></script>
+    <script src="/rasaai/js/modules/scanner.js"></script>
+    <script src="/rasaai/js/modules/gamification.js"></script>
+    <script src="/rasaai/js/modules/notifications.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded',function(){
+            var user=getCurrentUser();
+            if(user){document.getElementById('header-avatar').textContent=getInitials(user.name);document.getElementById('header-name').textContent=user.name;}
+            document.getElementById('today-scans').textContent=ScannerState.todayScans;
+            document.getElementById('total-coins').textContent=ScannerState.totalCoins;
+            document.getElementById('streak-count').textContent=ScannerState.currentStreak+' days';
+        });
+        function handleScan(){
+            var video=document.getElementById('scanner-video');
+            var placeholder=document.getElementById('scanner-placeholder');
+            video.style.display='block';
+            placeholder.style.display='none';
+            showToast('Camera activated! Simulating scan in 3 seconds...','info');
+            setTimeout(async function(){
+                var scanData=simulateQRScan();
+                var result=await processScan(scanData);
+                video.style.display='none';
+                placeholder.style.display='block';
+                renderScanResult(result);
+                document.getElementById('today-scans').textContent=ScannerState.todayScans;
+                document.getElementById('total-coins').textContent=ScannerState.totalCoins;
+                document.getElementById('streak-count').textContent=ScannerState.currentStreak+' days';
+            },3000);
+        }
+        async function handleSimulateScan(){
+            var scanData=simulateQRScan();
+            var result=await processScan(scanData);
+            renderScanResult(result);
+            document.getElementById('today-scans').textContent=ScannerState.todayScans;
+            document.getElementById('total-coins').textContent=ScannerState.totalCoins;
+            document.getElementById('streak-count').textContent=ScannerState.currentStreak+' days';
+        }
+    </script>
+</body>
+</html>
