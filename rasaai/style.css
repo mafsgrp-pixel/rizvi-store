@@ -2511,7 +2511,79 @@ body.dark-mode .text-muted { color: var(--dark-muted); }
   .pricing-amount { font-size: 40px; }
   .btn-lg { padding: 14px 24px; font-size: 16px; }
 }
-
+/* =====================================================
+   TRUSTED SECTION FIX
+   ===================================================== */
+.trusted-section {
+    background: var(--bg-secondary);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 60px 0;
+    overflow: hidden;
+}
+body.dark-mode .trusted-section {
+    background: var(--dark-secondary);
+    border-top-color: var(--dark-border);
+    border-bottom-color: var(--dark-border);
+}
+.trusted-title {
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-secondary);
+    margin-bottom: 8px;
+    text-align: center;
+}
+body.dark-mode .trusted-title {
+    color: var(--dark-muted);
+}
+.trusted-rating {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 32px;
+}
+.trusted-marquee {
+    overflow: hidden;
+    mask-image: linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%);
+    padding: 10px 0;
+}
+.marquee-track {
+    display: flex;
+    gap: 48px;
+    animation: marqueeScroll 25s linear infinite;
+    width: max-content;
+}
+.marquee-track:hover {
+    animation-play-state: paused;
+}
+@keyframes marqueeScroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+.logo-placeholder {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 600;
+    font-size: 16px;
+    color: var(--text);
+    white-space: nowrap;
+    opacity: 0.7;
+    padding: 8px 0;
+    transition: all 0.3s ease;
+    cursor: default;
+}
+.logo-placeholder:hover {
+    opacity: 1;
+    transform: scale(1.05);
+}
+body.dark-mode .logo-placeholder {
+    color: var(--dark-text);
+}
 /* =====================================================
    END OF style.css | Complete Design System v3.0
    Lines: ~2,300 | All Sections Covered
