@@ -1,15 +1,12 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=5.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta name="theme-color" content="#6C4DF6">
-    <title>Login - RASAAI Outdoor Advertising Network</title>
-    <meta name="robots" content="noindex, nofollow">
-    <link rel="canonical" href="https://rizvi.store/rasaai/login.html">
+    <title>Login - RASAAI</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%236C4DF6'/><text x='50' y='68' font-size='55' text-anchor='middle' fill='white' font-weight='bold'>R</text></svg>">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
     <style>
         *{margin:0;padding:0;box-sizing:border-box}
         body{
@@ -20,49 +17,16 @@
             justify-content:center;
             background:#F7F8FC;
             padding:20px;
-            position:relative;
-            overflow:hidden;
         }
-        body.dark-mode{background:#0F1117}
-        
-        .bg-blur1{
-            position:fixed;
-            width:500px;height:500px;
-            border-radius:50%;
-            background:rgba(108,77,246,0.3);
-            filter:blur(120px);
-            top:-20%;left:-10%;
-            pointer-events:none;
-            z-index:0;
-        }
-        .bg-blur2{
-            position:fixed;
-            width:400px;height:400px;
-            border-radius:50%;
-            background:rgba(0,212,255,0.25);
-            filter:blur(100px);
-            bottom:-15%;right:-10%;
-            pointer-events:none;
-            z-index:0;
-        }
-        
         .login-box{
-            width:100%;
-            max-width:420px;
-            position:relative;
-            z-index:1;
             background:#fff;
             border-radius:24px;
             padding:40px 30px;
+            width:100%;
+            max-width:420px;
+            box-shadow:0 20px 60px rgba(0,0,0,0.1);
             border:1px solid rgba(0,0,0,0.06);
-            box-shadow:0 20px 60px rgba(0,0,0,0.08);
         }
-        body.dark-mode .login-box{
-            background:#1a1f2e;
-            border-color:rgba(255,255,255,0.08);
-            box-shadow:0 20px 60px rgba(0,0,0,0.5);
-        }
-        
         .logo-area{text-align:center;margin-bottom:24px}
         .logo-icon{
             width:56px;height:56px;
@@ -74,62 +38,33 @@
             color:#fff;
             font-size:28px;
             font-weight:900;
-            margin-bottom:12px;
+            margin-bottom:10px;
         }
         .logo-text{
-            font-size:28px;
+            font-size:26px;
             font-weight:800;
             background:linear-gradient(135deg,#6C4DF6,#00D4FF);
             -webkit-background-clip:text;
             -webkit-text-fill-color:transparent;
-            background-clip:text;
-            display:block;
         }
-        .subtitle{color:#6B7280;font-size:14px;margin-top:4px}
-        body.dark-mode .subtitle{color:#9AA3B2}
-        
+        .subtitle{text-align:center;color:#6B7280;font-size:14px;margin-bottom:24px}
         .input-group{margin-bottom:16px}
         .input-group label{display:block;font-weight:600;font-size:13px;margin-bottom:6px;color:#111827}
-        body.dark-mode .input-group label{color:#fff}
         .input-group input{
             width:100%;
             padding:14px 16px;
-            font-size:16px;
-            border:1px solid rgba(0,0,0,0.1);
+            border:1px solid #ddd;
             border-radius:14px;
-            background:#fff;
-            color:#111;
+            font-size:16px;
             outline:none;
-            transition:all 0.2s;
-            font-family:inherit;
+            transition:0.2s;
+            background:#fff;
         }
-        .input-group input:focus{
-            border-color:#6C4DF6;
-            box-shadow:0 0 0 4px rgba(108,77,246,0.1);
-        }
-        body.dark-mode .input-group input{
-            background:rgba(255,255,255,0.05);
-            border-color:rgba(255,255,255,0.1);
-            color:#fff;
-        }
-        body.dark-mode .input-group input:focus{
-            border-color:#8B7CFF;
-            box-shadow:0 0 0 4px rgba(139,124,255,0.2);
-        }
-        
-        .row-flex{
-            display:flex;
-            justify-content:space-between;
-            align-items:center;
-            margin-bottom:20px;
-            font-size:13px;
-        }
-        .row-flex label{display:flex;align-items:center;gap:6px;color:#6B7280;cursor:pointer}
-        body.dark-mode .row-flex label{color:#9AA3B2}
-        .row-flex a{color:#6C4DF6;font-weight:500;text-decoration:none}
-        body.dark-mode .row-flex a{color:#8B7CFF}
-        
-        .btn-submit{
+        .input-group input:focus{border-color:#6C4DF6;box-shadow:0 0 0 3px rgba(108,77,246,0.1)}
+        .flex-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;font-size:13px}
+        .flex-row label{display:flex;align-items:center;gap:6px;color:#6B7280;cursor:pointer}
+        .flex-row a{color:#6C4DF6;text-decoration:none;font-weight:500}
+        .submit-btn{
             width:100%;
             padding:15px;
             background:linear-gradient(135deg,#6C4DF6,#8A63FF);
@@ -139,122 +74,79 @@
             font-size:17px;
             font-weight:600;
             cursor:pointer;
-            transition:all 0.3s;
-            font-family:inherit;
             box-shadow:0 8px 24px rgba(108,77,246,0.3);
+            transition:0.3s;
         }
-        .btn-submit:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(108,77,246,0.5)}
-        .btn-submit:active{transform:scale(0.98)}
-        .btn-submit:disabled{opacity:0.7;cursor:not-allowed;transform:none}
-        
-        .alert{
-            padding:12px 16px;
-            border-radius:12px;
-            font-size:13px;
-            font-weight:500;
-            margin-bottom:16px;
-            display:none;
-            text-align:center;
-        }
-        .alert-error{background:rgba(255,77,109,0.1);color:#FF4D6D;border:1px solid rgba(255,77,109,0.2)}
-        .alert-success{background:rgba(0,200,150,0.1);color:#00C896;border:1px solid rgba(0,200,150,0.2)}
-        .alert.show{display:block}
-        
-        .bottom-link{text-align:center;margin-top:20px;font-size:14px;color:#6B7280}
-        body.dark-mode .bottom-link{color:#9AA3B2}
-        .bottom-link a{color:#6C4DF6;font-weight:600;text-decoration:none}
-        body.dark-mode .bottom-link a{color:#8B7CFF}
-        
-        .demo-box{margin-top:20px;padding:16px;background:rgba(108,77,246,0.04);border-radius:14px;border:1px solid rgba(108,77,246,0.1)}
-        body.dark-mode .demo-box{background:rgba(139,124,255,0.05);border-color:rgba(139,124,255,0.1)}
-        .demo-box summary{font-weight:600;font-size:13px;cursor:pointer;color:#6C4DF6;margin-bottom:10px;user-select:none}
-        body.dark-mode .demo-box summary{color:#8B7CFF}
-        .demo-row{
-            display:flex;
-            justify-content:space-between;
-            align-items:center;
-            padding:8px 0;
-            font-size:12px;
-            border-bottom:1px solid rgba(0,0,0,0.04);
-        }
-        body.dark-mode .demo-row{border-bottom-color:rgba(255,255,255,0.04)}
-        .demo-row:last-child{border-bottom:none}
-        .demo-role{font-weight:600;color:#6C4DF6;min-width:65px;text-transform:capitalize;font-size:12px}
-        body.dark-mode .demo-role{color:#8B7CFF}
-        .demo-email{flex:1;margin:0 8px;color:#6B7280;font-size:11px}
-        body.dark-mode .demo-email{color:#9AA3B2}
-        .demo-btn{
-            padding:5px 12px;
-            background:#6C4DF6;
-            color:#fff;
-            border:none;
-            border-radius:8px;
-            font-size:11px;
-            cursor:pointer;
-            font-weight:600;
-            font-family:inherit;
-            transition:all 0.2s;
-        }
-        .demo-btn:hover{background:#8A63FF;transform:scale(1.05)}
-        .demo-btn:active{transform:scale(0.95)}
+        .submit-btn:hover{transform:scale(1.02)}
+        .submit-btn:disabled{opacity:0.6;cursor:wait;transform:none}
+        .message{padding:12px 16px;border-radius:12px;font-size:13px;margin-bottom:16px;display:none;text-align:center}
+        .message.error{background:#FFF0F0;color:#E53E3E;border:1px solid #FECACA;display:block}
+        .message.success{background:#F0FFF4;color:#38A169;border:1px solid #C6F6D5;display:block}
+        .bottom-text{text-align:center;margin-top:20px;font-size:14px;color:#6B7280}
+        .bottom-text a{color:#6C4DF6;font-weight:600;text-decoration:none}
+        .demo-box{margin-top:20px;padding:16px;background:#F8F7FF;border-radius:14px;border:1px solid #E8E5FF}
+        .demo-box summary{font-weight:600;font-size:13px;cursor:pointer;color:#6C4DF6}
+        .demo-item{display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px solid #eee;font-size:12px}
+        .demo-item:last-child{border-bottom:none}
+        .demo-role{font-weight:600;color:#6C4DF6;min-width:70px}
+        .demo-email{flex:1;margin:0 8px;color:#666;font-size:11px}
+        .demo-btn{padding:4px 10px;background:#6C4DF6;color:#fff;border:none;border-radius:8px;font-size:10px;cursor:pointer;font-weight:600}
+        .demo-btn:hover{background:#8A63FF}
     </style>
 </head>
 <body>
-    <div class="bg-blur1"></div>
-    <div class="bg-blur2"></div>
 
     <div class="login-box">
         <div class="logo-area">
             <div class="logo-icon">R</div>
-            <span class="logo-text">RASAAI</span>
-            <p class="subtitle">Sign in to your account</p>
+            <div class="logo-text">RASAAI</div>
         </div>
+        <p class="subtitle">Sign in to your account</p>
         
-        <div class="alert alert-error" id="errorBox"></div>
-        <div class="alert alert-success" id="successBox"></div>
+        <div class="message" id="msg"></div>
         
-        <form id="loginForm" onsubmit="return false;">
+        <form id="loginForm">
             <div class="input-group">
-                <label for="emailInput">Email Address</label>
-                <input type="email" id="emailInput" placeholder="Enter your email" required autocomplete="email" autofocus>
+                <label for="email">Email Address</label>
+                <input type="email" id="email" placeholder="Enter your email" required autocomplete="email" autofocus>
             </div>
             <div class="input-group">
-                <label for="passInput">Password</label>
-                <input type="password" id="passInput" placeholder="Enter your password" required autocomplete="current-password">
+                <label for="password">Password</label>
+                <input type="password" id="password" placeholder="Enter your password" required autocomplete="current-password">
             </div>
-            <div class="row-flex">
-                <label><input type="checkbox" id="rememberCheck"> Remember me</label>
+            <div class="flex-row">
+                <label><input type="checkbox" id="remember"> Remember me</label>
                 <a href="forgot-password.html">Forgot password?</a>
             </div>
-            <button type="submit" class="btn-submit" id="submitBtn" onclick="doLogin()">🔐 Sign In</button>
+            <button type="submit" class="submit-btn" id="submitBtn">🔐 Sign In</button>
         </form>
         
-        <p class="bottom-link">Don't have an account? <a href="register.html">Create one</a></p>
+        <p class="bottom-text">Don't have an account? <a href="register.html">Create one</a></p>
         
         <details class="demo-box">
-            <summary>🔑 Demo Login Credentials (Click to expand)</summary>
-            <div style="margin-top:8px">
-                <div class="demo-row">
+            <summary>🔑 Demo Login Credentials</summary>
+            <div style="margin-top:10px">
+                <div class="demo-item">
                     <span class="demo-role">👑 Admin</span>
                     <span class="demo-email">admin@rasaai.com</span>
                     <button class="demo-btn" onclick="fillDemo('admin@rasaai.com','admin123')">Fill</button>
                 </div>
-                <div class="demo-row">
+                <div class="demo-item">
                     <span class="demo-role">👤 Client</span>
                     <span class="demo-email">client@rasaai.com</span>
                     <button class="demo-btn" onclick="fillDemo('client@rasaai.com','client123')">Fill</button>
                 </div>
-                <div class="demo-row">
+                <div class="demo-item">
                     <span class="demo-role">🛺 Driver</span>
                     <span class="demo-email">driver@rasaai.com</span>
                     <button class="demo-btn" onclick="fillDemo('driver@rasaai.com','driver123')">Fill</button>
                 </div>
-                <div class="demo-row">
+                <div class="demo-item">
                     <span class="demo-role">🔗 Affiliate</span>
                     <span class="demo-email">affiliate@rasaai.com</span>
                     <button class="demo-btn" onclick="fillDemo('affiliate@rasaai.com','affiliate123')">Fill</button>
                 </div>
-                <div class="demo-row">
+                <div class="demo-item">
                     <span class="demo-role">📊 Sales</span>
                     <span class="demo-email">sales@rasaai.com</span>
                     <button class="demo-btn" onclick="fillDemo('sales@rasaai.com','sales123')">Fill</button>
@@ -265,63 +157,38 @@
 
     <script>
         // =====================================================
-        // DEMO USERS - Hardcoded & Always Available
+        // DEMO USERS - Hardcoded database
         // =====================================================
         var DEMO_USERS = [
-            { id:'ADM001', name:'Admin User', email:'admin@rasaai.com', password:'admin123', role:'admin', phone:'9876543210', active:true, company:'', gst:'', avatar:'A' },
-            { id:'CLI001', name:'Rahul Sharma', email:'client@rasaai.com', password:'client123', role:'client', phone:'9876543211', active:true, company:'Mumbra Pizza House', gst:'27AAAAA0000A1Z5', avatar:'RS' },
-            { id:'DRV001', name:'Salman Khan', email:'driver@rasaai.com', password:'driver123', role:'driver', phone:'9876543212', active:true, zone:'mumbra-station', rickshawId:'RICK001', avatar:'SK' },
-            { id:'AFF001', name:'Priya Patel', email:'affiliate@rasaai.com', password:'affiliate123', role:'affiliate', phone:'9876543213', active:true, referralCode:'REF001', avatar:'PP' },
-            { id:'SAL001', name:'Amit Verma', email:'sales@rasaai.com', password:'sales123', role:'sales', phone:'9876543214', active:true, target:500000, avatar:'AV' }
+            { id:'ADM001',name:'Admin User',email:'admin@rasaai.com',password:'admin123',role:'admin',phone:'9876543210',active:true },
+            { id:'CLI001',name:'Rahul Sharma',email:'client@rasaai.com',password:'client123',role:'client',phone:'9876543211',active:true,company:'Mumbra Pizza House' },
+            { id:'DRV001',name:'Salman Khan',email:'driver@rasaai.com',password:'driver123',role:'driver',phone:'9876543212',active:true,zone:'mumbra-station',rickshawId:'RICK001' },
+            { id:'AFF001',name:'Priya Patel',email:'affiliate@rasaai.com',password:'affiliate123',role:'affiliate',phone:'9876543213',active:true },
+            { id:'SAL001',name:'Amit Verma',email:'sales@rasaai.com',password:'sales123',role:'sales',phone:'9876543214',active:true }
         ];
 
         // =====================================================
-        // STORAGE HELPERS
+        // LOCAL STORAGE HELPERS
         // =====================================================
-        function saveLocal(key, val) {
-            try { localStorage.setItem('rasaai_' + key, JSON.stringify(val)); } catch(e) {}
+        function save(key, value) {
+            try { localStorage.setItem('rasaai_' + key, JSON.stringify(value)); } catch(e) {}
         }
-        function getLocal(key, def) {
-            try { var raw = localStorage.getItem('rasaai_' + key); return raw ? JSON.parse(raw) : def; } catch(e) { return def; }
+        function load(key, def) {
+            try { var d = localStorage.getItem('rasaai_' + key); return d ? JSON.parse(d) : def; } catch(e) { return def; }
         }
 
-        // Seed users on first load
-        (function() {
-            var existing = getLocal('users', null);
-            if (!existing || existing.length === 0) {
-                saveLocal('users', DEMO_USERS);
-            }
-        })();
-
-        // =====================================================
-        // FILL DEMO
-        // =====================================================
-        function fillDemo(email, pass) {
-            document.getElementById('emailInput').value = email;
-            document.getElementById('passInput').value = pass;
-            document.getElementById('emailInput').focus();
+        // Seed users on first visit
+        if (load('users', []).length === 0) {
+            save('users', DEMO_USERS);
         }
 
         // =====================================================
-        // SHOW ERROR / SUCCESS
+        // FILL DEMO - Called by demo buttons
         // =====================================================
-        function showError(msg) {
-            var e = document.getElementById('errorBox');
-            var s = document.getElementById('successBox');
-            e.textContent = '❌ ' + msg;
-            e.className = 'alert alert-error show';
-            s.className = 'alert alert-success';
-        }
-        function showSuccess(msg) {
-            var s = document.getElementById('successBox');
-            var e = document.getElementById('errorBox');
-            s.textContent = '✅ ' + msg;
-            s.className = 'alert alert-success show';
-            e.className = 'alert alert-error';
-        }
-        function hideAlerts() {
-            document.getElementById('errorBox').className = 'alert alert-error';
-            document.getElementById('successBox').className = 'alert alert-success';
+        function fillDemo(email, password) {
+            document.getElementById('email').value = email;
+            document.getElementById('password').value = password;
+            document.getElementById('email').focus();
         }
 
         // =====================================================
@@ -336,136 +203,122 @@
                 'sales': 'crm.html'
             };
             var url = pages[role] || 'dashboard.html';
-            
-            // Check for redirect param
-            var params = new URLSearchParams(window.location.search);
-            var redirect = params.get('redirect');
-            
-            window.location.href = redirect || url;
+            window.location.href = url;
         }
 
         // =====================================================
-        // DO LOGIN - The Main Function
+        // SHOW MESSAGE
         // =====================================================
-        function doLogin() {
-            var email = document.getElementById('emailInput').value.trim().toLowerCase();
-            var pass = document.getElementById('passInput').value;
-            var remember = document.getElementById('rememberCheck').checked;
+        function showMsg(text, type) {
+            var m = document.getElementById('msg');
+            m.textContent = text;
+            m.className = 'message ' + type;
+        }
+        function hideMsg() {
+            var m = document.getElementById('msg');
+            m.className = 'message';
+            m.textContent = '';
+        }
+
+        // =====================================================
+        // FORM SUBMIT HANDLER
+        // =====================================================
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            var email = document.getElementById('email').value.trim().toLowerCase();
+            var password = document.getElementById('password').value;
+            var remember = document.getElementById('remember').checked;
             var btn = document.getElementById('submitBtn');
             
-            hideAlerts();
+            hideMsg();
             
             // Validate
-            if (!email) {
-                showError('Please enter your email address');
-                document.getElementById('emailInput').focus();
-                return;
-            }
-            if (!pass) {
-                showError('Please enter your password');
-                document.getElementById('passInput').focus();
-                return;
-            }
+            if (!email) { showMsg('Please enter your email address', 'error'); return; }
+            if (!password) { showMsg('Please enter your password', 'error'); return; }
             
-            // Disable button & show loading
+            // Loading state
             btn.disabled = true;
-            btn.textContent = '⏳ Signing in...';
+            btn.textContent = 'Signing in...';
             
-            // Find user
-            var users = getLocal('users', DEMO_USERS);
-            var found = null;
-            
-            for (var i = 0; i < users.length; i++) {
-                if (users[i].email === email && users[i].password === pass) {
-                    found = users[i];
-                    break;
-                }
-            }
-            
-            if (!found) {
-                // Failed
-                setTimeout(function() {
-                    showError('Invalid email or password. Try: admin@rasaai.com / admin123');
-                    btn.disabled = false;
-                    btn.textContent = '🔐 Sign In';
-                }, 400);
-                return;
-            }
-            
-            if (!found.active) {
-                setTimeout(function() {
-                    showError('Account is deactivated. Contact admin.');
-                    btn.disabled = false;
-                    btn.textContent = '🔐 Sign In';
-                }, 400);
-                return;
-            }
-            
-            // SUCCESS!
-            var sessionUser = {
-                id: found.id,
-                name: found.name,
-                email: found.email,
-                role: found.role,
-                phone: found.phone || '',
-                company: found.company || '',
-                gst: found.gst || '',
-                zone: found.zone || '',
-                rickshawId: found.rickshawId || '',
-                referralCode: found.referralCode || '',
-                target: found.target || 0,
-                avatar: found.avatar || found.name.charAt(0).toUpperCase(),
-                active: true
-            };
-            
-            saveLocal('currentUser', sessionUser);
-            
-            if (remember) {
-                saveLocal('rememberedEmail', email);
-            }
-            
-            showSuccess('Login successful! Redirecting to ' + found.role + ' dashboard...');
-            btn.textContent = '✅ Success!';
-            
-            // Redirect after short delay
+            // Process login (small delay for UX)
             setTimeout(function() {
-                goToDashboard(found.role);
-            }, 600);
-        }
-
-        // =====================================================
-        // ENTER KEY TO SUBMIT
-        // =====================================================
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Enter' && document.activeElement && document.activeElement.tagName === 'INPUT') {
-                e.preventDefault();
-                doLogin();
-            }
+                var users = load('users', DEMO_USERS);
+                var found = null;
+                
+                // Find user
+                for (var i = 0; i < users.length; i++) {
+                    if (users[i].email === email && users[i].password === password) {
+                        found = users[i];
+                        break;
+                    }
+                }
+                
+                if (!found) {
+                    showMsg('Invalid email or password. Try: admin@rasaai.com / admin123', 'error');
+                    btn.disabled = false;
+                    btn.textContent = '🔐 Sign In';
+                    return;
+                }
+                
+                if (!found.active) {
+                    showMsg('Account deactivated. Contact admin.', 'error');
+                    btn.disabled = false;
+                    btn.textContent = '🔐 Sign In';
+                    return;
+                }
+                
+                // SUCCESS - Save session
+                var sessionUser = {
+                    id: found.id,
+                    name: found.name,
+                    email: found.email,
+                    role: found.role,
+                    phone: found.phone,
+                    company: found.company || '',
+                    zone: found.zone || '',
+                    rickshawId: found.rickshawId || '',
+                    active: found.active
+                };
+                
+                save('currentUser', sessionUser);
+                
+                if (remember) {
+                    save('rememberedEmail', email);
+                }
+                
+                showMsg('Login successful! Redirecting...', 'success');
+                btn.textContent = 'Success!';
+                
+                // Redirect after short delay
+                setTimeout(function() {
+                    goToDashboard(found.role);
+                }, 600);
+                
+            }, 400);
         });
 
         // =====================================================
-        // CHECK IF ALREADY LOGGED IN
+        // AUTO-REDIRECT IF ALREADY LOGGED IN
         // =====================================================
         (function() {
-            var user = getLocal('currentUser', null);
+            var user = load('currentUser', null);
             if (user && user.role) {
-                document.getElementById('emailInput').value = user.email || '';
-                showSuccess('Already logged in as ' + user.name + '. Redirecting...');
-                setTimeout(function() {
+                var params = new URLSearchParams(window.location.search);
+                var redirect = params.get('redirect');
+                if (redirect) {
+                    window.location.href = redirect;
+                } else {
                     goToDashboard(user.role);
-                }, 800);
-                return;
+                }
             }
             
-            // Fill remembered email
-            var remembered = getLocal('rememberedEmail', '');
+            // Pre-fill remembered email
+            var remembered = load('rememberedEmail', '');
             if (remembered) {
-                document.getElementById('emailInput').value = remembered;
+                document.getElementById('email').value = remembered;
             }
         })();
-
-        console.log('✅ RASAAI Login v2.0 Ready');
-        console.log('📧 Demo logins available - click "Demo Login Credentials"');
     </script>
 </body>
 </html>
