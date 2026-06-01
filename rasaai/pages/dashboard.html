@@ -1,0 +1,124 @@
+<!--
+ * Filename: dashboard.html
+ * Path: /pages/dashboard.html
+ * Project: RASAAI - Auto Rickshaw Advertising Network
+ * Description: Dashboard Router - Auto-redirects based on user role
+ * Role: All authenticated users
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#221F60">
+    <meta name="robots" content="noindex, nofollow">
+    
+    <link rel="icon" type="image/x-icon" href="/rasaai/assets/images/favicon.ico">
+    <link rel="manifest" href="/rasaai/manifest.json">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="/rasaai/css/main.css">
+    <link rel="stylesheet" href="/rasaai/css/layout.css">
+    <link rel="stylesheet" href="/rasaai/css/components.css">
+    <link rel="stylesheet" href="/rasaai/css/mobile.css">
+    <link rel="stylesheet" href="/rasaai/css/animations.css">
+    
+    <title>Dashboard - RASAAI</title>
+</head>
+<body class="bg-gray-50">
+    
+    <div style="min-height:100vh;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:20px;padding:20px;">
+        
+        <!-- Loading Animation -->
+        <div style="font-size:60px;animation:bounce 1s ease infinite;">🛺</div>
+        
+        <div style="text-align:center;">
+            <h2 style="font-size:22px;font-weight:700;color:#221F60;margin-bottom:8px;">
+                Loading Dashboard...
+            </h2>
+            <p style="font-size:14px;color:#6C757D;">
+                Please wait while we redirect you
+            </p>
+        </div>
+        
+        <!-- Loading dots -->
+        <div class="loading-dots">
+            <div class="loading-dot"></div>
+            <div class="loading-dot"></div>
+            <div class="loading-dot"></div>
+        </div>
+        
+        <!-- Error message (hidden) -->
+        <div id="error-message" class="hidden" style="text-align:center;">
+            <div style="font-size:48px;">⚠️</div>
+            <h3 style="color:#E74C3C;margin-bottom:8px;">Unable to Load Dashboard</h3>
+            <p style="color:#6C757D;margin-bottom:16px;" id="error-text">
+                Please login to continue.
+            </p>
+            <div style="display:flex;gap:12px;justify-content:center;">
+                <a href="/rasaai/pages/login.html" class="btn btn-primary">🔐 Login</a>
+                <a href="/rasaai/index.html" class="btn btn-outline">🏠 Home</a>
+            </div>
+        </div>
+        
+    </div>
+
+    <script src="/rasaai/js/data/constants.js"></script>
+    <script src="/rasaai/js/data/zones.js"></script>
+    <script src="/rasaai/js/data/demo-users.js"></script>
+    <script src="/rasaai/js/utils/helpers.js"></script>
+    <script src="/rasaai/js/utils/validators.js"></script>
+    <script src="/rasaai/js/utils/formatters.js"></script>
+    <script src="/rasaai/js/utils/error-handler.js"></script>
+    <script src="/rasaai/js/core/config.js"></script>
+    <script src="/rasaai/js/core/auth.js"></script>
+    <script src="/rasaai/js/core/sheets.js"></script>
+    <script src="/rasaai/js/core/state.js"></script>
+    <script src="/rasaai/js/core/router.js"></script>
+    <script src="/rasaai/js/modules/notifications.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            
+            // Wait briefly for auth to initialize
+            setTimeout(function() {
+                
+                // Check if user is authenticated
+                if (!AuthState.isAuthenticated) {
+                    showError('Please login to access the dashboard.');
+                    
+                    // Redirect to login
+                    setTimeout(function() {
+                        window.location.href = '/rasaai/pages/login.html?redirect=/rasaai/pages/dashboard.html';
+                    }, 2000);
+                    return;
+                }
+                
+                // Get user role and redirect
+                var role = AuthState.currentUser?.role;
+                var dashboardUrl = getDashboardForRole(role);
+                
+                if (dashboardUrl && dashboardUrl !== window.location.pathname) {
+                    // Redirect to role-specific dashboard
+                    window.location.href = dashboardUrl;
+                } else {
+                    showError('Unknown user role. Please contact support.');
+                }
+                
+            }, 500);
+        });
+        
+        function showError(message) {
+            document.querySelector('.loading-dots')?.classList.add('hidden');
+            document.querySelector('h2')?.classList.add('hidden');
+            document.querySelector('p')?.classList.add('hidden');
+            document.getElementById('error-message').classList.remove('hidden');
+            document.getElementById('error-text').textContent = message;
+        }
+    </script>
+</body>
+</html>
