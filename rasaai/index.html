@@ -1,498 +1,1045 @@
+<!--
+ * Filename: index.html
+ * Path: /index.html
+ * Project: RASAAI - Auto Rickshaw Advertising Network
+ * Description: Landing Page - Zoomcar.com inspired design
+ * Role: Public/Guest access
+-->
 
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=5.0, user-scalable=yes">
-    <meta name="theme-color" content="#6C4DF6" media="(prefers-color-scheme: light)">
-    <meta name="theme-color" content="#0F1117" media="(prefers-color-scheme: dark)">
-    <meta name="color-scheme" content="light dark">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="RASAAI - India's first hyperlocal auto rickshaw advertising network. Connect with 5L+ daily commuters across 12 Mumbra zones.">
+    <meta name="theme-color" content="#221F60">
     
-    <title>RASAAI - Advertise On Moving Rickshaws Across Mumbra | ₹1,238/day</title>
-    <meta name="description" content="Hyperlocal outdoor advertising on auto rickshaws across 12 zones in Mumbra. LED & Audio campaigns with real-time analytics. Starting at ₹1,238/day per rickshaw. FREE 30 Social Media Creatives with LED Campaign!">
-    <meta name="keywords" content="rickshaw advertising, Mumbra advertising, auto rickshaw ads, outdoor advertising, LED rickshaw, audio advertising, hyperlocal marketing, moving billboard, transit advertising">
-    <meta name="author" content="RASAAI Outdoor Advertising Network">
-    <meta name="robots" content="index, follow">
+    <!-- PWA -->
+    <link rel="manifest" href="/rasaai/manifest.json">
+    <link rel="icon" type="image/x-icon" href="/rasaai/assets/images/favicon.ico">
+    <link rel="apple-touch-icon" href="/rasaai/assets/icons/icon-192x192.png">
     
-    <link rel="canonical" href="https://rizvi.store/rasaai/">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%236C4DF6'/><text x='50' y='68' font-size='55' text-anchor='middle' fill='white' font-weight='bold'>R</text></svg>">
-    
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://rizvi.store/rasaai/">
-    <meta property="og:title" content="RASAAI - Advertise On Moving Rickshaws Across Mumbra">
-    <meta property="og:description" content="LED & Audio campaigns starting at ₹1,238/day. FREE 30 Social Media Creatives!">
-    <meta property="og:site_name" content="RASAAI">
-    
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="RASAAI - Rickshaw Advertising Network">
-    
-    <link rel="manifest" href="manifest.json">
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="/rasaai/css/main.css">
+    <link rel="stylesheet" href="/rasaai/css/layout.css">
+    <link rel="stylesheet" href="/rasaai/css/components.css">
+    <link rel="stylesheet" href="/rasaai/css/landing.css">
+    <link rel="stylesheet" href="/rasaai/css/mobile.css">
+    <link rel="stylesheet" href="/rasaai/css/animations.css">
+    
+    <title>RASAAI - Auto Rickshaw Advertising Network | LED & Audio Ads in Mumbra</title>
+    
+    <!-- Google Sign-In -->
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
 </head>
 <body>
-    <a href="#main-content" class="sr-only">Skip to main content</a>
-
-    <!-- DESKTOP HEADER -->
-    <header class="sticky-header" id="main-header" role="banner">
-        <div class="container">
-            <div class="header-inner">
-                <a href="/rasaai/" class="logo" aria-label="RASAAI Homepage">
-                    <span class="logo-icon" aria-hidden="true">R</span><span>RASAAI</span>
-                </a>
-                <nav class="nav-list" id="main-nav" role="navigation" aria-label="Main navigation">
-                    <a href="#zones" class="nav-link">Zones</a>
-                    <a href="#pricing" class="nav-link">Pricing</a>
-                    <a href="#calculator" class="nav-link">Calculator</a>
-                    <a href="#how-it-works" class="nav-link">How It Works</a>
-                    <a href="#testimonials" class="nav-link">Testimonials</a>
-                    <a href="#faq" class="nav-link">FAQ</a>
-                </nav>
-                <div class="header-actions">
-                    <a href="https://wa.me/919594306625?text=Hi%20RASAAI%2C%20I%20want%20to%20advertise%20on%20rickshaws" class="btn btn-whatsapp btn-sm" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">💬 WhatsApp</a>
-                    <a href="login.html" class="btn btn-outline btn-sm">Login</a>
-                    <a href="dashboard.html" class="btn btn-primary btn-sm">Dashboard</a>
-                    <button class="theme-toggle" id="theme-toggle-btn" aria-label="Switch to dark mode">🌙</button>
-                    <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
-                </div>
-            </div>
-        </div>
-    </header>
-
-    <!-- MOBILE APP HEADER -->
-    <header class="app-header" id="app-header">
-        <button class="back-btn" onclick="history.back()" aria-label="Go back">←</button>
-        <span class="title">RASAAI</span>
-        <button class="action-btn theme-toggle" onclick="App.applyTheme(App.state.theme==='light'?'dark':'light')" aria-label="Toggle theme">🌙</button>
-    </header>
-
-    <main id="main-content">
-        <!-- HERO SECTION (99vw) -->
-        <section class="hero-section" id="hero" aria-labelledby="hero-headline">
-            <div class="background-glow glow-primary" aria-hidden="true"></div>
-            <div class="background-glow glow-accent" aria-hidden="true"></div>
-            <div class="background-glow glow-cyan" aria-hidden="true"></div>
+    
+    <!-- ============ HEADER / NAVIGATION ============ -->
+    <header class="header" id="header">
+        <nav class="nav container">
+            <a href="/rasaai/" class="nav-logo">
+                <img src="/rasaai/assets/images/logo.svg" alt="RASAAI" height="36">
+            </a>
             
-            <div class="hero-inner">
-                <div class="hero-content">
-                    <h1 class="hero-title" id="hero-headline">Advertise On Moving Rickshaws Across Mumbra</h1>
-                    <p class="hero-subtitle">Turn every auto rickshaw into your moving billboard. Hyperlocal LED & Audio advertising reaching 5L+ daily commuters. <strong>Starting at just ₹1,238/day per rickshaw.</strong></p>
-                    
-                    <div class="hero-actions">
-                        <a href="#calculator" class="btn btn-primary btn-lg">📊 Get Free Estimate</a>
-                        <a href="#pricing" class="btn btn-secondary btn-lg">💰 View Pricing</a>
-                    </div>
-                    
-                    <!-- Large Interactive Metric Badges -->
-                    <div class="metric-badges" aria-label="Key platform metrics">
-                        <div class="metric-badge-large">
-                            <span class="badge-icon">🛺</span>
-                            <span class="badge-value">50+</span>
-                            <span class="badge-label">Rickshaws/Zone</span>
-                        </div>
-                        <div class="metric-badge-large">
-                            <span class="badge-icon">📍</span>
-                            <span class="badge-value">12</span>
-                            <span class="badge-label">Zones</span>
-                        </div>
-                        <div class="metric-badge-large">
-                            <span class="badge-icon">👁️</span>
-                            <span class="badge-value">5L+</span>
-                            <span class="badge-label">Daily Reach</span>
-                        </div>
-                        <div class="metric-badge-large">
-                            <span class="badge-icon">⭐</span>
-                            <span class="badge-value">4.8</span>
-                            <span class="badge-label">Rating</span>
-                        </div>
-                    </div>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="#how-it-works">How It Works</a></li>
+                <li><a href="#zones">Zones</a></li>
+                <li><a href="#pricing">Pricing</a></li>
+                <li><a href="#calculator">Calculator</a></li>
+                <li><a href="#faq">FAQ</a></li>
+            </ul>
+            
+            <div class="nav-actions">
+                <button class="btn btn-outline" onclick="handleLogin()">Login</button>
+                <button class="btn btn-primary" onclick="handleRegister()">Get Started</button>
+                <button class="btn-menu" id="menu-toggle" aria-label="Menu">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- ============ HERO SECTION ============ -->
+    <section class="hero" id="hero">
+        <div class="hero-container container">
+            <div class="hero-content">
+                <span class="hero-badge">🇮🇳 India's First Auto Rickshaw Ad Network</span>
+                <h1 class="hero-title">
+                    Your Ad on <span class="text-orange">600+ Moving</span> Rickshaws Across <span class="text-yellow">Mumbra</span>
+                </h1>
+                <p class="hero-subtitle">
+                    Reach 5L+ daily commuters with LED screens & audio announcements. 
+                    Track every impression in real-time. Starting at just ₹1,238/day.
+                </p>
+                
+                <div class="hero-cta-group">
+                    <button class="btn btn-primary btn-lg" onclick="scrollToCalculator()">
+                        📊 Get Free Estimate
+                    </button>
+                    <button class="btn btn-outline btn-lg" onclick="scrollToPricing()">
+                        💰 View Pricing
+                    </button>
+                    <a href="https://wa.me/919594306625?text=Hi%20RASAAI,%20I%20want%20to%20advertise" 
+                       class="btn btn-whatsapp btn-lg" target="_blank">
+                        💬 WhatsApp Book
+                    </a>
                 </div>
                 
-                <div class="hero-visual" aria-hidden="true">
-                    <div class="rickshaw-illustration">
-                        <div class="rickshaw-body"></div>
-                        <div class="rickshaw-wheel left"></div>
-                        <div class="rickshaw-wheel right"></div>
+                <div class="hero-stats">
+                    <div class="hero-stat">
+                        <span class="hero-stat-number">600+</span>
+                        <span class="hero-stat-label">Active Rickshaws</span>
+                    </div>
+                    <div class="hero-stat">
+                        <span class="hero-stat-number">5L+</span>
+                        <span class="hero-stat-label">Daily Impressions</span>
+                    </div>
+                    <div class="hero-stat">
+                        <span class="hero-stat-number">12</span>
+                        <span class="hero-stat-label">Mumbra Zones</span>
+                    </div>
+                    <div class="hero-stat">
+                        <span class="hero-stat-number">₹1,238</span>
+                        <span class="hero-stat-label">Starting/Day</span>
                     </div>
                 </div>
-                
-                <!-- Live Pricing Card -->
-                <div class="pricing-card featured" style="max-width:320px" aria-label="Live LED pricing">
-                    <div class="pricing-glow" aria-hidden="true"></div>
-                    <div class="pricing-type">LED CAMPAIGN</div>
-                    <div class="pricing-amount price-led">₹1,442</div>
-                    <div class="pricing-period">per day / per rickshaw</div>
-                    <div class="pricing-timer" aria-live="polite"><span class="timer-icon">⏱️</span> Updates in <span id="pricing-countdown">12:34</span></div>
-                    <a href="#calculator" class="btn btn-primary btn-block mt-4">Book Now</a>
-                    <a href="https://wa.me/919594306625?text=Hi%2C%20I%20want%20LED%20campaign%20at%20Mumbra" class="btn btn-whatsapp btn-block mt-2" target="_blank" rel="noopener">💬 WhatsApp Book</a>
-                </div>
             </div>
-        </section>
-
-        <!-- LIVE STATS BANNER -->
-        <section class="section-sm" aria-label="Platform statistics">
-            <div class="container">
-                <div class="live-stats-banner" role="list">
-                    <div class="stat-card-hero" role="listitem"><span class="stat-icon">🛺</span><span class="stat-value">600+</span><span class="stat-label">Total Rickshaws</span></div>
-                    <div class="stat-card-hero" role="listitem"><span class="stat-icon">📢</span><span class="stat-value">150+</span><span class="stat-label">Active Campaigns</span></div>
-                    <div class="stat-card-hero" role="listitem"><span class="stat-icon">👁️</span><span class="stat-value">5.2M</span><span class="stat-label">Monthly Impressions</span></div>
-                    <div class="stat-card-hero" role="listitem"><span class="stat-icon">🏪</span><span class="stat-value">350+</span><span class="stat-label">Businesses Served</span></div>
-                </div>
-            </div>
-        </section>
-
-       <!-- TRUSTED BY SECTION - FIXED -->
-<section class="section trusted-section" aria-labelledby="trusted-title" style="padding:60px 0;background:var(--bg-secondary);border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
-    <div class="container" style="text-align:center">
-        <p class="trusted-title" id="trusted-title" style="font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;color:var(--text-secondary);margin-bottom:8px">TRUSTED BY 350+ BUSINESSES ACROSS MUMBRA</p>
-        <div style="display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:32px">
-            <span style="color:var(--warning);font-size:18px">⭐⭐⭐⭐⭐</span>
-            <span style="font-weight:700;font-size:16px">4.8/5</span>
-            <span style="color:var(--text-secondary);font-size:14px">(250+ reviews)</span>
-        </div>
-        <div class="trusted-marquee" role="marquee" aria-label="Client logos scrolling" style="overflow:hidden;mask-image:linear-gradient(to right,transparent 0%,black 15%,black 85%,transparent 100%);-webkit-mask-image:linear-gradient(to right,transparent 0%,black 15%,black 85%,transparent 100%)">
-            <div class="marquee-track" style="display:flex;gap:48px;animation:marqueeScroll 25s linear infinite;width:max-content">
-                <div class="logo-placeholder" style="display:flex;align-items:center;gap:10px;font-weight:600;font-size:16px;color:var(--text);white-space:nowrap;opacity:0.7;padding:8px 0">
-                    <span style="font-size:28px">🏪</span> Patel General Store
-                </div>
-                <div class="logo-placeholder" style="display:flex;align-items:center;gap:10px;font-weight:600;font-size:16px;color:var(--text);white-space:nowrap;opacity:0.7;padding:8px 0">
-                    <span style="font-size:28px">🍕</span> Mumbra Pizza House
-                </div>
-                <div class="logo-placeholder" style="display:flex;align-items:center;gap:10px;font-weight:600;font-size:16px;color:var(--text);white-space:nowrap;opacity:0.7;padding:8px 0">
-                    <span style="font-size:28px">🏥</span> Shifa Clinic
-                </div>
-                <div class="logo-placeholder" style="display:flex;align-items:center;gap:10px;font-weight:600;font-size:16px;color:var(--text);white-space:nowrap;opacity:0.7;padding:8px 0">
-                    <span style="font-size:28px">📚</span> Al-Huda Tuition Center
-                </div>
-                <div class="logo-placeholder" style="display:flex;align-items:center;gap:10px;font-weight:600;font-size:16px;color:var(--text);white-space:nowrap;opacity:0.7;padding:8px 0">
-                    <span style="font-size:28px">👗</span> Shaheen Boutique
-                </div>
-                <div class="logo-placeholder" style="display:flex;align-items:center;gap:10px;font-weight:600;font-size:16px;color:var(--text);white-space:nowrap;opacity:0.7;padding:8px 0">
-                    <span style="font-size:28px">🔧</span> Mumbra Auto Parts
-                </div>
-                <div class="logo-placeholder" style="display:flex;align-items:center;gap:10px;font-weight:600;font-size:16px;color:var(--text);white-space:nowrap;opacity:0.7;padding:8px 0">
-                    <span style="font-size:28px">🏦</span> Local Finance Co
-                </div>
-                <div class="logo-placeholder" style="display:flex;align-items:center;gap:10px;font-weight:600;font-size:16px;color:var(--text);white-space:nowrap;opacity:0.7;padding:8px 0">
-                    <span style="font-size:28px">🍽️</span> Dawat Restaurant
-                </div>
-                <!-- Duplicate for seamless loop -->
-                <div class="logo-placeholder" style="display:flex;align-items:center;gap:10px;font-weight:600;font-size:16px;color:var(--text);white-space:nowrap;opacity:0.7;padding:8px 0">
-                    <span style="font-size:28px">🏪</span> Patel General Store
-                </div>
-                <div class="logo-placeholder" style="display:flex;align-items:center;gap:10px;font-weight:600;font-size:16px;color:var(--text);white-space:nowrap;opacity:0.7;padding:8px 0">
-                    <span style="font-size:28px">🍕</span> Mumbra Pizza House
-                </div>
-                <div class="logo-placeholder" style="display:flex;align-items:center;gap:10px;font-weight:600;font-size:16px;color:var(--text);white-space:nowrap;opacity:0.7;padding:8px 0">
-                    <span style="font-size:28px">🏥</span> Shifa Clinic
-                </div>
-                <div class="logo-placeholder" style="display:flex;align-items:center;gap:10px;font-weight:600;font-size:16px;color:var(--text);white-space:nowrap;opacity:0.7;padding:8px 0">
-                    <span style="font-size:28px">📚</span> Al-Huda Tuition Center
+            
+            <div class="hero-visual">
+                <div class="hero-image-wrapper">
+                    <img src="/rasaai/assets/images/rickshaw-led.jpg" 
+                         alt="Auto Rickshaw with LED Advertising Screen" 
+                         class="hero-image">
+                    <div class="hero-floating-card hero-floating-card-1">
+                        <span class="floating-icon">🔊</span>
+                        <div>
+                            <strong>Audio Ad Playing</strong>
+                            <small>Mumbra Pizza House</small>
+                        </div>
+                    </div>
+                    <div class="hero-floating-card hero-floating-card-2">
+                        <span class="floating-icon">📱</span>
+                        <div>
+                            <strong>12 Scans Today</strong>
+                            <small>QR Engagement</small>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
-        <!-- ZONE EXPLORER -->
-        <section class="section" id="zones" aria-labelledby="zones-title">
-            <div class="container">
-                <span class="text-overline">COVERAGE</span>
-                <h2 class="section-title" id="zones-title">Explore Our 12 Advertising Zones</h2>
-                <p class="body-text mb-8">Each zone is strategically mapped with detailed demographics, traffic patterns, and rickshaw inventory to maximize your campaign ROI.</p>
+    </section>
+
+    <!-- ============ TRUST BAR ============ -->
+    <section class="trust-bar">
+        <div class="container">
+            <div class="trust-grid">
+                <div class="trust-item">
+                    <span class="trust-number text-yellow">50+</span>
+                    <span class="trust-label">Active Advertisers</span>
+                </div>
+                <div class="trust-item">
+                    <span class="trust-number text-yellow">15,000+</span>
+                    <span class="trust-label">Campaigns Completed</span>
+                </div>
+                <div class="trust-item">
+                    <span class="trust-number text-yellow">4.8/5</span>
+                    <span class="trust-label">Advertiser Rating</span>
+                </div>
+                <div class="trust-item">
+                    <span class="trust-number text-yellow">98%</span>
+                    <span class="trust-label">On-Time Delivery</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ HOW IT WORKS ============ -->
+    <section class="section how-it-works" id="how-it-works">
+        <div class="container">
+            <h2 class="section-title">How It Works</h2>
+            <p class="section-subtitle">Launch your hyperlocal ad campaign in 4 simple steps</p>
+            
+            <div class="steps-grid">
+                <div class="step-card">
+                    <div class="step-number">01</div>
+                    <div class="step-icon">📍</div>
+                    <h3 class="step-title">Select Zone & Type</h3>
+                    <p class="step-desc">Choose from 12 Mumbra zones. Pick LED screen ads, audio announcements, or combo.</p>
+                </div>
                 
-                <div class="table-filter-bar mb-8">
-                    <input type="search" id="zone-search" placeholder="🔍 Search zones by name..." aria-label="Search zones">
-                    <div class="btn-group" role="group" aria-label="Filter zones">
-                        <button class="btn btn-outline btn-sm zone-filter-btn active" data-filter="all" aria-pressed="true">All Zones</button>
-                        <button class="btn btn-outline btn-sm zone-filter-btn" data-filter="high-traffic" aria-pressed="false">High Traffic</button>
-                        <button class="btn btn-outline btn-sm zone-filter-btn" data-filter="high-population" aria-pressed="false">High Population</button>
-                        <button class="btn btn-outline btn-sm zone-filter-btn" data-filter="available" aria-pressed="false">Available</button>
+                <div class="step-card">
+                    <div class="step-number">02</div>
+                    <div class="step-icon">🎨</div>
+                    <h3 class="step-title">Upload Creative</h3>
+                    <p class="step-desc">Upload your image/video for LED or audio file for announcements. Get 30 FREE social creatives.</p>
+                </div>
+                
+                <div class="step-card">
+                    <div class="step-number">03</div>
+                    <div class="step-icon">🚀</div>
+                    <h3 class="step-title">Launch Campaign</h3>
+                    <p class="step-desc">Your ad goes live on rickshaws within 24 hours. Track everything in real-time dashboard.</p>
+                </div>
+                
+                <div class="step-card">
+                    <div class="step-number">04</div>
+                    <div class="step-icon">📊</div>
+                    <h3 class="step-title">Track Results</h3>
+                    <p class="step-desc">Real-time analytics: impressions, reach, QR scans, CPM. Download performance reports.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ ZONE EXPLORER ============ -->
+    <section class="section zones-section" id="zones">
+        <div class="container">
+            <h2 class="section-title">12 Mumbra Zones</h2>
+            <p class="section-subtitle">Target your audience with precision. Select zones where your customers live.</p>
+            
+            <div class="zones-grid" id="zones-grid">
+                <!-- Zone 1 -->
+                <div class="zone-card" data-zone="Kausa">
+                    <div class="zone-header">
+                        <h3 class="zone-name">Kausa</h3>
+                        <span class="zone-badge badge-medium">Medium Traffic</span>
                     </div>
-                </div>
-                
-                <div class="zone-grid" id="zone-cards-container" role="list" aria-label="Advertising zones"></div>
-            </div>
-        </section>
-
-        <!-- PRICING -->
-        <section class="section" id="pricing" aria-labelledby="pricing-title">
-            <div class="container">
-                <div style="text-align:center;margin-bottom:48px">
-                    <span class="text-overline">PRICING</span>
-                    <h2 class="section-title" id="pricing-title" style="display:block;text-align:center">Live Pricing Per Day Per Rickshaw</h2>
-                    <p class="body-text" style="max-width:600px;margin:0 auto">Dynamic pricing based on real-time demand. Updates every 15 minutes. Minimum 1 rickshaw for 1 day.</p>
-                    <div class="pricing-timer" style="justify-content:center;margin-top:12px" aria-live="polite">⏱️ Prices update in <span id="pricing-countdown-2">12:34</span></div>
-                </div>
-                
-                <div class="pricing-grid">
-                    <article class="pricing-card">
-                        <div class="pricing-glow" aria-hidden="true"></div>
-                        <div class="pricing-icon" aria-hidden="true">📺</div>
-                        <h3 class="pricing-type">LED Campaign</h3>
-                        <div class="pricing-amount price-led">₹1,442</div>
-                        <div class="pricing-period">per day / per rickshaw</div>
-                        <ul class="pricing-features">
-                            <li class="pricing-feature">LED Screen on Rickshaw</li>
-                            <li class="pricing-feature">₹1,238 – ₹1,647/day range</li>
-                            <li class="pricing-feature">GPS Tracked Coverage</li>
-                            <li class="pricing-feature">Real-Time Analytics</li>
-                            <li class="pricing-feature">10% off on 10+ rickshaws</li>
-                            <li class="pricing-feature" style="color:var(--success);font-weight:700">🎁 FREE 30 Social Media Creatives!</li>
-                        </ul>
-                        <a href="#calculator" class="btn btn-primary btn-block">Get LED Campaign</a>
-                    </article>
-                    
-                    <article class="pricing-card featured">
-                        <div class="pricing-glow" aria-hidden="true"></div>
-                        <div class="pricing-icon" aria-hidden="true">🔊</div>
-                        <h3 class="pricing-type">Audio Campaign</h3>
-                        <div class="pricing-amount price-audio">₹478</div>
-                        <div class="pricing-period">per day / per rickshaw</div>
-                        <ul class="pricing-features">
-                            <li class="pricing-feature">Audio via Bluetooth Speaker</li>
-                            <li class="pricing-feature">₹318 – ₹639/day range</li>
-                            <li class="pricing-feature">60-sec Ad Every 15 Minutes</li>
-                            <li class="pricing-feature">Zone Announcement Included</li>
-                            <li class="pricing-feature">10% off on 10+ rickshaws</li>
-                        </ul>
-                        <a href="#calculator" class="btn btn-primary btn-block">Get Audio Campaign</a>
-                    </article>
-                    
-                    <article class="pricing-card">
-                        <div class="pricing-glow" aria-hidden="true"></div>
-                        <div class="pricing-icon" aria-hidden="true">🔥</div>
-                        <h3 class="pricing-type">LED + Audio Combo</h3>
-                        <div class="pricing-amount">₹1,920</div>
-                        <div class="pricing-period">per day / per rickshaw</div>
-                        <ul class="pricing-features">
-                            <li class="pricing-feature">LED + Audio Both</li>
-                            <li class="pricing-feature">Maximum Visibility</li>
-                            <li class="pricing-feature">Full Analytics Suite</li>
-                            <li class="pricing-feature">Priority Zone Access</li>
-                            <li class="pricing-feature">10% off on 10+ rickshaws</li>
-                            <li class="pricing-feature" style="color:var(--success);font-weight:700">🎁 FREE 30 Social Media Creatives!</li>
-                        </ul>
-                        <a href="#calculator" class="btn btn-primary btn-block">Get Combo Campaign</a>
-                    </article>
-                </div>
-            </div>
-        </section>
-
-        <!-- CAMPAIGN CALCULATOR -->
-        <section class="section" id="calculator" aria-labelledby="calculator-title">
-            <div class="container">
-                <div style="text-align:center;margin-bottom:48px">
-                    <span class="text-overline">CALCULATOR</span>
-                    <h2 class="section-title" id="calculator-title" style="display:block;text-align:center">Estimate Your Campaign Cost</h2>
-                </div>
-                
-                <div class="calculator-widget" id="campaign-calculator">
-                    <form class="calculator-grid" onsubmit="return false">
-                        <div class="calculator-inputs">
-                            <div class="calculator-field"><label for="calc-type">Campaign Type</label><select id="calc-type"><option value="led">LED Campaign</option><option value="audio">Audio Campaign</option><option value="combo">Combo (LED + Audio)</option></select></div>
-                            <div class="calculator-field"><label for="calc-zone">Target Zone</label><select id="calc-zone"></select></div>
-                            <div class="calculator-field"><label for="calc-duration">Duration (Days) - Max 90</label><input type="range" id="calc-duration" min="1" max="90" value="7" class="range-slider"><div class="range-labels"><span>1 Day</span><span id="duration-value">7 Days</span><span>90 Days</span></div></div>
-                            <div class="calculator-field"><label for="calc-quantity">Rickshaws - Max 50</label><input type="range" id="calc-quantity" min="1" max="50" value="5" class="range-slider"><div class="range-labels"><span>1</span><span id="quantity-value">5 Rickshaws</span><span>50</span></div></div>
-                            <div class="calculator-field"><label for="calc-start-date">Start Date</label><input type="date" id="calc-start-date"></div>
-                            <div class="calculator-field"><label for="calc-hashtag">Hashtag (Optional)</label><input type="text" id="calc-hashtag" placeholder="#YourCampaign"></div>
-                            <div class="calculator-field"><label for="calc-contest">Contest Name (Optional)</label><input type="text" id="calc-contest" placeholder="Contest name"></div>
+                    <div class="zone-stats">
+                        <div class="zone-stat">
+                            <span class="zone-stat-value">45,000</span>
+                            <span class="zone-stat-label">Population</span>
                         </div>
-                        <div class="calculator-results" aria-live="polite">
-                            <h3>📊 Your Campaign Estimate</h3>
-                            <div class="result-item"><span class="result-label">Cost Per Day</span><span class="result-value" id="calc-cost-per-day">₹7,210</span></div>
-                            <div class="result-item"><span class="result-label">Total Cost</span><span class="result-value result-total" id="calc-cost">₹50,470</span></div>
-                            <div class="result-item"><span class="result-label">Total Reach</span><span class="result-value" id="calc-reach">1,190,000</span></div>
-                            <div class="result-item"><span class="result-label">Total Impressions</span><span class="result-value" id="calc-impressions">3,332,000</span></div>
-                            <div class="result-item"><span class="result-label">CPM</span><span class="result-value" id="calc-cpm">₹15.15</span></div>
-                            <div class="result-item"><span class="result-label">Discount</span><span class="result-value" id="calc-discount">0%</span></div>
-                            <div class="result-item"><span class="result-label">Est. ROI</span><span class="result-value" id="calc-roi">230%</span></div>
-                            <button type="button" class="btn btn-primary btn-block mt-4" onclick="handleBookCampaign()">🚀 Book This Campaign</button>
-                            <button type="button" class="btn btn-outline btn-block mt-2" onclick="handleBookViaWhatsApp()">💬 Book via WhatsApp</button>
+                        <div class="zone-stat">
+                            <span class="zone-stat-value">85,000</span>
+                            <span class="zone-stat-label">Daily Traffic</span>
                         </div>
-                    </form>
-                </div>
-            </div>
-        </section>
-
-        <!-- BENEFITS -->
-        <section class="section" id="benefits" aria-labelledby="benefits-title">
-            <div class="container">
-                <div style="text-align:center;margin-bottom:48px"><span class="text-overline">WHY RASAAI</span><h2 class="section-title" id="benefits-title" style="display:block;text-align:center">Why Advertise On Moving Rickshaws?</h2></div>
-                <div class="benefits-grid" role="list">
-                    <article class="benefit-card" role="listitem"><div class="benefit-icon">📍</div><h3 class="benefit-title">Hyperlocal Reach</h3><p class="benefit-description">Target 12 specific zones across Mumbra. Your ad reaches exactly where your customers live.</p></article>
-                    <article class="benefit-card" role="listitem"><div class="benefit-icon">🚛</div><h3 class="benefit-title">Moving Visibility</h3><p class="benefit-description">Unlike static billboards, your ad moves through streets, markets, and residential areas.</p></article>
-                    <article class="benefit-card" role="listitem"><div class="benefit-icon">🔊</div><h3 class="benefit-title">Audio + LED</h3><p class="benefit-description">Combine visual LED with audio announcements. Your message is both seen AND heard.</p></article>
-                    <article class="benefit-card" role="listitem"><div class="benefit-icon">💰</div><h3 class="benefit-title">Affordable CPM</h3><p class="benefit-description">At just ₹7-15 CPM, rickshaw advertising is 5x cheaper than traditional outdoor media.</p></article>
-                    <article class="benefit-card" role="listitem"><div class="benefit-icon">🛰️</div><h3 class="benefit-title">GPS Monitoring</h3><p class="benefit-description">Every rickshaw is GPS-tracked. See where your ad traveled in real-time.</p></article>
-                    <article class="benefit-card" role="listitem"><div class="benefit-icon">📊</div><h3 class="benefit-title">Analytics Dashboard</h3><p class="benefit-description">Detailed reports on reach, impressions, CPM, audio plays, and ROI.</p></article>
-                </div>
-            </div>
-        </section>
-
-        <!-- SOCIAL MEDIA CREATIVES BONUS -->
-        <section class="section">
-            <div class="container">
-                <div class="bonus-creatives-card">
-                    <h2>🎁 FREE Bonus With Every LED Campaign!</h2>
-                    <p>Book any LED or Combo campaign and get <strong>30 Social Media Creatives</strong> absolutely FREE!</p>
-                    <div class="bonus-icons">
-                        <div class="bonus-icon-item"><span class="platform-icon">📸</span><span class="platform-name">Instagram Posts</span></div>
-                        <div class="bonus-icon-item"><span class="platform-icon">💬</span><span class="platform-name">WhatsApp</span></div>
-                        <div class="bonus-icon-item"><span class="platform-icon">👍</span><span class="platform-name">Facebook</span></div>
-                        <div class="bonus-icon-item"><span class="platform-icon">📖</span><span class="platform-name">Stories</span></div>
-                        <div class="bonus-icon-item"><span class="platform-icon">🎠</span><span class="platform-name">Carousels</span></div>
-                        <div class="bonus-icon-item"><span class="platform-icon">🎥</span><span class="platform-name">Reels</span></div>
+                        <div class="zone-stat">
+                            <span class="zone-stat-value">1.25L</span>
+                            <span class="zone-stat-label">Impressions</span>
+                        </div>
                     </div>
-                    <p>Perfect for promoting your business on social media. Ready-to-use creatives included!</p>
-                    <a href="#calculator" class="btn">🎯 Book LED Campaign & Claim Free Creatives</a>
+                    <div class="zone-peak">
+                        <small>🕐 Peak: 8-10 AM, 5-8 PM</small>
+                    </div>
+                    <button class="btn btn-primary btn-sm btn-full" onclick="bookZone('Kausa')">
+                        📋 Book Now
+                    </button>
+                </div>
+
+                <!-- Zone 2 -->
+                <div class="zone-card zone-premium" data-zone="Mumbra Station">
+                    <div class="zone-header">
+                        <h3 class="zone-name">Mumbra Station</h3>
+                        <span class="zone-badge badge-high">High Traffic 🔥</span>
+                    </div>
+                    <div class="zone-stats">
+                        <div class="zone-stat">
+                            <span class="zone-stat-value">78,000</span>
+                            <span class="zone-stat-label">Population</span>
+                        </div>
+                        <div class="zone-stat">
+                            <span class="zone-stat-value">1,50,000</span>
+                            <span class="zone-stat-label">Daily Traffic</span>
+                        </div>
+                        <div class="zone-stat">
+                            <span class="zone-stat-value">2.2L</span>
+                            <span class="zone-stat-label">Impressions</span>
+                        </div>
+                    </div>
+                    <div class="zone-peak">
+                        <small>🕐 Peak: 7-10 AM, 4-9 PM</small>
+                    </div>
+                    <div class="zone-premium-badge">+20% Pricing</div>
+                    <button class="btn btn-primary btn-sm btn-full" onclick="bookZone('Mumbra Station')">
+                        📋 Book Now
+                    </button>
+                </div>
+
+                <!-- Zone 3 -->
+                <div class="zone-card" data-zone="Amrut Nagar">
+                    <div class="zone-header">
+                        <h3 class="zone-name">Amrut Nagar</h3>
+                        <span class="zone-badge badge-low">Low Traffic</span>
+                    </div>
+                    <div class="zone-stats">
+                        <div class="zone-stat">
+                            <span class="zone-stat-value">35,000</span>
+                            <span class="zone-stat-label">Population</span>
+                        </div>
+                        <div class="zone-stat">
+                            <span class="zone-stat-value">65,000</span>
+                            <span class="zone-stat-label">Daily Traffic</span>
+                        </div>
+                        <div class="zone-stat">
+                            <span class="zone-stat-value">95K</span>
+                            <span class="zone-stat-label">Impressions</span>
+                        </div>
+                    </div>
+                    <div class="zone-peak">
+                        <small>🕐 Peak: 9-11 AM, 6-8 PM</small>
+                    </div>
+                    <div class="zone-discount-badge">-10% Pricing</div>
+                    <button class="btn btn-primary btn-sm btn-full" onclick="bookZone('Amrut Nagar')">
+                        📋 Book Now
+                    </button>
+                </div>
+
+                <!-- Zone 4 -->
+                <div class="zone-card zone-premium" data-zone="Shilphata">
+                    <div class="zone-header">
+                        <h3 class="zone-name">Shilphata</h3>
+                        <span class="zone-badge badge-high">High Traffic 🔥</span>
+                    </div>
+                    <div class="zone-stats">
+                        <div class="zone-stat">
+                            <span class="zone-stat-value">55,000</span>
+                            <span class="zone-stat-label">Population</span>
+                        </div>
+                        <div class="zone-stat">
+                            <span class="zone-stat-value">1,10,000</span>
+                            <span class="zone-stat-label">Daily Traffic</span>
+                        </div>
+                        <div class="zone-stat">
+                            <span class="zone-stat-value">1.55L</span>
+                            <span class="zone-stat-label">Impressions</span>
+                        </div>
+                    </div>
+                    <div class="zone-peak">
+                        <small>🕐 Peak: 7-9 AM, 5-9 PM</small>
+                    </div>
+                    <div class="zone-premium-badge">+20% Pricing</div>
+                    <button class="btn btn-primary btn-sm btn-full" onclick="bookZone('Shilphata')">
+                        📋 Book Now
+                    </button>
+                </div>
+
+                <!-- Zone 5 -->
+                <div class="zone-card" data-zone="Retibunder">
+                    <div class="zone-header">
+                        <h3 class="zone-name">Retibunder</h3>
+                        <span class="zone-badge badge-low">Low Traffic</span>
+                    </div>
+                    <div class="zone-stats">
+                        <div class="zone-stat">
+                            <span class="zone-stat-value">28,000</span>
+                            <span class="zone-stat-label">Population</span>
+                        </div>
+                        <div class="zone-stat">
+                            <span class="zone-stat-value">52,000</span>
+                            <span class="zone-stat-label">Daily Traffic</span>
+                        </div>
+                        <div class="zone-stat">
+                            <span class="zone-stat-value">78K</span>
+                            <span class="zone-stat-label">Impressions</span>
+                        </div>
+                    </div>
+                    <div class="zone-peak">
+                        <small>🕐 Peak: 8-10 AM, 4-7 PM</small>
+                    </div>
+                    <div class="zone-discount-badge">-10% Pricing</div>
+                    <button class="btn btn-primary btn-sm btn-full" onclick="bookZone('Retibunder')">
+                        📋 Book Now
+                    </button>
+                </div>
+
+                <!-- Zone 6 -->
+                <div class="zone-card zone-premium" data-zone="Diva Junction">
+                    <div class="zone-header">
+                        <h3 class="zone-name">Diva Junction</h3>
+                        <span class="zone-badge badge-high">High Traffic 🔥</span>
+                    </div>
+                    <div class="zone-stats">
+                        <div class="zone-stat">
+                            <span class="zone-stat-value">62,000</span>
+                            <span class="zone-stat-label">Population</span>
+                        </div>
+                        <div class="zone-stat">
+                            <span class="zone-stat-value">1,20,000</span>
+                            <span class="zone-stat-label">Daily Traffic</span>
+                        </div>
+                        <div class="zone-stat">
+                            <span class="zone-stat-value">1.75L</span>
+                            <span class="zone-stat-label">Impressions</span>
+                        </div>
+                    </div>
+                    <div class="zone-peak">
+                        <small>🕐 Peak: 6-10 AM, 4-10 PM</small>
+                    </div>
+                    <div class="zone-premium-badge">+20% Pricing</div>
+                    <button class="btn btn-primary btn-sm btn-full" onclick="bookZone('Diva Junction')">
+                        📋 Book Now
+                    </button>
+                </div>
+
+                <!-- Zone 7 -->
+                <div class="zone-card" data-zone="Mumbra Bypass">
+                    <div class="zone-header">
+                        <h3 class="zone-name">Mumbra Bypass</h3>
+                        <span class="zone-badge badge-medium">Medium Traffic</span>
+                    </div>
+                    <div class="zone-stats">
+                        <div class="zone-stat">
+                            <span class="zone-stat-value">38,000</span>
+                            <span class="zone-stat-label">Population</span>
+                        </div>
+                        <div class="zone-stat">
+                            <span class="zone-stat-value">72,000</span>
+                            <span class="zone-stat-label">Daily Traffic</span>
+                        </div>
+                        <div class="zone-stat">
+                            <span class="zone-stat-value">1.05L</span>
+                            <span class="zone-stat-label">Impressions</span>
+                        </div>
+                    </div>
+                    <div class="zone-peak">
+                        <small>🕐 Peak: 7-9 AM, 5-8 PM</small>
+                    </div>
+                    <button class="btn btn-primary btn-sm btn-full" onclick="bookZone('Mumbra Bypass')">
+                        📋 Book Now
+                    </button>
+                </div>
+
+                <!-- Zone 8 -->
+                <div class="zone-card" data-zone="Check Naka">
+                    <div class="zone-header">
+                        <h3 class="zone-name">Check Naka</h3>
+                        <span class="zone-badge badge-medium">Medium Traffic</span>
+                    </div>
+                    <div class="zone-stats">
+                        <div class="zone-stat">
+                            <span class="zone-stat-value">42,000</span>
+                            <span class="zone-stat-label">Population</span>
+                        </div>
+                        <div class="zone-stat">
+                            <span class="zone-stat-value">80,000</span>
+                            <span class="zone-stat-label">Daily Traffic</span>
+                        </div>
+                        <div class="zone-stat">
+                            <span class="zone-stat-value">1.18L</span>
+                            <span class="zone-stat-label">Impressions</span>
+                        </div>
+                    </div>
+                    <div class="zone-peak">
+                        <small>🕐 Peak: 8-11 AM, 5-9 PM</small>
+                    </div>
+                    <button class="btn btn-primary btn-sm btn-full" onclick="bookZone('Check Naka')">
+                        📋 Book Now
+                    </button>
+                </div>
+
+                <!-- Zone 9 -->
+                <div class="zone-card" data-zone="Kalwa Route">
+                    <div class="zone-header">
+                        <h3 class="zone-name">Kalwa Route</h3>
+                        <span class="zone-badge badge-medium">Medium Traffic</span>
+                    </div>
+                    <div class="zone-stats">
+                        <div class="zone-stat">
+                            <span class="zone-stat-value">48,000</span>
+                            <span class="zone-stat-label">Population</span>
+                        </div>
+                        <div class="zone-stat">
+                            <span class="zone-stat-value">92,000</span>
+                            <span class="zone-stat-label">Daily Traffic</span>
+                        </div>
+                        <div class="zone-stat">
+                            <span class="zone-stat-value">1.35L</span>
+                            <span class="zone-stat-label">Impressions</span>
+                        </div>
+                    </div>
+                    <div class="zone-peak">
+                        <small>🕐 Peak: 7-10 AM, 4-8 PM</small>
+                    </div>
+                    <button class="btn btn-primary btn-sm btn-full" onclick="bookZone('Kalwa Route')">
+                        📋 Book Now
+                    </button>
+                </div>
+
+                <!-- Zone 10 -->
+                <div class="zone-card" data-zone="Almas Colony">
+                    <div class="zone-header">
+                        <h3 class="zone-name">Almas Colony</h3>
+                        <span class="zone-badge badge-low">Low Traffic</span>
+                    </div>
+                    <div class="zone-stats">
+                        <div class="zone-stat">
+                            <span class="zone-stat-value">32,000</span>
+                            <span class="zone-stat-label">Population</span>
+                        </div>
+                        <div class="zone-stat">
+                            <span class="zone-stat-value">60,000</span>
+                            <span class="zone-stat-label">Daily Traffic</span>
+                        </div>
+                        <div class="zone-stat">
+                            <span class="zone-stat-value">88K</span>
+                            <span class="zone-stat-label">Impressions</span>
+                        </div>
+                    </div>
+                    <div class="zone-peak">
+                        <small>🕐 Peak: 9-11 AM, 5-7 PM</small>
+                    </div>
+                    <div class="zone-discount-badge">-10% Pricing</div>
+                    <button class="btn btn-primary btn-sm btn-full" onclick="bookZone('Almas Colony')">
+                        📋 Book Now
+                    </button>
+                </div>
+
+                <!-- Zone 11 -->
+                <div class="zone-card" data-zone="Azad Nagar">
+                    <div class="zone-header">
+                        <h3 class="zone-name">Azad Nagar</h3>
+                        <span class="zone-badge badge-medium">Medium Traffic</span>
+                    </div>
+                    <div class="zone-stats">
+                        <div class="zone-stat">
+                            <span class="zone-stat-value">40,000</span>
+                            <span class="zone-stat-label">Population</span>
+                        </div>
+                        <div class="zone-stat">
+                            <span class="zone-stat-value">76,000</span>
+                            <span class="zone-stat-label">Daily Traffic</span>
+                        </div>
+                        <div class="zone-stat">
+                            <span class="zone-stat-value">1.12L</span>
+                            <span class="zone-stat-label">Impressions</span>
+                        </div>
+                    </div>
+                    <div class="zone-peak">
+                        <small>🕐 Peak: 8-10 AM, 5-8 PM</small>
+                    </div>
+                    <button class="btn btn-primary btn-sm btn-full" onclick="bookZone('Azad Nagar')">
+                        📋 Book Now
+                    </button>
+                </div>
+
+                <!-- Zone 12 -->
+                <div class="zone-card zone-premium" data-zone="Mumbra Market">
+                    <div class="zone-header">
+                        <h3 class="zone-name">Mumbra Market</h3>
+                        <span class="zone-badge badge-high">High Traffic 🔥</span>
+                    </div>
+                    <div class="zone-stats">
+                        <div class="zone-stat">
+                            <span class="zone-stat-value">52,000</span>
+                            <span class="zone-stat-label">Population</span>
+                        </div>
+                        <div class="zone-stat">
+                            <span class="zone-stat-value">1,00,000</span>
+                            <span class="zone-stat-label">Daily Traffic</span>
+                        </div>
+                        <div class="zone-stat">
+                            <span class="zone-stat-value">1.48L</span>
+                            <span class="zone-stat-label">Impressions</span>
+                        </div>
+                    </div>
+                    <div class="zone-peak">
+                        <small>🕐 Peak: 8 AM - 10 PM</small>
+                    </div>
+                    <div class="zone-premium-badge">+20% Pricing</div>
+                    <button class="btn btn-primary btn-sm btn-full" onclick="bookZone('Mumbra Market')">
+                        📋 Book Now
+                    </button>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- HOW IT WORKS -->
-        <section class="section" id="how-it-works" aria-labelledby="how-title">
-            <div class="container">
-                <div style="text-align:center;margin-bottom:48px"><span class="text-overline">PROCESS</span><h2 class="section-title" id="how-title" style="display:block;text-align:center">Launch In 5 Simple Steps</h2></div>
-                <div class="timeline">
-                    <article class="timeline-step" data-step="1"><h3 class="timeline-step-title">Choose Your Zone</h3><p class="timeline-step-desc">Browse 12 zones with real-time rickshaw availability, traffic data, and demographics.</p></article>
-                    <article class="timeline-step" data-step="2"><h3 class="timeline-step-title">Select Campaign Type</h3><p class="timeline-step-desc">LED Screen, Audio announcements, or Combo. Use our calculator to estimate costs & ROI.</p></article>
-                    <article class="timeline-step" data-step="3"><h3 class="timeline-step-title">Upload Creative</h3><p class="timeline-step-desc">Upload your ad creative. Get 30 FREE social media creatives with LED campaigns!</p></article>
-                    <article class="timeline-step" data-step="4"><h3 class="timeline-step-title">Launch Campaign</h3><p class="timeline-step-desc">Your ad goes live on rickshaws. LED screens display your ad, audio plays every 15 minutes.</p></article>
-                    <article class="timeline-step" data-step="5"><h3 class="timeline-step-title">Track Analytics</h3><p class="timeline-step-desc">Real-time dashboard shows reach, impressions, GPS routes, audio plays, and ROI.</p></article>
+    <!-- ============ PRICING SECTION ============ -->
+    <section class="section pricing-section" id="pricing">
+        <div class="container">
+            <h2 class="section-title">Simple, Transparent Pricing</h2>
+            <p class="section-subtitle">Live rates updated every 15 minutes. No hidden charges.</p>
+            
+            <div class="pricing-grid">
+                <!-- LED Campaign -->
+                <div class="pricing-card">
+                    <div class="pricing-header">
+                        <h3 class="pricing-name">LED Screen Ad</h3>
+                        <p class="pricing-desc">Digital display on rickshaw back</p>
+                    </div>
+                    <div class="pricing-price">
+                        <span class="pricing-currency">₹</span>
+                        <span class="pricing-amount" id="led-price">1,238</span>
+                        <span class="pricing-period">/day/rickshaw</span>
+                    </div>
+                    <ul class="pricing-features">
+                        <li>✅ LED screen display</li>
+                        <li>✅ 15-min content rotation</li>
+                        <li>✅ Real-time GPS tracking</li>
+                        <li>✅ Impressions analytics</li>
+                        <li>✅ 30 FREE social creatives</li>
+                        <li>✅ 1-50 rickshaws</li>
+                    </ul>
+                    <button class="btn btn-primary btn-full" onclick="bookCampaign('LED')">
+                        Get LED Campaign
+                    </button>
+                    <small class="pricing-update">⏱️ Prices update in <span id="led-update">12:45</span></small>
+                </div>
+
+                <!-- Audio Campaign -->
+                <div class="pricing-card">
+                    <div class="pricing-header">
+                        <h3 class="pricing-name">Audio Announcement</h3>
+                        <p class="pricing-desc">Bluetooth speaker audio ads</p>
+                    </div>
+                    <div class="pricing-price">
+                        <span class="pricing-currency">₹</span>
+                        <span class="pricing-amount" id="audio-price">318</span>
+                        <span class="pricing-period">/day/rickshaw</span>
+                    </div>
+                    <ul class="pricing-features">
+                        <li>✅ Audio ad via speaker</li>
+                        <li>✅ Every 15-min play cycle</li>
+                        <li>✅ 60-second ad duration</li>
+                        <li>✅ Zone-wise targeting</li>
+                        <li>✅ Play count analytics</li>
+                        <li>✅ 1-50 rickshaws</li>
+                    </ul>
+                    <button class="btn btn-primary btn-full" onclick="bookCampaign('Audio')">
+                        Get Audio Campaign
+                    </button>
+                    <small class="pricing-update">⏱️ Prices update in <span id="audio-update">12:45</span></small>
+                </div>
+
+                <!-- Combo Campaign - Featured -->
+                <div class="pricing-card pricing-featured">
+                    <div class="pricing-badge">🔥 MOST POPULAR</div>
+                    <div class="pricing-header">
+                        <h3 class="pricing-name">Combo (LED + Audio)</h3>
+                        <p class="pricing-desc">Maximum visibility & engagement</p>
+                    </div>
+                    <div class="pricing-price">
+                        <span class="pricing-currency">₹</span>
+                        <span class="pricing-amount" id="combo-price">1,556</span>
+                        <span class="pricing-period">/day/rickshaw</span>
+                    </div>
+                    <ul class="pricing-features">
+                        <li>✅ Everything in LED plan</li>
+                        <li>✅ Everything in Audio plan</li>
+                        <li>✅ Same rickshaw placement</li>
+                        <li>✅ 10% bulk discount on 10+</li>
+                        <li>✅ Priority campaign support</li>
+                        <li>✅ Best ROI guaranteed</li>
+                    </ul>
+                    <button class="btn btn-orange btn-full" onclick="bookCampaign('Combo')">
+                        Get Combo Campaign
+                    </button>
+                    <small class="pricing-update">⏱️ Prices update in <span id="combo-update">12:45</span></small>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- TESTIMONIALS -->
-        <section class="section" id="testimonials" aria-labelledby="testimonials-title">
-            <div class="container">
-                <div style="text-align:center;margin-bottom:48px"><span class="text-overline">TESTIMONIALS</span><h2 class="section-title" id="testimonials-title" style="display:block;text-align:center">Loved By 350+ Businesses</h2></div>
-                <div class="testimonial-grid" role="list">
-                    <article class="testimonial-card" role="listitem"><div class="testimonial-rating">⭐⭐⭐⭐⭐</div><blockquote class="testimonial-text">"RASAAI se humare Pizza House ki walk-ins 65% badh gayi. Best advertising investment for local businesses!"</blockquote><div class="testimonial-profile"><div class="testimonial-avatar">AS</div><div><div class="testimonial-name">Ahmed Shaikh</div><div class="testimonial-role">Owner, Mumbra Pizza House</div></div></div></article>
-                    <article class="testimonial-card" role="listitem"><div class="testimonial-rating">⭐⭐⭐⭐⭐</div><blockquote class="testimonial-text">"As a doctor, I needed hyperlocal visibility. 120 new patients in 6 months through rickshaw ads!"</blockquote><div class="testimonial-profile"><div class="testimonial-avatar">FK</div><div><div class="testimonial-name">Dr. Fatima Khan</div><div class="testimonial-role">Owner, Shifa Clinic</div></div></div></article>
-                    <article class="testimonial-card" role="listitem"><div class="testimonial-rating">⭐⭐⭐⭐⭐</div><blockquote class="testimonial-text">"45 new students enrolled in 2 months. Combo package is worth every rupee!"</blockquote><div class="testimonial-profile"><div class="testimonial-avatar">MA</div><div><div class="testimonial-name">Mohammed Ali</div><div class="testimonial-role">Director, Al-Huda Tuition</div></div></div></article>
+    <!-- ============ CAMPAIGN CALCULATOR ============ -->
+    <section class="section calculator-section" id="calculator">
+        <div class="container">
+            <h2 class="section-title">Campaign Cost Calculator</h2>
+            <p class="section-subtitle">Get an instant estimate for your advertising campaign</p>
+            
+            <div class="calculator-card">
+                <div class="calculator-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Campaign Type</label>
+                            <select id="calc-type">
+                                <option value="LED">LED Screen Ad</option>
+                                <option value="Audio">Audio Announcement</option>
+                                <option value="Combo">Combo (LED + Audio)</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Select Zone</label>
+                            <select id="calc-zone">
+                                <option value="Kausa">Kausa</option>
+                                <option value="Mumbra Station">Mumbra Station (+20%)</option>
+                                <option value="Amrut Nagar">Amrut Nagar (-10%)</option>
+                                <option value="Shilphata">Shilphata (+20%)</option>
+                                <option value="Retibunder">Retibunder (-10%)</option>
+                                <option value="Diva Junction">Diva Junction (+20%)</option>
+                                <option value="Mumbra Bypass">Mumbra Bypass</option>
+                                <option value="Check Naka">Check Naka</option>
+                                <option value="Kalwa Route">Kalwa Route</option>
+                                <option value="Almas Colony">Almas Colony (-10%)</option>
+                                <option value="Azad Nagar">Azad Nagar</option>
+                                <option value="Mumbra Market">Mumbra Market (+20%)</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Number of Rickshaws</label>
+                            <input type="range" id="calc-rickshaws" min="1" max="50" value="5" oninput="document.getElementById('rickshaws-value').textContent = this.value">
+                            <span class="range-value"><strong id="rickshaws-value">5</strong> rickshaws</span>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Campaign Duration</label>
+                            <input type="range" id="calc-days" min="1" max="90" value="7" oninput="document.getElementById('days-value').textContent = this.value">
+                            <span class="range-value"><strong id="days-value">7</strong> days</span>
+                        </div>
+                    </div>
+                    
+                    <div class="calculator-result">
+                        <div class="result-row">
+                            <span>Base Price</span>
+                            <span id="result-base">₹0</span>
+                        </div>
+                        <div class="result-row">
+                            <span>Zone Adjustment</span>
+                            <span id="result-zone">₹0</span>
+                        </div>
+                        <div class="result-row" id="bulk-row" style="display:none;">
+                            <span>Bulk Discount (10%)</span>
+                            <span id="result-bulk" class="text-green">-₹0</span>
+                        </div>
+                        <div class="result-row" id="longterm-row" style="display:none;">
+                            <span>Long-term Discount (5%)</span>
+                            <span id="result-longterm" class="text-green">-₹0</span>
+                        </div>
+                        <div class="result-divider"></div>
+                        <div class="result-row result-total">
+                            <span>Estimated Total</span>
+                            <span id="result-total">₹0</span>
+                        </div>
+                        <div class="result-row">
+                            <span>GST (18%)</span>
+                            <span id="result-gst">₹0</span>
+                        </div>
+                        <div class="result-divider"></div>
+                        <div class="result-row result-grand">
+                            <span>Grand Total</span>
+                            <span id="result-grand">₹0</span>
+                        </div>
+                    </div>
+                    
+                    <button class="btn btn-primary btn-full btn-lg" onclick="proceedToBook()">
+                        🚀 Book This Campaign
+                    </button>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- FAQ -->
-        <section class="section" id="faq" aria-labelledby="faq-title">
-            <div class="container">
-                <div style="text-align:center;margin-bottom:48px"><span class="text-overline">FAQ</span><h2 class="section-title" id="faq-title" style="display:block;text-align:center">Frequently Asked Questions</h2></div>
-                <div class="faq-container"><div class="accordion" role="list">
-                    <div class="accordion-item"><button class="accordion-header" aria-expanded="false" aria-controls="faq1">What is RASAAI?<span class="accordion-arrow">▼</span></button><div class="accordion-content" id="faq1" hidden><p>India's first hyperlocal auto rickshaw advertising network covering 12 zones across Mumbra with LED screens and audio ads. We turn moving rickshaws into your billboards.</p></div></div>
-                    <div class="accordion-item"><button class="accordion-header" aria-expanded="false" aria-controls="faq2">How much does it cost?<span class="accordion-arrow">▼</span></button><div class="accordion-content" id="faq2" hidden><p>LED: ₹1,238-₹1,647/day/rickshaw. Audio: ₹318-₹639/day/rickshaw. 10% discount on 10+ rickshaws. Book 1 rickshaw for 1 day minimum.</p></div></div>
-                    <div class="accordion-item"><button class="accordion-header" aria-expanded="false" aria-controls="faq3">What is the FREE bonus?<span class="accordion-arrow">▼</span></button><div class="accordion-content" id="faq3" hidden><p>Every LED or Combo campaign gets 30 FREE social media creatives for Instagram, WhatsApp, Facebook, Stories, Carousels, and Reels. 100% free, no hidden charges!</p></div></div>
-                    <div class="accordion-item"><button class="accordion-header" aria-expanded="false" aria-controls="faq4">How does audio ad work?<span class="accordion-arrow">▼</span></button><div class="accordion-content" id="faq4" hidden><p>Bluetooth speaker on rickshaw plays zone announcement + 60-second ad every 15 minutes during rides. Drivers earn per play.</p></div></div>
-                    <div class="accordion-item"><button class="accordion-header" aria-expanded="false" aria-controls="faq5">How to pay?<span class="accordion-arrow">▼</span></button><div class="accordion-content" id="faq5" hidden><p>We accept PhonePe, UPI (9594306625@ybl), and bank transfers. WhatsApp us at +91 9594306625 for payment assistance.</p></div></div>
-                </div></div>
+    <!-- ============ BONUS BANNER ============ -->
+    <section class="section bonus-section">
+        <div class="container">
+            <div class="bonus-card">
+                <div class="bonus-content">
+                    <h2>🎁 First-Time Bonus</h2>
+                    <p>Book any LED campaign and get <strong>30 Social Media Creatives</strong> absolutely FREE!</p>
+                    <button class="btn btn-yellow btn-lg" onclick="scrollToCalculator()">
+                        🎯 Book Now & Claim Bonus
+                    </button>
+                </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- FINAL CTA -->
-        <section class="section">
-            <div class="container">
-                <div class="glass-card" style="text-align:center;padding:64px 32px;position:relative;overflow:hidden">
-                    <div class="background-glow glow-primary" style="width:400px;height:400px;top:-50%;left:-20%" aria-hidden="true"></div>
-                    <h2 class="section-title" style="display:block;text-align:center;position:relative;z-index:1">Ready To Turn Rickshaws Into Your Moving Billboards?</h2>
-                    <p class="body-text" style="max-width:600px;margin:0 auto 32px;position:relative;z-index:1">Join 350+ businesses. Starting at ₹1,238/day. Get 30 FREE social media creatives with LED campaigns!</p>
-                    <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;position:relative;z-index:1">
-                        <a href="#calculator" class="btn btn-primary btn-lg">📊 Free Estimate</a>
-                        <a href="https://wa.me/919594306625?text=Hi%2C%20I%20want%20to%20start%20advertising%20on%20rickshaws" class="btn btn-whatsapp btn-lg" target="_blank" rel="noopener">💬 WhatsApp</a>
-                        <a href="tel:+919594306625" class="btn btn-outline btn-lg">📞 Call Now</a>
+    <!-- ============ TESTIMONIALS ============ -->
+    <section class="section testimonials-section">
+        <div class="container">
+            <h2 class="section-title">What Advertisers Say</h2>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
+                    <p>"RASAAI helped Mumbra Pizza House reach 50,000+ new customers in just 7 days. The QR code engagement was incredible!"</p>
+                    <div class="testimonial-author">
+                        <strong>Rahul Sharma</strong>
+                        <small>Mumbra Pizza House</small>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
+                    <p>"Best advertising ROI in Mumbra. We spent ₹8,666 and got 200+ walk-in customers. The audio ads are very effective."</p>
+                    <div class="testimonial-author">
+                        <strong>Dr. Fatima Khan</strong>
+                        <small>Khan Dental Clinic, Kausa</small>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
+                    <p>"Affordable, trackable, and hyperlocal. Exactly what small businesses need. The dashboard analytics are fantastic."</p>
+                    <div class="testimonial-author">
+                        <strong>Amit Patel</strong>
+                        <small>Patel General Store, Diva</small>
                     </div>
                 </div>
             </div>
-        </section>
-    </main>
+        </div>
+    </section>
 
-    <!-- FOOTER -->
-    <footer class="footer" role="contentinfo">
+    <!-- ============ FAQ ============ -->
+    <section class="section faq-section" id="faq">
+        <div class="container">
+            <h2 class="section-title">Frequently Asked Questions</h2>
+            <div class="faq-list">
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFAQ(this)">
+                        <span>How does RASAAI work?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>We install LED screens and Bluetooth speakers on auto rickshaws. Your ad displays on the screen or plays through the speaker as the rickshaw moves through Mumbra. You can track impressions and engagement in real-time through your dashboard.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFAQ(this)">
+                        <span>How much does it cost?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>LED ads start at ₹1,238/day/rickshaw. Audio ads start at ₹318/day/rickshaw. Combo (LED+Audio) starts at ₹1,556/day/rickshaw. Prices update every 15 minutes based on demand. Bulk discounts available on 10+ rickshaws.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFAQ(this)">
+                        <span>How many people will see my ad?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Depending on the zone, your ad can get 78,000 to 2,20,000 impressions per day. Mumbra Station and Diva Junction are the highest traffic zones. You get detailed analytics for every campaign.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFAQ(this)">
+                        <span>How do I pay?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>We accept UPI (PhonePe, Google Pay, Paytm) and bank transfers. Our UPI ID is 9594306625@ybl. Payment is required to activate your campaign.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFAQ(this)">
+                        <span>Can I choose specific zones?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Yes! You can select from 12 Mumbra zones. Premium zones (Mumbra Station, Diva Junction, Mumbra Market, Shilphata) have +20% pricing due to higher traffic. Low traffic zones (Amrut Nagar, Retibunder, Almas Colony) have -10% discount.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ FINAL CTA ============ -->
+    <section class="section final-cta">
+        <div class="container">
+            <h2>Ready to Reach 5L+ Daily Commuters?</h2>
+            <p>Join 50+ businesses already advertising with RASAAI</p>
+            <div class="final-cta-buttons">
+                <button class="btn btn-primary btn-lg" onclick="scrollToCalculator()">📊 Get Free Estimate</button>
+                <a href="https://wa.me/919594306625?text=Hi%20RASAAI,%20I%20want%20to%20book%20a%20campaign" class="btn btn-whatsapp btn-lg" target="_blank">💬 WhatsApp Book</a>
+                <a href="tel:+919594306625" class="btn btn-outline btn-lg">📞 Call Now</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ FOOTER ============ -->
+    <footer class="footer">
         <div class="container">
             <div class="footer-grid">
-                <div class="footer-col"><div class="footer-brand">RASAAI</div><p class="footer-desc">India's first hyperlocal auto rickshaw advertising network across 12 Mumbra zones. LED & Audio campaigns with real-time analytics.</p><div class="footer-social"><a href="https://wa.me/919594306625" class="footer-social-link" target="_blank" rel="noopener" aria-label="WhatsApp">WA</a><a href="tel:+919594306625" class="footer-social-link" aria-label="Call">📞</a></div></div>
-                <div class="footer-col"><h4>Quick Links</h4><a href="#zones">Zones</a><a href="#pricing">Pricing</a><a href="#calculator">Calculator</a><a href="#faq">FAQ</a></div>
-                <div class="footer-col"><h4>Services</h4><a href="#pricing">LED Campaigns</a><a href="#pricing">Audio Campaigns</a><a href="#pricing">Combo Packages</a><a href="campaign.html">Book Campaign</a></div>
-                <div class="footer-col"><h4>Contact</h4><a href="tel:+919594306625">📞 +91 9594306625</a><a href="https://wa.me/919594306625">💬 WhatsApp</a><a href="mailto:hello@rasaai.com">✉️ hello@rasaai.com</a></div>
-                <div class="footer-col"><h4>Legal</h4><a href="privacy.html">Privacy Policy</a><a href="terms.html">Terms of Service</a><a href="refund.html">Refund Policy</a></div>
+                <div class="footer-brand">
+                    <img src="/rasaai/assets/images/logo-white.svg" alt="RASAAI" height="32">
+                    <p>India's first hyperlocal auto rickshaw advertising network. Connecting local businesses with 5L+ daily commuters.</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <a href="#how-it-works">How It Works</a>
+                    <a href="#zones">Zones</a>
+                    <a href="#pricing">Pricing</a>
+                    <a href="#calculator">Calculator</a>
+                    <a href="#faq">FAQ</a>
+                </div>
+                <div class="footer-links">
+                    <h4>Legal</h4>
+                    <a href="/rasaai/pages/privacy.html">Privacy Policy</a>
+                    <a href="/rasaai/pages/terms.html">Terms of Service</a>
+                    <a href="/rasaai/pages/refund.html">Refund Policy</a>
+                </div>
+                <div class="footer-contact">
+                    <h4>Contact</h4>
+                    <a href="tel:+919594306625">📞 +91 95943 06625</a>
+                    <a href="mailto:hello@rasaai.com">✉️ hello@rasaai.com</a>
+                    <a href="https://wa.me/919594306625">💬 WhatsApp</a>
+                    <p>📍 Mumbra, Thane, Maharashtra</p>
+                </div>
             </div>
-            <div class="footer-bottom"><span>© 2025 RASAAI Outdoor Advertising Network</span><span>Made with ❤️ in Mumbra, Maharashtra</span></div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 RASAAI. All rights reserved. Made with ❤️ in Mumbra.</p>
+            </div>
         </div>
     </footer>
 
-    <!-- MOBILE BOTTOM NAVIGATION -->
-    <nav class="bottom-nav" role="navigation" aria-label="Mobile navigation">
-        <a href="index.html" class="bottom-nav-item active" data-page="index.html">
-            <span class="nav-icon">🏠</span><span class="nav-label">Home</span>
+    <!-- ============ MOBILE BOTTOM NAVIGATION ============ -->
+    <nav class="mobile-nav" id="mobile-nav">
+        <a href="/rasaai/" class="mobile-nav-item active">
+            <span class="mobile-nav-icon">🏠</span>
+            <span class="mobile-nav-label">Home</span>
         </a>
-        <a href="campaign.html" class="bottom-nav-item" data-page="campaign.html">
-            <span class="nav-icon">📢</span><span class="nav-label">Campaigns</span>
+        <a href="/rasaai/pages/scan.html" class="mobile-nav-item">
+            <span class="mobile-nav-icon">📍</span>
+            <span class="mobile-nav-label">Explore</span>
         </a>
-        <a href="campaign.html" class="bottom-nav-fab" aria-label="Book new campaign">
-            <span>➕</span>
+        <button class="mobile-fab" onclick="openScanner()">
+            📷
+        </button>
+        <a href="/rasaai/pages/rewards.html" class="mobile-nav-item">
+            <span class="mobile-nav-icon">🎁</span>
+            <span class="mobile-nav-label">Rewards</span>
         </a>
-        <a href="analytics.html" class="bottom-nav-item" data-page="analytics.html">
-            <span class="nav-icon">📊</span><span class="nav-label">Stats</span>
-        </a>
-        <a href="login.html" class="bottom-nav-item" data-page="login.html" id="bottom-nav-profile">
-            <span class="nav-icon">👤</span><span class="nav-label">Profile</span>
-            <span class="nav-badge" style="display:none">0</span>
+        <a href="/rasaai/pages/login.html" class="mobile-nav-item">
+            <span class="mobile-nav-icon">👤</span>
+            <span class="mobile-nav-label">Profile</span>
         </a>
     </nav>
 
-    <!-- FLOATING BUTTONS -->
-    <a href="https://wa.me/919594306625?text=Hi%2C%20I%20need%20help" class="btn btn-whatsapp btn-icon btn-lg" style="position:fixed;bottom:80px;right:20px;z-index:100;box-shadow:0 8px 32px rgba(37,211,102,0.4)" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">💬</a>
+    <!-- ============ WHATSAPP FLOATING BUTTON ============ -->
+    <a href="https://wa.me/919594306625?text=Hi%20RASAAI,%20I%20need%20help!" 
+       class="whatsapp-float" target="_blank" aria-label="Chat on WhatsApp">
+        💬
+    </a>
 
-    <!-- NOTIFICATION CONTAINER -->
-    <div id="notification-container" class="notification-container" aria-live="polite" role="status"></div>
-
-    <script src="app.js"></script>
+    <!-- ============ SCRIPTS ============ -->
+    <script src="/rasaai/js/data/constants.js"></script>
+    <script src="/rasaai/js/data/zones.js"></script>
+    <script src="/rasaai/js/utils/helpers.js"></script>
+    <script src="/rasaai/js/modules/pricing.js"></script>
+    <script src="/rasaai/js/modules/calculator.js"></script>
+    <script src="/rasaai/js/core/router.js"></script>
+    <script src="/rasaai/js/core/app.js"></script>
+    
     <script>
-        // Zone cards rendering
-        document.addEventListener('DOMContentLoaded', () => {
-            if (typeof CampaignCalculator !== 'undefined') {
-                CampaignCalculator.renderZoneCards();
-            }
+        // Initialize landing page
+        document.addEventListener('DOMContentLoaded', function() {
+            initLandingPage();
         });
-
-        // Handle Book Campaign
-        function handleBookCampaign() {
-            const calc = CampaignCalculator.getLastCalculation();
-            if (!calc) { Notify.warning('Please adjust calculator inputs first'); return; }
+        
+        function initLandingPage() {
+            // Start live pricing updates
+            if (typeof initPricing === 'function') initPricing();
             
-            const user = Auth.getCurrentUser();
-            if (!user) { 
-                Storage.set('pendingBooking', calc);
-                window.location.href = 'login.html?redirect=campaign.html'; 
-                return; 
-            }
+            // Initialize calculator
+            if (typeof initCalculator === 'function') initCalculator();
             
-            window.location.href = `campaign.html?type=${calc.type}&zone=${calc.zone}&quantity=${calc.quantity}&days=${calc.days}`;
+            // Mobile menu toggle
+            document.getElementById('menu-toggle').addEventListener('click', function() {
+                document.getElementById('nav-links').classList.toggle('active');
+                this.classList.toggle('active');
+            });
+            
+            // Smooth scroll for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        document.getElementById('nav-links').classList.remove('active');
+                    }
+                });
+            });
+            
+            // Header scroll effect
+            window.addEventListener('scroll', function() {
+                const header = document.getElementById('header');
+                if (window.scrollY > 50) {
+                    header.classList.add('header-scrolled');
+                } else {
+                    header.classList.remove('header-scrolled');
+                }
+            });
         }
-
-        // Handle WhatsApp Booking
-        function handleBookViaWhatsApp() {
-            const calc = CampaignCalculator.getLastCalculation();
-            if (!calc) { Notify.warning('Please adjust calculator inputs first'); return; }
-            
-            const msg = encodeURIComponent(
-                `Hi RASAAI! 🛺\n\nI want to book a campaign:\n📋 Type: ${calc.type.toUpperCase()}\n📍 Zone: ${calc.zoneName}\n🛺 Rickshaws: ${calc.quantity}\n📅 Days: ${calc.days}\n💰 Est. Cost: ₹${calc.cost.toLocaleString()}\n\nPlease help me book!`
-            );
-            window.open(`https://wa.me/919594306625?text=${msg}`, '_blank');
+        
+        function scrollToCalculator() {
+            document.getElementById('calculator').scrollIntoView({ behavior: 'smooth' });
         }
-
-        // Update bottom nav based on auth
-        const user = Auth.getCurrentUser();
-        if (user) {
-            const profileLink = document.getElementById('bottom-nav-profile');
-            if (profileLink) {
-                profileLink.href = 'dashboard.html';
-                profileLink.querySelector('.nav-label').textContent = user.name.split(' ')[0];
+        
+        function scrollToPricing() {
+            document.getElementById('pricing').scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        function bookZone(zoneName) {
+            const zoneSelect = document.getElementById('calc-zone');
+            for (let i = 0; i < zoneSelect.options.length; i++) {
+                if (zoneSelect.options[i].text.startsWith(zoneName)) {
+                    zoneSelect.selectedIndex = i;
+                    break;
+                }
             }
+            scrollToCalculator();
+            if (typeof updateCalculator === 'function') updateCalculator();
+        }
+        
+        function bookCampaign(type) {
+            const typeSelect = document.getElementById('calc-type');
+            typeSelect.value = type;
+            scrollToCalculator();
+            if (typeof updateCalculator === 'function') updateCalculator();
+        }
+        
+        function toggleFAQ(btn) {
+            const answer = btn.nextElementSibling;
+            const icon = btn.querySelector('.faq-icon');
+            const isOpen = answer.style.maxHeight;
+            
+            // Close all
+            document.querySelectorAll('.faq-answer').forEach(a => a.style.maxHeight = null);
+            document.querySelectorAll('.faq-icon').forEach(i => i.textContent = '+');
+            
+            // Open clicked
+            if (!isOpen) {
+                answer.style.maxHeight = answer.scrollHeight + 'px';
+                icon.textContent = '−';
+            }
+        }
+        
+        function handleLogin() {
+            window.location.href = '/rasaai/pages/login.html';
+        }
+        
+        function handleRegister() {
+            window.location.href = '/rasaai/pages/register.html';
+        }
+        
+        function openScanner() {
+            window.location.href = '/rasaai/pages/scan.html';
+        }
+        
+        function proceedToBook() {
+            const type = document.getElementById('calc-type').value;
+            const zone = document.getElementById('calc-zone').value;
+            const rickshaws = document.getElementById('calc-rickshaws').value;
+            const days = document.getElementById('calc-days').value;
+            
+            const params = new URLSearchParams({
+                type: type,
+                zone: zone,
+                rickshaws: rickshaws,
+                days: days
+            });
+            
+            window.location.href = '/rasaai/pages/login.html?redirect=campaign&' + params.toString();
+        }
+        
+        // Register Service Worker
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+                navigator.serviceWorker.register('/rasaai/service-worker.js')
+                    .then(function(reg) {
+                        console.log('✅ Service Worker registered');
+                    })
+                    .catch(function(err) {
+                        console.log('❌ Service Worker failed:', err);
+                    });
+            });
         }
     </script>
 </body>
