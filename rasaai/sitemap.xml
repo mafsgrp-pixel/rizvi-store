@@ -1,10 +1,187 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://rizvi.store/rasaai/</loc>
-    <lastmod>2025-01-01</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
-  </url>
-  <url>
+<!--
+ * Filename: sitemap.xml
+ * Path: /sitemap.xml
+ * Project: RASAAI - Auto Rickshaw Advertising Network
+ * Description: XML Sitemap for SEO
+-->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 
+                            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+
+    <!-- Main Landing Page -->
+    <url>
+        <loc>https://rizvi.store/rasaai/index.html</loc>
+        <lastmod>2024-06-02</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>1.0</priority>
+    </url>
+
+    <url>
+        <loc>https://rizvi.store/rasaai/</loc>
+        <lastmod>2024-06-02</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>1.0</priority>
+    </url>
+
+    <!-- Auth Pages -->
+    <url>
+        <loc>https://rizvi.store/rasaai/pages/login.html</loc>
+        <lastmod>2024-06-02</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://rizvi.store/rasaai/pages/register.html</loc>
+        <lastmod>2024-06-02</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://rizvi.store/rasaai/pages/forgot-password.html</loc>
+        <lastmod>2024-06-02</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.4</priority>
+    </url>
+
+    <!-- Dashboard Pages -->
+    <url>
+        <loc>https://rizvi.store/rasaai/pages/dashboard.html</loc>
+        <lastmod>2024-06-02</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <url>
+        <loc>https://rizvi.store/rasaai/pages/admin.html</loc>
+        <lastmod>2024-06-02</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+    </url>
+
+    <url>
+        <loc>https://rizvi.store/rasaai/pages/client.html</loc>
+        <lastmod>2024-06-02</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+    </url>
+
+    <url>
+        <loc>https://rizvi.store/rasaai/pages/driver.html</loc>
+        <lastmod>2024-06-02</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+    </url>
+
+    <url>
+        <loc>https://rizvi.store/rasaai/pages/affiliate.html</loc>
+        <lastmod>2024-06-02</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+    </url>
+
+    <url>
+        <loc>https://rizvi.store/rasaai/pages/sales.html</loc>
+        <lastmod>2024-06-02</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+    </url>
+
+    <url>
+        <loc>https://rizvi.store/rasaai/pages/passenger.html</loc>
+        <lastmod>2024-06-02</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+    </url>
+
+    <!-- Feature Pages -->
+    <url>
+        <loc>https://rizvi.store/rasaai/pages/campaign.html</loc>
+        <lastmod>2024-06-02</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.9</priority>
+    </url>
+
+    <url>
+        <loc>https://rizvi.store/rasaai/pages/invoice.html</loc>
+        <lastmod>2024-06-02</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.5</priority>
+    </url>
+
+    <url>
+        <loc>https://rizvi.store/rasaai/pages/analytics.html</loc>
+        <lastmod>2024-06-02</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.5</priority>
+    </url>
+
+    <url>
+        <loc>https://rizvi.store/rasaai/pages/crm.html</loc>
+        <lastmod>2024-06-02</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.5</priority>
+    </url>
+
+    <url>
+        <loc>https://rizvi.store/rasaai/pages/scan.html</loc>
+        <lastmod>2024-06-02</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <url>
+        <loc>https://rizvi.store/rasaai/pages/rewards.html</loc>
+        <lastmod>2024-06-02</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <url>
+        <loc>https://rizvi.store/rasaai/pages/leaderboard.html</loc>
+        <lastmod>2024-06-02</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <!-- Legal Pages -->
+    <url>
+        <loc>https://rizvi.store/rasaai/pages/privacy.html</loc>
+        <lastmod>2024-06-02</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.3</priority>
+    </url>
+
+    <url>
+        <loc>https://rizvi.store/rasaai/pages/terms.html</loc>
+        <lastmod>2024-06-02</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.3</priority>
+    </url>
+
+    <url>
+        <loc>https://rizvi.store/rasaai/pages/refund.html</loc>
+        <lastmod>2024-06-02</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.3</priority>
+    </url>
+
+    <!-- Error Pages -->
+    <url>
+        <loc>https://rizvi.store/rasaai/pages/404.html</loc>
+        <lastmod>2024-06-02</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.1</priority>
+    </url>
+
+    <url>
+        <loc>https://rizvi.store/rasaai/pages/offline.html</loc>
+        <lastmod>2024-06-02</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.1</priority>
+    </url>
+
 </urlset>
