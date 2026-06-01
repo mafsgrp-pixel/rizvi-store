@@ -513,33 +513,41 @@
             },
             
             redirectBasedOnRole(user) {
-                // If there's a redirect URL, go there
-                if (this.redirectUrl) {
-                    window.location.href = this.redirectUrl;
-                    return;
-                }
-                
-                // Otherwise redirect based on role
-                switch (user.role) {
-                    case 'admin':
-                        window.location.href = 'admin.html';
-                        break;
-                    case 'client':
-                        window.location.href = 'client.html';
-                        break;
-                    case 'driver':
-                        window.location.href = 'driver.html';
-                        break;
-                    case 'affiliate':
-                        window.location.href = 'affiliate.html';
-                        break;
-                    case 'sales':
-                        window.location.href = 'crm.html';
-                        break;
-                    default:
-                        window.location.href = 'dashboard.html';
-                }
-            },
+    // If there's a redirect URL, go there
+    if (this.redirectUrl) {
+        window.location.href = this.redirectUrl;
+        return;
+    }
+    
+    // Check stored redirect
+    const storedRedirect = Storage.get('redirectAfterLogin');
+    if (storedRedirect) {
+        Storage.remove('redirectAfterLogin');
+        window.location.href = storedRedirect;
+        return;
+    }
+    
+    // Otherwise redirect based on role
+    switch (user.role) {
+        case 'admin':
+            window.location.href = 'admin.html';
+            break;
+        case 'client':
+            window.location.href = 'client.html';
+            break;
+        case 'driver':
+            window.location.href = 'driver.html';
+            break;
+        case 'affiliate':
+            window.location.href = 'affiliate.html';
+            break;
+        case 'sales':
+            window.location.href = 'crm.html';
+            break;
+        default:
+            window.location.href = 'dashboard.html';
+    }
+}
             
             togglePassword() {
                 const input = document.getElementById('login-password');
