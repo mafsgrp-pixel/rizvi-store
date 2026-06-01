@@ -1,0 +1,188 @@
+<!--
+ * Filename: sales.html
+ * Path: /pages/sales.html
+ * Project: RASAAI - Auto Rickshaw Advertising Network
+ * Description: Sales Representative Portal - CRM Pipeline, Leads, Targets
+ * Role: sales
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#221F60">
+    <meta name="robots" content="noindex, nofollow">
+    
+    <link rel="icon" type="image/x-icon" href="/rasaai/assets/images/favicon.ico">
+    <link rel="manifest" href="/rasaai/manifest.json">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="/rasaai/css/main.css">
+    <link rel="stylesheet" href="/rasaai/css/layout.css">
+    <link rel="stylesheet" href="/rasaai/css/components.css">
+    <link rel="stylesheet" href="/rasaai/css/dashboard.css">
+    <link rel="stylesheet" href="/rasaai/css/mobile.css">
+    <link rel="stylesheet" href="/rasaai/css/dark-mode.css">
+    <link rel="stylesheet" href="/rasaai/css/animations.css">
+    
+    <title>Sales Portal - RASAAI</title>
+</head>
+<body class="dashboard-body">
+    
+    <div class="backdrop" id="sidebar-backdrop" onclick="closeSidebar()"></div>
+    
+    <aside class="dashboard-sidebar" id="sales-sidebar"></aside>
+    
+    <main class="dashboard-main">
+        
+        <header class="dashboard-header">
+            <div class="dashboard-header-left">
+                <button class="sidebar-toggle" onclick="toggleSidebar()">☰</button>
+                <h1 class="dashboard-header-title">Sales Dashboard</h1>
+            </div>
+            <div class="dashboard-header-right">
+                <button class="dark-mode-toggle" onclick="toggleTheme()">🌓</button>
+                <button class="header-user-btn" onclick="logout()">
+                    <div class="header-user-avatar" id="header-avatar">S</div>
+                    <span class="header-user-name" id="header-name">Sales</span>
+                </button>
+            </div>
+        </header>
+        
+        <div class="dashboard-content">
+            
+            <div class="welcome-row">
+                <div class="welcome-text">
+                    <h1>Welcome, <span id="welcome-name">Amit</span>! 💼</h1>
+                    <p>Track your leads and close more deals</p>
+                </div>
+                <div class="welcome-actions">
+                    <button class="btn btn-primary" onclick="openNewLeadForm()">+ New Lead</button>
+                </div>
+            </div>
+            
+            <!-- Target Progress -->
+            <div id="target-progress-container"></div>
+            
+            <!-- Stats -->
+            <div class="stats-row">
+                <div class="stat-card-dashboard">
+                    <div class="stat-card-icon-box blue">👥</div>
+                    <div class="stat-card-info">
+                        <div class="stat-card-label">Total Leads</div>
+                        <div class="stat-card-value">5</div>
+                    </div>
+                </div>
+                <div class="stat-card-dashboard">
+                    <div class="stat-card-icon-box green">🏆</div>
+                    <div class="stat-card-info">
+                        <div class="stat-card-label">Won</div>
+                        <div class="stat-card-value">1</div>
+                    </div>
+                </div>
+                <div class="stat-card-dashboard">
+                    <div class="stat-card-icon-box yellow">⏳</div>
+                    <div class="stat-card-info">
+                        <div class="stat-card-label">In Pipeline</div>
+                        <div class="stat-card-value">3</div>
+                    </div>
+                </div>
+                <div class="stat-card-dashboard">
+                    <div class="stat-card-icon-box purple">💰</div>
+                    <div class="stat-card-info">
+                        <div class="stat-card-label">Revenue Generated</div>
+                        <div class="stat-card-value">₹68,021</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Kanban Board -->
+            <div class="chart-widget">
+                <div class="chart-widget-header">
+                    <span class="chart-widget-title">Pipeline</span>
+                </div>
+                <div id="kanban-board"></div>
+            </div>
+            
+            <!-- Leads Table -->
+            <div class="table-widget">
+                <div class="table-widget-header">
+                    <span class="table-widget-title">All Leads</span>
+                    <button class="btn btn-sm btn-primary" onclick="openNewLeadForm()">+ New Lead</button>
+                </div>
+                <div class="table-widget-body" id="leads-table">
+                    <table class="table">
+                        <thead><tr><th>Lead</th><th>Company</th><th>Contact</th><th>Source</th><th>Status</th><th>Actions</th></tr></thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Vikas Gupta</strong></td><td>Gupta Electronics</td>
+                                <td><small>📞 9876543201</small></td>
+                                <td><span class="badge badge-gray">WhatsApp</span></td>
+                                <td><span class="badge badge-green">Won</span></td>
+                                <td><button class="btn btn-sm btn-ghost">👁️</button></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Sunita Reddy</strong></td><td>Reddy Medical</td>
+                                <td><small>📞 9876543202</small></td>
+                                <td><span class="badge badge-gray">Referral</span></td>
+                                <td><span class="badge badge-yellow">Negotiation</span></td>
+                                <td><button class="btn btn-sm btn-ghost">👁️</button></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Mohammed Ali</strong></td><td>Ali Bakery</td>
+                                <td><small>📞 9876543203</small></td>
+                                <td><span class="badge badge-gray">Website</span></td>
+                                <td><span class="badge badge-blue">Qualified</span></td>
+                                <td><button class="btn btn-sm btn-ghost">👁️</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+        </div>
+    </main>
+
+    <script src="/rasaai/js/data/constants.js"></script>
+    <script src="/rasaai/js/data/zones.js"></script>
+    <script src="/rasaai/js/data/demo-users.js"></script>
+    <script src="/rasaai/js/utils/helpers.js"></script>
+    <script src="/rasaai/js/utils/validators.js"></script>
+    <script src="/rasaai/js/utils/formatters.js"></script>
+    <script src="/rasaai/js/utils/error-handler.js"></script>
+    <script src="/rasaai/js/core/config.js"></script>
+    <script src="/rasaai/js/core/auth.js"></script>
+    <script src="/rasaai/js/core/sheets.js"></script>
+    <script src="/rasaai/js/core/state.js"></script>
+    <script src="/rasaai/js/core/router.js"></script>
+    <script src="/rasaai/js/modules/crm.js"></script>
+    <script src="/rasaai/js/modules/notifications.js"></script>
+    <script src="/rasaai/js/app.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            if (!requireRole('sales')) return;
+            
+            renderSidebar('sales-sidebar');
+            
+            var user = getCurrentUser();
+            if (user) {
+                document.getElementById('header-avatar').textContent = getInitials(user.name);
+                document.getElementById('header-name').textContent = user.name;
+                document.getElementById('welcome-name').textContent = user.name.split(' ')[0];
+            }
+            
+            renderTargetProgress('target-progress-container');
+            renderKanbanBoard('kanban-board');
+        });
+        
+        function openNewLeadForm() {
+            showToast('New lead form coming soon! 📝', 'info');
+        }
+    </script>
+</body>
+</html>
