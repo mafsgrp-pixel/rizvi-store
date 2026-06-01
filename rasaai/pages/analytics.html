@@ -1,0 +1,75 @@
+<!--
+ * Filename: analytics.html
+ * Path: /pages/analytics.html
+ * Project: RASAAI - Auto Rickshaw Advertising Network
+ * Description: Analytics Dashboard - Charts, Reports, Data Export
+ * Role: client, admin, super_admin, sales
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#221F60">
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="icon" type="image/x-icon" href="/rasaai/assets/images/favicon.ico">
+    <link rel="manifest" href="/rasaai/manifest.json">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/rasaai/css/main.css">
+    <link rel="stylesheet" href="/rasaai/css/layout.css">
+    <link rel="stylesheet" href="/rasaai/css/components.css">
+    <link rel="stylesheet" href="/rasaai/css/dashboard.css">
+    <link rel="stylesheet" href="/rasaai/css/print.css">
+    <link rel="stylesheet" href="/rasaai/css/mobile.css">
+    <link rel="stylesheet" href="/rasaai/css/animations.css">
+    <title>Analytics - RASAAI</title>
+</head>
+<body class="dashboard-body">
+    <main class="dashboard-main" style="margin-left:0;">
+        <header class="dashboard-header">
+            <div class="dashboard-header-left"><a href="/rasaai/index.html" style="font-size:20px;font-weight:900;color:#221F60;">RASAAI</a></div>
+            <div class="dashboard-header-right">
+                <button class="btn btn-sm btn-outline" onclick="exportAnalyticsReport('csv')">📥 Export CSV</button>
+                <button class="btn btn-sm btn-outline" onclick="exportAnalyticsReport('print')">🖨️ Print Report</button>
+                <button class="header-user-btn" onclick="logout()"><div class="header-user-avatar" id="header-avatar">U</div><span class="header-user-name" id="header-name">User</span></button>
+            </div>
+        </header>
+        <div class="dashboard-content" style="max-width:1200px;margin:0 auto;">
+            <div class="welcome-row"><div class="welcome-text"><h1>Analytics Dashboard</h1><p>Real-time campaign performance and insights</p></div></div>
+            <div class="stats-row" id="analytics-stats">
+                <div class="stat-card-dashboard"><div class="stat-card-icon-box green">💰</div><div class="stat-card-info"><div class="stat-card-label">Total Revenue</div><div class="stat-card-value">₹1,45,136</div><div class="stat-card-change up">↑ 12%</div></div></div>
+                <div class="stat-card-dashboard"><div class="stat-card-icon-box blue">👁️</div><div class="stat-card-info"><div class="stat-card-label">Total Impressions</div><div class="stat-card-value">3.45L</div><div class="stat-card-change">Avg CPM: ₹42.10</div></div></div>
+                <div class="stat-card-dashboard"><div class="stat-card-icon-box orange">📱</div><div class="stat-card-info"><div class="stat-card-label">QR Scans</div><div class="stat-card-value">234</div><div class="stat-card-change">15 unique users</div></div></div>
+                <div class="stat-card-dashboard"><div class="stat-card-icon-box purple">🔊</div><div class="stat-card-info"><div class="stat-card-label">Audio Plays</div><div class="stat-card-value">1,250</div><div class="stat-card-change">2 active drivers</div></div></div>
+            </div>
+            <div class="dashboard-grid-2">
+                <div class="chart-widget"><div class="chart-widget-header"><span class="chart-widget-title">Revenue Trend</span></div><div class="chart-widget-body"><canvas id="revenue-chart" width="400" height="200"></canvas></div></div>
+                <div class="chart-widget"><div class="chart-widget-header"><span class="chart-widget-title">Campaigns by Zone</span></div><div class="chart-widget-body"><canvas id="zone-chart" width="400" height="200"></canvas></div></div>
+            </div>
+            <div class="dashboard-grid-2">
+                <div class="chart-widget"><div class="chart-widget-header"><span class="chart-widget-title">Campaign Types</span></div><div class="chart-widget-body"><canvas id="campaign-type-chart" width="400" height="200"></canvas></div></div>
+                <div class="chart-widget"><div class="chart-widget-header"><span class="chart-widget-title">Zone Performance</span></div><div class="table-widget-body"><table class="table"><thead><tr><th>Zone</th><th>Campaigns</th><th>Spend</th><th>Impressions</th></tr></thead><tbody><tr><td>Mumbra Station</td><td>1</td><td>₹68,021</td><td>2.2L</td></tr><tr><td>Kausa</td><td>1</td><td>₹77,115</td><td>1.25L</td></tr></tbody></table></div></div>
+            </div>
+        </div>
+    </main>
+    <script src="/rasaai/js/data/constants.js"></script>
+    <script src="/rasaai/js/data/zones.js"></script>
+    <script src="/rasaai/js/data/demo-users.js"></script>
+    <script src="/rasaai/js/utils/helpers.js"></script>
+    <script src="/rasaai/js/utils/formatters.js"></script>
+    <script src="/rasaai/js/core/config.js"></script>
+    <script src="/rasaai/js/core/auth.js"></script>
+    <script src="/rasaai/js/core/router.js"></script>
+    <script src="/rasaai/js/modules/analytics.js"></script>
+    <script src="/rasaai/js/modules/charts.js"></script>
+    <script src="/rasaai/js/modules/notifications.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded',function(){
+            if(!requireRole('client','admin','super_admin','sales'))return;
+            var user=getCurrentUser();
+            if(user){document.getElementById('header-avatar').textContent=getInitials(user.name);document.getElementById('header-name').textContent=user.name;}
+            setTimeout(function(){renderAllCharts();},500);
+        });
+    </script>
+</body>
+</html>
