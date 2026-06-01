@@ -1,0 +1,329 @@
+<!--
+ * Filename: register.html
+ * Path: /pages/register.html
+ * Project: RASAAI - Auto Rickshaw Advertising Network
+ * Description: User Registration Page
+ * Role: Public
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#221F60">
+    <meta name="description" content="Register for RASAAI - Auto Rickshaw Advertising Network">
+    
+    <link rel="icon" type="image/x-icon" href="/rasaai/assets/images/favicon.ico">
+    <link rel="manifest" href="/rasaai/manifest.json">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="/rasaai/css/main.css">
+    <link rel="stylesheet" href="/rasaai/css/layout.css">
+    <link rel="stylesheet" href="/rasaai/css/components.css">
+    <link rel="stylesheet" href="/rasaai/css/mobile.css">
+    <link rel="stylesheet" href="/rasaai/css/animations.css">
+    
+    <title>Register - RASAAI</title>
+</head>
+<body class="bg-gray-50">
+    
+    <div class="page-wrapper">
+        <div class="page-body flex-center" style="min-height:100vh;padding:20px;">
+            
+            <div class="register-container" style="width:100%;max-width:480px;">
+                
+                <!-- Logo -->
+                <div class="text-center mb-2xl">
+                    <a href="/rasaai/index.html">
+                        <img src="/rasaai/assets/images/logo.svg" alt="RASAAI" height="36" style="margin:0 auto;">
+                    </a>
+                    <p class="text-sm text-gray mt-sm">Create your account</p>
+                </div>
+                
+                <!-- Register Card -->
+                <div class="card" style="padding:32px;">
+                    
+                    <!-- Google Sign-Up Note -->
+                    <div id="google-signup-note" class="hidden alert alert-info mb-lg">
+                        <span>🔗</span>
+                        <span>Complete your registration with Google</span>
+                    </div>
+                    
+                    <!-- Register Form -->
+                    <form id="register-form" onsubmit="handleRegisterSubmit(event)" novalidate>
+                        
+                        <!-- Error Message -->
+                        <div id="register-error" class="alert alert-danger hidden" style="margin-bottom:16px;">
+                            <span>❌</span>
+                            <span id="register-error-text"></span>
+                        </div>
+                        
+                        <!-- Full Name -->
+                        <div class="form-group">
+                            <label class="form-label form-label-required" for="reg-name">Full Name</label>
+                            <input type="text" id="reg-name" name="name" 
+                                   placeholder="Enter your full name" 
+                                   required minlength="2" data-label="Name">
+                            <div class="form-error">Name is required</div>
+                        </div>
+                        
+                        <!-- Email -->
+                        <div class="form-group">
+                            <label class="form-label form-label-required" for="reg-email">Email Address</label>
+                            <input type="email" id="reg-email" name="email" 
+                                   placeholder="Enter your email" 
+                                   required autocomplete="email" data-label="Email">
+                            <div class="form-error">Please enter a valid email</div>
+                        </div>
+                        
+                        <!-- Phone -->
+                        <div class="form-group">
+                            <label class="form-label" for="reg-phone">Phone Number</label>
+                            <input type="tel" id="reg-phone" name="phone" 
+                                   placeholder="10-digit mobile number" 
+                                   pattern="[6-9][0-9]{9}" maxlength="10" data-label="Phone">
+                            <div class="form-error">Please enter a valid phone number</div>
+                        </div>
+                        
+                        <!-- Password -->
+                        <div class="form-group">
+                            <label class="form-label form-label-required" for="reg-password">Password</label>
+                            <input type="password" id="reg-password" name="password" 
+                                   placeholder="Min 6 characters" 
+                                   required minlength="6" autocomplete="new-password" data-label="Password">
+                            <div class="form-error">Password must be at least 6 characters</div>
+                        </div>
+                        
+                        <!-- Confirm Password -->
+                        <div class="form-group">
+                            <label class="form-label form-label-required" for="reg-confirm-password">Confirm Password</label>
+                            <input type="password" id="reg-confirm-password" name="confirm_password" 
+                                   placeholder="Re-enter your password" 
+                                   required data-label="Confirm Password">
+                            <div class="form-error">Passwords do not match</div>
+                        </div>
+                        
+                        <!-- Account Type -->
+                        <div class="form-group">
+                            <label class="form-label form-label-required" for="reg-role">I want to</label>
+                            <select id="reg-role" name="role" required data-label="Account Type">
+                                <option value="">Select account type...</option>
+                                <option value="client">🏢 Advertise My Business (Client)</option>
+                                <option value="driver">🛺 Earn as Rickshaw Driver</option>
+                                <option value="affiliate">🔗 Earn as Affiliate Partner</option>
+                                <option value="sales">💼 Join Sales Team</option>
+                                <option value="passenger">👤 Scan QR & Earn Rewards</option>
+                            </select>
+                            <div class="form-error">Please select an account type</div>
+                        </div>
+                        
+                        <!-- Company (for clients) -->
+                        <div class="form-group hidden" id="company-group">
+                            <label class="form-label" for="reg-company">Company / Business Name</label>
+                            <input type="text" id="reg-company" name="company" 
+                                   placeholder="Your business name">
+                        </div>
+                        
+                        <!-- Zone (for drivers) -->
+                        <div class="form-group hidden" id="zone-group">
+                            <label class="form-label" for="reg-zone">Preferred Zone</label>
+                            <select id="reg-zone" name="zone">
+                                <option value="">Select zone...</option>
+                            </select>
+                        </div>
+                        
+                        <!-- Terms -->
+                        <div class="form-group">
+                            <label class="checkbox-group">
+                                <input type="checkbox" id="reg-terms" required>
+                                <span class="text-sm">
+                                    I agree to the 
+                                    <a href="/rasaai/pages/terms.html" target="_blank" style="color:#FF5A00;">Terms</a> 
+                                    & 
+                                    <a href="/rasaai/pages/privacy.html" target="_blank" style="color:#FF5A00;">Privacy Policy</a>
+                                </span>
+                            </label>
+                        </div>
+                        
+                        <!-- Submit -->
+                        <button type="submit" class="btn btn-orange btn-full btn-lg" id="register-submit-btn">
+                            🚀 Create Account
+                        </button>
+                        
+                    </form>
+                </div>
+                
+                <!-- Login Link -->
+                <p class="text-center mt-lg text-sm" style="color:#6C757D;">
+                    Already have an account? 
+                    <a href="/rasaai/pages/login.html" style="color:#FF5A00;font-weight:600;">Sign in</a>
+                </p>
+                
+            </div>
+        </div>
+    </div>
+
+    <script src="/rasaai/js/data/constants.js"></script>
+    <script src="/rasaai/js/data/zones.js"></script>
+    <script src="/rasaai/js/data/demo-users.js"></script>
+    <script src="/rasaai/js/utils/helpers.js"></script>
+    <script src="/rasaai/js/utils/validators.js"></script>
+    <script src="/rasaai/js/utils/formatters.js"></script>
+    <script src="/rasaai/js/utils/error-handler.js"></script>
+    <script src="/rasaai/js/core/config.js"></script>
+    <script src="/rasaai/js/core/auth.js"></script>
+    <script src="/rasaai/js/core/sheets.js"></script>
+    <script src="/rasaai/js/core/state.js"></script>
+    <script src="/rasaai/js/core/router.js"></script>
+    <script src="/rasaai/js/modules/notifications.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check for Google sign-up data
+            var googleData = sessionStorage.getItem('google_signup_data');
+            if (googleData) {
+                var userData = JSON.parse(googleData);
+                document.getElementById('google-signup-note').classList.remove('hidden');
+                document.getElementById('reg-name').value = userData.name || '';
+                document.getElementById('reg-email').value = userData.email || '';
+                document.getElementById('reg-email').disabled = true;
+                document.getElementById('reg-password').value = 'GoogleAuth' + Math.random().toString(36).substring(2,8);
+                document.getElementById('reg-password').parentElement.parentElement.classList.add('hidden');
+                document.getElementById('reg-confirm-password').parentElement.parentElement.classList.add('hidden');
+            }
+            
+            // Populate zones dropdown
+            var zoneSelect = document.getElementById('reg-zone');
+            if (zoneSelect) {
+                MUMBRA_ZONES.forEach(function(zone) {
+                    var option = document.createElement('option');
+                    option.value = zone.name;
+                    option.textContent = zone.name + ' ' + zone.tierIcon;
+                    zoneSelect.appendChild(option);
+                });
+            }
+            
+            // Role change handler
+            document.getElementById('reg-role').addEventListener('change', function() {
+                var role = this.value;
+                document.getElementById('company-group').classList.toggle('hidden', role !== 'client');
+                document.getElementById('zone-group').classList.toggle('hidden', role !== 'driver');
+            });
+            
+            // Redirect if already logged in
+            if (AuthState.isAuthenticated) {
+                redirectToRoleDashboard();
+            }
+        });
+        
+        async function handleRegisterSubmit(event) {
+            event.preventDefault();
+            
+            var name = document.getElementById('reg-name').value.trim();
+            var email = document.getElementById('reg-email').value.trim();
+            var phone = document.getElementById('reg-phone').value.trim();
+            var password = document.getElementById('reg-password').value;
+            var confirmPassword = document.getElementById('reg-confirm-password').value;
+            var role = document.getElementById('reg-role').value;
+            var company = document.getElementById('reg-company').value.trim();
+            var zone = document.getElementById('reg-zone').value;
+            var termsAccepted = document.getElementById('reg-terms').checked;
+            
+            var errorEl = document.getElementById('register-error');
+            var errorText = document.getElementById('register-error-text');
+            var submitBtn = document.getElementById('register-submit-btn');
+            
+            errorEl.classList.add('hidden');
+            
+            if (!termsAccepted) {
+                showError('Please accept the Terms & Privacy Policy.');
+                return;
+            }
+            
+            if (password !== confirmPassword) {
+                showError('Passwords do not match.');
+                return;
+            }
+            
+            var validation = validateRegistrationForm({
+                name: name, email: email, phone: phone, 
+                password: password, confirmPassword: confirmPassword
+            });
+            
+            if (!validation.isValid) {
+                showFormErrors(validation.errors);
+                return;
+            }
+            
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '⏳ Creating account...';
+            
+            var userData = {
+                name: name,
+                email: email,
+                phone: phone,
+                password: password,
+                role: role || 'client',
+                company: company,
+                zone: zone
+            };
+            
+            var result;
+            var googleData = sessionStorage.getItem('google_signup_data');
+            
+            if (googleData) {
+                result = await completeGoogleSignup(userData);
+            } else {
+                result = await registerUser(userData);
+            }
+            
+            if (result.success) {
+                showToast('Account created successfully! 🎉', 'success');
+                setTimeout(function() {
+                    redirectToRoleDashboard();
+                }, 800);
+            } else {
+                showError(result.error || 'Registration failed. Please try again.');
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = '🚀 Create Account';
+            }
+        }
+        
+        function showError(message) {
+            var errorEl = document.getElementById('register-error');
+            var errorText = document.getElementById('register-error-text');
+            errorEl.classList.remove('hidden');
+            errorText.textContent = message;
+            errorEl.scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        function showFormErrors(errors) {
+            document.querySelectorAll('.form-group.error').forEach(function(el) {
+                el.classList.remove('error');
+            });
+            document.querySelectorAll('.form-error').forEach(function(el) {
+                el.style.display = 'none';
+            });
+            
+            Object.keys(errors).forEach(function(field) {
+                var input = document.getElementById('reg-' + field);
+                if (input) {
+                    var formGroup = input.closest('.form-group');
+                    if (formGroup) {
+                        formGroup.classList.add('error');
+                        var errorEl = formGroup.querySelector('.form-error');
+                        if (errorEl) {
+                            errorEl.textContent = errors[field];
+                            errorEl.style.display = 'block';
+                        }
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+</html>
