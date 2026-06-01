@@ -1,0 +1,74 @@
+<!--
+ * Filename: invoice.html
+ * Path: /pages/invoice.html
+ * Project: RASAAI - Auto Rickshaw Advertising Network
+ * Description: Invoice Management Page
+ * Role: client, admin, super_admin
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#221F60">
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="icon" type="image/x-icon" href="/rasaai/assets/images/favicon.ico">
+    <link rel="manifest" href="/rasaai/manifest.json">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/rasaai/css/main.css">
+    <link rel="stylesheet" href="/rasaai/css/layout.css">
+    <link rel="stylesheet" href="/rasaai/css/components.css">
+    <link rel="stylesheet" href="/rasaai/css/dashboard.css">
+    <link rel="stylesheet" href="/rasaai/css/print.css">
+    <link rel="stylesheet" href="/rasaai/css/mobile.css">
+    <link rel="stylesheet" href="/rasaai/css/animations.css">
+    <title>Invoices - RASAAI</title>
+</head>
+<body class="dashboard-body">
+    <main class="dashboard-main" style="margin-left:0;">
+        <header class="dashboard-header">
+            <div class="dashboard-header-left"><a href="/rasaai/index.html" style="font-size:20px;font-weight:900;color:#221F60;">RASAAI</a></div>
+            <div class="dashboard-header-right"><button class="header-user-btn" onclick="logout()"><div class="header-user-avatar" id="header-avatar">U</div><span class="header-user-name" id="header-name">User</span></button></div>
+        </header>
+        <div class="dashboard-content" style="max-width:1000px;margin:0 auto;">
+            <div class="welcome-row"><div class="welcome-text"><h1>Invoices</h1><p>View and manage your invoices</p></div><div class="welcome-actions"><button class="btn btn-outline" onclick="window.print()">🖨️ Print All</button></div></div>
+            <div class="stats-row">
+                <div class="stat-card-dashboard"><div class="stat-card-icon-box green">✅</div><div class="stat-card-info"><div class="stat-card-label">Paid</div><div class="stat-card-value">2</div></div></div>
+                <div class="stat-card-dashboard"><div class="stat-card-icon-box yellow">⏳</div><div class="stat-card-info"><div class="stat-card-label">Pending</div><div class="stat-card-value">1</div></div></div>
+                <div class="stat-card-dashboard"><div class="stat-card-icon-box blue">💰</div><div class="stat-card-info"><div class="stat-card-label">Total Paid</div><div class="stat-card-value">₹1,45,136</div></div></div>
+                <div class="stat-card-dashboard"><div class="stat-card-icon-box orange">📄</div><div class="stat-card-info"><div class="stat-card-label">Total Invoices</div><div class="stat-card-value">3</div></div></div>
+            </div>
+            <div class="table-widget">
+                <div class="table-widget-header"><span class="table-widget-title">All Invoices</span></div>
+                <div class="table-widget-body">
+                    <table class="table">
+                        <thead><tr><th>Invoice #</th><th>Campaign</th><th>Amount</th><th>GST</th><th>Total</th><th>Status</th><th>Date</th><th>Actions</th></tr></thead>
+                        <tbody>
+                            <tr><td><code>INV-2401-0001</code></td><td>CAM001</td><td>₹57,645</td><td>₹10,376</td><td><strong>₹68,021</strong></td><td><span class="badge badge-green">Paid</span></td><td>10 Jan 2024</td><td><button class="btn btn-sm btn-ghost" onclick="printInvoice('INV001')">🖨️</button></td></tr>
+                            <tr><td><code>INV-2402-0002</code></td><td>CAM002</td><td>₹65,352</td><td>₹11,763</td><td><strong>₹77,115</strong></td><td><span class="badge badge-green">Paid</span></td><td>25 Jan 2024</td><td><button class="btn btn-sm btn-ghost" onclick="printInvoice('INV002')">🖨️</button></td></tr>
+                            <tr><td><code>INV-2403-0003</code></td><td>CAM003</td><td>₹10,731</td><td>₹1,931</td><td><strong>₹12,662</strong></td><td><span class="badge badge-yellow">Pending</span></td><td>28 Feb 2024</td><td><button class="btn btn-sm btn-ghost" onclick="printInvoice('INV003')">🖨️</button> <button class="btn btn-sm btn-success" onclick="showToast('Opening payment...','info')">💳 Pay</button></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script src="/rasaai/js/data/constants.js"></script>
+    <script src="/rasaai/js/data/demo-users.js"></script>
+    <script src="/rasaai/js/utils/helpers.js"></script>
+    <script src="/rasaai/js/utils/formatters.js"></script>
+    <script src="/rasaai/js/core/config.js"></script>
+    <script src="/rasaai/js/core/auth.js"></script>
+    <script src="/rasaai/js/core/router.js"></script>
+    <script src="/rasaai/js/modules/invoices.js"></script>
+    <script src="/rasaai/js/modules/payments.js"></script>
+    <script src="/rasaai/js/modules/notifications.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded',function(){
+            if(!requireRole('client','admin','super_admin'))return;
+            var user=getCurrentUser();
+            if(user){document.getElementById('header-avatar').textContent=getInitials(user.name);document.getElementById('header-name').textContent=user.name;}
+        });
+    </script>
+</body>
+</html>
