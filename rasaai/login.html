@@ -105,7 +105,7 @@
         
         <div class="message" id="msg"></div>
         
-        <form id="loginForm">
+        <form id="loginForm" onsubmit="return false;">
             <div class="input-group">
                 <label for="email">Email Address</label>
                 <input type="email" id="email" placeholder="Enter your email" required autocomplete="email" autofocus>
@@ -118,7 +118,7 @@
                 <label><input type="checkbox" id="remember"> Remember me</label>
                 <a href="forgot-password.html">Forgot password?</a>
             </div>
-            <button type="submit" class="submit-btn" id="submitBtn">🔐 Sign In</button>
+            <button type="button" class="submit-btn" id="submitBtn" onclick="doLogin()">🔐 Sign In</button>
         </form>
         
         <p class="bottom-text">Don't have an account? <a href="register.html">Create one</a></p>
@@ -157,53 +157,39 @@
 
     <script>
         // =====================================================
-        // DEMO USERS - Hardcoded database
+        // DEMO USERS - HARDCODED (ALWAYS WORKS)
         // =====================================================
         var DEMO_USERS = [
-            { id:'ADM001',name:'Admin User',email:'admin@rasaai.com',password:'admin123',role:'admin',phone:'9876543210',active:true },
-            { id:'CLI001',name:'Rahul Sharma',email:'client@rasaai.com',password:'client123',role:'client',phone:'9876543211',active:true,company:'Mumbra Pizza House' },
-            { id:'DRV001',name:'Salman Khan',email:'driver@rasaai.com',password:'driver123',role:'driver',phone:'9876543212',active:true,zone:'mumbra-station',rickshawId:'RICK001' },
-            { id:'AFF001',name:'Priya Patel',email:'affiliate@rasaai.com',password:'affiliate123',role:'affiliate',phone:'9876543213',active:true },
-            { id:'SAL001',name:'Amit Verma',email:'sales@rasaai.com',password:'sales123',role:'sales',phone:'9876543214',active:true }
+            { id:'ADM001', name:'Admin User',      email:'admin@rasaai.com',     password:'admin123',     role:'admin',     phone:'9876543210', active:true },
+            { id:'CLI001', name:'Rahul Sharma',    email:'client@rasaai.com',    password:'client123',    role:'client',    phone:'9876543211', active:true, company:'Mumbra Pizza House' },
+            { id:'DRV001', name:'Salman Khan',     email:'driver@rasaai.com',    password:'driver123',    role:'driver',    phone:'9876543212', active:true, zone:'mumbra-station', rickshawId:'RICK001' },
+            { id:'AFF001', name:'Priya Patel',     email:'affiliate@rasaai.com', password:'affiliate123', role:'affiliate', phone:'9876543213', active:true },
+            { id:'SAL001', name:'Amit Verma',      email:'sales@rasaai.com',     password:'sales123',     role:'sales',     phone:'9876543214', active:true }
         ];
 
         // =====================================================
-        // LOCAL STORAGE HELPERS
+        // SIMPLE STORAGE
         // =====================================================
-        function save(key, value) {
-            try { localStorage.setItem('rasaai_' + key, JSON.stringify(value)); } catch(e) {}
-        }
-        function load(key, def) {
-            try { var d = localStorage.getItem('rasaai_' + key); return d ? JSON.parse(d) : def; } catch(e) { return def; }
+        function saveToStorage(key, value) {
+            try { localStorage.setItem('rasaai_' + key, JSON.stringify(value)); console.log('SAVED:', key); } 
+            catch(e) { console.log('SAVE ERROR:', e); }
         }
 
-        // Seed users on first visit
-        if (load('users', []).length === 0) {
-            save('users', DEMO_USERS);
+        function loadFromStorage(key, def) {
+            try { 
+                var d = localStorage.getItem('rasaai_' + key); 
+                if (d) { console.log('LOADED:', key, JSON.parse(d)); return JSON.parse(d); }
+                return def; 
+            } catch(e) { console.log('LOAD ERROR:', e); return def; }
         }
 
         // =====================================================
-        // FILL DEMO - Called by demo buttons
+        // FILL DEMO
         // =====================================================
         function fillDemo(email, password) {
+            console.log('FILL:', email, password);
             document.getElementById('email').value = email;
             document.getElementById('password').value = password;
-            document.getElementById('email').focus();
-        }
-
-        // =====================================================
-        // REDIRECT BY ROLE
-        // =====================================================
-        function goToDashboard(role) {
-            var pages = {
-                'admin': 'admin.html',
-                'client': 'client.html',
-                'driver': 'driver.html',
-                'affiliate': 'affiliate.html',
-                'sales': 'crm.html'
-            };
-            var url = pages[role] || 'dashboard.html';
-            window.location.href = url;
         }
 
         // =====================================================
@@ -213,112 +199,143 @@
             var m = document.getElementById('msg');
             m.textContent = text;
             m.className = 'message ' + type;
-        }
-        function hideMsg() {
-            var m = document.getElementById('msg');
-            m.className = 'message';
-            m.textContent = '';
+            console.log('MSG:', type, text);
         }
 
         // =====================================================
-        // FORM SUBMIT HANDLER
+        // DO LOGIN - Called by button onclick
         // =====================================================
-        document.getElementById('loginForm').addEventListener('submit', function(e) {
-            e.preventDefault();
+        function doLogin() {
+            console.log('=== LOGIN ATTEMPT ===');
             
-            var email = document.getElementById('email').value.trim().toLowerCase();
-            var password = document.getElementById('password').value;
-            var remember = document.getElementById('remember').checked;
+            var emailInput = document.getElementById('email');
+            var passwordInput = document.getElementById('password');
+            var rememberCheck = document.getElementById('remember');
             var btn = document.getElementById('submitBtn');
             
-            hideMsg();
+            var email = emailInput.value.trim();
+            var password = passwordInput.value;
+            var remember = rememberCheck.checked;
+            
+            console.log('Email entered:', email);
+            console.log('Password entered:', password ? '***' : '(empty)');
+            
+            // Hide old message
+            document.getElementById('msg').className = 'message';
             
             // Validate
-            if (!email) { showMsg('Please enter your email address', 'error'); return; }
-            if (!password) { showMsg('Please enter your password', 'error'); return; }
+            if (!email) {
+                showMsg('Please enter your email address', 'error');
+                return;
+            }
+            if (!password) {
+                showMsg('Please enter your password', 'error');
+                return;
+            }
             
-            // Loading state
+            // Loading
             btn.disabled = true;
             btn.textContent = 'Signing in...';
             
-            // Process login (small delay for UX)
+            // Find user in DEMO_USERS array (bypasses localStorage entirely)
             setTimeout(function() {
-                var users = load('users', DEMO_USERS);
-                var found = null;
+                var foundUser = null;
                 
-                // Find user
-                for (var i = 0; i < users.length; i++) {
-                    if (users[i].email === email && users[i].password === password) {
-                        found = users[i];
+                console.log('Searching through', DEMO_USERS.length, 'demo users...');
+                
+                for (var i = 0; i < DEMO_USERS.length; i++) {
+                    var u = DEMO_USERS[i];
+                    console.log('Checking:', u.email, 'vs', email);
+                    if (u.email === email && u.password === password) {
+                        foundUser = u;
+                        console.log('✅ MATCH FOUND:', u.name, u.role);
                         break;
                     }
                 }
                 
-                if (!found) {
+                if (!foundUser) {
+                    console.log('❌ NO MATCH FOUND');
                     showMsg('Invalid email or password. Try: admin@rasaai.com / admin123', 'error');
                     btn.disabled = false;
                     btn.textContent = '🔐 Sign In';
                     return;
                 }
                 
-                if (!found.active) {
-                    showMsg('Account deactivated. Contact admin.', 'error');
+                if (!foundUser.active) {
+                    showMsg('Account deactivated.', 'error');
                     btn.disabled = false;
                     btn.textContent = '🔐 Sign In';
                     return;
                 }
                 
-                // SUCCESS - Save session
-                var sessionUser = {
-                    id: found.id,
-                    name: found.name,
-                    email: found.email,
-                    role: found.role,
-                    phone: found.phone,
-                    company: found.company || '',
-                    zone: found.zone || '',
-                    rickshawId: found.rickshawId || '',
-                    active: found.active
+                // SUCCESS!
+                console.log('✅ LOGIN SUCCESS for:', foundUser.name, 'Role:', foundUser.role);
+                
+                // Create session
+                var session = {
+                    id: foundUser.id,
+                    name: foundUser.name,
+                    email: foundUser.email,
+                    role: foundUser.role,
+                    phone: foundUser.phone || '',
+                    company: foundUser.company || '',
+                    zone: foundUser.zone || '',
+                    rickshawId: foundUser.rickshawId || '',
+                    active: true
                 };
                 
-                save('currentUser', sessionUser);
-                
+                // Save to localStorage
+                saveToStorage('currentUser', session);
                 if (remember) {
-                    save('rememberedEmail', email);
+                    saveToStorage('rememberedEmail', email);
                 }
                 
-                showMsg('Login successful! Redirecting...', 'success');
+                showMsg('✅ Login successful! Redirecting to ' + foundUser.role + ' dashboard...', 'success');
                 btn.textContent = 'Success!';
                 
-                // Redirect after short delay
+                // Redirect
                 setTimeout(function() {
-                    goToDashboard(found.role);
-                }, 600);
+                    var pages = {
+                        'admin': 'admin.html',
+                        'client': 'client.html',
+                        'driver': 'driver.html',
+                        'affiliate': 'affiliate.html',
+                        'sales': 'crm.html'
+                    };
+                    var url = pages[foundUser.role] || 'dashboard.html';
+                    console.log('REDIRECTING TO:', url);
+                    window.location.href = url;
+                }, 800);
                 
-            }, 400);
-        });
+            }, 300);
+        }
 
         // =====================================================
-        // AUTO-REDIRECT IF ALREADY LOGGED IN
+        // CHECK IF ALREADY LOGGED IN
         // =====================================================
         (function() {
-            var user = load('currentUser', null);
+            var user = loadFromStorage('currentUser', null);
             if (user && user.role) {
-                var params = new URLSearchParams(window.location.search);
-                var redirect = params.get('redirect');
-                if (redirect) {
-                    window.location.href = redirect;
-                } else {
-                    goToDashboard(user.role);
-                }
+                console.log('Already logged in as:', user.name, user.role);
+                var pages = {
+                    'admin': 'admin.html',
+                    'client': 'client.html',
+                    'driver': 'driver.html',
+                    'affiliate': 'affiliate.html',
+                    'sales': 'crm.html'
+                };
+                window.location.href = pages[user.role] || 'dashboard.html';
             }
             
             // Pre-fill remembered email
-            var remembered = load('rememberedEmail', '');
-            if (remembered) {
+            var remembered = loadFromStorage('rememberedEmail', '');
+            if (remembered && document.getElementById('email')) {
                 document.getElementById('email').value = remembered;
             }
         })();
+
+        console.log('✅ RASAAI Login Page Ready');
+        console.log('📧 Demo logins available - click "Demo Login Credentials" to see them');
     </script>
 </body>
 </html>
