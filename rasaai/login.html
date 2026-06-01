@@ -3,599 +3,386 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=5.0">
-    <meta name="theme-color" content="#6C4DF6" media="(prefers-color-scheme: light)">
-    <meta name="theme-color" content="#0F1117" media="(prefers-color-scheme: dark)">
-    <meta name="color-scheme" content="light dark">
-    
+    <meta name="theme-color" content="#6C4DF6">
     <title>Login - RASAAI Outdoor Advertising Network</title>
-    <meta name="description" content="Login to your RASAAI account. Access your dashboard, campaigns, analytics, and more.">
     <meta name="robots" content="noindex, nofollow">
-    
     <link rel="canonical" href="https://rizvi.store/rasaai/login.html">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%236C4DF6'/><text x='50' y='68' font-size='55' text-anchor='middle' fill='white' font-weight='bold'>R</text></svg>">
-    
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://rizvi.store/rasaai/login.html">
-    <meta property="og:title" content="Login - RASAAI">
-    <meta property="og:site_name" content="RASAAI">
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    
     <style>
-        /* Login page specific styles */
-        .login-page {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-            position: relative;
-            overflow: hidden;
-            background: var(--bg);
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{
+            font-family:'Inter',system-ui,sans-serif;
+            min-height:100vh;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            background:#F7F8FC;
+            padding:20px;
         }
-        body.dark-mode .login-page {
-            background: var(--dark-bg);
+        body.dark-mode{background:#0F1117}
+        .login-container{width:100%;max-width:440px;position:relative;z-index:1}
+        .login-card{
+            background:#fff;
+            border-radius:24px;
+            padding:40px 32px;
+            border:1px solid rgba(0,0,0,0.08);
+            box-shadow:0 20px 60px rgba(0,0,0,0.08);
         }
-        .login-container {
-            width: 100%;
-            max-width: 440px;
-            position: relative;
-            z-index: 1;
+        body.dark-mode .login-card{
+            background:rgba(25,30,42,0.95);
+            border-color:rgba(255,255,255,0.08);
+            box-shadow:0 20px 60px rgba(0,0,0,0.5);
         }
-        .login-card {
-            background: var(--card);
-            border-radius: var(--radius-lg);
-            padding: 48px 40px;
-            border: 1px solid var(--border);
-            box-shadow: var(--shadow-card);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
+        .login-logo{text-align:center;margin-bottom:8px}
+        .login-logo .icon{
+            width:56px;height:56px;
+            background:linear-gradient(135deg,#6C4DF6,#00D4FF);
+            border-radius:16px;
+            display:inline-flex;
+            align-items:center;
+            justify-content:center;
+            color:#FFF;
+            font-size:28px;
+            font-weight:900;
+            margin-bottom:12px;
         }
-        body.dark-mode .login-card {
-            background: var(--dark-card);
-            border-color: var(--dark-border);
-            box-shadow: var(--dark-shadow);
+        .login-logo h1{
+            font-size:28px;
+            font-weight:800;
+            background:linear-gradient(135deg,#6C4DF6,#00D4FF);
+            -webkit-background-clip:text;
+            -webkit-text-fill-color:transparent;
+            background-clip:text;
         }
-        .login-logo {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-            margin-bottom: 8px;
+        .login-subtitle{text-align:center;color:#6B7280;margin-bottom:28px;font-size:14px}
+        body.dark-mode .login-subtitle{color:#9AA3B2}
+        .form-group{margin-bottom:18px}
+        .form-group label{display:block;font-weight:600;margin-bottom:6px;font-size:13px;color:#111827}
+        body.dark-mode .form-group label{color:#fff}
+        .form-group input{
+            width:100%;
+            padding:14px 16px;
+            font-size:16px;
+            border-radius:14px;
+            border:1px solid rgba(0,0,0,0.1);
+            background:#fff;
+            color:#111827;
+            outline:none;
+            transition:all 0.2s;
         }
-        .login-logo-icon {
-            width: 48px;
-            height: 48px;
-            background: linear-gradient(135deg, var(--primary), var(--accent-cyan));
-            border-radius: var(--radius-md);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #FFF;
-            font-size: 24px;
-            font-weight: 900;
+        .form-group input:focus{border-color:#6C4DF6;box-shadow:0 0 0 4px rgba(108,77,246,0.1)}
+        body.dark-mode .form-group input{
+            background:rgba(25,30,42,0.9);
+            border-color:rgba(255,255,255,0.08);
+            color:#fff;
         }
-        .login-logo-text {
-            font-size: 28px;
-            font-weight: 800;
-            background: linear-gradient(135deg, var(--primary), var(--accent-cyan));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+        .remember-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;font-size:13px}
+        .remember-row label{display:flex;align-items:center;gap:8px;color:#6B7280;cursor:pointer}
+        body.dark-mode .remember-row label{color:#9AA3B2}
+        .remember-row a{color:#6C4DF6;font-weight:500;text-decoration:none}
+        .btn-login{
+            width:100%;
+            padding:15px;
+            background:linear-gradient(135deg,#6C4DF6,#8A63FF);
+            color:#fff;
+            border:none;
+            border-radius:14px;
+            font-size:17px;
+            font-weight:600;
+            cursor:pointer;
+            transition:all 0.3s;
+            box-shadow:0 8px 24px rgba(108,77,246,0.3);
         }
-        .login-subtitle {
-            text-align: center;
-            color: var(--text-secondary);
-            margin-bottom: 32px;
-            font-size: 14px;
+        .btn-login:hover{transform:scale(1.02);box-shadow:0 12px 32px rgba(108,77,246,0.5)}
+        .btn-login:disabled{opacity:0.7;cursor:not-allowed;transform:none}
+        .error-msg{
+            background:rgba(255,77,109,0.1);
+            color:#FF4D6D;
+            padding:12px 16px;
+            border-radius:12px;
+            font-size:13px;
+            margin-bottom:16px;
+            display:none;
+            text-align:center;
         }
-        body.dark-mode .login-subtitle {
-            color: var(--dark-muted);
+        .error-msg.show{display:block}
+        .success-msg{
+            background:rgba(0,200,150,0.1);
+            color:#00C896;
+            padding:12px 16px;
+            border-radius:12px;
+            font-size:13px;
+            margin-bottom:16px;
+            display:none;
+            text-align:center;
         }
-        .form-group {
-            margin-bottom: 20px;
-        }
-        .form-group label {
-            display: block;
-            font-weight: 600;
-            margin-bottom: 8px;
-            font-size: 14px;
-            color: var(--text);
-        }
-        body.dark-mode .form-group label {
-            color: var(--dark-text);
-        }
-        .input-wrapper {
-            position: relative;
-        }
-        .input-wrapper input {
-            width: 100%;
-            padding: 14px 16px;
-            padding-right: 44px;
-            font-size: 16px;
-        }
-        .input-icon {
-            position: absolute;
-            right: 14px;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 18px;
-            color: var(--text-secondary);
-            pointer-events: none;
-        }
-        .password-toggle {
-            position: absolute;
-            right: 14px;
-            top: 50%;
-            transform: translateY(-50%);
-            background: none;
-            border: none;
-            cursor: pointer;
-            font-size: 18px;
-            color: var(--text-secondary);
-            padding: 4px;
-        }
-        .password-toggle:hover {
-            color: var(--primary);
-        }
-        .remember-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 24px;
-            font-size: 14px;
-        }
-        .remember-row label {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            cursor: pointer;
-            color: var(--text-secondary);
-        }
-        .remember-row input[type="checkbox"] {
-            width: 18px;
-            height: 18px;
-            accent-color: var(--primary);
-            cursor: pointer;
-        }
-        .forgot-link {
-            color: var(--primary);
-            font-weight: 500;
-            cursor: pointer;
-        }
-        .forgot-link:hover {
-            color: var(--primary-hover);
-            text-decoration: underline;
-        }
-        body.dark-mode .forgot-link {
-            color: var(--dark-primary);
-        }
-        .register-link {
-            text-align: center;
-            margin-top: 24px;
-            font-size: 14px;
-            color: var(--text-secondary);
-        }
-        .register-link a {
-            color: var(--primary);
-            font-weight: 600;
-        }
-        .register-link a:hover {
-            text-decoration: underline;
-        }
-        body.dark-mode .register-link {
-            color: var(--dark-muted);
-        }
-        body.dark-mode .register-link a {
-            color: var(--dark-primary);
-        }
-        .error-message {
-            background: rgba(255,77,109,0.1);
-            color: var(--danger);
-            padding: 12px 16px;
-            border-radius: var(--radius-md);
-            font-size: 14px;
-            margin-bottom: 16px;
-            display: none;
-            border: 1px solid rgba(255,77,109,0.2);
-        }
-        .error-message.show {
-            display: block;
-            animation: shake 0.5s ease;
-        }
-        @keyframes shake {
-            0%,100% { transform: translateX(0); }
-            25% { transform: translateX(-8px); }
-            50% { transform: translateX(8px); }
-            75% { transform: translateX(-4px); }
-        }
-        .success-message {
-            background: rgba(0,200,150,0.1);
-            color: var(--success);
-            padding: 12px 16px;
-            border-radius: var(--radius-md);
-            font-size: 14px;
-            margin-bottom: 16px;
-            display: none;
-            border: 1px solid rgba(0,200,150,0.2);
-        }
-        .success-message.show {
-            display: block;
-        }
-        .demo-accounts {
-            margin-top: 24px;
-            padding: 16px;
-            background: rgba(108,77,246,0.05);
-            border-radius: var(--radius-md);
-            border: 1px solid rgba(108,77,246,0.1);
-        }
-        body.dark-mode .demo-accounts {
-            background: rgba(139,124,255,0.05);
-            border-color: rgba(139,124,255,0.1);
-        }
-        .demo-accounts summary {
-            font-weight: 600;
-            font-size: 13px;
-            cursor: pointer;
-            color: var(--primary);
-            margin-bottom: 8px;
-        }
-        body.dark-mode .demo-accounts summary {
-            color: var(--dark-primary);
-        }
-        .demo-account {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 6px 0;
-            font-size: 12px;
-            border-bottom: 1px solid var(--border);
-        }
-        body.dark-mode .demo-account {
-            border-bottom-color: var(--dark-border);
-        }
-        .demo-account:last-child {
-            border-bottom: none;
-        }
-        .demo-account .role {
-            font-weight: 600;
-            text-transform: capitalize;
-            color: var(--primary);
-            min-width: 60px;
-        }
-        body.dark-mode .demo-account .role {
-            color: var(--dark-primary);
-        }
-        .demo-account .email {
-            color: var(--text-secondary);
-            flex: 1;
-            margin: 0 8px;
-        }
-        .demo-account .btn-sm {
-            padding: 4px 10px;
-            font-size: 11px;
-            min-height: 28px;
-        }
-        .loading-spinner {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 2px solid rgba(255,255,255,0.3);
-            border-top-color: #FFF;
-            border-radius: 50%;
-            animation: spin 0.6s linear infinite;
-            margin-right: 8px;
-            vertical-align: middle;
-        }
-        .btn:disabled {
-            opacity: 0.7;
-            cursor: not-allowed;
-            pointer-events: none;
-        }
+        .success-msg.show{display:block}
+        .register-link{text-align:center;margin-top:20px;font-size:14px;color:#6B7280}
+        body.dark-mode .register-link{color:#9AA3B2}
+        .register-link a{color:#6C4DF6;font-weight:600;text-decoration:none}
+        .demo-section{margin-top:24px;padding:16px;background:rgba(108,77,246,0.04);border-radius:14px;border:1px solid rgba(108,77,246,0.1)}
+        body.dark-mode .demo-section{background:rgba(139,124,255,0.05);border-color:rgba(139,124,255,0.1)}
+        .demo-section summary{font-weight:600;font-size:13px;cursor:pointer;color:#6C4DF6;margin-bottom:10px}
+        .demo-row{display:flex;justify-content:space-between;align-items:center;padding:7px 0;font-size:12px;border-bottom:1px solid rgba(0,0,0,0.04)}
+        body.dark-mode .demo-row{border-bottom-color:rgba(255,255,255,0.04)}
+        .demo-row:last-child{border-bottom:none}
+        .demo-role{font-weight:600;color:#6C4DF6;min-width:70px;text-transform:capitalize}
+        .demo-email{flex:1;margin:0 8px;color:#6B7280;font-size:11px}
+        body.dark-mode .demo-email{color:#9AA3B2}
+        .demo-fill-btn{padding:4px 10px;background:#6C4DF6;color:#fff;border:none;border-radius:8px;font-size:10px;cursor:pointer;font-weight:600}
+        .bg-glow{position:fixed;width:500px;height:500px;border-radius:50%;filter:blur(120px);opacity:0.2;pointer-events:none;z-index:0}
+        .bg-glow.g1{background:rgba(108,77,246,0.4);top:-20%;left:-10%}
+        .bg-glow.g2{background:rgba(60,130,246,0.35);bottom:-15%;right:-10%}
     </style>
 </head>
 <body>
-    <div class="login-page">
-        <!-- Background Glows -->
-        <div class="background-glow glow-primary" style="width:500px;height:500px;top:-30%;left:-20%" aria-hidden="true"></div>
-        <div class="background-glow glow-accent" style="width:400px;height:400px;bottom:-20%;right:-10%" aria-hidden="true"></div>
-        
-        <div class="login-container">
-            <div class="login-card">
-                <!-- Logo -->
-                <div class="login-logo">
-                    <div class="login-logo-icon" aria-hidden="true">R</div>
-                    <span class="login-logo-text">RASAAI</span>
-                </div>
-                <p class="login-subtitle">Sign in to your account to continue</p>
-                
-                <!-- Error Message -->
-                <div class="error-message" id="login-error" role="alert"></div>
-                
-                <!-- Success Message -->
-                <div class="success-message" id="login-success" role="status"></div>
-                
-                <!-- Login Form -->
-                <form id="login-form" onsubmit="return false;" novalidate>
-                    <div class="form-group">
-                        <label for="login-email">Email Address</label>
-                        <div class="input-wrapper">
-                            <input type="email" id="login-email" placeholder="Enter your email" required autocomplete="email" autofocus>
-                            <span class="input-icon" aria-hidden="true">📧</span>
-                        </div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="login-password">Password</label>
-                        <div class="input-wrapper">
-                            <input type="password" id="login-password" placeholder="Enter your password" required autocomplete="current-password">
-                            <button type="button" class="password-toggle" id="password-toggle" aria-label="Show password" onclick="LoginPage.togglePassword()">👁️</button>
-                        </div>
-                    </div>
-                    
-                    <div class="remember-row">
-                        <label>
-                            <input type="checkbox" id="remember-me" checked>
-                            <span>Remember me</span>
-                        </label>
-                        <a href="forgot-password.html" class="forgot-link">Forgot password?</a>
-                    </div>
-                    
-                    <button type="submit" class="btn btn-primary btn-block btn-lg" id="login-submit-btn">
-                        <span id="login-btn-text">🔐 Sign In</span>
-                    </button>
-                </form>
-                
-                <p class="register-link">
-                    Don't have an account? <a href="register.html">Create one</a>
-                </p>
-                
-                <!-- Demo Accounts -->
-                <details class="demo-accounts">
-                    <summary>🔑 Demo Login Credentials (Click to expand)</summary>
-                    <div style="margin-top:8px">
-                        <div class="demo-account">
-                            <span class="role">👑 Admin</span>
-                            <span class="email">admin@rasaai.com</span>
-                            <button class="btn btn-primary btn-sm" onclick="LoginPage.fillDemo('admin@rasaai.com','admin123')">Fill</button>
-                        </div>
-                        <div class="demo-account">
-                            <span class="role">👤 Client</span>
-                            <span class="email">client@rasaai.com</span>
-                            <button class="btn btn-primary btn-sm" onclick="LoginPage.fillDemo('client@rasaai.com','client123')">Fill</button>
-                        </div>
-                        <div class="demo-account">
-                            <span class="role">🛺 Driver</span>
-                            <span class="email">driver@rasaai.com</span>
-                            <button class="btn btn-primary btn-sm" onclick="LoginPage.fillDemo('driver@rasaai.com','driver123')">Fill</button>
-                        </div>
-                        <div class="demo-account">
-                            <span class="role">🔗 Affiliate</span>
-                            <span class="email">affiliate@rasaai.com</span>
-                            <button class="btn btn-primary btn-sm" onclick="LoginPage.fillDemo('affiliate@rasaai.com','affiliate123')">Fill</button>
-                        </div>
-                        <div class="demo-account">
-                            <span class="role">📊 Sales</span>
-                            <span class="email">sales@rasaai.com</span>
-                            <button class="btn btn-primary btn-sm" onclick="LoginPage.fillDemo('sales@rasaai.com','sales123')">Fill</button>
-                        </div>
-                    </div>
-                </details>
+    <div class="bg-glow g1"></div>
+    <div class="bg-glow g2"></div>
+
+    <div class="login-container">
+        <div class="login-card">
+            <div class="login-logo">
+                <div class="icon">R</div>
+                <h1>RASAAI</h1>
             </div>
+            <p class="login-subtitle">Sign in to your account</p>
+            
+            <div class="error-msg" id="error-msg"></div>
+            <div class="success-msg" id="success-msg"></div>
+            
+            <form onsubmit="return handleLogin(event)">
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" placeholder="Enter your email" required autocomplete="email">
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" placeholder="Enter your password" required autocomplete="current-password">
+                </div>
+                <div class="remember-row">
+                    <label><input type="checkbox" id="remember"> Remember me</label>
+                    <a href="forgot-password.html">Forgot password?</a>
+                </div>
+                <button type="submit" class="btn-login" id="login-btn">🔐 Sign In</button>
+            </form>
+            
+            <p class="register-link">Don't have an account? <a href="register.html">Create one</a></p>
+            
+            <details class="demo-section">
+                <summary>🔑 Demo Login Credentials (Click to expand)</summary>
+                <div style="margin-top:8px">
+                    <div class="demo-row">
+                        <span class="demo-role">👑 Admin</span>
+                        <span class="demo-email">admin@rasaai.com</span>
+                        <button class="demo-fill-btn" onclick="fillDemo('admin@rasaai.com','admin123')">Fill</button>
+                    </div>
+                    <div class="demo-row">
+                        <span class="demo-role">👤 Client</span>
+                        <span class="demo-email">client@rasaai.com</span>
+                        <button class="demo-fill-btn" onclick="fillDemo('client@rasaai.com','client123')">Fill</button>
+                    </div>
+                    <div class="demo-row">
+                        <span class="demo-role">🛺 Driver</span>
+                        <span class="demo-email">driver@rasaai.com</span>
+                        <button class="demo-fill-btn" onclick="fillDemo('driver@rasaai.com','driver123')">Fill</button>
+                    </div>
+                    <div class="demo-row">
+                        <span class="demo-role">🔗 Affiliate</span>
+                        <span class="demo-email">affiliate@rasaai.com</span>
+                        <button class="demo-fill-btn" onclick="fillDemo('affiliate@rasaai.com','affiliate123')">Fill</button>
+                    </div>
+                    <div class="demo-row">
+                        <span class="demo-role">📊 Sales</span>
+                        <span class="demo-email">sales@rasaai.com</span>
+                        <button class="demo-fill-btn" onclick="fillDemo('sales@rasaai.com','sales123')">Fill</button>
+                    </div>
+                </div>
+            </details>
         </div>
     </div>
-    
-    <!-- Notification Container -->
-    <div id="notification-container" class="notification-container" aria-live="polite" role="status"></div>
-    
-    <script src="app.js"></script>
+
     <script>
-        // Login Page Controller
-        const LoginPage = {
-            init() {
-                // Check if already logged in
-                const user = Auth.getCurrentUser();
-                if (user) {
-                    this.redirectBasedOnRole(user);
-                    return;
-                }
-                
-                // Check for remembered email
-                const remembered = Storage.get('rememberedEmail');
-                if (remembered) {
-                    document.getElementById('login-email').value = remembered;
-                }
-                
-                // Check for redirect parameter
-                const params = new URLSearchParams(window.location.search);
-                this.redirectUrl = params.get('redirect') || '';
-                
-                // Check for referral code
-                const refCode = params.get('ref');
-                if (refCode) {
-                    Storage.set('referralCode', refCode);
-                }
-                
-                // Form submit
-                document.getElementById('login-form').addEventListener('submit', (e) => {
-                    e.preventDefault();
-                    this.handleLogin();
-                });
-                
-                // Enter key
-                document.addEventListener('keydown', (e) => {
-                    if (e.key === 'Enter' && document.activeElement?.tagName !== 'BUTTON') {
-                        this.handleLogin();
-                    }
-                });
-            },
-            
-            handleLogin() {
-                const email = document.getElementById('login-email').value.trim();
-                const password = document.getElementById('login-password').value;
-                const remember = document.getElementById('remember-me').checked;
-                const errorEl = document.getElementById('login-error');
-                const submitBtn = document.getElementById('login-submit-btn');
-                const btnText = document.getElementById('login-btn-text');
-                
-                // Validation
-                if (!email) {
-                    this.showError('Please enter your email address');
-                    document.getElementById('login-email').focus();
-                    return;
-                }
-                if (!this.isValidEmail(email)) {
-                    this.showError('Please enter a valid email address');
-                    document.getElementById('login-email').focus();
-                    return;
-                }
-                if (!password) {
-                    this.showError('Please enter your password');
-                    document.getElementById('login-password').focus();
-                    return;
-                }
-                if (password.length < 6) {
-                    this.showError('Password must be at least 6 characters');
-                    document.getElementById('login-password').focus();
-                    return;
-                }
-                
-                // Clear error
-                this.hideError();
-                
-                // Show loading
-                submitBtn.disabled = true;
-                btnText.innerHTML = '<span class="loading-spinner"></span> Signing in...';
-                
-                // Simulate network delay for UX
-                setTimeout(() => {
-                    const result = Auth.login(email, password);
-                    
-                    if (result.success) {
-                        // Remember email
-                        if (remember) {
-                            Storage.set('rememberedEmail', email);
-                        } else {
-                            Storage.remove('rememberedEmail');
-                        }
-                        
-                        // Handle referral code
-                        const refCode = Storage.get('referralCode');
-                        if (refCode) {
-                            AffiliateManager.trackLead(refCode);
-                        }
-                        
-                        // Show success
-                        const successEl = document.getElementById('login-success');
-                        successEl.textContent = '✅ Login successful! Redirecting...';
-                        successEl.classList.add('show');
-                        btnText.textContent = '✅ Success!';
-                        
-                        // Redirect
-                        setTimeout(() => {
-                            this.redirectBasedOnRole(result.user);
-                        }, 800);
-                        
-                    } else {
-                        this.showError(result.message || 'Invalid credentials');
-                        submitBtn.disabled = false;
-                        btnText.textContent = '🔐 Sign In';
-                        
-                        // Shake the card
-                        const card = document.querySelector('.login-card');
-                        card.style.animation = 'shake 0.5s ease';
-                        setTimeout(() => card.style.animation = '', 500);
-                    }
-                }, 600);
-            },
-            
-            redirectBasedOnRole(user) {
-    // If there's a redirect URL, go there
-    if (this.redirectUrl) {
-        window.location.href = this.redirectUrl;
-        return;
-    }
-    
-    // Check stored redirect
-    const storedRedirect = Storage.get('redirectAfterLogin');
-    if (storedRedirect) {
-        Storage.remove('redirectAfterLogin');
-        window.location.href = storedRedirect;
-        return;
-    }
-    
-    // Otherwise redirect based on role
-    switch (user.role) {
-        case 'admin':
-            window.location.href = 'admin.html';
-            break;
-        case 'client':
-            window.location.href = 'client.html';
-            break;
-        case 'driver':
-            window.location.href = 'driver.html';
-            break;
-        case 'affiliate':
-            window.location.href = 'affiliate.html';
-            break;
-        case 'sales':
-            window.location.href = 'crm.html';
-            break;
-        default:
-            window.location.href = 'dashboard.html';
-    }
-}
-            
-            togglePassword() {
-                const input = document.getElementById('login-password');
-                const btn = document.getElementById('password-toggle');
-                if (input.type === 'password') {
-                    input.type = 'text';
-                    btn.textContent = '🙈';
-                    btn.setAttribute('aria-label', 'Hide password');
-                } else {
-                    input.type = 'password';
-                    btn.textContent = '👁️';
-                    btn.setAttribute('aria-label', 'Show password');
-                }
-            },
-            
-            fillDemo(email, password) {
-                document.getElementById('login-email').value = email;
-                document.getElementById('login-password').value = password;
-                document.getElementById('login-email').focus();
-                Notify.info(`Filled: ${email}`);
-            },
-            
-            showError(message) {
-                const el = document.getElementById('login-error');
-                el.textContent = '❌ ' + message;
-                el.classList.add('show');
-            },
-            
-            hideError() {
-                const el = document.getElementById('login-error');
-                el.classList.remove('show');
-                el.textContent = '';
-            },
-            
-            isValidEmail(email) {
-                return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+        // =====================================================
+        // DEMO USERS DATABASE (Hardcoded - Always Available)
+        // =====================================================
+        const DEMO_USERS = [
+            { id: 'ADM001', name: 'Admin User', email: 'admin@rasaai.com', password: 'admin123', role: 'admin', phone: '9876543210', active: true, company: '', gst: '', permissions: ['*'], avatar: 'A' },
+            { id: 'CLI001', name: 'Rahul Sharma', email: 'client@rasaai.com', password: 'client123', role: 'client', phone: '9876543211', active: true, company: 'Mumbra Pizza House', gst: '27AAAAA0000A1Z5', permissions: ['campaigns','invoices','analytics','affiliate'], avatar: 'RS' },
+            { id: 'DRV001', name: 'Salman Khan', email: 'driver@rasaai.com', password: 'driver123', role: 'driver', phone: '9876543212', active: true, zone: 'mumbra-station', rickshawId: 'RICK001', permissions: ['tasks','attendance','upload'], avatar: 'SK' },
+            { id: 'AFF001', name: 'Priya Patel', email: 'affiliate@rasaai.com', password: 'affiliate123', role: 'affiliate', phone: '9876543213', active: true, referralCode: 'REF001', permissions: ['referrals','commissions','wallet'], avatar: 'PP' },
+            { id: 'SAL001', name: 'Amit Verma', email: 'sales@rasaai.com', password: 'sales123', role: 'sales', phone: '9876543214', active: true, target: 500000, permissions: ['leads','pipeline','tasks','proposals'], avatar: 'AV' }
+        ];
+
+        // =====================================================
+        // SIMPLE STORAGE HELPERS
+        // =====================================================
+        function saveData(key, value) {
+            try {
+                localStorage.setItem('rasaai_' + key, JSON.stringify(value));
+            } catch(e) {
+                console.warn('Storage full:', e);
             }
-        };
-        
-        // Initialize on DOM ready
-        document.addEventListener('DOMContentLoaded', () => {
-            LoginPage.init();
-        });
-        
-        // Also init if app.js is already loaded
-        if (document.readyState === 'interactive' || document.readyState === 'complete') {
-            LoginPage.init();
         }
+
+        function getData(key, defaultValue) {
+            try {
+                const raw = localStorage.getItem('rasaai_' + key);
+                return raw ? JSON.parse(raw) : defaultValue;
+            } catch(e) {
+                return defaultValue;
+            }
+        }
+
+        // =====================================================
+        // SEED DEMO USERS INTO LOCAL STORAGE
+        // =====================================================
+        function seedUsers() {
+            const existing = getData('users', []);
+            if (existing.length === 0) {
+                saveData('users', DEMO_USERS);
+                console.log('✅ Demo users seeded');
+            }
+        }
+        seedUsers();
+
+        // =====================================================
+        // LOGIN FUNCTION
+        // =====================================================
+        function handleLogin(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('email').value.trim().toLowerCase();
+            const password = document.getElementById('password').value;
+            const remember = document.getElementById('remember').checked;
+            const errorEl = document.getElementById('error-msg');
+            const successEl = document.getElementById('success-msg');
+            const btn = document.getElementById('login-btn');
+            
+            // Hide messages
+            errorEl.classList.remove('show');
+            successEl.classList.remove('show');
+            
+            // Validation
+            if (!email) {
+                errorEl.textContent = '❌ Please enter your email';
+                errorEl.classList.add('show');
+                return false;
+            }
+            if (!password) {
+                errorEl.textContent = '❌ Please enter your password';
+                errorEl.classList.add('show');
+                return false;
+            }
+            
+            // Show loading
+            btn.disabled = true;
+            btn.textContent = '⏳ Signing in...';
+            
+            // Simulate network delay
+            setTimeout(() => {
+                const users = getData('users', DEMO_USERS);
+                const user = users.find(u => u.email === email && u.password === password);
+                
+                if (!user) {
+                    errorEl.textContent = '❌ Invalid email or password. Try demo: admin@rasaai.com / admin123';
+                    errorEl.classList.add('show');
+                    btn.disabled = false;
+                    btn.textContent = '🔐 Sign In';
+                    return;
+                }
+                
+                if (!user.active) {
+                    errorEl.textContent = '❌ Account deactivated. Contact admin.';
+                    errorEl.classList.add('show');
+                    btn.disabled = false;
+                    btn.textContent = '🔐 Sign In';
+                    return;
+                }
+                
+                // Login successful!
+                const sessionUser = { ...user };
+                delete sessionUser.password;
+                
+                // Save session
+                saveData('currentUser', sessionUser);
+                
+                // Remember email
+                if (remember) {
+                    saveData('rememberedEmail', email);
+                }
+                
+                successEl.textContent = '✅ Login successful! Redirecting...';
+                successEl.classList.add('show');
+                btn.textContent = '✅ Success!';
+                
+                // Redirect based on role
+                setTimeout(() => {
+                    switch(user.role) {
+                        case 'admin':
+                            window.location.href = 'admin.html';
+                            break;
+                        case 'client':
+                            window.location.href = 'client.html';
+                            break;
+                        case 'driver':
+                            window.location.href = 'driver.html';
+                            break;
+                        case 'affiliate':
+                            window.location.href = 'affiliate.html';
+                            break;
+                        case 'sales':
+                            window.location.href = 'crm.html';
+                            break;
+                        default:
+                            window.location.href = 'dashboard.html';
+                    }
+                }, 800);
+                
+            }, 500);
+            
+            return false;
+        }
+
+        // =====================================================
+        // FILL DEMO CREDENTIALS
+        // =====================================================
+        function fillDemo(email, password) {
+            document.getElementById('email').value = email;
+            document.getElementById('password').value = password;
+            document.getElementById('email').focus();
+        }
+
+        // =====================================================
+        // CHECK IF ALREADY LOGGED IN
+        // =====================================================
+        (function checkAuth() {
+            const user = getData('currentUser', null);
+            if (user) {
+                const redirect = new URLSearchParams(window.location.search).get('redirect');
+                if (redirect) {
+                    window.location.href = redirect;
+                } else {
+                    switch(user.role) {
+                        case 'admin': window.location.href = 'admin.html'; break;
+                        case 'client': window.location.href = 'client.html'; break;
+                        case 'driver': window.location.href = 'driver.html'; break;
+                        case 'affiliate': window.location.href = 'affiliate.html'; break;
+                        case 'sales': window.location.href = 'crm.html'; break;
+                    }
+                }
+            }
+            
+            // Fill remembered email
+            const remembered = getData('rememberedEmail', '');
+            if (remembered && document.getElementById('email')) {
+                document.getElementById('email').value = remembered;
+            }
+        })();
+
+        console.log('✅ RASAAI Login Page Ready');
+        console.log('📧 Demo: admin@rasaai.com / admin123');
     </script>
 </body>
 </html>
