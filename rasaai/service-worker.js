@@ -1,4 +1,4 @@
-const CACHE_NAME = 'rasaai-v1.0';
+const CACHE_NAME = 'rasaai-v3.0';
 const ASSETS_TO_CACHE = [
   '/rasaai/',
   '/rasaai/index.html',
@@ -14,26 +14,29 @@ const ASSETS_TO_CACHE = [
   '/rasaai/invoice.html',
   '/rasaai/analytics.html',
   '/rasaai/crm.html',
+  '/rasaai/forgot-password.html',
+  '/rasaai/privacy.html',
+  '/rasaai/terms.html',
+  '/rasaai/refund.html',
+  '/rasaai/404.html',
   '/rasaai/style.css',
   '/rasaai/app.js',
-  '/rasaai/auth.js',
-  '/rasaai/charts.js',
-  '/rasaai/404.html',
-  '/rasaai/manifest.json'
+  '/rasaai/manifest.json',
+  '/rasaai/robots.txt'
 ];
 
-// Install Service Worker
 self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
-      console.log('RASAAI: Caching assets');
-      return cache.addAll(ASSETS_TO_CACHE);
+      console.log('RASAAI SW: Caching', ASSETS_TO_CACHE.length, 'assets');
+      return cache.addAll(ASSETS_TO_CACHE).catch(err => {
+        console.log('SW: Some assets failed to cache, continuing...', err);
+      });
     })
   );
   self.skipWaiting();
 });
 
-// Activate Service Worker
 self.addEventListener('activate', (event) => {
   event.waitUntil(
     caches.keys().then((cacheNames) => {
@@ -45,7 +48,6 @@ self.addEventListener('activate', (event) => {
   self.clients.claim();
 });
 
-// Fetch Strategy: Network First, Fallback to Cache
 self.addEventListener('fetch', (event) => {
   if (event.request.method !== 'GET') return;
   
@@ -60,13 +62,12 @@ self.addEventListener('fetch', (event) => {
       })
       .catch(() => {
         return caches.match(event.request).then((cachedResponse) => {
-          return cachedResponse || caches.match('/rasaai/404.html');
+          return cachedResponse || caches.match('/rasaai/');
         });
       })
   );
 });
 
-// Push Notification
 self.addEventListener('push', (event) => {
   const data = event.data ? event.data.json() : {};
   const options = {
@@ -76,13 +77,10 @@ self.addEventListener('push', (event) => {
     vibrate: [200, 100, 200],
     data: { url: data.url || '/rasaai/dashboard.html' }
   };
-  event.waitUntil(self.registration.showNotification(data.title || 'RASAAI', options));
+  event.waitUntil(self.registration.showNotification(data.title || 'RASAAI Update', options));
 });
 
-// Notification Click
 self.addEventListener('notificationclick', (event) => {
   event.notification.close();
-  event.waitUntil(
-    clients.openWindow(event.notification.data.url || '/rasaai/dashboard.html')
-  );
+  event.waitUntil(clients.openWindow(event.notification.data.url || '/rasaai/dashboard.html'));
 });
