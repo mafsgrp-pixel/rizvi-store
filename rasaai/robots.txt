@@ -1,10 +1,36 @@
+# robots.txt for RASAAI - Auto Rickshaw Advertising Network
+# Domain: rizvi.store/rasaai
+# Generated: 2024-06-02
+
 User-agent: *
-Allow: /
-Disallow: /admin/
-Disallow: /driver/
-Disallow: /affiliate/
-Disallow: /sales/
-Disallow: /assets/js/
+Allow: /rasaai/
+Allow: /rasaai/index.html
+Allow: /rasaai/pages/
+Allow: /rasaai/css/
+Allow: /rasaai/js/
+Allow: /rasaai/assets/
+Allow: /rasaai/manifest.json
+
+Disallow: /rasaai/js/core/config.js
+Disallow: /rasaai/google/
+Disallow: /rasaai/backups/
+Disallow: /rasaai/tests/
+Disallow: /rasaai/docs/
+Disallow: /rasaai/.git/
+Disallow: /rasaai/*.md
+
 Sitemap: https://rizvi.store/rasaai/sitemap.xml
 
-# Crawl-delay: 10
+User-agent: Googlebot
+Allow: /rasaai/
+Crawl-delay: 2
+
+User-agent: Bingbot
+Allow: /rasaai/
+Crawl-delay: 3
+
+User-agent: AhrefsBot
+Disallow: /rasaai/
+
+User-agent: SemrushBot
+Disallow: /rasaai/
