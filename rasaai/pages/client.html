@@ -1,0 +1,195 @@
+<!--
+ * Filename: client.html
+ * Path: /pages/client.html
+ * Project: RASAAI - Auto Rickshaw Advertising Network
+ * Description: Client/Advertiser Portal Dashboard
+ * Role: client
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#221F60">
+    <meta name="robots" content="noindex, nofollow">
+    
+    <link rel="icon" type="image/x-icon" href="/rasaai/assets/images/favicon.ico">
+    <link rel="manifest" href="/rasaai/manifest.json">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="/rasaai/css/main.css">
+    <link rel="stylesheet" href="/rasaai/css/layout.css">
+    <link rel="stylesheet" href="/rasaai/css/components.css">
+    <link rel="stylesheet" href="/rasaai/css/dashboard.css">
+    <link rel="stylesheet" href="/rasaai/css/mobile.css">
+    <link rel="stylesheet" href="/rasaai/css/dark-mode.css">
+    <link rel="stylesheet" href="/rasaai/css/animations.css">
+    
+    <title>Client Portal - RASAAI</title>
+</head>
+<body class="dashboard-body">
+    
+    <div class="backdrop" id="sidebar-backdrop" onclick="closeSidebar()"></div>
+    
+    <aside class="dashboard-sidebar" id="client-sidebar"></aside>
+    
+    <main class="dashboard-main">
+        
+        <header class="dashboard-header">
+            <div class="dashboard-header-left">
+                <button class="sidebar-toggle" onclick="toggleSidebar()">☰</button>
+                <h1 class="dashboard-header-title">My Dashboard</h1>
+            </div>
+            <div class="dashboard-header-right">
+                <button class="dark-mode-toggle" onclick="toggleTheme()">🌓</button>
+                <div id="notification-bell-container"></div>
+                <button class="header-user-btn" onclick="logout()">
+                    <div class="header-user-avatar" id="header-avatar">C</div>
+                    <span class="header-user-name" id="header-name">Client</span>
+                </button>
+            </div>
+        </header>
+        
+        <div class="dashboard-content">
+            
+            <!-- Welcome -->
+            <div class="welcome-row">
+                <div class="welcome-text">
+                    <h1>Welcome, <span id="welcome-name">Rahul</span>! 🏢</h1>
+                    <p>Manage your campaigns and track performance</p>
+                </div>
+                <div class="welcome-actions">
+                    <a href="/rasaai/pages/campaign.html" class="btn btn-orange">+ New Campaign</a>
+                </div>
+            </div>
+            
+            <!-- Stats -->
+            <div class="stats-row">
+                <div class="stat-card-dashboard">
+                    <div class="stat-card-icon-box green">📋</div>
+                    <div class="stat-card-info">
+                        <div class="stat-card-label">Active Campaigns</div>
+                        <div class="stat-card-value" id="stat-active">0</div>
+                    </div>
+                </div>
+                <div class="stat-card-dashboard">
+                    <div class="stat-card-icon-box blue">👁️</div>
+                    <div class="stat-card-info">
+                        <div class="stat-card-label">Total Impressions</div>
+                        <div class="stat-card-value" id="stat-impressions">0</div>
+                    </div>
+                </div>
+                <div class="stat-card-dashboard">
+                    <div class="stat-card-icon-box orange">📱</div>
+                    <div class="stat-card-info">
+                        <div class="stat-card-label">QR Scans</div>
+                        <div class="stat-card-value" id="stat-scans">0</div>
+                    </div>
+                </div>
+                <div class="stat-card-dashboard">
+                    <div class="stat-card-icon-box purple">💰</div>
+                    <div class="stat-card-info">
+                        <div class="stat-card-label">Total Spent</div>
+                        <div class="stat-card-value" id="stat-spent">₹0</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- My Campaigns -->
+            <div class="table-widget">
+                <div class="table-widget-header">
+                    <span class="table-widget-title">My Campaigns</span>
+                    <a href="/rasaai/pages/campaign.html" class="btn btn-sm btn-primary">+ New Campaign</a>
+                </div>
+                <div class="table-widget-body" id="client-campaigns-table">
+                    <div style="text-align:center;padding:40px;color:#ADB5BD;">Loading...</div>
+                </div>
+            </div>
+            
+            <!-- Quick Actions -->
+            <div class="chart-widget">
+                <div class="chart-widget-header">
+                    <span class="chart-widget-title">Quick Actions</span>
+                </div>
+                <div class="quick-actions">
+                    <a href="/rasaai/pages/campaign.html" class="quick-action-btn">
+                        <span class="quick-action-icon">➕</span>
+                        <span class="quick-action-label">New Campaign</span>
+                    </a>
+                    <a href="/rasaai/pages/invoice.html" class="quick-action-btn">
+                        <span class="quick-action-icon">📄</span>
+                        <span class="quick-action-label">My Invoices</span>
+                    </a>
+                    <a href="/rasaai/pages/analytics.html" class="quick-action-btn">
+                        <span class="quick-action-icon">📊</span>
+                        <span class="quick-action-label">Analytics</span>
+                    </a>
+                    <a href="#" onclick="shareReferralWhatsApp()" class="quick-action-btn">
+                        <span class="quick-action-icon">🔗</span>
+                        <span class="quick-action-label">Refer & Earn</span>
+                    </a>
+                </div>
+            </div>
+            
+        </div>
+    </main>
+
+    <script src="/rasaai/js/data/constants.js"></script>
+    <script src="/rasaai/js/data/zones.js"></script>
+    <script src="/rasaai/js/data/templates.js"></script>
+    <script src="/rasaai/js/data/demo-users.js"></script>
+    <script src="/rasaai/js/utils/helpers.js"></script>
+    <script src="/rasaai/js/utils/validators.js"></script>
+    <script src="/rasaai/js/utils/formatters.js"></script>
+    <script src="/rasaai/js/utils/error-handler.js"></script>
+    <script src="/rasaai/js/core/config.js"></script>
+    <script src="/rasaai/js/core/auth.js"></script>
+    <script src="/rasaai/js/core/sheets.js"></script>
+    <script src="/rasaai/js/core/state.js"></script>
+    <script src="/rasaai/js/core/router.js"></script>
+    <script src="/rasaai/js/modules/campaigns.js"></script>
+    <script src="/rasaai/js/modules/invoices.js"></script>
+    <script src="/rasaai/js/modules/payments.js"></script>
+    <script src="/rasaai/js/modules/affiliates.js"></script>
+    <script src="/rasaai/js/modules/notifications.js"></script>
+    <script src="/rasaai/js/app.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', async function() {
+            if (!requireRole('client')) return;
+            
+            renderSidebar('client-sidebar');
+            
+            var user = getCurrentUser();
+            if (user) {
+                document.getElementById('header-avatar').textContent = getInitials(user.name);
+                document.getElementById('header-name').textContent = user.name;
+                document.getElementById('welcome-name').textContent = user.name.split(' ')[0];
+            }
+            
+            await loadCampaigns(user?.email);
+            
+            updateClientStats();
+            renderCampaignTable('client-campaigns-table', getFilteredCampaigns());
+            renderNotificationBell('notification-bell-container');
+        });
+        
+        function updateClientStats() {
+            var campaigns = CampaignState.campaigns;
+            var active = campaigns.filter(function(c) { return c.status === 'active'; }).length;
+            var totalImpressions = campaigns.reduce(function(sum, c) { return sum + (parseInt(c.impressions) || 0); }, 0);
+            var totalScans = campaigns.reduce(function(sum, c) { return sum + (parseInt(c.scans) || 0); }, 0);
+            var totalSpent = campaigns.reduce(function(sum, c) { return sum + (parseFloat(c.total_cost) || 0); }, 0);
+            
+            document.getElementById('stat-active').textContent = active;
+            document.getElementById('stat-impressions').textContent = formatCompactNumber(totalImpressions || 345000);
+            document.getElementById('stat-scans').textContent = formatCompactNumber(totalScans || 234);
+            document.getElementById('stat-spent').textContent = formatINR(totalSpent || 145136);
+        }
+    </script>
+</body>
+</html>
