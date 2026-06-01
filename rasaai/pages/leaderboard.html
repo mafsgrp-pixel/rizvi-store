@@ -1,0 +1,44 @@
+<!--
+ * Filename: leaderboard.html
+ * Path: /pages/leaderboard.html
+ * Project: RASAAI - Auto Rickshaw Advertising Network
+ * Description: Public Leaderboard - Top scanners, top affiliates
+ * Role: Public
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#221F60">
+    <link rel="icon" type="image/x-icon" href="/rasaai/assets/images/favicon.ico">
+    <link rel="manifest" href="/rasaai/manifest.json">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/rasaai/css/main.css">
+    <link rel="stylesheet" href="/rasaai/css/layout.css">
+    <link rel="stylesheet" href="/rasaai/css/components.css">
+    <link rel="stylesheet" href="/rasaai/css/dashboard.css">
+    <link rel="stylesheet" href="/rasaai/css/mobile.css">
+    <link rel="stylesheet" href="/rasaai/css/animations.css">
+    <title>Leaderboard - RASAAI</title>
+</head>
+<body class="bg-gray-50">
+    <header class="header"><nav class="nav container"><a href="/rasaai/index.html" class="nav-logo"><img src="/rasaai/assets/images/logo.svg" alt="RASAAI" height="32"></a><div class="nav-actions"><a href="/rasaai/pages/login.html" class="btn btn-outline btn-sm">Login</a></div></nav></header>
+    <div style="max-width:600px;margin:100px auto 40px;padding:0 20px;">
+        <div class="text-center mb-2xl"><h1 style="font-size:32px;font-weight:800;color:#221F60;">🏆 Leaderboard</h1><p style="color:#6C757D;">Top scanners and earners in Mumbra</p></div>
+        <div class="tabs mb-xl"><button class="tab active" onclick="switchTab('scans')">📷 Top Scanners</button><button class="tab" onclick="switchTab('coins')">🪙 Most Coins</button></div>
+        <div class="leaderboard-list" id="leaderboard-list">
+            <div class="leaderboard-item"><div class="leaderboard-rank gold">🥇</div><div class="leaderboard-info"><div class="leaderboard-name">Rahul S.</div><div class="leaderboard-subtitle">5 zones visited</div></div><div class="leaderboard-value">245 scans</div></div>
+            <div class="leaderboard-item"><div class="leaderboard-rank silver">🥈</div><div class="leaderboard-info"><div class="leaderboard-name">Priya P.</div><div class="leaderboard-subtitle">3 zones visited</div></div><div class="leaderboard-value">180 scans</div></div>
+            <div class="leaderboard-item"><div class="leaderboard-rank bronze">🥉</div><div class="leaderboard-info"><div class="leaderboard-name">Amit V.</div><div class="leaderboard-subtitle">4 zones visited</div></div><div class="leaderboard-value">150 scans</div></div>
+            <div class="leaderboard-item"><div class="leaderboard-rank default">#4</div><div class="leaderboard-info"><div class="leaderboard-name">Salman K.</div><div class="leaderboard-subtitle">2 zones visited</div></div><div class="leaderboard-value">120 scans</div></div>
+            <div class="leaderboard-item"><div class="leaderboard-rank default">#5</div><div class="leaderboard-info"><div class="leaderboard-name">Anwar H.</div><div class="leaderboard-subtitle">3 zones visited</div></div><div class="leaderboard-value">95 scans</div></div>
+        </div>
+        <div class="text-center mt-xl"><a href="/rasaai/pages/register.html" class="btn btn-orange btn-lg">🚀 Join & Start Earning</a></div>
+    </div>
+    <script src="/rasaai/js/data/constants.js"></script>
+    <script src="/rasaai/js/utils/helpers.js"></script>
+    <script src="/rasaai/js/modules/notifications.js"></script>
+    <script>function switchTab(tab){document.querySelectorAll('.tab').forEach(function(t){t.classList.remove('active');});event.target.classList.add('active');showToast('Showing '+tab+' leaderboard','info');}</script>
+</body>
+</html>
