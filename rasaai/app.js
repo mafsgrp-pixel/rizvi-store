@@ -3236,3 +3236,103 @@ window.Search = Search;
 console.log('✅ All 17 modules exposed globally');
 console.log('🔗 rizvi.store/rasaai | 📞 +91 9594306625');
 console.log('🎁 Free 30 Social Media Creatives with LED Campaign!');
+// =====================================================
+// DASHBOARD ROUTER FIX - Add this to app.js
+// =====================================================
+
+// Override the login redirect to properly route users
+const originalLogin = Auth.login;
+Auth.login = function(email, password) {
+    const result = originalLogin.call(this, email, password);
+    if (result.success) {
+        // Store redirect path
+        const redirectPath = Storage.get('redirectAfterLogin') || this.getDashboardPath(result.user.role);
+        Storage.set('loginRedirect', redirectPath);
+    }
+    return result;
+};
+
+Auth.getDashboardPath = function(role) {
+    switch(role) {
+        case 'admin': return 'admin.html';
+        case 'client': return 'client.html';
+        case 'driver': return 'driver.html';
+        case 'affiliate': return 'affiliate.html';
+        case 'sales': return 'crm.html';
+        default: return 'dashboard.html';
+    }
+};
+
+// Fix Dashboard.render to properly detect pages
+const originalRender = Dashboard.render;
+Dashboard.render = function(user) {
+    if (!user) {
+        const currentUser = Auth.getCurrentUser();
+        if (!currentUser) {
+            window.location.href = 'login.html';
+            return;
+        }
+        user = currentUser;
+    }
+    
+    this.user = user;
+    
+    // Update UI elements
+    document.querySelectorAll('#user-name-display, .user-name-display').forEach(el => {
+        if (el) el.textContent = user.name;
+    });
+    document.querySelectorAll('#user-role-display, .user-role-display').forEach(el => {
+        if (el) el.textContent = user.role;
+    });
+    document.querySelectorAll('#user-avatar-initial, .user-avatar-initial').forEach(el => {
+        if (el) el.textContent = (user.name || 'U').charAt(0).toUpperCase();
+    });
+    
+    // Route to correct dashboard
+    const path = window.location.pathname;
+    
+    if (path.includes('admin.html')) {
+        this.renderAdminDashboard();
+    } else if (path.includes('client.html')) {
+        this.renderClientDashboard();
+    } else if (path.includes('driver.html')) {
+        this.renderDriverDashboard();
+    } else if (path.includes('affiliate.html')) {
+        this.renderAffiliateDashboard();
+    } else if (path.includes('crm.html') || path.includes('sales.html')) {
+        this.renderCRMDashboard();
+    } else if (path.includes('dashboard.html')) {
+        // Generic dashboard - route based on role
+        switch(user.role) {
+            case 'admin': window.location.href = 'admin.html'; break;
+            case 'client': window.location.href = 'client.html'; break;
+            case 'driver': window.location.href = 'driver.html'; break;
+            case 'affiliate': window.location.href = 'affiliate.html'; break;
+            case 'sales': window.location.href = 'crm.html'; break;
+            default: this.renderClientDashboard();
+        }
+    } else {
+        this.renderRoleDashboard();
+    }
+};
+
+// Fix login page redirect
+document.addEventListener('DOMContentLoaded', function() {
+    // Check if we're on login page and already logged in
+    if (window.location.pathname.includes('login.html')) {
+        const user = Auth.getCurrentUser();
+        if (user) {
+            const redirectPath = Storage.get('loginRedirect') || Auth.getDashboardPath(user.role);
+            window.location.href = redirectPath;
+        }
+    }
+    
+    // Handle redirect after login
+    const params = new URLSearchParams(window.location.search);
+    const redirect = params.get('redirect');
+    if (redirect) {
+        Storage.set('redirectAfterLogin', redirect);
+    }
+});
+
+console.log('✅ Dashboard Router Fix Applied');
