@@ -1,0 +1,1111 @@
+/*
+ * Filename: dark-mode.css
+ * Path: /css/dark-mode.css
+ * Project: RASAAI - Auto Rickshaw Advertising Network
+ * Description: Complete Dark Mode Theme Overrides
+ * Design System: Zoomcar.com inspired
+ */
+
+/* ============================================
+   DARK MODE TRIGGER
+   ============================================ */
+
+/* User preference */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --dark-mode-active: 1;
+    }
+}
+
+/* Manual toggle class on body */
+body.dark-mode,
+[data-theme="dark"] {
+    --dark-mode-active: 1;
+}
+
+/* Apply dark mode when active */
+body.dark-mode,
+[data-theme="dark"],
+@media (prefers-color-scheme: dark) {
+    body:not(.light-mode) {
+        /* This will be overridden by manual classes */
+    }
+}
+
+/* ============================================
+   DARK MODE CSS VARIABLES
+   ============================================ */
+
+body.dark-mode {
+    /* Background Colors */
+    --white: #1A1D23;
+    --gray-50: #1E2130;
+    --gray-100: #252838;
+    --gray-200: #2D3142;
+    --gray-300: #3A3F54;
+    --gray-400: #4E5570;
+    --gray-500: #6B7294;
+    --gray-600: #8B91B0;
+    --gray-700: #A8ADC7;
+    --gray-800: #C5C9DB;
+    --gray-900: #E4E6EF;
+
+    /* Navy adjustments for dark */
+    --navy: #4B4FCF;
+    --navy-light: #5D61E0;
+    --navy-dark: #3A3EB8;
+    --navy-50: #1E2140;
+    --navy-100: #252860;
+    --navy-200: #2D3280;
+    --navy-300: #3A3FA0;
+    --navy-400: #474DC0;
+    --navy-500: #4B4FCF;
+    --navy-600: #6C70E0;
+    --navy-700: #8D90E8;
+    --navy-800: #AEB0F0;
+    --navy-900: #CFD0F7;
+
+    /* Orange adjustments */
+    --orange: #FF6B2B;
+    --orange-hover: #FF7F4D;
+    --orange-light: #2D1A10;
+    --orange-50: #2D1A10;
+    --orange-100: #3D2418;
+
+    /* Yellow adjustments */
+    --yellow: #FFC133;
+    --yellow-hover: #FFCD5C;
+    --yellow-light: #2D2408;
+    --yellow-50: #2D2408;
+    --yellow-100: #3D320C;
+
+    /* Green adjustments */
+    --green: #00CC80;
+    --green-light: #0D2818;
+    --green-dark: #00A86B;
+
+    /* Red adjustments */
+    --red: #FF5C4C;
+    --red-light: #2D1512;
+    --red-dark: #E04C3C;
+
+    /* Shadows (darker) */
+    --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.3);
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.4);
+    --shadow-base: 0 4px 6px rgba(0, 0, 0, 0.4);
+    --shadow-md: 0 10px 15px rgba(0, 0, 0, 0.5);
+    --shadow-lg: 0 20px 25px rgba(0, 0, 0, 0.6);
+    --shadow-xl: 0 25px 50px rgba(0, 0, 0, 0.7);
+}
+
+/* ============================================
+   BODY DARK MODE
+   ============================================ */
+
+body.dark-mode {
+    background-color: #1A1D23;
+    color: #E4E6EF;
+}
+
+/* ============================================
+   HEADER DARK MODE
+   ============================================ */
+
+body.dark-mode .header {
+    background: #1A1D23;
+    border-bottom-color: #2D3142;
+}
+
+body.dark-mode .header-scrolled {
+    background: rgba(26, 29, 35, 0.95);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom-color: #2D3142;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+}
+
+body.dark-mode .nav-links a {
+    color: #A8ADC7;
+}
+
+body.dark-mode .nav-links a:hover {
+    color: #FFFFFF;
+}
+
+body.dark-mode .btn-outline {
+    color: #A8ADC7;
+    border-color: #3A3F54;
+}
+
+body.dark-mode .btn-outline:hover {
+    color: #FFFFFF;
+    border-color: #4B4FCF;
+    background: #1E2140;
+}
+
+body.dark-mode .btn-menu span {
+    background: #A8ADC7;
+}
+
+/* ============================================
+   HERO DARK MODE
+   ============================================ */
+
+body.dark-mode .hero {
+    background: #1A1D23;
+}
+
+body.dark-mode .hero-badge {
+    background: #1E2140;
+    color: #AEB0F0;
+}
+
+body.dark-mode .hero-title {
+    color: #FFFFFF;
+}
+
+body.dark-mode .hero-subtitle {
+    color: #A8ADC7;
+}
+
+body.dark-mode .hero-stat-number {
+    color: #FFFFFF;
+}
+
+body.dark-mode .hero-stat-label {
+    color: #8B91B0;
+}
+
+body.dark-mode .hero-floating-card {
+    background: #252838;
+    color: #E4E6EF;
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.5);
+}
+
+/* ============================================
+   TRUST BAR DARK MODE
+   ============================================ */
+
+body.dark-mode .trust-bar {
+    background: #15171C;
+}
+
+body.dark-mode .trust-label {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+/* ============================================
+   CARDS DARK MODE
+   ============================================ */
+
+body.dark-mode .card,
+body.dark-mode .step-card,
+body.dark-mode .zone-card,
+body.dark-mode .pricing-card,
+body.dark-mode .testimonial-card,
+body.dark-mode .calculator-card,
+body.dark-mode .stat-card {
+    background: #252838;
+    border-color: #2D3142;
+}
+
+body.dark-mode .card:hover,
+body.dark-mode .step-card:hover,
+body.dark-mode .zone-card:hover,
+body.dark-mode .pricing-card:hover,
+body.dark-mode .testimonial-card:hover {
+    border-color: #4B4FCF;
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.5);
+}
+
+body.dark-mode .card-navy {
+    background: #4B4FCF;
+    border-color: #4B4FCF;
+}
+
+body.dark-mode .card-flat {
+    background: #1E2130;
+    border-color: transparent;
+}
+
+body.dark-mode .card-flat:hover {
+    background: #252838;
+}
+
+/* Card Parts */
+body.dark-mode .card-header {
+    border-bottom-color: #2D3142;
+}
+
+body.dark-mode .card-title {
+    color: #FFFFFF;
+}
+
+body.dark-mode .card-subtitle {
+    color: #8B91B0;
+}
+
+body.dark-mode .card-footer {
+    border-top-color: #2D3142;
+}
+
+/* ============================================
+   STAT CARDS DARK MODE
+   ============================================ */
+
+body.dark-mode .stat-card-label {
+    color: #8B91B0;
+}
+
+body.dark-mode .stat-card-value {
+    color: #FFFFFF;
+}
+
+body.dark-mode .stat-card-icon.navy {
+    background: #1E2140;
+    color: #AEB0F0;
+}
+
+body.dark-mode .stat-card-icon.orange {
+    background: #2D1A10;
+    color: #FF6B2B;
+}
+
+body.dark-mode .stat-card-icon.green {
+    background: #0D2818;
+    color: #00CC80;
+}
+
+body.dark-mode .stat-card-icon.red {
+    background: #2D1512;
+    color: #FF5C4C;
+}
+
+body.dark-mode .stat-card-icon.yellow {
+    background: #2D2408;
+    color: #FFC133;
+}
+
+/* ============================================
+   ZONES DARK MODE
+   ============================================ */
+
+body.dark-mode .zones-section {
+    background: #1E2130;
+}
+
+body.dark-mode .zone-stat {
+    background: #1E2130;
+}
+
+body.dark-mode .zone-stat-value {
+    color: #FFFFFF;
+}
+
+body.dark-mode .zone-stat-label {
+    color: #8B91B0;
+}
+
+body.dark-mode .zone-name {
+    color: #FFFFFF;
+}
+
+body.dark-mode .zone-peak {
+    color: #A8ADC7;
+}
+
+body.dark-mode .zone-premium {
+    border-color: #3D2418;
+}
+
+body.dark-mode .zone-premium:hover {
+    border-color: #FF6B2B;
+}
+
+/* ============================================
+   PRICING DARK MODE
+   ============================================ */
+
+body.dark-mode .pricing-section {
+    background: #1A1D23;
+}
+
+body.dark-mode .pricing-name {
+    color: #FFFFFF;
+}
+
+body.dark-mode .pricing-desc {
+    color: #8B91B0;
+}
+
+body.dark-mode .pricing-price {
+    border-top-color: #2D3142;
+    border-bottom-color: #2D3142;
+}
+
+body.dark-mode .pricing-currency,
+body.dark-mode .pricing-amount {
+    color: #FFFFFF;
+}
+
+body.dark-mode .pricing-period {
+    color: #8B91B0;
+}
+
+body.dark-mode .pricing-features li {
+    color: #A8ADC7;
+    border-bottom-color: #2D3142;
+}
+
+body.dark-mode .pricing-featured {
+    border-color: #FF6B2B;
+    box-shadow: 0 10px 25px rgba(255, 107, 43, 0.15);
+}
+
+body.dark-mode .pricing-badge {
+    background: #FF6B2B;
+}
+
+body.dark-mode .pricing-update {
+    color: #6B7294;
+}
+
+/* ============================================
+   CALCULATOR DARK MODE
+   ============================================ */
+
+body.dark-mode .calculator-section {
+    background: #1E2130;
+}
+
+body.dark-mode .calculator-result {
+    background: #1E2140;
+}
+
+body.dark-mode .result-row {
+    color: #A8ADC7;
+}
+
+body.dark-mode .result-total,
+body.dark-mode .result-grand {
+    color: #FFFFFF;
+}
+
+body.dark-mode .result-divider {
+    border-top-color: #2D3280;
+}
+
+/* ============================================
+   BONUS BANNER DARK MODE
+   ============================================ */
+
+body.dark-mode .bonus-section {
+    background: #1A1D23;
+}
+
+body.dark-mode .bonus-card {
+    background: linear-gradient(135deg, #3A3EB8 0%, #4B4FCF 100%);
+}
+
+/* ============================================
+   TESTIMONIALS DARK MODE
+   ============================================ */
+
+body.dark-mode .testimonials-section {
+    background: #1E2130;
+}
+
+body.dark-mode .testimonial-card p {
+    color: #A8ADC7;
+}
+
+body.dark-mode .testimonial-author strong {
+    color: #FFFFFF;
+}
+
+body.dark-mode .testimonial-author small {
+    color: #8B91B0;
+}
+
+/* ============================================
+   FAQ DARK MODE
+   ============================================ */
+
+body.dark-mode .faq-section {
+    background: #1A1D23;
+}
+
+body.dark-mode .faq-item {
+    border-color: #2D3142;
+}
+
+body.dark-mode .faq-item:hover {
+    border-color: #3A3F54;
+}
+
+body.dark-mode .faq-question {
+    background: #252838;
+    color: #FFFFFF;
+}
+
+body.dark-mode .faq-question:hover {
+    background: #2D3142;
+}
+
+body.dark-mode .faq-icon {
+    background: #2D3142;
+}
+
+body.dark-mode .faq-answer p {
+    color: #A8ADC7;
+}
+
+/* ============================================
+   FINAL CTA DARK MODE
+   ============================================ */
+
+body.dark-mode .final-cta {
+    background: #15171C;
+}
+
+/* ============================================
+   FOOTER DARK MODE
+   ============================================ */
+
+body.dark-mode .footer {
+    background: #111318;
+}
+
+body.dark-mode .footer-bottom {
+    border-top-color: rgba(255, 255, 255, 0.05);
+}
+
+/* ============================================
+   BUTTONS DARK MODE
+   ============================================ */
+
+body.dark-mode .btn-primary {
+    background: #4B4FCF;
+    border-color: #4B4FCF;
+}
+
+body.dark-mode .btn-primary:hover {
+    background: #5D61E0;
+    border-color: #5D61E0;
+}
+
+body.dark-mode .btn-outline {
+    color: #A8ADC7;
+    border-color: #3A3F54;
+}
+
+body.dark-mode .btn-outline:hover {
+    color: #FFFFFF;
+    border-color: #4B4FCF;
+    background: #1E2140;
+}
+
+body.dark-mode .btn-ghost {
+    color: #8B91B0;
+}
+
+body.dark-mode .btn-ghost:hover {
+    background: #252838;
+    color: #FFFFFF;
+}
+
+body.dark-mode .btn-orange {
+    background: #FF6B2B;
+    border-color: #FF6B2B;
+}
+
+body.dark-mode .btn-orange:hover {
+    background: #FF7F4D;
+    border-color: #FF7F4D;
+}
+
+body.dark-mode .btn-yellow {
+    background: #FFC133;
+    border-color: #FFC133;
+    color: #1A1D23;
+}
+
+body.dark-mode .btn-yellow:hover {
+    background: #FFCD5C;
+    border-color: #FFCD5C;
+}
+
+body.dark-mode .btn-whatsapp {
+    background: #25D366;
+    border-color: #25D366;
+    color: #FFFFFF;
+}
+
+body.dark-mode .btn-success {
+    background: #00CC80;
+    border-color: #00CC80;
+}
+
+body.dark-mode .btn-danger {
+    background: #FF5C4C;
+    border-color: #FF5C4C;
+}
+
+/* ============================================
+   FORMS DARK MODE
+   ============================================ */
+
+body.dark-mode .form-label {
+    color: #A8ADC7;
+}
+
+body.dark-mode .form-hint {
+    color: #6B7294;
+}
+
+body.dark-mode input[type="text"],
+body.dark-mode input[type="email"],
+body.dark-mode input[type="password"],
+body.dark-mode input[type="tel"],
+body.dark-mode input[type="number"],
+body.dark-mode input[type="url"],
+body.dark-mode input[type="date"],
+body.dark-mode input[type="time"],
+body.dark-mode input[type="search"],
+body.dark-mode select,
+body.dark-mode textarea {
+    background: #1E2130;
+    border-color: #3A3F54;
+    color: #E4E6EF;
+}
+
+body.dark-mode input:focus,
+body.dark-mode select:focus,
+body.dark-mode textarea:focus {
+    border-color: #4B4FCF;
+    box-shadow: 0 0 0 3px rgba(75, 79, 207, 0.2);
+}
+
+body.dark-mode input::placeholder,
+body.dark-mode textarea::placeholder {
+    color: #6B7294;
+}
+
+body.dark-mode input:disabled,
+body.dark-mode select:disabled,
+body.dark-mode textarea:disabled {
+    background: #252838;
+    opacity: 0.5;
+}
+
+body.dark-mode select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%238B91B0' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+}
+
+body.dark-mode input[type="range"] {
+    background: #3A3F54;
+}
+
+body.dark-mode input[type="range"]::-webkit-slider-thumb {
+    background: #4B4FCF;
+    border-color: #1A1D23;
+}
+
+body.dark-mode .toggle-track {
+    background: #3A3F54;
+}
+
+body.dark-mode .range-value {
+    color: #8B91B0;
+}
+
+/* ============================================
+   TABLES DARK MODE
+   ============================================ */
+
+body.dark-mode .table-container {
+    border-color: #2D3142;
+    background: #252838;
+}
+
+body.dark-mode .table thead {
+    background: #1E2130;
+    border-bottom-color: #3A3F54;
+}
+
+body.dark-mode .table th {
+    color: #A8ADC7;
+}
+
+body.dark-mode .table td {
+    border-bottom-color: #2D3142;
+    color: #E4E6EF;
+}
+
+body.dark-mode .table tbody tr:hover {
+    background: #2D3142;
+}
+
+body.dark-mode .table-striped tbody tr:nth-child(even) {
+    background: #1E2130;
+}
+
+/* ============================================
+   TABS DARK MODE
+   ============================================ */
+
+body.dark-mode .tabs {
+    border-bottom-color: #2D3142;
+}
+
+body.dark-mode .tab {
+    color: #8B91B0;
+}
+
+body.dark-mode .tab:hover {
+    color: #C5C9DB;
+}
+
+body.dark-mode .tab.active {
+    color: #AEB0F0;
+    border-bottom-color: #4B4FCF;
+}
+
+/* ============================================
+   MODALS DARK MODE
+   ============================================ */
+
+body.dark-mode .modal-backdrop {
+    background: rgba(0, 0, 0, 0.7);
+}
+
+body.dark-mode .modal {
+    background: #252838;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.7);
+}
+
+body.dark-mode .modal-header {
+    background: #252838;
+    border-bottom-color: #2D3142;
+}
+
+body.dark-mode .modal-title {
+    color: #FFFFFF;
+}
+
+body.dark-mode .modal-close {
+    color: #8B91B0;
+}
+
+body.dark-mode .modal-close:hover {
+    background: #2D3142;
+    color: #FFFFFF;
+}
+
+body.dark-mode .modal-footer {
+    background: #252838;
+    border-top-color: #2D3142;
+}
+
+/* ============================================
+   BOTTOM SHEET DARK MODE
+   ============================================ */
+
+body.dark-mode .bottom-sheet-backdrop {
+    background: rgba(0, 0, 0, 0.7);
+}
+
+body.dark-mode .bottom-sheet {
+    background: #252838;
+}
+
+body.dark-mode .bottom-sheet-handle {
+    background: #3A3F54;
+}
+
+/* ============================================
+   BADGES DARK MODE
+   ============================================ */
+
+body.dark-mode .badge-navy {
+    background: #1E2140;
+    color: #AEB0F0;
+}
+
+body.dark-mode .badge-orange {
+    background: #2D1A10;
+    color: #FF6B2B;
+}
+
+body.dark-mode .badge-green {
+    background: #0D2818;
+    color: #00CC80;
+}
+
+body.dark-mode .badge-red {
+    background: #2D1512;
+    color: #FF5C4C;
+}
+
+body.dark-mode .badge-yellow {
+    background: #2D2408;
+    color: #FFC133;
+}
+
+body.dark-mode .badge-gray {
+    background: #2D3142;
+    color: #A8ADC7;
+}
+
+body.dark-mode .badge-white {
+    background: rgba(255, 255, 255, 0.1);
+    color: #FFFFFF;
+}
+
+body.dark-mode .badge-high {
+    background: #3D2418;
+    color: #FF6B2B;
+}
+
+body.dark-mode .badge-medium {
+    background: #3D320C;
+    color: #FFC133;
+}
+
+body.dark-mode .badge-low {
+    background: #0D2818;
+    color: #00CC80;
+}
+
+/* ============================================
+   CHIPS DARK MODE
+   ============================================ */
+
+body.dark-mode .chip {
+    background: #2D3142;
+    color: #A8ADC7;
+}
+
+body.dark-mode .chip:hover {
+    background: #3A3F54;
+}
+
+body.dark-mode .chip.active {
+    background: #1E2140;
+    color: #AEB0F0;
+    border-color: #2D3280;
+}
+
+body.dark-mode .chip-remove {
+    background: #3A3F54;
+    color: #8B91B0;
+}
+
+body.dark-mode .chip-remove:hover {
+    background: #FF5C4C;
+    color: #FFFFFF;
+}
+
+/* ============================================
+   ALERTS DARK MODE
+   ============================================ */
+
+body.dark-mode .alert-info {
+    background: #0D1E2D;
+    border-color: #1A3A5C;
+    color: #6BB5E0;
+}
+
+body.dark-mode .alert-success {
+    background: #0D2818;
+    border-color: #1A4A2E;
+    color: #4DCC90;
+}
+
+body.dark-mode .alert-warning {
+    background: #2D2408;
+    border-color: #4A3A0E;
+    color: #E0C060;
+}
+
+body.dark-mode .alert-danger {
+    background: #2D1512;
+    border-color: #5C2018;
+    color: #F08070;
+}
+
+/* ============================================
+   PROGRESS BAR DARK MODE
+   ============================================ */
+
+body.dark-mode .progress {
+    background: #2D3142;
+}
+
+body.dark-mode .progress-label {
+    color: #A8ADC7;
+}
+
+/* ============================================
+   PAGINATION DARK MODE
+   ============================================ */
+
+body.dark-mode .pagination-btn {
+    background: #252838;
+    border-color: #3A3F54;
+    color: #A8ADC7;
+}
+
+body.dark-mode .pagination-btn:hover {
+    border-color: #4B4FCF;
+    color: #AEB0F0;
+}
+
+body.dark-mode .pagination-btn.active {
+    background: #4B4FCF;
+    border-color: #4B4FCF;
+    color: #FFFFFF;
+}
+
+/* ============================================
+   DROPDOWN DARK MODE
+   ============================================ */
+
+body.dark-mode .dropdown-menu {
+    background: #252838;
+    border-color: #2D3142;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
+}
+
+body.dark-mode .dropdown-item {
+    color: #A8ADC7;
+}
+
+body.dark-mode .dropdown-item:hover {
+    background: #2D3142;
+    color: #FFFFFF;
+}
+
+body.dark-mode .dropdown-divider {
+    border-top-color: #2D3142;
+}
+
+/* ============================================
+   TOOLTIP DARK MODE
+   ============================================ */
+
+body.dark-mode .tooltip::after {
+    background: #E4E6EF;
+    color: #1A1D23;
+}
+
+/* ============================================
+   BREADCRUMB DARK MODE
+   ============================================ */
+
+body.dark-mode .breadcrumb {
+    color: #8B91B0;
+}
+
+body.dark-mode .breadcrumb a {
+    color: #8B91B0;
+}
+
+body.dark-mode .breadcrumb a:hover {
+    color: #AEB0F0;
+}
+
+body.dark-mode .breadcrumb-current {
+    color: #C5C9DB;
+}
+
+/* ============================================
+   MOBILE NAV DARK MODE
+   ============================================ */
+
+body.dark-mode .mobile-nav {
+    background: #1E2130;
+    border-top-color: #2D3142;
+}
+
+body.dark-mode .mobile-nav-item {
+    color: #6B7294;
+}
+
+body.dark-mode .mobile-nav-item.active {
+    color: #FF6B2B;
+}
+
+body.dark-mode .mobile-fab {
+    border-color: #1E2130;
+}
+
+/* ============================================
+   SKELETON DARK MODE
+   ============================================ */
+
+body.dark-mode .skeleton {
+    background: linear-gradient(90deg, #2D3142 25%, #252838 50%, #2D3142 75%);
+    background-size: 200% 100%;
+}
+
+/* ============================================
+   SCROLLBAR DARK MODE
+   ============================================ */
+
+body.dark-mode ::-webkit-scrollbar-track {
+    background: #1E2130;
+}
+
+body.dark-mode ::-webkit-scrollbar-thumb {
+    background: #3A3F54;
+}
+
+body.dark-mode ::-webkit-scrollbar-thumb:hover {
+    background: #4E5570;
+}
+
+/* ============================================
+   EMPTY STATE DARK MODE
+   ============================================ */
+
+body.dark-mode .empty-state-title {
+    color: #A8ADC7;
+}
+
+body.dark-mode .empty-state-desc {
+    color: #6B7294;
+}
+
+/* ============================================
+   SECTION TITLES DARK MODE
+   ============================================ */
+
+body.dark-mode .section-title {
+    color: #FFFFFF;
+}
+
+body.dark-mode .section-subtitle {
+    color: #8B91B0;
+}
+
+body.dark-mode .how-it-works {
+    background: #1A1D23;
+}
+
+body.dark-mode .faq-section {
+    background: #1A1D23;
+}
+
+/* ============================================
+   DIVIDER DARK MODE
+   ============================================ */
+
+body.dark-mode .divider,
+body.dark-mode hr {
+    border-top-color: #2D3142;
+}
+
+/* ============================================
+   INSTALL BANNER DARK MODE
+   ============================================ */
+
+body.dark-mode .install-banner {
+    background: #1E2130;
+    border-top-color: #2D3142;
+}
+
+body.dark-mode .install-banner-title {
+    color: #E4E6EF;
+}
+
+body.dark-mode .install-banner-subtitle {
+    color: #8B91B0;
+}
+
+body.dark-mode .install-banner-close {
+    color: #6B7294;
+}
+
+/* ============================================
+   WHATSAPP FLOAT DARK MODE
+   ============================================ */
+
+body.dark-mode .whatsapp-float {
+    background: #25D366;
+    color: #FFFFFF;
+}
+
+/* ============================================
+   HIGHLIGHTED TEXT DARK MODE
+   ============================================ */
+
+body.dark-mode .text-orange {
+    color: #FF6B2B;
+}
+
+body.dark-mode .text-yellow {
+    color: #FFC133;
+}
+
+body.dark-mode .text-green {
+    color: #00CC80;
+}
+
+body.dark-mode .text-red {
+    color: #FF5C4C;
+}
+
+body.dark-mode .text-navy {
+    color: #AEB0F0;
+}
+
+body.dark-mode .text-gray {
+    color: #8B91B0;
+}
+
+body.dark-mode .text-white {
+    color: #FFFFFF;
+}
+
+/* ============================================
+   BACKDROP / OVERLAY DARK MODE
+   ============================================ */
+
+body.dark-mode .backdrop {
+    background: rgba(0, 0, 0, 0.7);
+}
+
+/* ============================================
+   DARK MODE TOGGLE BUTTON STYLE
+   ============================================ */
+
+.dark-mode-toggle {
+    width: 40px;
+    height: 40px;
+    border-radius: var(--radius-full);
+    border: 1px solid var(--gray-300);
+    background: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 1.25rem;
+    transition: all var(--transition-fast);
+}
+
+.dark-mode-toggle:hover {
+    background: var(--gray-50);
+    border-color: var(--gray-400);
+}
+
+body.dark-mode .dark-mode-toggle {
+    background: #252838;
+    border-color: #3A3F54;
+    color: #FFC133;
+}
+
+body.dark-mode .dark-mode-toggle:hover {
+    background: #2D3142;
+    border-color: #4E5570;
+}
