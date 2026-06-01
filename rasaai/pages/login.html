@@ -1,0 +1,286 @@
+<!--
+ * Filename: login.html
+ * Path: /pages/login.html
+ * Project: RASAAI - Auto Rickshaw Advertising Network
+ * Description: Unified Login Page with Google Sign-In and Email/Password
+ * Role: Public
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#221F60">
+    <meta name="description" content="Login to RASAAI - Auto Rickshaw Advertising Network">
+    
+    <link rel="icon" type="image/x-icon" href="/rasaai/assets/images/favicon.ico">
+    <link rel="manifest" href="/rasaai/manifest.json">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="/rasaai/css/main.css">
+    <link rel="stylesheet" href="/rasaai/css/layout.css">
+    <link rel="stylesheet" href="/rasaai/css/components.css">
+    <link rel="stylesheet" href="/rasaai/css/mobile.css">
+    <link rel="stylesheet" href="/rasaai/css/animations.css">
+    
+    <title>Login - RASAAI</title>
+    
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+</head>
+<body class="bg-gray-50">
+    
+    <div class="page-wrapper">
+        <div class="page-body flex-center" style="min-height:100vh;padding:20px;">
+            
+            <div class="login-container" style="width:100%;max-width:440px;">
+                
+                <!-- Logo -->
+                <div class="text-center mb-2xl">
+                    <a href="/rasaai/index.html">
+                        <img src="/rasaai/assets/images/logo.svg" alt="RASAAI" height="36" style="margin:0 auto;">
+                    </a>
+                    <p class="text-sm text-gray mt-sm">Sign in to your account</p>
+                </div>
+                
+                <!-- Login Card -->
+                <div class="card" style="padding:32px;">
+                    
+                    <!-- Google Sign-In -->
+                    <div class="mb-lg">
+                        <div id="google-signin-btn" style="min-height:48px;"></div>
+                    </div>
+                    
+                    <!-- Divider -->
+                    <div class="flex items-center gap-base mb-lg">
+                        <div style="flex:1;height:1px;background:#E9ECEF;"></div>
+                        <span class="text-xs text-gray">or sign in with email</span>
+                        <div style="flex:1;height:1px;background:#E9ECEF;"></div>
+                    </div>
+                    
+                    <!-- Login Form -->
+                    <form id="login-form" onsubmit="handleLoginSubmit(event)" novalidate>
+                        
+                        <!-- Error Message -->
+                        <div id="login-error" class="alert alert-danger hidden" style="margin-bottom:16px;">
+                            <span>❌</span>
+                            <span id="login-error-text"></span>
+                        </div>
+                        
+                        <!-- Email -->
+                        <div class="form-group">
+                            <label class="form-label" for="login-email">Email Address</label>
+                            <input type="email" id="login-email" name="email" 
+                                   placeholder="Enter your email" 
+                                   required autocomplete="email"
+                                   data-label="Email">
+                            <div class="form-error">Please enter a valid email</div>
+                        </div>
+                        
+                        <!-- Password -->
+                        <div class="form-group">
+                            <label class="form-label" for="login-password">Password</label>
+                            <div style="position:relative;">
+                                <input type="password" id="login-password" name="password" 
+                                       placeholder="Enter your password" 
+                                       required minlength="6" autocomplete="current-password"
+                                       data-label="Password">
+                                <button type="button" onclick="togglePasswordVisibility()" 
+                                        style="position:absolute;right:12px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;font-size:18px;color:#ADB5BD;"
+                                        id="toggle-password-btn">👁️</button>
+                            </div>
+                            <div class="form-error">Password is required</div>
+                        </div>
+                        
+                        <!-- Remember Me -->
+                        <div class="flex items-center justify-between mb-lg">
+                            <label class="checkbox-group">
+                                <input type="checkbox" id="remember-me">
+                                <span class="text-sm">Remember me</span>
+                            </label>
+                            <a href="/rasaai/pages/forgot-password.html" class="text-sm" style="color:#FF5A00;font-weight:500;">
+                                Forgot password?
+                            </a>
+                        </div>
+                        
+                        <!-- Submit -->
+                        <button type="submit" class="btn btn-primary btn-full btn-lg" id="login-submit-btn">
+                            🔐 Sign In
+                        </button>
+                        
+                    </form>
+                </div>
+                
+                <!-- Register Link -->
+                <p class="text-center mt-lg text-sm" style="color:#6C757D;">
+                    Don't have an account? 
+                    <a href="/rasaai/pages/register.html" style="color:#FF5A00;font-weight:600;">Create one</a>
+                </p>
+                
+                <!-- Demo Credentials -->
+                <div class="card card-flat mt-lg" style="padding:16px;text-align:center;">
+                    <p class="text-xs text-gray mb-sm">📋 Demo Accounts:</p>
+                    <div style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center;">
+                        <button class="btn btn-sm btn-outline" onclick="fillDemoCredentials('admin@rasaai.com','admin123')">
+                            👑 Admin
+                        </button>
+                        <button class="btn btn-sm btn-outline" onclick="fillDemoCredentials('client@rasaai.com','client123')">
+                            🏢 Client
+                        </button>
+                        <button class="btn btn-sm btn-outline" onclick="fillDemoCredentials('driver@rasaai.com','driver123')">
+                            🛺 Driver
+                        </button>
+                        <button class="btn btn-sm btn-outline" onclick="fillDemoCredentials('affiliate@rasaai.com','affiliate123')">
+                            🔗 Affiliate
+                        </button>
+                        <button class="btn btn-sm btn-outline" onclick="fillDemoCredentials('sales@rasaai.com','sales123')">
+                            💼 Sales
+                        </button>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+
+    <script src="/rasaai/js/data/constants.js"></script>
+    <script src="/rasaai/js/data/zones.js"></script>
+    <script src="/rasaai/js/data/demo-users.js"></script>
+    <script src="/rasaai/js/utils/helpers.js"></script>
+    <script src="/rasaai/js/utils/validators.js"></script>
+    <script src="/rasaai/js/utils/formatters.js"></script>
+    <script src="/rasaai/js/utils/error-handler.js"></script>
+    <script src="/rasaai/js/core/config.js"></script>
+    <script src="/rasaai/js/core/auth.js"></script>
+    <script src="/rasaai/js/core/sheets.js"></script>
+    <script src="/rasaai/js/core/state.js"></script>
+    <script src="/rasaai/js/core/router.js"></script>
+    <script src="/rasaai/js/modules/notifications.js"></script>
+    
+    <script>
+        // Page initialization
+        document.addEventListener('DOMContentLoaded', function() {
+            // Render Google Sign-In button
+            if (FEATURES.GOOGLE_SIGN_IN && typeof renderGoogleButton === 'function') {
+                setTimeout(function() {
+                    renderGoogleButton('google-signin-btn', {
+                        theme: 'outline',
+                        size: 'large',
+                        text: 'signin_with',
+                        shape: 'pill',
+                        width: '368'
+                    });
+                }, 500);
+            }
+            
+            // Check for redirect after login
+            var redirect = getQueryParam('redirect');
+            if (redirect) {
+                sessionStorage.setItem('rasaai_login_redirect', redirect);
+            }
+            
+            // Check if already logged in
+            if (AuthState.isAuthenticated) {
+                redirectAfterLogin();
+            }
+        });
+        
+        // Handle form submission
+        async function handleLoginSubmit(event) {
+            event.preventDefault();
+            
+            var email = document.getElementById('login-email').value.trim();
+            var password = document.getElementById('login-password').value;
+            var rememberMe = document.getElementById('remember-me').checked;
+            var errorEl = document.getElementById('login-error');
+            var errorText = document.getElementById('login-error-text');
+            var submitBtn = document.getElementById('login-submit-btn');
+            
+            // Hide previous errors
+            errorEl.classList.add('hidden');
+            
+            // Validate
+            var validation = validateLoginForm(email, password);
+            if (!validation.isValid) {
+                showFormErrors(validation.errors);
+                return;
+            }
+            
+            // Show loading
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '⏳ Signing in...';
+            
+            // Attempt login
+            var result = await loginWithEmail(email, password, rememberMe);
+            
+            if (result.success) {
+                showToast('Login successful! 🎉', 'success');
+                setTimeout(redirectAfterLogin, 500);
+            } else {
+                errorEl.classList.remove('hidden');
+                errorText.textContent = result.error || 'Login failed. Please try again.';
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = '🔐 Sign In';
+            }
+        }
+        
+        function showFormErrors(errors) {
+            // Clear all errors
+            document.querySelectorAll('.form-group.error').forEach(function(el) {
+                el.classList.remove('error');
+            });
+            document.querySelectorAll('.form-error').forEach(function(el) {
+                el.style.display = 'none';
+            });
+            
+            // Show new errors
+            Object.keys(errors).forEach(function(field) {
+                var input = document.getElementById('login-' + field);
+                if (input) {
+                    var formGroup = input.closest('.form-group');
+                    if (formGroup) {
+                        formGroup.classList.add('error');
+                        var errorEl = formGroup.querySelector('.form-error');
+                        if (errorEl) {
+                            errorEl.textContent = errors[field];
+                            errorEl.style.display = 'block';
+                        }
+                    }
+                }
+            });
+        }
+        
+        function redirectAfterLogin() {
+            var redirect = sessionStorage.getItem('rasaai_login_redirect');
+            if (redirect) {
+                sessionStorage.removeItem('rasaai_login_redirect');
+                window.location.href = redirect;
+            } else {
+                redirectToRoleDashboard();
+            }
+        }
+        
+        function fillDemoCredentials(email, password) {
+            document.getElementById('login-email').value = email;
+            document.getElementById('login-password').value = password;
+            document.getElementById('login-error').classList.add('hidden');
+            showToast('Demo credentials filled! Click Sign In.', 'info');
+        }
+        
+        function togglePasswordVisibility() {
+            var input = document.getElementById('login-password');
+            var btn = document.getElementById('toggle-password-btn');
+            if (input.type === 'password') {
+                input.type = 'text';
+                btn.textContent = '🙈';
+            } else {
+                input.type = 'password';
+                btn.textContent = '👁️';
+            }
+        }
+    </script>
+</body>
+</html>
