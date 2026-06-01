@@ -124,31 +124,31 @@
         <p class="bottom-text">Don't have an account? <a href="register.html">Create one</a></p>
         
         <details class="demo-box">
-            <summary>🔑 Demo Login Credentials</summary>
+            <summary>🔑 Demo Login Credentials (Click to expand)</summary>
             <div style="margin-top:10px">
                 <div class="demo-item">
                     <span class="demo-role">👑 Admin</span>
-                    <span class="demo-email">admin@rasaai.com</span>
+                    <span class="demo-email">admin@rasaai.com / admin123</span>
                     <button class="demo-btn" onclick="fillDemo('admin@rasaai.com','admin123')">Fill</button>
                 </div>
                 <div class="demo-item">
                     <span class="demo-role">👤 Client</span>
-                    <span class="demo-email">client@rasaai.com</span>
+                    <span class="demo-email">client@rasaai.com / client123</span>
                     <button class="demo-btn" onclick="fillDemo('client@rasaai.com','client123')">Fill</button>
                 </div>
                 <div class="demo-item">
                     <span class="demo-role">🛺 Driver</span>
-                    <span class="demo-email">driver@rasaai.com</span>
+                    <span class="demo-email">driver@rasaai.com / driver123</span>
                     <button class="demo-btn" onclick="fillDemo('driver@rasaai.com','driver123')">Fill</button>
                 </div>
                 <div class="demo-item">
                     <span class="demo-role">🔗 Affiliate</span>
-                    <span class="demo-email">affiliate@rasaai.com</span>
+                    <span class="demo-email">affiliate@rasaai.com / affiliate123</span>
                     <button class="demo-btn" onclick="fillDemo('affiliate@rasaai.com','affiliate123')">Fill</button>
                 </div>
                 <div class="demo-item">
                     <span class="demo-role">📊 Sales</span>
-                    <span class="demo-email">sales@rasaai.com</span>
+                    <span class="demo-email">sales@rasaai.com / sales123</span>
                     <button class="demo-btn" onclick="fillDemo('sales@rasaai.com','sales123')">Fill</button>
                 </div>
             </div>
@@ -157,79 +157,62 @@
 
     <script>
         // =====================================================
-        // DEMO USERS - HARDCODED (ALWAYS WORKS)
+        // FORCE-FRESH DEMO USERS - Always available
         // =====================================================
         var DEMO_USERS = [
-            { id:'ADM001', name:'Admin User',      email:'admin@rasaai.com',     password:'admin123',     role:'admin',     phone:'9876543210', active:true },
-            { id:'CLI001', name:'Rahul Sharma',    email:'client@rasaai.com',    password:'client123',    role:'client',    phone:'9876543211', active:true, company:'Mumbra Pizza House' },
-            { id:'DRV001', name:'Salman Khan',     email:'driver@rasaai.com',    password:'driver123',    role:'driver',    phone:'9876543212', active:true, zone:'mumbra-station', rickshawId:'RICK001' },
-            { id:'AFF001', name:'Priya Patel',     email:'affiliate@rasaai.com', password:'affiliate123', role:'affiliate', phone:'9876543213', active:true },
-            { id:'SAL001', name:'Amit Verma',      email:'sales@rasaai.com',     password:'sales123',     role:'sales',     phone:'9876543214', active:true }
+            { id:'ADM001',name:'Admin User',email:'admin@rasaai.com',password:'admin123',role:'admin',phone:'9876543210',active:true },
+            { id:'CLI001',name:'Rahul Sharma',email:'client@rasaai.com',password:'client123',role:'client',phone:'9876543211',active:true,company:'Mumbra Pizza House' },
+            { id:'DRV001',name:'Salman Khan',email:'driver@rasaai.com',password:'driver123',role:'driver',phone:'9876543212',active:true,zone:'mumbra-station',rickshawId:'RICK001' },
+            { id:'AFF001',name:'Priya Patel',email:'affiliate@rasaai.com',password:'affiliate123',role:'affiliate',phone:'9876543213',active:true },
+            { id:'SAL001',name:'Amit Verma',email:'sales@rasaai.com',password:'sales123',role:'sales',phone:'9876543214',active:true }
         ];
 
         // =====================================================
         // SIMPLE STORAGE
         // =====================================================
-        function saveToStorage(key, value) {
-            try { localStorage.setItem('rasaai_' + key, JSON.stringify(value)); console.log('SAVED:', key); } 
-            catch(e) { console.log('SAVE ERROR:', e); }
+        function saveItem(key, value) {
+            localStorage.setItem('rasaai_' + key, JSON.stringify(value));
         }
 
-        function loadFromStorage(key, def) {
-            try { 
-                var d = localStorage.getItem('rasaai_' + key); 
-                if (d) { console.log('LOADED:', key, JSON.parse(d)); return JSON.parse(d); }
-                return def; 
-            } catch(e) { console.log('LOAD ERROR:', e); return def; }
+        function getItem(key, defaultValue) {
+            var raw = localStorage.getItem('rasaai_' + key);
+            if (!raw) return defaultValue;
+            try { return JSON.parse(raw); } catch(e) { return defaultValue; }
         }
 
         // =====================================================
-        // FILL DEMO
+        // FILL DEMO - Called by Fill buttons
         // =====================================================
         function fillDemo(email, password) {
-            console.log('FILL:', email, password);
             document.getElementById('email').value = email;
             document.getElementById('password').value = password;
+            document.getElementById('msg').className = 'message';
+            document.getElementById('msg').textContent = '';
         }
 
         // =====================================================
-        // SHOW MESSAGE
-        // =====================================================
-        function showMsg(text, type) {
-            var m = document.getElementById('msg');
-            m.textContent = text;
-            m.className = 'message ' + type;
-            console.log('MSG:', type, text);
-        }
-
-        // =====================================================
-        // DO LOGIN - Called by button onclick
+        // DO LOGIN - Called by Sign In button
         // =====================================================
         function doLogin() {
-            console.log('=== LOGIN ATTEMPT ===');
-            
-            var emailInput = document.getElementById('email');
-            var passwordInput = document.getElementById('password');
-            var rememberCheck = document.getElementById('remember');
+            var email = document.getElementById('email').value.trim();
+            var password = document.getElementById('password').value;
+            var remember = document.getElementById('remember').checked;
             var btn = document.getElementById('submitBtn');
+            var msg = document.getElementById('msg');
             
-            var email = emailInput.value.trim();
-            var password = passwordInput.value;
-            var remember = rememberCheck.checked;
-            
-            console.log('Email entered:', email);
-            console.log('Password entered:', password ? '***' : '(empty)');
-            
-            // Hide old message
-            document.getElementById('msg').className = 'message';
+            // Reset message
+            msg.className = 'message';
+            msg.textContent = '';
             
             // Validate
             if (!email) {
-                showMsg('Please enter your email address', 'error');
+                msg.textContent = 'Please enter your email address';
+                msg.className = 'message error';
                 return;
             }
             if (!password) {
-                showMsg('Please enter your password', 'error');
+                msg.textContent = 'Please enter your password';
+                msg.className = 'message error';
                 return;
             }
             
@@ -237,86 +220,78 @@
             btn.disabled = true;
             btn.textContent = 'Signing in...';
             
-            // Find user in DEMO_USERS array (bypasses localStorage entirely)
+            // ALWAYS force-fresh users into storage
+            saveItem('users', DEMO_USERS);
+            
+            // Find user (case-insensitive email)
+            var found = null;
+            for (var i = 0; i < DEMO_USERS.length; i++) {
+                if (DEMO_USERS[i].email.toLowerCase() === email.toLowerCase() && 
+                    DEMO_USERS[i].password === password) {
+                    found = DEMO_USERS[i];
+                    break;
+                }
+            }
+            
+            // Check result
+            if (!found) {
+                msg.textContent = 'Invalid email or password. Try: admin@rasaai.com / admin123';
+                msg.className = 'message error';
+                btn.disabled = false;
+                btn.textContent = '🔐 Sign In';
+                return;
+            }
+            
+            if (!found.active) {
+                msg.textContent = 'Account deactivated. Contact admin.';
+                msg.className = 'message error';
+                btn.disabled = false;
+                btn.textContent = '🔐 Sign In';
+                return;
+            }
+            
+            // SUCCESS!
+            msg.textContent = '✅ Login successful! Redirecting to ' + found.role + ' dashboard...';
+            msg.className = 'message success';
+            btn.textContent = '✅ Success!';
+            
+            // Save session
+            var session = {
+                id: found.id,
+                name: found.name,
+                email: found.email,
+                role: found.role,
+                phone: found.phone,
+                company: found.company || '',
+                zone: found.zone || '',
+                rickshawId: found.rickshawId || '',
+                active: true
+            };
+            saveItem('currentUser', session);
+            
+            if (remember) {
+                saveItem('rememberedEmail', email);
+            }
+            
+            // Redirect based on role
             setTimeout(function() {
-                var foundUser = null;
-                
-                console.log('Searching through', DEMO_USERS.length, 'demo users...');
-                
-                for (var i = 0; i < DEMO_USERS.length; i++) {
-                    var u = DEMO_USERS[i];
-                    console.log('Checking:', u.email, 'vs', email);
-                    if (u.email === email && u.password === password) {
-                        foundUser = u;
-                        console.log('✅ MATCH FOUND:', u.name, u.role);
-                        break;
-                    }
-                }
-                
-                if (!foundUser) {
-                    console.log('❌ NO MATCH FOUND');
-                    showMsg('Invalid email or password. Try: admin@rasaai.com / admin123', 'error');
-                    btn.disabled = false;
-                    btn.textContent = '🔐 Sign In';
-                    return;
-                }
-                
-                if (!foundUser.active) {
-                    showMsg('Account deactivated.', 'error');
-                    btn.disabled = false;
-                    btn.textContent = '🔐 Sign In';
-                    return;
-                }
-                
-                // SUCCESS!
-                console.log('✅ LOGIN SUCCESS for:', foundUser.name, 'Role:', foundUser.role);
-                
-                // Create session
-                var session = {
-                    id: foundUser.id,
-                    name: foundUser.name,
-                    email: foundUser.email,
-                    role: foundUser.role,
-                    phone: foundUser.phone || '',
-                    company: foundUser.company || '',
-                    zone: foundUser.zone || '',
-                    rickshawId: foundUser.rickshawId || '',
-                    active: true
+                var pages = {
+                    'admin': 'admin.html',
+                    'client': 'client.html',
+                    'driver': 'driver.html',
+                    'affiliate': 'affiliate.html',
+                    'sales': 'crm.html'
                 };
-                
-                // Save to localStorage
-                saveToStorage('currentUser', session);
-                if (remember) {
-                    saveToStorage('rememberedEmail', email);
-                }
-                
-                showMsg('✅ Login successful! Redirecting to ' + foundUser.role + ' dashboard...', 'success');
-                btn.textContent = 'Success!';
-                
-                // Redirect
-                setTimeout(function() {
-                    var pages = {
-                        'admin': 'admin.html',
-                        'client': 'client.html',
-                        'driver': 'driver.html',
-                        'affiliate': 'affiliate.html',
-                        'sales': 'crm.html'
-                    };
-                    var url = pages[foundUser.role] || 'dashboard.html';
-                    console.log('REDIRECTING TO:', url);
-                    window.location.href = url;
-                }, 800);
-                
-            }, 300);
+                window.location.href = pages[found.role] || 'dashboard.html';
+            }, 800);
         }
 
         // =====================================================
-        // CHECK IF ALREADY LOGGED IN
+        // AUTO LOGIN CHECK
         // =====================================================
         (function() {
-            var user = loadFromStorage('currentUser', null);
+            var user = getItem('currentUser', null);
             if (user && user.role) {
-                console.log('Already logged in as:', user.name, user.role);
                 var pages = {
                     'admin': 'admin.html',
                     'client': 'client.html',
@@ -328,14 +303,11 @@
             }
             
             // Pre-fill remembered email
-            var remembered = loadFromStorage('rememberedEmail', '');
-            if (remembered && document.getElementById('email')) {
+            var remembered = getItem('rememberedEmail', '');
+            if (remembered) {
                 document.getElementById('email').value = remembered;
             }
         })();
-
-        console.log('✅ RASAAI Login Page Ready');
-        console.log('📧 Demo logins available - click "Demo Login Credentials" to see them');
     </script>
 </body>
 </html>
