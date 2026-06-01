@@ -1,0 +1,253 @@
+<!--
+ * Filename: offline.html
+ * Path: /pages/offline.html
+ * Project: RASAAI - Auto Rickshaw Advertising Network
+ * Description: Offline fallback page shown when user has no internet connection
+ * Role: Public
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#221F60">
+    <meta name="robots" content="noindex, nofollow">
+    
+    <title>You're Offline - RASAAI</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #1A1D23;
+            color: #E4E6EF;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        .offline-container {
+            text-align: center;
+            max-width: 450px;
+            width: 100%;
+        }
+        
+        .offline-icon {
+            font-size: 80px;
+            margin-bottom: 20px;
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+        
+        .offline-title {
+            font-size: 28px;
+            font-weight: 800;
+            color: #FFFFFF;
+            margin-bottom: 12px;
+            letter-spacing: -0.02em;
+        }
+        
+        .offline-subtitle {
+            font-size: 16px;
+            color: #8B91B0;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+        
+        .offline-logo {
+            font-size: 18px;
+            font-weight: 900;
+            color: #FF5A00;
+            letter-spacing: 0.05em;
+            margin-bottom: 30px;
+        }
+        
+        .offline-illustration {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 30px;
+            background: #252838;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 100px;
+            border: 3px dashed #3A3F54;
+        }
+        
+        .offline-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 14px 28px;
+            font-size: 15px;
+            font-weight: 600;
+            border-radius: 50px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.2s ease;
+            font-family: inherit;
+            text-decoration: none;
+        }
+        
+        .btn-primary {
+            background: #FF5A00;
+            color: white;
+            border-color: #FF5A00;
+        }
+        
+        .btn-primary:hover {
+            background: #E04E00;
+            transform: translateY(-1px);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            color: #8B91B0;
+            border-color: #3A3F54;
+        }
+        
+        .btn-outline:hover {
+            border-color: #FF5A00;
+            color: #FFFFFF;
+        }
+        
+        .offline-info {
+            margin-top: 30px;
+            padding: 16px;
+            background: #252838;
+            border-radius: 16px;
+            font-size: 13px;
+            color: #6B7294;
+            line-height: 1.6;
+        }
+        
+        .offline-info strong {
+            color: #FFB800;
+        }
+        
+        .offline-status {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 20px;
+            font-size: 13px;
+            color: #E74C3C;
+        }
+        
+        .offline-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #E74C3C;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+        
+        @media (max-width: 480px) {
+            .offline-icon { font-size: 60px; }
+            .offline-title { font-size: 24px; }
+            .offline-illustration { width: 150px; height: 150px; font-size: 70px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="offline-container">
+        <div class="offline-logo">RASAAI</div>
+        
+        <div class="offline-illustration">
+            📡
+        </div>
+        
+        <div class="offline-icon">🔌</div>
+        
+        <h1 class="offline-title">You're Offline</h1>
+        <p class="offline-subtitle">
+            It looks like you've lost your internet connection. 
+            Don't worry, RASAAI works offline too!
+        </p>
+        
+        <div class="offline-actions">
+            <button class="btn btn-primary" onclick="window.location.reload()">
+                🔄 Try Again
+            </button>
+            <a href="/rasaai/index.html" class="btn btn-outline">
+                🏠 Go to Home
+            </a>
+        </div>
+        
+        <div class="offline-info">
+            <p><strong>What you can do offline:</strong></p>
+            <p>✅ View previously loaded pages<br>
+               ✅ Check campaign details<br>
+               ✅ View your dashboard<br>
+               ✅ Audio ads will continue playing<br>
+               📱 QR scans will sync when back online</p>
+        </div>
+        
+        <div class="offline-status">
+            <span class="offline-dot"></span>
+            <span>Waiting for connection...</span>
+        </div>
+    </div>
+
+    <script>
+        // Check connection status and reload when back online
+        window.addEventListener('online', function() {
+            // Show brief notification then reload
+            document.body.innerHTML = `
+                <div style="text-align:center;padding:40px;">
+                    <div style="font-size:60px;">🌐</div>
+                    <h2 style="color:#00A86B;margin:20px 0;">Back Online!</h2>
+                    <p style="color:#8B91B0;">Redirecting you back...</p>
+                </div>`;
+            
+            setTimeout(function() {
+                var previousPage = sessionStorage.getItem('rasaai_previous_page');
+                if (previousPage) {
+                    window.location.href = previousPage;
+                } else {
+                    window.location.href = '/rasaai/index.html';
+                }
+            }, 1500);
+        });
+        
+        // Store current page for return
+        if (!sessionStorage.getItem('rasaai_previous_page')) {
+            sessionStorage.setItem('rasaai_previous_page', document.referrer || '/rasaai/index.html');
+        }
+        
+        // Periodically check connection
+        setInterval(function() {
+            if (navigator.onLine) {
+                window.location.reload();
+            }
+        }, 5000);
+    </script>
+</body>
+</html>
