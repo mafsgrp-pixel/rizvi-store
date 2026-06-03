@@ -1,0 +1,36 @@
+{
+    "name": "RASAAI - Hyperlocal Rickshaw Advertising",
+    "short_name": "RASAAI",
+    "description": "Physical ads that can't be skipped. Dominate Mumbra's streets with rickshaw advertising. 17.7M+ monthly eye views.",
+    "start_url": "/rasaaiads/",
+    "scope": "/rasaaiads/",
+    "display": "standalone",
+    "orientation": "portrait-primary",
+    "background_color": "#0A1929",
+    "theme_color": "#00C853",
+    "categories": ["business", "advertising", "marketing"],
+    "icons": [
+        {
+            "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%2300C853'/><text y='.75em' font-size='60' text-anchor='middle' x='50'>🛺</text></svg>",
+            "sizes": "192x192",
+            "type": "image/svg+xml",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%2300C853'/><text y='.75em' font-size='60' text-anchor='middle' x='50'>🛺</text></svg>",
+            "sizes": "512x512",
+            "type": "image/svg+xml",
+            "purpose": "any maskable"
+        }
+    ],
+    "screenshots": [
+        {
+            "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 390 844'><rect width='390' height='844' fill='%230A1929'/><text fill='%2300C853' font-size='24' text-anchor='middle' x='195' y='400'>RASAAI Platform</text></svg>",
+            "sizes": "390x844",
+            "type": "image/svg+xml",
+            "form_factor": "narrow"
+        }
+    ],
+    "prefer_related_applications": false,
+    "related_applications": []
+}
