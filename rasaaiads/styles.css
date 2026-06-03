@@ -2753,3 +2753,26 @@ section:nth-child(even) {
         font-size: 15px;
     }
 }
+/* FAQ Active State */
+.faq-item.active .faq-answer,
+#faqContainer .active div:last-child {
+    max-height: 500px !important;
+}
+
+/* Bar animation */
+@keyframes barGrow {
+    from { width: 0 !important; }
+}
+
+/* Testimonial slider scrollbar */
+#testSliderInner::-webkit-scrollbar { display: none; }
+
+/* Sticky bar */
+.sticky-mobile-bar {
+    position: fixed;
+    bottom: 64px;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    box-shadow: 0 -4px 20px rgba(0,0,0,0.1);
+}
