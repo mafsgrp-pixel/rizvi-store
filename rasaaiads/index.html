@@ -2,420 +2,267 @@
 <html lang="en" dir="ltr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=5.0, user-scalable=yes">
-    <meta name="theme-color" content="#00C853">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="RASAAI">
-    <meta name="description" content="RASAAI - Hyperlocal Rickshaw Advertising. 17.7M+ Monthly Eye Views across Mumbra. Better than Instagram, Facebook & YouTube Ads.">
-    
-    <link rel="manifest" href="manifest.json">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=5.0">
+    <meta name="theme-color" content="#221F60">
+    <meta name="color-scheme" content="light">
+    <title>RASAAI - Advertise on Moving Rickshaws | LED & Audio Campaigns</title>
+    <meta name="description" content="Book rickshaw advertising across Mumbra. LED screen campaigns on auto rickshaws. Starting at ₹1,238/day. Free 30 social media creatives.">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23221F60'/><text x='50' y='68' font-size='55' text-anchor='middle' fill='white' font-weight='bold'>R</text></svg>">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
     <link rel="stylesheet" href="styles.css">
-    
-    <title>RASAAI - Hyperlocal Rickshaw Advertising | Real Eye Views, Real Impact</title>
 </head>
 <body>
-    <!-- Loading Screen -->
-    <div id="loadingScreen" style="position:fixed;inset:0;background:#0A1929;z-index:9999;display:flex;align-items:center;justify-content:center;transition:opacity 0.5s">
-        <div style="text-align:center">
-            <div style="font-size:64px;animation:bounce 0.6s infinite alternate">🛺</div>
-            <div style="width:200px;height:4px;background:rgba(255,255,255,0.1);border-radius:100px;margin:24px auto;overflow:hidden">
-                <div style="height:100%;background:linear-gradient(135deg,#00C853,#00E676);border-radius:100px;animation:load 2s infinite"></div>
+
+    <!-- LOADING SCREEN -->
+    <div id="loadingScreen"><div><div class="rickshaw-loader">🛺</div><div class="loading-bar"></div><p>Loading RASAAI...</p></div></div>
+
+    <!-- DESKTOP HEADER -->
+    <header class="header" id="desktopHeader">
+        <div class="header-inner">
+            <a href="/" class="logo"><span class="logo-icon">R</span><span>RASAAI</span></a>
+            <nav class="nav-links">
+                <a href="#howItWorks" class="nav-link">How It Works</a>
+                <a href="#zones" class="nav-link">Zones & Routes</a>
+                <a href="#pricing" class="nav-link">Pricing</a>
+                <a href="#campaignBuilder" class="nav-link">Build Campaign</a>
+                <a href="#socialBonus" class="nav-link">Free Bonus</a>
+            </nav>
+            <div class="header-actions">
+                <a href="https://wa.me/919594306625" class="btn btn-whatsapp btn-sm">💬 WhatsApp</a>
+                <a href="tel:+919594306625" class="btn btn-outline btn-sm">📞 Call</a>
+                <button onclick="scrollToSection('campaignBuilder')" class="btn btn-primary btn-sm">Book Campaign</button>
             </div>
-            <p style="color:#94A3B8;font-size:14px;letter-spacing:2px">Loading RASAAI...</p>
         </div>
+    </header>
+
+    <!-- MOBILE HEADER -->
+    <div class="mobile-header">
+        <a href="/" class="logo"><span class="logo-icon logo-icon-sm">R</span>RASAAI</a>
+        <button onclick="scrollToSection('campaignBuilder')" class="btn btn-primary btn-sm">Book</button>
     </div>
 
-    <!-- Exit Popup -->
-    <div id="exitPopup" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:500;align-items:center;justify-content:center;backdrop-filter:blur(4px);padding:16px">
-        <div style="background:white;border-radius:20px;padding:32px;text-align:center;max-width:400px;width:100%;position:relative">
-            <button onclick="document.getElementById('exitPopup').style.display='none'" style="position:absolute;top:12px;right:12px;border:none;background:none;font-size:20px;cursor:pointer">✕</button>
-            <div style="font-size:48px;margin-bottom:16px">⚡</div>
-            <h3>Wait! Limited Rickshaws Available</h3>
-            <p>Only <strong>8</strong> rickshaws left in Mumbra this week!</p>
-            <div style="padding:8px 16px;background:rgba(255,23,68,0.1);color:#FF1744;border-radius:100px;display:inline-block;margin:12px 0;font-weight:600;font-size:13px" id="exitTimer">Offer refreshes: 04:59</div>
-            <a href="tel:+919594306625" style="display:block;padding:16px 24px;background:linear-gradient(135deg,#00C853,#00E676);color:white;border-radius:100px;text-decoration:none;font-weight:600;margin-bottom:8px">📞 Call Now: +91 95943 06625</a>
-            <a href="https://wa.me/919594306625" style="display:block;padding:16px 24px;background:#25D366;color:white;border-radius:100px;text-decoration:none;font-weight:600">💬 Chat on WhatsApp</a>
-        </div>
-    </div>
-
-    <!-- Booking Modal -->
-    <div id="bookingModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:400;align-items:center;justify-content:center;backdrop-filter:blur(4px);padding:16px">
-        <div style="background:white;border-radius:20px;padding:32px;max-width:500px;width:100%;max-height:85vh;overflow-y:auto;position:relative">
-            <button onclick="closeBookingModal()" style="position:absolute;top:12px;right:12px;width:32px;height:32px;border-radius:50%;border:none;background:#f1f5f9;cursor:pointer;font-size:16px">✕</button>
-            <h2>Book Your Campaign</h2>
-            <p style="color:#64748B;margin-bottom:24px;font-size:14px">Fill details & we'll call you back in 5 minutes</p>
-            <form id="bookingForm" onsubmit="handleBookingSubmit(event)">
-                <div style="margin-bottom:16px"><label style="display:block;font-weight:600;margin-bottom:4px;font-size:13px">Business Name *</label><input type="text" required placeholder="Your business name" style="width:100%;padding:10px 14px;border:2px solid #e2e8f0;border-radius:10px;font-size:15px"></div>
-                <div style="margin-bottom:16px"><label style="display:block;font-weight:600;margin-bottom:4px;font-size:13px">Phone Number *</label><input type="tel" required placeholder="Your phone number" style="width:100%;padding:10px 14px;border:2px solid #e2e8f0;border-radius:10px;font-size:15px"></div>
-                <div style="margin-bottom:16px"><label style="display:block;font-weight:600;margin-bottom:4px;font-size:13px">Email</label><input type="email" placeholder="you@example.com" style="width:100%;padding:10px 14px;border:2px solid #e2e8f0;border-radius:10px;font-size:15px"></div>
-                <div style="margin-bottom:16px"><label style="display:block;font-weight:600;margin-bottom:4px;font-size:13px">Preferred Zone</label><select style="width:100%;padding:10px 14px;border:2px solid #e2e8f0;border-radius:10px;font-size:15px"><option>Select Zone</option><option>Kausa</option><option>Mumbra Station</option><option>Shilphata</option><option>Retibunder</option><option>Check Naka</option><option>Multiple Zones</option></select></div>
-                <div style="margin-bottom:16px"><label style="display:block;font-weight:600;margin-bottom:4px;font-size:13px">Budget Range</label><select style="width:100%;padding:10px 14px;border:2px solid #e2e8f0;border-radius:10px;font-size:15px"><option>₹5,000 - ₹15,000</option><option>₹15,000 - ₹50,000</option><option>₹50,000 - ₹1,00,000</option><option>₹1,00,000+</option></select></div>
-                <input type="hidden" name="recipient" value="mafs.grp@gmail.com">
-                <button type="submit" style="width:100%;padding:16px;background:linear-gradient(135deg,#00C853,#00E676);color:white;border:none;border-radius:100px;font-weight:600;font-size:16px;cursor:pointer">Submit & Get Callback</button>
-                <p style="text-align:center;margin-top:16px;font-size:13px;color:#64748B">Or call: <a href="tel:+919594306625" style="color:#00C853;font-weight:600">+91 95943 06625</a></p>
-            </form>
-        </div>
-    </div>
-
-    <!-- Sticky Mobile Bar -->
-    <div class="sticky-mobile-bar" id="stickyBar" style="display:none">
-        <a href="tel:+919594306625" style="flex:1;display:flex;flex-direction:column;align-items:center;padding:8px;background:linear-gradient(135deg,#00C853,#00E676);color:white;text-decoration:none;font-size:10px">📞<span>Call</span></a>
-        <a href="https://wa.me/919594306625" style="flex:1;display:flex;flex-direction:column;align-items:center;padding:8px;background:#25D366;color:white;text-decoration:none;font-size:10px">💬<span>WhatsApp</span></a>
-        <button onclick="document.getElementById('pricing').scrollIntoView({behavior:'smooth'})" style="flex:1;display:flex;flex-direction:column;align-items:center;padding:8px;background:white;border:none;font-size:10px;cursor:pointer;color:#334155">🎯<span>Book</span></button>
-    </div>
-
-    <!-- FAB -->
-    <div style="position:fixed;bottom:80px;right:16px;z-index:200" id="fabContainer">
-        <button id="fabMain" style="width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,#00C853,#00E676);color:white;border:none;font-size:22px;cursor:pointer;box-shadow:0 20px 25px rgba(0,0,0,0.2)">⚡</button>
-        <div id="fabOptions" style="display:none;flex-direction:column;gap:6px;position:absolute;bottom:60px;right:0">
-            <button onclick="document.getElementById('calculator').scrollIntoView({behavior:'smooth'})" style="padding:10px 18px;background:white;border:none;border-radius:100px;box-shadow:0 10px 15px rgba(0,0,0,0.1);cursor:pointer;white-space:nowrap;font-size:13px">🧮 ROI Calculator</button>
-            <button onclick="document.getElementById('pricing').scrollIntoView({behavior:'smooth'})" style="padding:10px 18px;background:white;border:none;border-radius:100px;box-shadow:0 10px 15px rgba(0,0,0,0.1);cursor:pointer;white-space:nowrap;font-size:13px">🎯 Quick Book</button>
-            <a href="tel:+919594306625" style="padding:10px 18px;background:white;border-radius:100px;box-shadow:0 10px 15px rgba(0,0,0,0.1);text-decoration:none;color:#0F172A;font-size:13px">📞 Call Now</a>
-        </div>
-    </div>
-
-    <!-- Notification -->
-    <div id="notifWidget" style="display:none;position:fixed;top:16px;right:16px;left:16px;max-width:400px;margin-left:auto;background:white;padding:12px 16px;border-radius:100px;box-shadow:0 25px 50px rgba(0,0,0,0.25);z-index:500;font-size:13px;font-weight:500">
-        🔔 <span id="notifText">3 businesses booked Kausa today</span>
-    </div>
-
-    <!-- MAIN CONTENT -->
-    <main>
-        
-        <!-- HERO -->
-        <section style="position:relative;min-height:100vh;display:flex;align-items:center;background:#0A1929;padding:80px 0 60px;overflow:hidden">
-            <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 20% 50%,rgba(0,200,83,0.15),transparent 50%),radial-gradient(ellipse at 80% 20%,rgba(124,77,255,0.1),transparent 50%)"></div>
-            <div class="container" style="position:relative;z-index:1">
-                <div style="display:inline-flex;align-items:center;gap:8px;padding:8px 18px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);border-radius:100px;color:#e2e8f0;font-size:13px;margin-bottom:24px;backdrop-filter:blur(10px)">
-                    <span style="width:8px;height:8px;background:#00E676;border-radius:50%;animation:pulse 2s infinite"></span>
-                    🛺 850+ Businesses Trust RASAAI in Mumbra
-                </div>
-                <h1 style="font-size:clamp(30px,5vw,56px);color:white;line-height:1.15;margin-bottom:16px;font-family:'Plus Jakarta Sans',sans-serif;font-weight:800">
-                    Your Ad, On Every Street.<br>
-                    <span style="background:linear-gradient(135deg,#00C853,#00E676);-webkit-background-clip:text;-webkit-text-fill-color:transparent">Unskippable. Unmissable.</span>
-                </h1>
-                <p style="font-size:clamp(15px,2vw,18px);color:#94A3B8;max-width:600px;margin-bottom:24px;line-height:1.6">
-                    Dominate Mumbra's busiest routes with rickshaw advertising delivering <strong style="color:#00E676">17.7M+ Real Eye Views monthly</strong>. Physical ads that Instagram, Facebook & YouTube can't match.
-                </p>
-                <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:32px">
-                    <a href="tel:+919594306625" style="padding:16px 32px;background:linear-gradient(135deg,#00C853,#00E676);color:white;border-radius:100px;text-decoration:none;font-weight:600;font-size:17px;animation:btnPulse 2s infinite">📞 Book: +91 95943 06625</a>
-                    <a href="https://wa.me/919594306625" style="padding:16px 32px;border:2px solid rgba(255,255,255,0.3);color:white;border-radius:100px;text-decoration:none;font-weight:600;font-size:17px">💬 WhatsApp</a>
-                </div>
-                <div style="display:flex;gap:24px;flex-wrap:wrap">
-                    <div style="text-align:center"><span style="display:block;font-size:28px;font-weight:800;color:#00E676" data-count="17760000">17.7M+</span><span style="font-size:11px;color:#64748B;text-transform:uppercase">Monthly Eye Views</span></div>
-                    <div style="text-align:center"><span style="display:block;font-size:28px;font-weight:800;color:#00E676" data-count="850">850+</span><span style="font-size:11px;color:#64748B;text-transform:uppercase">Businesses</span></div>
-                    <div style="text-align:center"><span style="display:block;font-size:28px;font-weight:800;color:#00E676" data-count="2847">2,847</span><span style="font-size:11px;color:#64748B;text-transform:uppercase">Campaigns</span></div>
-                    <div style="text-align:center"><span style="display:block;font-size:28px;font-weight:800;color:#00E676" data-count="350">350+</span><span style="font-size:11px;color:#64748B;text-transform:uppercase">Rickshaws</span></div>
+    <!-- HERO -->
+    <section class="hero" id="hero">
+        <div class="hero-inner">
+            <div class="hero-content-col">
+                <div class="hero-badge"><span class="dot"></span> Now covering 4 strategic routes across Mumbra</div>
+                <h1 class="hero-title">Advertise on <span>Moving Rickshaws</span> Across Mumbra</h1>
+                <p class="hero-subtitle">Turn every auto rickshaw into your moving billboard. LED screens & audio ads reaching 5L+ daily commuters. Starting at just <strong>₹1,238/day</strong> per rickshaw.</p>
+                <div class="hero-actions">
+                    <button onclick="scrollToSection('campaignBuilder')" class="btn btn-primary btn-lg">📊 Get Free Estimate</button>
+                    <button onclick="scrollToSection('pricing')" class="btn btn-outline btn-lg">💰 View Pricing</button>
                 </div>
             </div>
-        </section>
-
-        <!-- LIVE STATS -->
-        <section style="padding:12px 0;background:white;border-bottom:1px solid #e2e8f0">
-            <div class="container">
-                <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px">
-                    <div style="text-align:center;padding:8px;background:#f8fafc;border-radius:10px"><span style="display:inline-block;width:6px;height:6px;background:#00C853;border-radius:50%;animation:pulse 1.5s infinite"></span><div style="font-size:20px;font-weight:700" id="liveRickshaws">342</div><div style="font-size:10px;color:#64748B">Live Rickshaws</div></div>
-                    <div style="text-align:center;padding:8px;background:#f8fafc;border-radius:10px"><div style="font-size:20px;font-weight:700" id="liveCampaigns">127</div><div style="font-size:10px;color:#64748B">Active Campaigns</div></div>
-                    <div style="text-align:center;padding:8px;background:#f8fafc;border-radius:10px"><div style="font-size:20px;font-weight:700" id="liveEyeViews">1,247,893</div><div style="font-size:10px;color:#64748B">Eye Views Today</div></div>
-                    <div style="text-align:center;padding:8px;background:#f8fafc;border-radius:10px"><div style="font-size:20px;font-weight:700">5</div><div style="font-size:10px;color:#64748B">Zones Covered</div></div>
-                </div>
-            </div>
-        </section>
-
-        <!-- TRUST BAR -->
-        <section style="padding:32px 0;background:#f8fafc;overflow:hidden">
-            <div class="container">
-                <p style="text-align:center;font-size:13px;color:#64748B;margin-bottom:16px;text-transform:uppercase">Trusted by 850+ Local & National Brands</p>
-                <div style="overflow:hidden"><div id="trustTrack" style="display:flex;gap:32px;animation:scroll 25s linear infinite;width:max-content"></div></div>
-            </div>
-        </section>
-
-        <!-- PROBLEM -->
-        <section style="padding:64px 0">
-            <div class="container">
-                <div style="text-align:center;margin-bottom:48px"><span style="padding:6px 16px;background:#f1f5f9;border-radius:100px;font-size:13px;font-weight:600">The Problem</span><h2 style="margin:16px 0">Tired of Digital Ads Nobody Sees?</h2></div>
-                <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:24px">
-                    <div style="text-align:center;padding:32px;background:white;border-radius:16px;border:1px solid #e2e8f0"><div style="font-size:40px">📱</div><h3 style="color:#FF1744">76% Skip Rate</h3><p style="color:#64748B">YouTube ads skipped in 5 seconds</p></div>
-                    <div style="text-align:center;padding:32px;background:white;border-radius:16px;border:1px solid #e2e8f0"><div style="font-size:40px">👻</div><h3 style="color:#FF1744">Ad Blockers</h3><p style="color:#64748B">42% block digital ads completely</p></div>
-                    <div style="text-align:center;padding:32px;background:white;border-radius:16px;border:1px solid #e2e8f0"><div style="font-size:40px">📉</div><h3 style="color:#FF1744">Low Recall</h3><p style="color:#64748B">18% recall for social media ads</p></div>
-                </div>
-            </div>
-        </section>
-
-        <!-- SOLUTION -->
-        <section style="padding:64px 0;background:#f8fafc">
-            <div class="container">
-                <div style="text-align:center;margin-bottom:48px"><span style="padding:6px 16px;background:rgba(0,200,83,0.1);color:#009624;border-radius:100px;font-size:13px;font-weight:600">The Solution</span><h2 style="margin:16px 0">Physical Ads That Can't Be Skipped</h2></div>
-                <div style="display:flex;align-items:center;justify-content:center;gap:32px;flex-wrap:wrap">
-                    <div style="text-align:center"><span style="color:#FF1744;font-weight:700">Digital Ads</span><div style="width:100px;height:170px;background:#1E293B;border-radius:16px;padding:16px 8px;border:3px solid #334155;margin:16px auto"><div style="background:white;height:100%;border-radius:3px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;font-size:10px"><div style="padding:6px;background:#e2e8f0;border-radius:3px">Ad</div><div style="color:#FF1744;font-weight:600">Skip Ad →</div></div></div></div>
-                    <div style="font-size:28px;font-weight:900;color:#94A3B8">VS</div>
-                    <div style="text-align:center"><span style="color:#00C853;font-weight:700">RASAAI</span><div style="width:140px;height:90px;background:#00C853;border-radius:12px;display:flex;align-items:center;justify-content:center;margin:16px auto"><span style="color:white;font-weight:800;font-size:16px">YOUR BRAND</span></div></div>
-                </div>
-            </div>
-        </section>
-
-        <!-- HOW IT WORKS -->
-        <section style="padding:64px 0">
-            <div class="container">
-                <div style="text-align:center;margin-bottom:48px"><span style="padding:6px 16px;background:#f1f5f9;border-radius:100px;font-size:13px;font-weight:600">Simple Process</span><h2 style="margin:16px 0">Launch in 3 Easy Steps</h2></div>
-                <div style="display:flex;align-items:center;justify-content:center;gap:24px;flex-wrap:wrap">
-                    <div style="text-align:center;padding:32px;background:white;border-radius:16px;box-shadow:0 4px 6px rgba(0,0,0,0.1);max-width:250px"><div style="width:36px;height:36px;background:linear-gradient(135deg,#00C853,#00E676);color:white;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;margin:0 auto 12px">1</div><div style="font-size:32px">🎯</div><h3>Choose Zone</h3><p style="color:#64748B;font-size:14px">Select from 5 high-traffic Mumbra zones</p></div>
-                    <div style="color:#00C853">→</div>
-                    <div style="text-align:center;padding:32px;background:white;border-radius:16px;box-shadow:0 4px 6px rgba(0,0,0,0.1);max-width:250px"><div style="width:36px;height:36px;background:linear-gradient(135deg,#00C853,#00E676);color:white;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;margin:0 auto 12px">2</div><div style="font-size:32px">🎨</div><h3>Upload Creative</h3><p style="color:#64748B;font-size:14px">We handle production & installation</p></div>
-                    <div style="color:#00C853">→</div>
-                    <div style="text-align:center;padding:32px;background:white;border-radius:16px;box-shadow:0 4px 6px rgba(0,0,0,0.1);max-width:250px"><div style="width:36px;height:36px;background:linear-gradient(135deg,#00C853,#00E676);color:white;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;margin:0 auto 12px">3</div><div style="font-size:32px">🚀</div><h3>Go Live</h3><p style="color:#64748B;font-size:14px">Track eye views in real-time</p></div>
-                </div>
-            </div>
-        </section>
-
-        <!-- COVERAGE MAP -->
-        <section style="padding:64px 0;background:#f8fafc">
-            <div class="container">
-                <div style="text-align:center;margin-bottom:32px"><span style="padding:6px 16px;background:rgba(0,200,83,0.1);color:#009624;border-radius:100px;font-size:13px;font-weight:600">Coverage</span><h2 style="margin:16px 0">Dominating Mumbra's Streets</h2><p style="color:#64748B">350+ rickshaws across 5 strategic routes</p></div>
-                <div id="coverageMap" style="height:400px;border-radius:16px;overflow:hidden;box-shadow:0 10px 15px rgba(0,0,0,0.1);border:2px solid #e2e8f0;background:#f1f5f9"></div>
-                <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:24px" id="routeCards"></div>
-            </div>
-        </section>
-
-        <!-- ZONE EXPLORER -->
-        <section style="padding:64px 0">
-            <div class="container">
-                <div style="text-align:center;margin-bottom:32px"><span style="padding:6px 16px;background:#f1f5f9;border-radius:100px;font-size:13px;font-weight:600">Zone Intelligence</span><h2 style="margin:16px 0">Explore Mumbra's Advertising Zones</h2></div>
-                <div id="zoneCardsGrid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px"></div>
-            </div>
-        </section>
-
-        <!-- ROUTE INTELLIGENCE -->
-        <section style="padding:64px 0;background:#f8fafc">
-            <div class="container">
-                <div style="text-align:center;margin-bottom:32px"><span style="padding:6px 16px;background:rgba(0,200,83,0.1);color:#009624;border-radius:100px;font-size:13px;font-weight:600">Live Tracking</span><h2 style="margin:16px 0">Route Intelligence Engine</h2><p style="color:#64748B">Every rickshaw tracked in real-time with exposure estimates</p></div>
-                <div id="rickshawTrackGrid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px"></div>
-            </div>
-        </section>
-
-        <!-- EYE CALCULATOR -->
-        <section style="padding:64px 0" id="calculator">
-            <div class="container">
-                <div style="text-align:center;margin-bottom:32px"><span style="padding:6px 16px;background:#f1f5f9;border-radius:100px;font-size:13px;font-weight:600">Estimate ROI</span><h2 style="margin:16px 0">Eye View Calculator</h2><p style="color:#64748B">See exactly how many real human eyes will see your ad</p></div>
-                <div id="eyeCalculator" style="max-width:700px;margin:0 auto"></div>
-            </div>
-        </section>
-
-        <!-- NEUROMARKETING -->
-        <section style="padding:64px 0;background:#f8fafc">
-            <div class="container">
-                <div style="text-align:center;margin-bottom:32px"><span style="padding:6px 16px;background:rgba(124,77,255,0.1);color:#7C4DFF;border-radius:100px;font-size:13px;font-weight:600">Science</span><h2 style="margin:16px 0">Why Moving Advertising Captures Human Attention</h2><p style="color:#64748B">The neuroscience of transit media explained</p></div>
-                <div id="neuroCardsGrid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:24px"></div>
-            </div>
-        </section>
-
-        <!-- METRICS -->
-        <section style="padding:64px 0">
-            <div class="container">
-                <div style="text-align:center;margin-bottom:32px"><span style="padding:6px 16px;background:#f1f5f9;border-radius:100px;font-size:13px;font-weight:600">Real Metrics</span><h2 style="margin:16px 0">Not Impressions. Not Reach. Real Eye Views.</h2></div>
-                <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px" id="metricsGrid"></div>
-            </div>
-        </section>
-
-        <!-- COMPARISONS -->
-        <section style="padding:64px 0;background:#f8fafc" id="vsInstagram">
-            <div class="container">
-                <div style="text-align:center;margin-bottom:32px"><span style="padding:6px 16px;background:rgba(255,109,0,0.1);color:#FF6D00;border-radius:100px;font-size:13px;font-weight:600">Comparison</span><h2 style="margin:16px 0">Why RASAAI Beats Digital Ads</h2></div>
-                <div id="comparisonTabs" style="margin-bottom:24px"></div>
-                <div id="comparisonContent" style="overflow-x:auto"></div>
-            </div>
-        </section>
-
-        <!-- AUDIO DEMO -->
-        <section style="padding:64px 0">
-            <div class="container">
-                <div style="text-align:center;margin-bottom:32px"><span style="padding:6px 16px;background:rgba(0,200,83,0.1);color:#009624;border-radius:100px;font-size:13px;font-weight:600">Audio Ads</span><h2 style="margin:16px 0">Hear What Your Customers Hear</h2><p style="color:#64748B">Dual-channel: Visual + Audio for 85% higher recall</p></div>
-                <div id="audioPlayer" style="max-width:600px;margin:0 auto"></div>
-            </div>
-        </section>
-
-        <!-- FORMATS -->
-        <section style="padding:64px 0;background:#f8fafc">
-            <div class="container">
-                <div style="text-align:center;margin-bottom:32px"><span style="padding:6px 16px;background:#f1f5f9;border-radius:100px;font-size:13px;font-weight:600">Ad Formats</span><h2 style="margin:16px 0">Choose Your Advertising Format</h2></div>
-                <div id="formatCards" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:24px"></div>
-            </div>
-        </section>
-
-        <!-- CAMPAIGN BUILDER -->
-        <section style="padding:64px 0">
-            <div class="container">
-                <div style="text-align:center;margin-bottom:32px"><span style="padding:6px 16px;background:rgba(0,200,83,0.1);color:#009624;border-radius:100px;font-size:13px;font-weight:600">Builder</span><h2 style="margin:16px 0">Build Your Campaign</h2></div>
-                <div id="campaignBuilder" style="max-width:700px;margin:0 auto"></div>
-            </div>
-        </section>
-
-        <!-- PRICING -->
-        <section style="padding:64px 0;background:#f8fafc" id="pricing">
-            <div class="container">
-                <div style="text-align:center;margin-bottom:32px"><span style="padding:6px 16px;background:rgba(255,109,0,0.1);color:#FF6D00;border-radius:100px;font-size:13px;font-weight:600">Pricing</span><h2 style="margin:16px 0">Zone-Wise Pricing</h2><div style="padding:8px 16px;background:rgba(255,109,0,0.1);color:#FF6D00;border-radius:100px;display:inline-block;font-weight:600;font-size:13px;margin-top:8px">⏱️ Prices refresh in: <span id="timerDisplay">04:59</span></div></div>
-                <div id="pricingGrid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px"></div>
-            </div>
-        </section>
-
-        <!-- INVENTORY -->
-        <section style="padding:64px 0">
-            <div class="container">
-                <div style="text-align:center;margin-bottom:32px"><span style="padding:6px 16px;background:rgba(255,23,68,0.1);color:#FF1744;border-radius:100px;font-size:13px;font-weight:600">Limited</span><h2 style="margin:16px 0">Available Rickshaws Per Zone</h2><p style="color:#64748B">⚠️ Inventory updates in real-time</p></div>
-                <div id="inventoryGrid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px"></div>
-            </div>
-        </section>
-
-        <!-- ROI CALCULATOR -->
-        <section style="padding:64px 0;background:#f8fafc">
-            <div class="container">
-                <div style="text-align:center;margin-bottom:32px"><span style="padding:6px 16px;background:#f1f5f9;border-radius:100px;font-size:13px;font-weight:600">ROI</span><h2 style="margin:16px 0">Advanced ROI Calculator</h2><p style="color:#64748B">Project your campaign performance</p></div>
-                <div id="roiCalc" style="max-width:700px;margin:0 auto"></div>
-            </div>
-        </section>
-
-        <!-- CASE STUDIES -->
-        <section style="padding:64px 0">
-            <div class="container">
-                <div style="text-align:center;margin-bottom:32px"><span style="padding:6px 16px;background:rgba(0,200,83,0.1);color:#009624;border-radius:100px;font-size:13px;font-weight:600">Results</span><h2 style="margin:16px 0">Real Businesses, Real Results</h2></div>
-                <div id="caseStudiesGrid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px"></div>
-            </div>
-        </section>
-
-        <!-- INDUSTRIES -->
-        <section style="padding:64px 0;background:#f8fafc">
-            <div class="container">
-                <div style="text-align:center;margin-bottom:32px"><span style="padding:6px 16px;background:#f1f5f9;border-radius:100px;font-size:13px;font-weight:600">Industries</span><h2 style="margin:16px 0">Perfect For Every Business</h2></div>
-                <div id="industryCards" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:16px"></div>
-            </div>
-        </section>
-
-        <!-- TESTIMONIALS -->
-        <section style="padding:64px 0">
-            <div class="container">
-                <div style="text-align:center;margin-bottom:32px"><span style="padding:6px 16px;background:#f1f5f9;border-radius:100px;font-size:13px;font-weight:600">Testimonials</span><h2 style="margin:16px 0">What Advertisers Say</h2></div>
-                <div id="testimonialSlider" style="position:relative;overflow:hidden"></div>
-            </div>
-        </section>
-
-        <!-- VIDEO GALLERY -->
-        <section style="padding:64px 0;background:#f8fafc">
-            <div class="container">
-                <div style="text-align:center;margin-bottom:32px"><span style="padding:6px 16px;background:#f1f5f9;border-radius:100px;font-size:13px;font-weight:600">Gallery</span><h2 style="margin:16px 0">See RASAAI In Action</h2></div>
-                <div id="videoGrid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px"></div>
-                <div id="videoModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.9);z-index:500;align-items:center;justify-content:center;padding:16px" onclick="this.style.display='none'">
-                    <div style="position:relative;width:100%;max-width:800px" onclick="event.stopPropagation()">
-                        <button onclick="document.getElementById('videoModal').style.display='none'" style="position:absolute;top:-40px;right:0;background:none;border:none;color:white;font-size:24px;cursor:pointer">✕</button>
-                        <div id="videoEmbed" style="position:relative;padding-bottom:56.25%;height:0"></div>
+            <div class="hero-visual">
+                <div class="rickshaw-card">
+                    <div class="rickshaw-illustration">🛺</div>
+                    <p class="price-tag">LED Campaign starting at</p>
+                    <p class="price" id="heroPrice">₹1,238<span>/day</span></p>
+                    <div class="features">
+                        <div class="feature"><span class="check">✓</span> LED Screen</div>
+                        <div class="feature"><span class="check">✓</span> GPS Tracked</div>
+                        <div class="feature"><span class="check">✓</span> 5L+ Reach</div>
+                        <div class="feature"><span class="check">✓</span> Real Analytics</div>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- HEATMAP -->
-        <section style="padding:64px 0">
-            <div class="container">
-                <div style="text-align:center;margin-bottom:32px"><span style="padding:6px 16px;background:rgba(124,77,255,0.1);color:#7C4DFF;border-radius:100px;font-size:13px;font-weight:600">Analytics</span><h2 style="margin:16px 0">Coverage Heatmap</h2><p style="color:#64748B">See rickshaw density across time</p></div>
-                <div id="heatmapContainer"></div>
+    <!-- TRUST BAR -->
+    <div class="trust-bar">
+        <div class="trust-bar-inner">
+            <div class="trust-stats">
+                <div class="trust-stat"><div class="number">600+</div><div class="label">Total Rickshaws</div></div>
+                <div class="trust-stat"><div class="number">150+</div><div class="label">Active Campaigns</div></div>
+                <div class="trust-stat"><div class="number">5.2M</div><div class="label">Monthly Impressions</div></div>
+                <div class="trust-stat"><div class="number">350+</div><div class="label">Businesses Served</div></div>
             </div>
-        </section>
-
-        <!-- LEADERBOARD -->
-        <section style="padding:64px 0;background:#f8fafc">
-            <div class="container">
-                <div style="text-align:center;margin-bottom:32px"><span style="padding:6px 16px;background:rgba(255,109,0,0.1);color:#FF6D00;border-radius:100px;font-size:13px;font-weight:600">Rankings</span><h2 style="margin:16px 0">Top Performing Zones</h2></div>
-                <div id="leaderboardContainer" style="max-width:700px;margin:0 auto"></div>
+            <div class="trust-logos">
+                <span class="trust-logo">🏪 Patel General Store</span>
+                <span class="trust-logo">🍕 Mumbra Pizza House</span>
+                <span class="trust-logo">🏥 Shifa Clinic</span>
+                <span class="trust-logo">📚 Al-Huda Tuition</span>
             </div>
-        </section>
+        </div>
+    </div>
 
-        <!-- AFFILIATE -->
-        <section style="padding:64px 0">
-            <div class="container">
-                <div style="text-align:center;margin-bottom:32px"><span style="padding:6px 16px;background:rgba(0,200,83,0.1);color:#009624;border-radius:100px;font-size:13px;font-weight:600">Earn</span><h2 style="margin:16px 0">Affiliate Program</h2><p style="color:#64748B">Earn 10% commission on every referral</p></div>
-                <div id="affiliateContainer" style="max-width:600px;margin:0 auto"></div>
+    <!-- HOW IT WORKS -->
+    <section class="section" id="howItWorks">
+        <div class="section-inner">
+            <h2 class="section-title">How It Works</h2>
+            <p class="section-subtitle">Book your rickshaw ad campaign in 4 simple steps</p>
+            <div class="steps-grid">
+                <div class="step-card"><div class="step-number">1</div><h4>Choose Zone & Route</h4><p>Select from 4 strategic routes across Mumbra with detailed traffic data</p></div>
+                <div class="step-card"><div class="step-number">2</div><h4>Pick Campaign Type</h4><p>LED screen, audio ads, or combo. Min 1 rickshaw for 1 day</p></div>
+                <div class="step-card"><div class="step-number">3</div><h4>Upload Creative</h4><p>Upload your ad design. Get 30 FREE social media creatives with LED campaigns</p></div>
+                <div class="step-card"><div class="step-number">4</div><h4>Go Live & Track</h4><p>Your ad plays on rickshaws. Track reach, impressions & ROI in real-time</p></div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- CONTEST -->
-        <section style="padding:64px 0;background:#f8fafc">
-            <div class="container">
-                <div style="text-align:center;margin-bottom:32px"><span style="padding:6px 16px;background:rgba(124,77,255,0.1);color:#7C4DFF;border-radius:100px;font-size:13px;font-weight:600">Engage</span><h2 style="margin:16px 0">Run a Hashtag Contest</h2></div>
-                <div id="contestContainer" style="max-width:600px;margin:0 auto"></div>
+    <!-- ROUTES SECTION -->
+    <section class="section" id="routes" style="background:var(--gray-50)">
+        <div class="section-inner">
+            <h2 class="section-title">Our Strategic Routes</h2>
+            <p class="section-subtitle">4 high-traffic routes covering the entire Mumbra region</p>
+            <div class="routes-grid" id="routesGrid"></div>
+        </div>
+    </section>
+
+    <!-- ZONES -->
+    <section class="section" id="zones">
+        <div class="section-inner">
+            <h2 class="section-title">Explore Advertising Zones</h2>
+            <p class="section-subtitle">Each zone mapped with population, traffic & rickshaw availability</p>
+            <div id="coverageMap" class="coverage-map"></div>
+            <div class="zones-grid" id="zonesGrid"></div>
+        </div>
+    </section>
+
+    <!-- PRICING -->
+    <section class="section" id="pricing" style="background:var(--gray-50)">
+        <div class="section-inner">
+            <h2 class="section-title">Simple, Transparent Pricing</h2>
+            <p class="section-subtitle">Dynamic pricing per day per rickshaw. Price changes every 15 minutes based on demand.</p>
+            <div class="pricing-refresh"><span>⏱️ Price refreshes in: </span><span id="priceTimer">14:59</span></div>
+            <div class="pricing-grid" id="pricingGrid"></div>
+        </div>
+    </section>
+
+    <!-- CAMPAIGN BUILDER -->
+    <section class="section booking-section" id="campaignBuilder">
+        <div class="section-inner">
+            <h2 class="section-title">Build Your Campaign</h2>
+            <p class="section-subtitle">Fill details & get instant estimate. We'll call you back in 5 minutes.</p>
+            <div class="booking-card" id="bookingCard"></div>
+        </div>
+    </section>
+
+    <!-- SOCIAL BONUS -->
+    <section class="section" id="socialBonus">
+        <div class="section-inner">
+            <div class="bonus-banner">
+                <h3>🎁 FREE 30 Social Media Creatives!</h3>
+                <p>Book any LED or Combo campaign and get 30 ready-to-use social media designs absolutely FREE!</p>
+                <div class="bonus-icons">
+                    <span>📸 Instagram Posts (10)</span><span>💬 WhatsApp Ads (5)</span><span>👍 Facebook Posts (5)</span>
+                    <span>📖 Stories (5)</span><span>🎠 Carousels (3)</span><span>🎥 Reels (2)</span>
+                </div>
+                <button onclick="scrollToSection('campaignBuilder')" class="btn btn-primary btn-lg" style="background:var(--white);color:var(--navy)">🎯 Book Now & Claim Bonus</button>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- HASHTAG TRACKING -->
-        <section style="padding:64px 0">
-            <div class="container">
-                <div style="text-align:center;margin-bottom:32px"><span style="padding:6px 16px;background:#f1f5f9;border-radius:100px;font-size:13px;font-weight:600">Track</span><h2 style="margin:16px 0">Live Hashtag Tracking</h2></div>
-                <div id="hashtagContainer" style="max-width:600px;margin:0 auto"></div>
-            </div>
-        </section>
+    <!-- NEUROMARKETING -->
+    <section class="section" id="neuromarketing">
+        <div class="section-inner">
+            <h2 class="section-title">Why Moving Ads Capture Attention</h2>
+            <p class="section-subtitle">The science behind transit advertising effectiveness</p>
+            <div class="neuro-grid" id="neuroGrid"></div>
+        </div>
+    </section>
 
-        <!-- FAQ -->
-        <section style="padding:64px 0;background:#f8fafc">
-            <div class="container">
-                <div style="text-align:center;margin-bottom:32px"><span style="padding:6px 16px;background:#f1f5f9;border-radius:100px;font-size:13px;font-weight:600">Help</span><h2 style="margin:16px 0">Frequently Asked Questions</h2></div>
-                <div id="faqContainer" style="max-width:700px;margin:0 auto"></div>
-            </div>
-        </section>
+    <!-- COMPARISON -->
+    <section class="section" id="comparison" style="background:var(--gray-50)">
+        <div class="section-inner">
+            <h2 class="section-title">Why RASAAI Beats Digital Ads</h2>
+            <div id="comparisonTabs" class="comparison-tabs"></div>
+            <div id="comparisonContent" class="comparison-content"></div>
+        </div>
+    </section>
 
-        <!-- FINAL CTA -->
-        <section style="padding:64px 0">
-            <div class="container">
-                <div style="text-align:center;padding:64px 32px;background:#0A1929;border-radius:20px;color:white">
-                    <h2 style="color:white">Ready to Dominate Mumbra's Streets?</h2>
-                    <p style="color:#94A3B8;margin:16px 0 32px">Join 850+ businesses getting real eye views every day</p>
-                    <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-bottom:32px">
-                        <a href="tel:+919594306625" style="padding:16px 32px;background:linear-gradient(135deg,#00C853,#00E676);color:white;border-radius:100px;text-decoration:none;font-weight:600;font-size:17px">📞 Call: +91 95943 06625</a>
-                        <a href="https://wa.me/919594306625" style="padding:16px 32px;background:#25D366;color:white;border-radius:100px;text-decoration:none;font-weight:600;font-size:17px">💬 WhatsApp Us</a>
-                    </div>
-                    <div style="display:flex;gap:24px;justify-content:center;flex-wrap:wrap;font-size:14px;color:#94A3B8"><span>🛺 350+ Rickshaws</span><span>📍 5 Zones</span><span>👁️ 17.7M+ Eye Views</span><span>⭐ 4.8/5 Rating</span></div>
+    <!-- TESTIMONIALS -->
+    <section class="section" id="testimonials">
+        <div class="section-inner">
+            <h2 class="section-title">Loved by 350+ Businesses</h2>
+            <p class="section-subtitle">See what our advertisers say about RASAAI</p>
+            <div id="testimonialSlider" class="testimonial-slider"></div>
+        </div>
+    </section>
+
+    <!-- VIDEO GALLERY -->
+    <section class="section" id="videos" style="background:var(--gray-50)">
+        <div class="section-inner">
+            <h2 class="section-title">See RASAAI In Action</h2>
+            <div class="video-grid" id="videoGrid"></div>
+            <div id="videoModal" class="video-modal" onclick="closeVideoModal()">
+                <div class="video-modal-content" onclick="event.stopPropagation()">
+                    <button class="video-close" onclick="closeVideoModal()">✕</button>
+                    <div id="videoEmbed" class="video-embed"></div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- FOOTER -->
-        <footer style="background:#0A1929;color:#cbd5e1;padding:64px 0 32px">
-            <div class="container">
-                <div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:32px;margin-bottom:32px">
-                    <div>
-                        <div style="font-size:24px;font-weight:800;color:#00E676;margin-bottom:12px">🛺 RASAAI</div>
-                        <p style="color:#94A3B8;font-size:14px;margin-bottom:16px">Hyperlocal Rickshaw Advertising. Real Eye Views. Real Impact.</p>
-                        <div style="display:flex;flex-direction:column;gap:6px;font-size:13px">
-                            <a href="tel:+919594306625" style="color:#94A3B8;text-decoration:none">📞 +91 95943 06625</a>
-                            <a href="https://wa.me/919594306625" style="color:#94A3B8;text-decoration:none">💬 WhatsApp</a>
-                            <a href="mailto:mafs.grp@gmail.com" style="color:#94A3B8;text-decoration:none">✉️ mafs.grp@gmail.com</a>
-                            <span>📍 Mumbra, Thane, Maharashtra</span>
-                        </div>
-                    </div>
-                    <div><h4 style="color:white;margin-bottom:12px">Quick Links</h4><a href="#zoneExplorer" style="display:block;color:#94A3B8;text-decoration:none;font-size:13px;padding:3px 0">Zones</a><a href="#pricing" style="display:block;color:#94A3B8;text-decoration:none;font-size:13px;padding:3px 0">Pricing</a><a href="#caseStudies" style="display:block;color:#94A3B8;text-decoration:none;font-size:13px;padding:3px 0">Case Studies</a><a href="#faq" style="display:block;color:#94A3B8;text-decoration:none;font-size:13px;padding:3px 0">FAQ</a></div>
-                    <div><h4 style="color:white;margin-bottom:12px">Compare</h4><a href="#vsInstagram" style="display:block;color:#94A3B8;text-decoration:none;font-size:13px;padding:3px 0">vs Instagram</a><a href="#vsFacebook" style="display:block;color:#94A3B8;text-decoration:none;font-size:13px;padding:3px 0">vs Facebook</a><a href="#vsYoutube" style="display:block;color:#94A3B8;text-decoration:none;font-size:13px;padding:3px 0">vs YouTube</a></div>
-                    <div><h4 style="color:white;margin-bottom:12px">Tools</h4><a href="#calculator" style="display:block;color:#94A3B8;text-decoration:none;font-size:13px;padding:3px 0">Eye Calculator</a><a href="#roiCalc" style="display:block;color:#94A3B8;text-decoration:none;font-size:13px;padding:3px 0">ROI Calculator</a><a href="#affiliate" style="display:block;color:#94A3B8;text-decoration:none;font-size:13px;padding:3px 0">Affiliate</a></div>
-                </div>
-                <div style="text-align:center;padding:24px 0;border-top:1px solid rgba(255,255,255,0.1)">🏆 850+ Businesses Trust RASAAI</div>
-                <div style="display:flex;justify-content:space-between;padding-top:24px;border-top:1px solid rgba(255,255,255,0.1);font-size:13px;color:#64748B">
-                    <p>© 2026 RASAAI. All rights reserved.</p>
-                    <div style="display:flex;gap:16px"><a href="#" style="color:#64748B;text-decoration:none">Privacy</a><a href="#" style="color:#64748B;text-decoration:none">Terms</a><a href="#" style="color:#64748B;text-decoration:none">Refund</a></div>
+    <!-- AFFILIATE -->
+    <section class="section" id="affiliate">
+        <div class="section-inner">
+            <h2 class="section-title">Affiliate Program</h2>
+            <p class="section-subtitle">Earn 10% commission on every referral's first campaign</p>
+            <div id="affiliateContainer"></div>
+        </div>
+    </section>
+
+    <!-- CONTEST -->
+    <section class="section" id="contest" style="background:var(--gray-50)">
+        <div class="section-inner">
+            <h2 class="section-title">Run a Hashtag Contest</h2>
+            <p class="section-subtitle">Boost engagement with rickshaw-powered hashtag contests</p>
+            <div id="contestContainer"></div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section" id="faq">
+        <div class="section-inner">
+            <h2 class="section-title">Frequently Asked Questions</h2>
+            <div id="faqContainer" class="faq-container"></div>
+        </div>
+    </section>
+
+    <!-- FINAL CTA -->
+    <section class="section" style="background:var(--gray-50)">
+        <div class="section-inner">
+            <div class="bonus-banner">
+                <h3>Ready to Dominate Mumbra's Streets?</h3>
+                <p>Join 350+ businesses getting real eye views every day. Starting at ₹1,238/day.</p>
+                <div class="hero-actions" style="justify-content:center">
+                    <a href="tel:+919594306625" class="btn btn-primary btn-lg">📞 Call: +91 95943 06625</a>
+                    <a href="https://wa.me/919594306625" class="btn btn-whatsapp btn-lg">💬 WhatsApp Us</a>
                 </div>
             </div>
-        </footer>
+        </div>
+    </section>
 
-    </main>
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-inner">
+            <div class="footer-grid">
+                <div class="footer-col"><h4>RASAAI</h4><p>India's first hyperlocal auto rickshaw advertising network. LED & Audio campaigns across Mumbra.</p></div>
+                <div class="footer-col"><h4>Quick Links</h4><a href="#howItWorks">How It Works</a><a href="#routes">Routes</a><a href="#pricing">Pricing</a><a href="#campaignBuilder">Book Now</a></div>
+                <div class="footer-col"><h4>Services</h4><a href="#pricing">LED Campaigns</a><a href="#pricing">Audio Campaigns</a><a href="#pricing">Combo Packages</a><a href="#affiliate">Affiliate</a></div>
+                <div class="footer-col"><h4>Contact</h4><a href="tel:+919594306625">📞 +91 9594306625</a><a href="https://wa.me/919594306625">💬 WhatsApp</a><a href="mailto:mafs.grp@gmail.com">✉️ mafs.grp@gmail.com</a></div>
+                <div class="footer-col"><h4>Legal</h4><a href="#">Privacy Policy</a><a href="#">Terms of Service</a><a href="#">Refund Policy</a></div>
+            </div>
+            <div class="footer-bottom"><span>© 2026 RASAAI Outdoor Advertising Network</span><span>Made with ❤️ in Mumbra</span></div>
+        </div>
+    </footer>
 
-    <!-- Bottom Nav -->
-    <nav style="position:fixed;bottom:0;left:0;right:0;height:64px;background:white;border-top:1px solid #e2e8f0;display:flex;z-index:300;box-shadow:0 -4px 20px rgba(0,0,0,0.08);padding-bottom:env(safe-area-inset-bottom)">
-        <a href="#" onclick="window.scrollTo({top:0,behavior:'smooth'});return false" style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-decoration:none;color:#00C853;font-size:10px;font-weight:500"><span style="font-size:18px">🏠</span>Home</a>
-        <a href="#campaignBuilder" onclick="document.getElementById('campaignBuilder').scrollIntoView({behavior:'smooth'});return false" style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-decoration:none;color:#64748B;font-size:10px;font-weight:500"><span style="font-size:18px">🎯</span>Campaigns</a>
-        <a href="#calculator" onclick="document.getElementById('calculator').scrollIntoView({behavior:'smooth'});return false" style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-decoration:none;color:#64748B;font-size:10px;font-weight:500"><span style="font-size:18px">📊</span>Analytics</a>
-        <a href="#affiliate" onclick="document.getElementById('affiliateContainer').scrollIntoView({behavior:'smooth'});return false" style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-decoration:none;color:#64748B;font-size:10px;font-weight:500"><span style="font-size:18px">💰</span>Affiliate</a>
-        <a href="tel:+919594306625" style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-decoration:none;color:#64748B;font-size:10px;font-weight:500"><span style="font-size:18px">👤</span>Contact</a>
+    <!-- MOBILE BOTTOM NAV -->
+    <nav class="bottom-nav">
+        <a href="#hero" class="bottom-nav-item active"><span class="icon">🏠</span>Home</a>
+        <a href="#routes" class="bottom-nav-item"><span class="icon">📍</span>Routes</a>
+        <button onclick="scrollToSection('campaignBuilder')" class="bottom-nav-fab">➕</button>
+        <a href="#pricing" class="bottom-nav-item"><span class="icon">💰</span>Pricing</a>
+        <a href="tel:+919594306625" class="bottom-nav-item"><span class="icon">👤</span>Call</a>
     </nav>
+
+    <!-- FLOATING WHATSAPP -->
+    <a href="https://wa.me/919594306625?text=Hi%2C%20I%20want%20rickshaw%20advertising" target="_blank" class="floating-whatsapp">💬</a>
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="app-fix.js"></script>
