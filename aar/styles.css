@@ -434,3 +434,82 @@ body{font-family:'Inter',-apple-system,sans-serif;color:var(--gray-900);backgrou
     .bonus-icons{flex-direction:column;align-items:center}.metrics-detail-row{grid-template-columns:1fr}
     .rickshaw-track-grid{grid-template-columns:1fr}.inventory-grid{grid-template-columns:1fr}
 }
+/* ============ FIX 1: TRUST SLIDER - SINGLE LINE ============ */
+.trust-logo-wrapper {
+    overflow: hidden;
+    max-width: 100%;
+    mask-image: linear-gradient(90deg, transparent, black 10%, black 90%, transparent);
+    -webkit-mask-image: linear-gradient(90deg, transparent, black 10%, black 90%, transparent);
+}
+.trust-logo-track {
+    display: flex;
+    gap: 20px;
+    animation: logoScroll 30s linear infinite;
+    width: max-content;
+    flex-wrap: nowrap;
+}
+.trust-logo-track:hover {
+    animation-play-state: paused;
+}
+.trust-logo-item {
+    font-size: 13px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.8);
+    white-space: nowrap;
+    padding: 8px 18px;
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: var(--radius-pill);
+    flex-shrink: 0;
+    background: rgba(255,255,255,0.05);
+}
+@keyframes logoScroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+/* ============ FIX 7 & 8: AUDIO & FORMATS - 3 COLUMNS FORCED ============ */
+.audio-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+}
+.formats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+}
+
+/* ============ FIX 13: VIDEO GALLERY - 4 COLUMNS FORCED ============ */
+.video-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+/* ============ FIX 16: FOOTER - COMPACT ============ */
+.footer {
+    padding: 32px 24px 16px;
+}
+.footer-grid {
+    gap: 24px;
+    margin-bottom: 16px;
+}
+.footer-trust {
+    padding: 12px 0;
+}
+.footer-bottom {
+    padding-top: 12px;
+}
+
+/* ============ RESPONSIVE FIXES ============ */
+@media (max-width: 1024px) {
+    .audio-grid { grid-template-columns: repeat(2, 1fr); }
+    .formats-grid { grid-template-columns: repeat(2, 1fr); }
+    .video-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 768px) {
+    .audio-grid { grid-template-columns: 1fr; }
+    .formats-grid { grid-template-columns: 1fr; }
+    .video-grid { grid-template-columns: 1fr; }
+    .footer { padding: 24px 16px 12px; }
+}
