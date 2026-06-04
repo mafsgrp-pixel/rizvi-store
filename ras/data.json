@@ -1,0 +1,168 @@
+{
+  "meta": {
+    "business": "RASAAI Hyperlocal Rickshaw Advertising",
+    "contact": {
+      "phone": "+919594306625",
+      "whatsapp": "919594306625",
+      "email": "mafs.grp@gmail.com",
+      "address": "Mumbra, Thane, Maharashtra"
+    },
+    "stats": {
+      "totalRickshaws": 600,
+      "activeRickshaws": 342,
+      "monthlyEyeViews": 17700000,
+      "totalBusinesses": 350,
+      "totalCampaigns": 2847,
+      "zonesCount": 12,
+      "routesCount": 4
+    }
+  },
+  "pricing": {
+    "min": 1238,
+    "max": 1647,
+    "current": 1450,
+    "lastUpdated": "",
+    "refreshIntervalMinutes": 15,
+    "multipliers": {
+      "led": 1,
+      "audio": 1,
+      "combo": 1.8
+    }
+  },
+  "routes": [
+    {
+      "id": "route1",
+      "name": "Route 1",
+      "path": "Mumbra → Kausa → MM Valley Road",
+      "stops": ["Mumbra Station", "Kausa", "MM Valley Road"],
+      "stopCount": 3,
+      "rickshawCount": 45,
+      "dailyEyeViews": 12000,
+      "distance": 4.2,
+      "peakHours": "7-10AM, 5-8PM",
+      "color": "#FF5A00",
+      "thumbnail": "https://www.hanksadvertising.com/cms/resources/assets/frontend/images2/1/Thumbnail/21.jpg"
+    },
+    {
+      "id": "route2",
+      "name": "Route 2",
+      "path": "Mumbra → Kausa → Kalsekar Bypass → Shilphata → Kalyan Phata → Taloja Phase 1 & 2",
+      "stops": ["Mumbra Station", "Kausa", "Kalsekar Bypass", "Shilphata", "Kalyan Phata", "Taloja Phase 1", "Taloja Phase 2"],
+      "stopCount": 7,
+      "rickshawCount": 78,
+      "dailyEyeViews": 28000,
+      "distance": 12.5,
+      "peakHours": "7-10AM, 5-8PM",
+      "color": "#221F60",
+      "thumbnail": "https://www.hanksadvertising.com/cms/resources/assets/frontend/images2/1/Thumbnail/20.jpg"
+    },
+    {
+      "id": "route3",
+      "name": "Route 3",
+      "path": "Mumbra → Retibunder → Kalwa Naka",
+      "stops": ["Mumbra Station", "Retibunder", "Kalwa Naka"],
+      "stopCount": 3,
+      "rickshawCount": 32,
+      "dailyEyeViews": 9000,
+      "distance": 3.8,
+      "peakHours": "8-11AM, 4-7PM",
+      "color": "#FFB800",
+      "thumbnail": "https://www.hanksadvertising.com/cms/resources/assets/frontend/images2/1/Thumbnail/18.jpg"
+    },
+    {
+      "id": "route4",
+      "name": "Route 4",
+      "path": "Mumbra → Retibunder → Check Naka → Majhiwada",
+      "stops": ["Mumbra Station", "Retibunder", "Check Naka", "Majhiwada"],
+      "stopCount": 4,
+      "rickshawCount": 55,
+      "dailyEyeViews": 15000,
+      "distance": 5.1,
+      "peakHours": "7-10AM, 5-8PM",
+      "color": "#00aa00",
+      "thumbnail": "https://www.hanksadvertising.com/cms/resources/assets/frontend/images2/1/Thumbnail/16.jpg"
+    }
+  ],
+  "zones": [
+    {"id": "zone1", "name": "Mumbra Station", "lat": 19.1800, "lng": 73.0280, "population": 45000, "traffic": "Very High", "peakTime": "7-10AM", "availableRickshaws": 12, "totalRickshaws": 15, "impressions": 45000, "coverage": 87, "thumbnail": "https://www.hanksadvertising.com/cms/resources/assets/frontend/images2/1/Thumbnail/13.jpg"},
+    {"id": "zone2", "name": "Kausa", "lat": 19.1765, "lng": 73.0320, "population": 38000, "traffic": "High", "peakTime": "8-11AM", "availableRickshaws": 8, "totalRickshaws": 10, "impressions": 32000, "coverage": 80, "thumbnail": "https://www.hanksadvertising.com/cms/resources/assets/frontend/images2/1/Thumbnail/8.jpg"},
+    {"id": "zone3", "name": "MM Valley Road", "lat": 19.1720, "lng": 73.0250, "population": 22000, "traffic": "Medium", "peakTime": "5-8PM", "availableRickshaws": 5, "totalRickshaws": 6, "impressions": 18000, "coverage": 83, "thumbnail": "https://www.hanksadvertising.com/cms/resources/assets/frontend/images2/1/Thumbnail/7.jpg"},
+    {"id": "zone4", "name": "Kalsekar Bypass", "lat": 19.1850, "lng": 73.0500, "population": 52000, "traffic": "Very High", "peakTime": "7-10AM", "availableRickshaws": 15, "totalRickshaws": 18, "impressions": 58000, "coverage": 92, "thumbnail": "https://www.hanksadvertising.com/cms/resources/assets/frontend/images2/1/Thumbnail/6.jpg"},
+    {"id": "zone5", "name": "Shilphata", "lat": 19.1950, "lng": 73.0480, "population": 35000, "traffic": "High", "peakTime": "5-8PM", "availableRickshaws": 7, "totalRickshaws": 10, "impressions": 28000, "coverage": 78, "thumbnail": "https://www.hanksadvertising.com/cms/resources/assets/frontend/images2/1/Thumbnail/5.jpg"},
+    {"id": "zone6", "name": "Kalyan Phata", "lat": 19.1980, "lng": 73.0550, "population": 48000, "traffic": "Very High", "peakTime": "7-10AM", "availableRickshaws": 20, "totalRickshaws": 22, "impressions": 62000, "coverage": 95, "thumbnail": "https://www.hanksadvertising.com/cms/resources/assets/frontend/images2/1/Thumbnail/2.jpg"},
+    {"id": "zone7", "name": "Taloja Phase 1", "lat": 19.2000, "lng": 73.0600, "population": 28000, "traffic": "Medium", "peakTime": "8-11AM", "availableRickshaws": 3, "totalRickshaws": 5, "impressions": 14000, "coverage": 60, "thumbnail": "https://www.hanksadvertising.com/cms/resources/assets/frontend/images2/1/Thumbnail/1.jpg"},
+    {"id": "zone8", "name": "Taloja Phase 2", "lat": 19.2050, "lng": 73.0650, "population": 25000, "traffic": "Low", "peakTime": "5-8PM", "availableRickshaws": 9, "totalRickshaws": 12, "impressions": 20000, "coverage": 75, "thumbnail": "https://www.hanksadvertising.com/cms/resources/assets/frontend/images/noparking_slider/HANKS_ADVERTISING_AUTO_BRANDING.jpeg"},
+    {"id": "zone9", "name": "Retibunder", "lat": 19.1700, "lng": 73.0380, "population": 40000, "traffic": "High", "peakTime": "7-10AM", "availableRickshaws": 11, "totalRickshaws": 14, "impressions": 38000, "coverage": 85, "thumbnail": "https://www.hanksadvertising.com/cms/uploads/images/auto-rickshaw-advertising-ad.jpg"},
+    {"id": "zone10", "name": "Kalwa Naka", "lat": 19.1650, "lng": 73.0420, "population": 30000, "traffic": "Medium", "peakTime": "8-11AM", "availableRickshaws": 6, "totalRickshaws": 8, "impressions": 22000, "coverage": 75, "thumbnail": "https://www.hanksadvertising.com/cms/uploads/images/auto-ads-delhi.jpg"},
+    {"id": "zone11", "name": "Check Naka", "lat": 19.1850, "lng": 73.0350, "population": 42000, "traffic": "High", "peakTime": "5-8PM", "availableRickshaws": 14, "totalRickshaws": 16, "impressions": 48000, "coverage": 88, "thumbnail": "https://www.hanksadvertising.com/cms/resources/assets/frontend/images2/1/Thumbnail/21.jpg"},
+    {"id": "zone12", "name": "Majhiwada", "lat": 19.1900, "lng": 73.0300, "population": 33000, "traffic": "Medium", "peakTime": "7-10AM", "availableRickshaws": 4, "totalRickshaws": 7, "impressions": 16000, "coverage": 57, "thumbnail": "https://www.hanksadvertising.com/cms/resources/assets/frontend/images2/1/Thumbnail/20.jpg"}
+  ],
+  "rickshaws": [
+    {"id": "RJ-4521", "driver": "Ramesh Kumar", "phone": "+919876543210", "zone": "zone1", "route": "route1", "status": "active", "battery": 85, "ledStatus": true, "audioStatus": true, "currentCampaign": "camp001"},
+    {"id": "RJ-7832", "driver": "Suresh Patil", "phone": "+919876543211", "zone": "zone2", "route": "route1", "status": "active", "battery": 72, "ledStatus": true, "audioStatus": false, "currentCampaign": "camp002"},
+    {"id": "RJ-1290", "driver": "Prakash Joshi", "phone": "+919876543212", "zone": "zone4", "route": "route2", "status": "active", "battery": 90, "ledStatus": true, "audioStatus": true, "currentCampaign": "camp001"},
+    {"id": "RJ-5643", "driver": "Anil Yadav", "phone": "+919876543213", "zone": "zone5", "route": "route2", "status": "active", "battery": 65, "ledStatus": true, "audioStatus": false, "currentCampaign": "camp003"},
+    {"id": "RJ-9087", "driver": "Vijay Singh", "phone": "+919876543214", "zone": "zone9", "route": "route3", "status": "active", "battery": 78, "ledStatus": false, "audioStatus": true, "currentCampaign": "camp002"},
+    {"id": "RJ-2341", "driver": "Rajesh More", "phone": "+919876543215", "zone": "zone11", "route": "route4", "status": "active", "battery": 93, "ledStatus": true, "audioStatus": true, "currentCampaign": "camp004"}
+  ],
+  "campaigns": [
+    {"id": "camp001", "client": "Sharma Restaurant", "type": "combo", "route": "route1", "rickshaws": 5, "duration": 30, "status": "active", "startDate": "2026-05-15", "endDate": "2026-06-14", "budget": 217500},
+    {"id": "camp002", "client": "City Clinic", "type": "led", "route": "route3", "rickshaws": 3, "duration": 15, "status": "active", "startDate": "2026-05-20", "endDate": "2026-06-04", "budget": 65250},
+    {"id": "camp003", "client": "Bright Academy", "type": "audio", "route": "route2", "rickshaws": 8, "duration": 45, "status": "pending", "startDate": "2026-06-10", "endDate": "2026-07-25", "budget": 464000},
+    {"id": "camp004", "client": "Fresh Mart", "type": "combo", "route": "route4", "rickshaws": 4, "duration": 20, "status": "active", "startDate": "2026-05-25", "endDate": "2026-06-14", "budget": 208800}
+  ],
+  "affiliates": [
+    {"id": "aff001", "name": "Rahul Sharma", "phone": "+919876543300", "referralCode": "RAS001", "totalReferrals": 12, "commissionEarned": 14500, "commissionPending": 3200},
+    {"id": "aff002", "name": "Priya Patel", "phone": "+919876543301", "referralCode": "RAS002", "totalReferrals": 8, "commissionEarned": 9800, "commissionPending": 1500}
+  ],
+  "comparison": {
+    "instagram": [
+      {"feature": "Ad Skipping", "rasaai": "✅ Impossible to Skip", "competitor": "❌ 76% Skip Rate"},
+      {"feature": "Local Reach", "rasaai": "✅ Hyperlocal Mumbra", "competitor": "❌ Scattered Nationwide"},
+      {"feature": "Cost per View", "rasaai": "✅ ₹0.04/eye view", "competitor": "❌ ₹2.5/view"},
+      {"feature": "Ad Blockers", "rasaai": "✅ Zero Impact", "competitor": "❌ 42% Blocked"}
+    ],
+    "facebook": [
+      {"feature": "Organic Reach", "rasaai": "✅ 100% Physical", "competitor": "❌ 5.2% Organic"},
+      {"feature": "Recall Rate", "rasaai": "✅ 89% Brand Recall", "competitor": "❌ 18% Recall"},
+      {"feature": "Targeting", "rasaai": "✅ Zone Precise", "competitor": "❌ Interest Based"},
+      {"feature": "Engagement", "rasaai": "✅ Real Eye Contact", "competitor": "❌ Passive Scrolling"}
+    ],
+    "youtube": [
+      {"feature": "Ad Completion", "rasaai": "✅ 98% View Rate", "competitor": "❌ 24% Completion"},
+      {"feature": "Frequency", "rasaai": "✅ Repeated Daily", "competitor": "❌ One-time View"},
+      {"feature": "CPV", "rasaai": "✅ ₹0.04/view", "competitor": "❌ ₹1.2/view"},
+      {"feature": "Audience", "rasaai": "✅ Local Buyers", "competitor": "❌ Global Random"}
+    ]
+  },
+  "neuromarketing": [
+    {"title": "Motion Detection", "description": "Human brain is hardwired to detect movement. Moving rickshaws trigger automatic attention.", "icon": "🧠"},
+    {"title": "Pattern Interrupt", "description": "Static environment + moving ad = pattern interrupt. Your ad becomes unmissable.", "icon": "⚡"},
+    {"title": "Repetition Effect", "description": "Same route daily = repeated exposure. 7+ views needed for brand recall.", "icon": "🔄"},
+    {"title": "Color Psychology", "description": "LED brightness triggers dopamine. Bright ads = positive brand association.", "icon": "🎨"},
+    {"title": "Proximity Bias", "description": "Physical nearness creates trust. Local ads feel more relevant than digital.", "icon": "📍"},
+    {"title": "Audio-Visual Sync", "description": "LED + Audio combo increases memory retention by 70%.", "icon": "🔊"},
+    {"title": "Crowd Psychology", "description": "People look where others look. One viewer attracts more viewers.", "icon": "👥"},
+    {"title": "Time-Place Binding", "description": "Ad + familiar location = strong memory anchor for your brand.", "icon": "⏰"}
+  ],
+  "industries": [
+    "Restaurant", "Clinic", "Education", "Real Estate", "Grocery", "Pharmacy", "Gym", "Salon",
+    "Hardware", "Electronics", "Clothing", "Jewelry", "Banking", "Insurance", "Travel",
+    "Automobile", "Furniture", "Catering", "Event Management", "Tuition Classes"
+  ],
+  "faq": [
+    {"q": "How does rickshaw advertising work?", "a": "We install LED screens and audio systems on auto rickshaws. Your ad plays while rickshaws move through busy Mumbra routes, reaching thousands of real viewers daily."},
+    {"q": "What is the minimum campaign duration?", "a": "Minimum 7 days. We recommend 30 days for optimal brand recall and results."},
+    {"q": "How do you track eye views?", "a": "GPS tracking + traffic density data + camera sensors. We calculate actual human eye views, not digital impressions."},
+    {"q": "Can I choose specific zones?", "a": "Yes! Select from 12 zones across 4 strategic routes. Target exactly where your customers are."},
+    {"q": "How soon can my campaign start?", "a": "Campaigns go live within 48 hours of booking and creative approval."},
+    {"q": "What's included in the 30 free social creatives?", "a": "10 Instagram posts, 5 WhatsApp forwards, 5 Facebook posts, 5 Stories, 3 Carousels, 2 Reels - all branded for your business."},
+    {"q": "Is there a booking fee?", "a": "No booking fee. Pay only for your campaign. Pricing starts at ₹1,238/day per rickshaw."},
+    {"q": "How do I track my campaign performance?", "a": "Real-time dashboard shows live rickshaw locations, eye view counts, zone coverage, and ROI metrics."}
+  ],
+  "caseStudies": [
+    {"business": "Sharma Restaurant", "result": "312% ROI", "description": "30-day LED campaign on Route 1. Footfall increased from 45 to 120 customers/day.", "icon": "🍽️"},
+    {"business": "City Clinic", "result": "245% ROI", "description": "Audio campaign on Route 3. Patient inquiries doubled within 2 weeks.", "icon": "🏥"},
+    {"business": "Bright Academy", "result": "189% ROI", "description": "Combo campaign on Route 2. Admissions increased by 67 students in one month.", "icon": "📚"}
+  ]
+}
