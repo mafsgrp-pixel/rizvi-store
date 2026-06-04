@@ -3,389 +3,321 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <meta name="theme-color" content="#0a0015">
-    <title>Rasaai OS - AI-Powered Outdoor Advertising Platform</title>
-    <meta name="description" content="AI-Powered Rickshaw Advertising Platform. Plan campaigns with AI, get instant estimates, book via WhatsApp. Starting at ₹1,238/day.">
+    <meta name="theme-color" content="#7C3AED">
+    <title>Rasaai AI OS - AI-Powered Outdoor Advertising Platform</title>
+    <meta name="description" content="AI-powered rickshaw advertising platform. Plan campaigns with AI, generate mockups instantly, book via WhatsApp. Starting at ₹1,238/day.">
+    <meta property="og:title" content="Rasaai AI OS - Intelligent Outdoor Advertising">
+    <meta property="og:description" content="AI campaign planner, mockup generator, WhatsApp booking. 17.7M+ monthly eye views.">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%237C3AED'/><text x='50' y='68' font-size='55' text-anchor='middle' fill='white' font-weight='bold'>R</text></svg>">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-<div id="loadingScreen"><div class="loader-content"><div class="ai-loader">🛺</div><div class="loader-bar"></div><p>Rasaai OS Initializing...</p></div></div>
+<div id="loadingScreen"><div><div class="ai-loader">🛺</div><div class="loading-bar"></div><p>Rasaai AI OS Loading...</p></div></div>
 
-<div id="notificationToast" class="toast"><span id="toastMsg"></span></div>
+<div id="exitPopup" class="modal-overlay">
+    <div class="glass-card" style="max-width:420px;text-align:center">
+        <button class="modal-close" onclick="RASAAI.closeExitPopup()">✕</button>
+        <div style="font-size:48px;margin-bottom:12px">⚡</div>
+        <h3>AI Recommends: Book Now!</h3>
+        <p style="color:var(--gray-400)">Limited slots. Prices changing in:</p>
+        <div class="exit-timer" id="exitTimerDisplay">04:59</div>
+        <a href="tel:+919594306625" class="btn btn-primary btn-block pulse-glow">📞 +91 95943 06625</a>
+        <a href="https://wa.me/919594306625" class="btn btn-whatsapp btn-block" style="margin-top:8px">💬 WhatsApp</a>
+    </div>
+</div>
 
-<!-- HEADER -->
-<header class="header" id="header">
+<div class="sticky-bar" id="stickyBar">
+    <a href="tel:+919594306625" class="sticky-btn" style="background:var(--violet)">📞 Call</a>
+    <a href="https://wa.me/919594306625" class="sticky-btn" style="background:#25D366">💬 Chat</a>
+    <button onclick="document.getElementById('campaignBuilder').scrollIntoView({behavior:'smooth'})" class="sticky-btn" style="background:var(--cyan)">🎯 Book</button>
+</div>
+
+<a href="https://wa.me/919594306625" target="_blank" class="floating-wa" rel="noopener">💬</a>
+
+<div id="notifWidget" class="notif-toast"><span>🔔</span><span id="notifText"></span></div>
+
+<header class="header glass" id="desktopHeader">
     <div class="header-inner">
-        <a href="#" class="logo">
-            <div class="logo-icon">R</div>
-            <span>Rasaai<span class="logo-ai">OS</span></span>
-        </a>
-        <nav class="nav-links" id="navLinks">
-            <a href="#hero" class="nav-link active">Home</a>
+        <a href="#" class="logo"><span class="logo-icon">R</span><span>Rasaai AI OS</span></a>
+        <nav class="nav-links">
             <a href="#aiPlanner" class="nav-link">AI Planner</a>
-            <a href="#calculator" class="nav-link">Calculate</a>
+            <a href="#routes" class="nav-link">Routes</a>
             <a href="#pricing" class="nav-link">Pricing</a>
-            <a href="#book" class="nav-link">Book</a>
+            <a href="#campaignBuilder" class="nav-link">Book</a>
+            <a href="#dashboard" class="nav-link">Dashboard</a>
         </nav>
         <div class="header-actions">
             <a href="https://wa.me/919594306625" class="btn btn-whatsapp btn-sm">💬</a>
-            <button onclick="scrollToSection('book')" class="btn btn-primary btn-sm">Book Now</button>
+            <button onclick="document.getElementById('campaignBuilder').scrollIntoView({behavior:'smooth'})" class="btn btn-primary btn-sm">Book Now</button>
         </div>
     </div>
 </header>
 
-<!-- MOBILE NAV -->
-<nav class="mobile-nav" id="mobileNav">
-    <a href="#hero" class="mnav-item active">🏠</a>
-    <a href="#aiPlanner" class="mnav-item">🤖</a>
-    <button onclick="scrollToSection('book')" class="mnav-fab">➕</button>
-    <a href="#pricing" class="mnav-item">💰</a>
-    <a href="https://wa.me/919594306625" class="mnav-item">💬</a>
-</nav>
-
-<!-- FLOATING WHATSAPP -->
-<a href="https://wa.me/919594306625?text=Hi%20Rasaai%20OS!" target="_blank" class="float-wa" rel="noopener">💬</a>
+<div class="mobile-header glass">
+    <a href="#" class="logo"><span class="logo-icon-sm">R</span>Rasaai AI</a>
+    <button onclick="document.getElementById('campaignBuilder').scrollIntoView({behavior:'smooth'})" class="btn btn-primary btn-sm">Book</button>
+</div>
 
 <main>
 
-<!-- ============ HERO ============ -->
+<!-- HERO -->
 <section class="hero" id="hero">
-    <div class="hero-grid"></div>
-    <div class="hero-content">
-        <div class="hero-badge">
-            <span class="pulse-dot"></span>
-            <span>🤖 AI-Powered Outdoor Advertising</span>
-        </div>
-        <h1 class="hero-title">Your Ad, On Every <span class="gradient-text">Moving Rickshaw</span></h1>
-        <p class="hero-subtitle">Plan campaigns with AI. Get instant reach estimates. Book in 60 seconds. Starting at <strong>₹1,238/day</strong>.</p>
-        <div class="hero-actions">
-            <button onclick="scrollToSection('aiPlanner')" class="btn btn-primary btn-lg">🤖 Plan With AI</button>
-            <button onclick="scrollToSection('calculator')" class="btn btn-glass btn-lg">📊 Calculate Reach</button>
-        </div>
-        <div class="hero-stats">
-            <div class="hstat"><span class="hstat-num" data-count="17700000">17.7M+</span><span class="hstat-lbl">Monthly Views</span></div>
-            <div class="hstat"><span class="hstat-num" data-count="600">600+</span><span class="hstat-lbl">Rickshaws</span></div>
-            <div class="hstat"><span class="hstat-num" data-count="12">12</span><span class="hstat-lbl">Zones</span></div>
-            <div class="hstat"><span class="hstat-num" data-count="350">350+</span><span class="hstat-lbl">Clients</span></div>
-        </div>
-    </div>
-    <div class="hero-visual">
-        <div class="rickshaw-3d">
-            <div class="rickshaw-body">
-                <div class="led-panel">YOUR AD</div>
-                <div class="wheel wheel-front"></div>
-                <div class="wheel wheel-back"></div>
+    <div class="hero-bg"></div>
+    <div class="hero-inner">
+        <div class="hero-content">
+            <div class="hero-badge glass"><span class="dot"></span> AI-Powered Outdoor Advertising</div>
+            <h1 class="hero-title">Your Ad, On Every Street.<br><span class="gradient-text">Powered by AI.</span></h1>
+            <p class="hero-subtitle">AI plans your campaign. Mockups generate instantly. <strong>17.7M+ monthly eye views</strong> across Mumbra. Starting at <strong>₹1,238/day</strong>.</p>
+            <div class="hero-actions">
+                <button onclick="document.getElementById('aiPlanner').scrollIntoView({behavior:'smooth'})" class="btn btn-primary btn-lg pulse-glow">🤖 Plan With AI</button>
+                <button onclick="document.getElementById('campaignBuilder').scrollIntoView({behavior:'smooth'})" class="btn btn-glass btn-lg">📊 Calculate Reach</button>
+            </div>
+            <div class="hero-stats">
+                <div class="hero-stat"><span class="hero-stat-num" data-count="17700000">17.7M+</span><span class="hero-stat-lbl">Monthly Eye Views</span></div>
+                <div class="hero-stat"><span class="hero-stat-num" data-count="850">850+</span><span class="hero-stat-lbl">Businesses</span></div>
+                <div class="hero-stat"><span class="hero-stat-num" data-count="2847">2,847</span><span class="hero-stat-lbl">Campaigns</span></div>
+                <div class="hero-stat"><span class="hero-stat-num" data-count="600">600+</span><span class="hero-stat-lbl">Rickshaws</span></div>
             </div>
         </div>
-    </div>
-</section>
-
-<!-- ============ LIVE TICKER ============ -->
-<section class="live-ticker">
-    <div class="ticker-inner">
-        <div class="ticker-track" id="tickerTrack">
-            <span>🛺 3 businesses booked Kausa today</span>
-            <span>🔥 Mumbra Station: Only 8 slots left</span>
-            <span>✅ New campaign live in Shilphata</span>
-            <span>💼 Agency booked 15 rickshaws</span>
-            <span>⚡ AI recommends Kausa for retail</span>
-            <span>🎯 85% recall rate achieved</span>
-        </div>
-    </div>
-</section>
-
-<!-- ============ AI CAMPAIGN PLANNER ============ -->
-<section class="section" id="aiPlanner">
-    <div class="section-inner">
-        <div class="section-header">
-            <span class="badge badge-ai">🤖 AI Powered</span>
-            <h2 class="section-title">AI Campaign Planner</h2>
-            <p class="section-subtitle">Tell us about your business. AI recommends the best strategy.</p>
-        </div>
-        <div class="ai-card glass-card">
-            <div class="ai-form">
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>Business Type</label>
-                        <select id="aiBusiness">
-                            <option value="">Select...</option>
-                            <option value="retail">Retail Store</option>
-                            <option value="restaurant">Restaurant</option>
-                            <option value="clinic">Clinic / Healthcare</option>
-                            <option value="education">School / Coaching</option>
-                            <option value="realestate">Real Estate</option>
-                            <option value="salon">Salon / Spa</option>
-                            <option value="gym">Gym / Fitness</option>
-                            <option value="electronics">Electronics Shop</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>Target Location</label>
-                        <select id="aiLocation">
-                            <option value="">Select...</option>
-                            <option value="kausa">Kausa</option>
-                            <option value="station">Mumbra Station</option>
-                            <option value="shilphata">Shilphata</option>
-                            <option value="retibunder">Retibunder</option>
-                            <option value="checknaka">Check Naka</option>
-                            <option value="kalwa">Kalwa Naka</option>
-                            <option value="majhiwada">Majhiwada</option>
-                        </select>
-                    </div>
+        <div class="hero-visual">
+            <div class="rickshaw-card glass floating">
+                <div class="rickshaw-preview" id="heroPreview">
+                    <div class="mockup-screen">YOUR AD</div>
                 </div>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>Monthly Budget</label>
-                        <select id="aiBudget">
-                            <option value="">Select...</option>
-                            <option value="5000">₹5,000 - ₹15,000</option>
-                            <option value="15000">₹15,000 - ₹50,000</option>
-                            <option value="50000">₹50,000 - ₹1,00,000</option>
-                            <option value="100000">₹1,00,000+</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>Campaign Objective</label>
-                        <select id="aiObjective">
-                            <option value="">Select...</option>
-                            <option value="awareness">Brand Awareness</option>
-                            <option value="footfall">Store Footfall</option>
-                            <option value="sales">Sales / Offers</option>
-                            <option value="launch">New Launch</option>
-                            <option value="event">Event Promotion</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>Campaign Duration</label>
-                        <select id="aiDuration">
-                            <option value="7">7 Days</option>
-                            <option value="15">15 Days</option>
-                            <option value="30" selected>30 Days</option>
-                            <option value="60">60 Days</option>
-                            <option value="90">90 Days</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <button onclick="runAIPlanner()" class="btn btn-primary btn-block btn-lg" style="margin-top:24px">🤖 Get AI Recommendation</button>
-                    </div>
-                </div>
-            </div>
-            <div id="aiResult" class="ai-result" style="display:none"></div>
-        </div>
-    </div>
-</section>
-
-<!-- ============ CALCULATOR ============ -->
-<section class="section section-alt" id="calculator">
-    <div class="section-inner">
-        <div class="section-header">
-            <span class="badge">📊 Calculator</span>
-            <h2 class="section-title">Campaign Reach Calculator</h2>
-        </div>
-        <div class="glass-card" style="max-width:700px;margin:0 auto">
-            <div class="calc-grid">
-                <div class="form-group">
-                    <label>Select Zone</label>
-                    <select id="calcZone" onchange="updateCalculator()">
-                        <option value="kausa">Kausa</option>
-                        <option value="station">Mumbra Station</option>
-                        <option value="shilphata">Shilphata</option>
-                        <option value="retibunder">Retibunder</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>Rickshaws</label>
-                    <input type="range" id="calcRicks" min="1" max="50" value="10" oninput="document.getElementById('calcRicksVal').textContent=this.value;updateCalculator()">
-                    <span id="calcRicksVal" class="range-val">10</span>
-                </div>
-                <div class="form-group">
-                    <label>Days</label>
-                    <input type="range" id="calcDays" min="7" max="90" value="30" oninput="document.getElementById('calcDaysVal').textContent=this.value;updateCalculator()">
-                    <span id="calcDaysVal" class="range-val">30</span>
-                </div>
-            </div>
-            <div class="calc-results">
-                <div class="calc-item"><span class="calc-icon">👁️</span><span class="calc-val" id="calcReach">3,450,000</span><span class="calc-lbl">Est. Reach</span></div>
-                <div class="calc-item"><span class="calc-icon">📊</span><span class="calc-val" id="calcImpressions">5,520,000</span><span class="calc-lbl">Impressions</span></div>
-                <div class="calc-item"><span class="calc-icon">💰</span><span class="calc-val" id="calcCost">₹42,000</span><span class="calc-lbl">Est. Cost</span></div>
-                <div class="calc-item"><span class="calc-icon">📈</span><span class="calc-val" id="calcCPM">₹4.50</span><span class="calc-lbl">CPM</span></div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- ============ PRICING ============ -->
-<section class="section" id="pricing">
-    <div class="section-inner">
-        <div class="section-header">
-            <span class="badge badge-pricing">💰 Dynamic Pricing</span>
-            <h2 class="section-title">Live Pricing Engine</h2>
-            <p class="section-subtitle">Prices refresh every 15 minutes. <span id="priceCountdown" class="countdown">14:59</span></p>
-        </div>
-        <div class="pricing-grid" id="pricingGrid"></div>
-    </div>
-</section>
-
-<!-- ============ UPLOAD CREATIVE ============ -->
-<section class="section section-alt" id="upload">
-    <div class="section-inner">
-        <div class="section-header">
-            <span class="badge badge-ai">🎨 Creative Studio</span>
-            <h2 class="section-title">Upload & Preview Your Ad</h2>
-        </div>
-        <div class="glass-card" style="max-width:700px;margin:0 auto;text-align:center">
-            <div class="upload-zone" id="uploadZone" onclick="document.getElementById('creativeFile').click()">
-                <div class="upload-icon">📁</div>
-                <p>Drop your logo or poster here</p>
-                <p class="upload-hint">JPG, PNG, PDF (Max 5MB)</p>
-                <input type="file" id="creativeFile" accept="image/*,.pdf" onchange="handleCreativeUpload(event)" style="display:none">
-            </div>
-            <div id="mockupPreview" class="mockup-preview" style="display:none">
-                <h4>🎨 Mockup Previews</h4>
-                <div class="mockup-grid">
-                    <div class="mockup-item" id="mockupDay">Day View</div>
-                    <div class="mockup-item" id="mockupNight">Night View</div>
-                    <div class="mockup-item" id="mockupRoad">Roadside View</div>
-                    <div class="mockup-item" id="mockupTraffic">Traffic View</div>
+                <p class="price-tag">AI Recommended</p>
+                <p class="price" id="heroPrice">₹1,238<span>/day</span></p>
+                <div class="features-grid">
+                    <div class="feature"><span>✓</span> AI Planned</div>
+                    <div class="feature"><span>✓</span> GPS Tracked</div>
+                    <div class="feature"><span>✓</span> Real Analytics</div>
+                    <div class="feature"><span>✓</span> Mockup Ready</div>
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- ============ BOOKING ============ -->
-<section class="section" id="book">
-    <div class="section-inner">
-        <div class="section-header">
-            <span class="badge badge-pricing">📋 Book Now</span>
-            <h2 class="section-title">Complete Your Booking</h2>
+<!-- LIVE TICKER -->
+<section class="live-ticker"><div class="section-inner"><div class="ticker-grid">
+    <div class="ticker-card glass"><div class="live-dot"></div><div class="ticker-val" id="liveRickshaws">342</div><div class="ticker-lbl">Live Rickshaws</div></div>
+    <div class="ticker-card glass"><div class="ticker-val" id="liveCampaigns">127</div><div class="ticker-lbl">Active Campaigns</div></div>
+    <div class="ticker-card glass"><div class="ticker-val" id="liveEyeViews">1,247,893</div><div class="ticker-lbl">Eye Views Today</div></div>
+    <div class="ticker-card glass"><div class="ticker-val" id="liveBookings">24</div><div class="ticker-lbl">Bookings Today</div></div>
+</div></div></section>
+
+<!-- TRUST BAR -->
+<section class="trust-bar"><div class="section-inner">
+    <div class="trust-stats">
+        <div class="trust-stat"><div class="trust-num">600+</div><div class="trust-lbl">Rickshaws</div></div>
+        <div class="trust-stat"><div class="trust-num">150+</div><div class="trust-lbl">Campaigns</div></div>
+        <div class="trust-stat"><div class="trust-num">17.7M</div><div class="trust-lbl">Monthly Eyes</div></div>
+        <div class="trust-stat"><div class="trust-num">350+</div><div class="trust-lbl">Businesses</div></div>
+    </div>
+    <div class="trust-scroll"><div class="trust-track" id="trustTrack"></div></div>
+</div></section>
+
+<!-- AI CAMPAIGN PLANNER -->
+<section class="section" id="aiPlanner"><div class="section-inner">
+    <div class="section-header"><span class="badge badge-ai">🤖 AI Powered</span><h2 class="section-title">AI Campaign Planner</h2><p class="section-subtitle">Tell us about your business. AI recommends the perfect campaign.</p></div>
+    <div class="glass-card" style="max-width:800px;margin:0 auto;padding:40px">
+        <div class="form-row">
+            <div class="form-group"><label>Business Type</label><select id="aiBiz"><option value="">Select</option><option>Retail</option><option>Restaurant</option><option>Clinic</option><option>Education</option><option>Real Estate</option><option>Service</option></select></div>
+            <div class="form-group"><label>Target Location</label><select id="aiLocation"><option value="">Select Zone</option><option>Kausa</option><option>Mumbra Station</option><option>Shilphata</option><option>Retibunder</option><option>Check Naka</option></select></div>
         </div>
-        <div class="glass-card booking-card">
-            <div class="form-row">
-                <div class="form-group"><label>Your Name *</label><input type="text" id="bookName" required></div>
-                <div class="form-group"><label>Phone *</label><input type="tel" id="bookPhone" required></div>
-            </div>
-            <div class="form-row">
-                <div class="form-group"><label>Email</label><input type="email" id="bookEmail"></div>
-                <div class="form-group"><label>Business Name</label><input type="text" id="bookBiz"></div>
-            </div>
-            <div class="form-row">
-                <div class="form-group"><label>Campaign Type</label><select id="bookType"><option>LED Campaign</option><option>Audio Campaign</option><option>Combo (LED+Audio)</option></select></div>
-                <div class="form-group"><label>Zone</label><select id="bookZone"><option>Kausa</option><option>Mumbra Station</option><option>Shilphata</option><option>Retibunder</option></select></div>
-            </div>
-            
-            <!-- Payment Section -->
-            <div class="payment-section">
-                <h4>💳 Payment</h4>
-                <div class="qr-grid" id="qrGrid"></div>
-                <div class="form-group">
-                    <label>Transaction ID</label>
-                    <input type="text" id="txnId" placeholder="Enter UPI transaction ID">
-                </div>
-                <div class="form-group">
-                    <label>Payment Screenshot</label>
-                    <input type="file" id="paymentScreenshot" accept="image/*">
-                </div>
-            </div>
+        <div class="form-row">
+            <div class="form-group"><label>Monthly Budget</label><select id="aiBudget"><option value="">Select</option><option>₹5K-15K</option><option>₹15K-50K</option><option>₹50K-1L</option><option>₹1L+</option></select></div>
+            <div class="form-group"><label>Campaign Objective</label><select id="aiObjective"><option value="">Select</option><option>Brand Awareness</option><option>Footfall Increase</option><option>Sales Boost</option><option>New Launch</option></select></div>
+        </div>
+        <button class="btn btn-primary btn-block btn-lg pulse-glow" onclick="RASAAI.runAIPlanner()">🤖 Get AI Recommendation</button>
+        <div id="aiResult" class="ai-result" style="display:none;margin-top:24px"></div>
+    </div>
+</div></section>
 
-            <!-- Summary -->
-            <div id="bookingSummary" class="booking-summary"></div>
+<!-- ROUTES -->
+<section class="section section-alt" id="routes"><div class="section-inner">
+    <div class="section-header"><span class="badge badge-cyan">📍 Routes</span><h2 class="section-title">4 Strategic Routes Across Mumbra</h2></div>
+    <div class="routes-grid" id="routesGrid"></div>
+</div></section>
 
-            <div style="display:flex;gap:12px;margin-top:24px;flex-wrap:wrap">
-                <button onclick="submitBooking()" class="btn btn-primary btn-lg" style="flex:1">🚀 Confirm Booking</button>
-                <button onclick="bookViaWhatsApp()" class="btn btn-whatsapp btn-lg" style="flex:1">💬 Book via WhatsApp</button>
-            </div>
+<!-- ZONES -->
+<section class="section" id="zones"><div class="section-inner">
+    <div class="section-header"><span class="badge badge-violet">🗺️ Zones</span><h2 class="section-title">12 Advertising Zones</h2></div>
+    <div class="zones-grid" id="zonesGrid"></div>
+</div></section>
+
+<!-- ROUTE INTELLIGENCE -->
+<section class="section section-alt" id="routeIntel"><div class="section-inner">
+    <div class="section-header"><span class="badge badge-green">📡 Live</span><h2 class="section-title">Route Intelligence Engine</h2></div>
+    <div class="track-grid" id="trackGrid"></div>
+</div></section>
+
+<!-- PRICING -->
+<section class="section" id="pricing"><div class="section-inner">
+    <div class="section-header"><span class="badge badge-amber">💰 Pricing</span><h2 class="section-title">Dynamic AI-Optimized Pricing</h2><p class="section-subtitle">₹1,238-1,647/day. AI adjusts every 15 minutes.</p></div>
+    <div class="pricing-refresh">⏱️ Price refreshes in: <span id="priceTimer">14:59</span></div>
+    <div class="pricing-grid" id="pricingGrid"></div>
+</div></section>
+
+<!-- CAMPAIGN BUILDER -->
+<section class="section section-alt" id="campaignBuilder"><div class="section-inner">
+    <div class="section-header"><span class="badge badge-cyan">🎯 Book</span><h2 class="section-title">Build Your Campaign</h2><p class="section-subtitle">Book instantly via WhatsApp</p></div>
+    <div class="glass-card" style="max-width:850px;margin:0 auto;padding:40px" id="bookingCard"></div>
+</div></section>
+
+<!-- MOCKUP GENERATOR -->
+<section class="section" id="mockup"><div class="section-inner">
+    <div class="section-header"><span class="badge badge-violet">🎨 Mockup</span><h2 class="section-title">Instant Mockup Generator</h2><p class="section-subtitle">Upload your creative. See it on a rickshaw instantly.</p></div>
+    <div class="glass-card" style="max-width:900px;margin:0 auto;padding:40px;text-align:center">
+        <input type="file" id="mockupFile" accept="image/*" onchange="RASAAI.generateMockup()" style="margin-bottom:20px">
+        <div class="mockup-views">
+            <div class="mockup-view" id="dayView"><canvas id="dayCanvas"></canvas><span>Day View</span></div>
+            <div class="mockup-view" id="nightView"><canvas id="nightCanvas"></canvas><span>Night View</span></div>
+            <div class="mockup-view" id="roadView"><canvas id="roadCanvas"></canvas><span>Roadside View</span></div>
+            <div class="mockup-view" id="trafficView"><canvas id="trafficCanvas"></canvas><span>Traffic View</span></div>
         </div>
     </div>
-</section>
+</div></section>
 
-<!-- ============ FREE BONUS ============ -->
-<section class="section section-alt" id="bonus">
-    <div class="section-inner">
-        <div class="bonus-card glass-card">
-            <h3>🎁 FREE 30 Social Media Creatives!</h3>
-            <p>Included with every LED & Combo campaign</p>
-            <div class="bonus-icons-grid">
-                <span>📸 Instagram (10)</span><span>💬 WhatsApp (5)</span><span>👍 Facebook (5)</span>
-                <span>📖 Stories (5)</span><span>🎠 Carousels (3)</span><span>🎥 Reels (2)</span>
-            </div>
-            <button onclick="scrollToSection('book')" class="btn btn-glass btn-lg">🎯 Claim Bonus</button>
+<!-- PAYMENT CENTER -->
+<section class="section section-alt" id="payment"><div class="section-inner">
+    <div class="section-header"><span class="badge badge-green">💳 Pay</span><h2 class="section-title">Payment Center</h2></div>
+    <div class="glass-card" style="max-width:600px;margin:0 auto;padding:40px;text-align:center" id="paymentCard"></div>
+</div></section>
+
+<!-- FORMATS -->
+<section class="section" id="formats"><div class="section-inner">
+    <div class="section-header"><span class="badge badge-cyan">📺 Formats</span><h2 class="section-title">Choose Your Format</h2></div>
+    <div class="formats-grid" id="formatCards"></div>
+</div></section>
+
+<!-- COMPARISON -->
+<section class="section section-alt" id="comparison"><div class="section-inner">
+    <div class="section-header"><span class="badge badge-amber">⚖️ Compare</span><h2 class="section-title">Why AI Advertising Wins</h2></div>
+    <div id="compTabs" class="comp-tabs"></div>
+    <div id="compContent" class="comp-content"></div>
+</div></section>
+
+<!-- AUDIO -->
+<section class="section" id="audio"><div class="section-inner">
+    <div class="section-header"><span class="badge badge-violet">🔊 Audio</span><h2 class="section-title">Hear Your Ad</h2></div>
+    <div class="audio-grid" id="audioGrid"></div>
+</div></section>
+
+<!-- VIDEO GALLERY -->
+<section class="section section-alt" id="videos"><div class="section-inner">
+    <div class="section-header"><span class="badge badge-cyan">🎬 Gallery</span><h2 class="section-title">See Rasaai In Action</h2></div>
+    <div class="video-grid" id="videoGrid"></div>
+    <div id="videoModal" class="video-modal" onclick="RASAAI.closeVideo()"><div class="video-modal-inner" onclick="event.stopPropagation()"><button class="video-close" onclick="RASAAI.closeVideo()">✕</button><div id="videoEmbed" class="video-embed"></div></div></div>
+</div></section>
+
+<!-- NEURO -->
+<section class="section" id="neuro"><div class="section-inner">
+    <div class="section-header"><span class="badge badge-violet">🧠 Science</span><h2 class="section-title">Why Moving Ads Capture Attention</h2></div>
+    <div class="neuro-grid" id="neuroGrid"></div>
+</div></section>
+
+<!-- DASHBOARD -->
+<section class="section section-alt" id="dashboard"><div class="section-inner">
+    <div class="section-header"><span class="badge badge-green">📊 Dashboard</span><h2 class="section-title">Campaign Dashboard</h2></div>
+    <div class="glass-card" style="padding:32px" id="dashContent"></div>
+</div></section>
+
+<!-- AFFILIATE -->
+<section class="section" id="affiliate"><div class="section-inner">
+    <div class="section-header"><span class="badge badge-amber">💰 Earn</span><h2 class="section-title">Affiliate Program</h2></div>
+    <div id="affiliateContainer"></div>
+</div></section>
+
+<!-- DRIVER ONBOARDING -->
+<section class="section section-alt" id="driver"><div class="section-inner">
+    <div class="section-header"><span class="badge badge-cyan">🛺 Driver</span><h2 class="section-title">Driver Onboarding</h2></div>
+    <div class="glass-card" style="max-width:700px;margin:0 auto;padding:40px" id="driverCard"></div>
+</div></section>
+
+<!-- CONTEST -->
+<section class="section" id="contest"><div class="section-inner">
+    <div class="section-header"><span class="badge badge-violet">🏆 Engage</span><h2 class="section-title">Hashtag Contest</h2></div>
+    <div id="contestContainer"></div>
+</div></section>
+
+<!-- HEATMAP -->
+<section class="section section-alt" id="heatmap"><div class="section-inner">
+    <div class="section-header"><span class="badge badge-cyan">🔥 Analytics</span><h2 class="section-title">Coverage Heatmap</h2></div>
+    <div id="heatmapContainer"></div>
+</div></section>
+
+<!-- LEADERBOARD -->
+<section class="section" id="leaderboard"><div class="section-inner">
+    <div class="section-header"><span class="badge badge-amber">🏅 Rankings</span><h2 class="section-title">Top Zones</h2></div>
+    <div id="leaderboardContainer" class="lb-container"></div>
+</div></section>
+
+<!-- TESTIMONIALS -->
+<section class="section section-alt" id="testimonials"><div class="section-inner">
+    <div class="section-header"><span class="badge badge-green">💬 Reviews</span><h2 class="section-title">350+ Advertisers Love Us</h2><div style="text-align:center;margin-bottom:20px">⭐⭐⭐⭐⭐ 4.8/5</div></div>
+    <div id="testimonialSlider"></div>
+</div></section>
+
+<!-- INDUSTRIES -->
+<section class="section" id="industries"><div class="section-inner">
+    <div class="section-header"><span class="badge badge-violet">🏢 20 Industries</span><h2 class="section-title">Perfect For Every Business</h2></div>
+    <div class="industries-grid" id="industryCards"></div>
+</div></section>
+
+<!-- FAQ -->
+<section class="section section-alt" id="faq"><div class="section-inner">
+    <div class="section-header"><span class="badge badge-cyan">❓ Help</span><h2 class="section-title">FAQ</h2></div>
+    <div id="faqContainer" class="faq-container"></div>
+</div></section>
+
+<!-- BONUS -->
+<section class="section" id="bonus"><div class="section-inner">
+    <div class="bonus-banner">
+        <h3>🎁 FREE 30 Social Media Creatives!</h3>
+        <p>Book any campaign and get 30 ready-to-use designs FREE!</p>
+        <div class="bonus-icons">
+            <span>📸 Instagram (10)</span><span>💬 WhatsApp (5)</span><span>👍 Facebook (5)</span>
+            <span>📖 Stories (5)</span><span>🎠 Carousels (3)</span><span>🎥 Reels (2)</span>
+        </div>
+        <button onclick="document.getElementById('campaignBuilder').scrollIntoView({behavior:'smooth'})" class="btn btn-lg" style="background:white;color:#7C3AED;font-weight:700">🎯 Claim Bonus</button>
+    </div>
+</div></section>
+
+<!-- FINAL CTA -->
+<section class="section section-alt" id="finalCta"><div class="section-inner">
+    <div class="bonus-banner">
+        <h3>Ready to Dominate Mumbra's Streets?</h3>
+        <p>AI-powered campaigns. Starting at ₹1,238/day.</p>
+        <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap">
+            <a href="tel:+919594306625" class="btn btn-primary btn-lg pulse-glow">📞 +91 95943 06625</a>
+            <a href="https://wa.me/919594306625" class="btn btn-whatsapp btn-lg">💬 WhatsApp</a>
         </div>
     </div>
-</section>
-
-<!-- ============ AFFILIATE ============ -->
-<section class="section" id="affiliate">
-    <div class="section-inner">
-        <div class="section-header">
-            <span class="badge badge-ai">💰 Earn</span>
-            <h2 class="section-title">Affiliate Program</h2>
-        </div>
-        <div class="glass-card" style="max-width:600px;margin:0 auto;text-align:center">
-            <h3>Earn 10% Commission</h3>
-            <p style="color:var(--gray-400);margin:12px 0">Refer businesses and earn on every campaign they book</p>
-            <div class="form-row">
-                <div class="form-group"><label>Your Name</label><input type="text" id="affName"></div>
-                <div class="form-group"><label>Phone</label><input type="tel" id="affPhone"></div>
-            </div>
-            <button onclick="registerAffiliate()" class="btn btn-primary btn-block">Become an Affiliate</button>
-            <div id="affiliateResult" style="margin-top:16px;display:none"></div>
-        </div>
-    </div>
-</section>
-
-<!-- ============ DRIVER ONBOARDING ============ -->
-<section class="section section-alt" id="driver">
-    <div class="section-inner">
-        <div class="section-header">
-            <span class="badge">🛺 Drivers</span>
-            <h2 class="section-title">Driver Onboarding</h2>
-        </div>
-        <div class="glass-card" style="max-width:600px;margin:0 auto">
-            <div class="form-row">
-                <div class="form-group"><label>Driver Name</label><input type="text" id="driverName"></div>
-                <div class="form-group"><label>Phone</label><input type="tel" id="driverPhone"></div>
-            </div>
-            <div class="form-row">
-                <div class="form-group"><label>Vehicle Number</label><input type="text" id="driverVehicle"></div>
-                <div class="form-group"><label>Preferred Route</label><select id="driverRoute"><option>Kausa</option><option>Station</option><option>Shilphata</option><option>Retibunder</option></select></div>
-            </div>
-            <button onclick="registerDriver()" class="btn btn-primary btn-block">Register as Driver</button>
-            <div id="driverResult" style="margin-top:16px;display:none"></div>
-        </div>
-    </div>
-</section>
-
-<!-- ============ FAQ ============ -->
-<section class="section" id="faq">
-    <div class="section-inner">
-        <div class="section-header"><h2 class="section-title">Frequently Asked Questions</h2></div>
-        <div class="faq-container" id="faqContainer"></div>
-    </div>
-</section>
+</div></section>
 
 </main>
 
-<footer class="footer">
-    <div class="section-inner">
-        <div class="footer-grid">
-            <div class="footer-col">
-                <div class="footer-logo">🛺 Rasaai<span class="logo-ai">OS</span></div>
-                <p>AI-Powered Outdoor Advertising Platform. Smart campaigns, real results.</p>
-            </div>
-            <div class="footer-col"><h4>Links</h4><a href="#aiPlanner">AI Planner</a><a href="#calculator">Calculator</a><a href="#pricing">Pricing</a></div>
-            <div class="footer-col"><h4>Contact</h4><a href="tel:+919594306625">📞 +91 95943 06625</a><a href="https://wa.me/919594306625">💬 WhatsApp</a></div>
-        </div>
-        <div class="footer-bottom"><span>© 2026 Rasaai OS</span><span>Powered by AI</span></div>
+<footer class="footer"><div class="section-inner">
+    <div class="footer-grid">
+        <div class="footer-col"><div class="footer-logo">🛺 Rasaai AI OS</div><p>AI-powered outdoor advertising. LED & Audio campaigns across Mumbra.</p><div class="footer-contact"><a href="tel:+919594306625">📞 +91 95943 06625</a><a href="https://wa.me/919594306625">💬 WhatsApp</a></div></div>
+        <div class="footer-col"><h4>Platform</h4><a href="#aiPlanner">AI Planner</a><a href="#routes">Routes</a><a href="#pricing">Pricing</a></div>
+        <div class="footer-col"><h4>Tools</h4><a href="#mockup">Mockup Generator</a><a href="#payment">Payment</a><a href="#dashboard">Dashboard</a></div>
+        <div class="footer-col"><h4>Contact</h4><a href="tel:+919594306625">📞 Call</a><a href="https://wa.me/919594306625">💬 WhatsApp</a></div>
     </div>
-</footer>
+    <div class="footer-bottom"><span>© 2026 Rasaai AI OS</span><span>Made with ❤️ in Mumbra</span></div>
+</div></footer>
 
-<script src="config.json"></script>
+<nav class="bottom-nav">
+    <a href="#hero" class="nav-item active"><span>🏠</span>Home</a>
+    <a href="#aiPlanner" class="nav-item"><span>🤖</span>AI Plan</a>
+    <button onclick="document.getElementById('campaignBuilder').scrollIntoView({behavior:'smooth'})" class="nav-fab">➕</button>
+    <a href="#pricing" class="nav-item"><span>💰</span>Price</a>
+    <a href="tel:+919594306625" class="nav-item"><span>📞</span>Call</a>
+</nav>
+
 <script src="app.js"></script>
 </body>
 </html>
