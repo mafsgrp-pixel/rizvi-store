@@ -5,10 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta name="theme-color" content="#221F60">
     <title>RASAAI - Hyperlocal Rickshaw Advertising | Real Eye Views</title>
-    <meta name="description" content="Book rickshaw advertising across Mumbra. LED campaigns starting at ₹1,238/day. 17.7M+ monthly eye views.">
+    <meta name="description" content="Book rickshaw advertising across Mumbra. LED campaigns starting at ₹1,238/day. 17.7M+ monthly eye views. WhatsApp booking.">
     <meta property="og:title" content="RASAAI - Hyperlocal Rickshaw Advertising">
-    <meta property="og:description" content="Physical ads that can't be skipped. 17.7M+ Monthly Eye Views.">
+    <meta property="og:description" content="Physical ads that can't be skipped. 17.7M+ Monthly Eye Views across Mumbra.">
     <meta property="og:image" content="https://www.hanksadvertising.com/cms/uploads/images/auto-rickshaw-advertising-ad.jpg">
+    <meta name="twitter:card" content="summary_large_image">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23221F60'/><text x='50' y='68' font-size='55' text-anchor='middle' fill='white' font-weight='bold'>R</text></svg>">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -24,7 +25,7 @@
         <button class="modal-close-btn" onclick="RASAAI.closeExitPopup()">✕</button>
         <div class="exit-icon">⚡</div>
         <h3>Wait! Limited Rickshaws Available</h3>
-        <p>Only <strong>8</strong> rickshaws left in Mumbra!</p>
+        <p>Only <strong>8</strong> rickshaws left in Mumbra this week!</p>
         <div class="exit-timer">Offer refreshes soon</div>
         <a href="tel:+919594306625" class="btn btn-primary btn-block pulse-btn">📞 Call: +91 95943 06625</a>
         <a href="https://wa.me/919594306625" class="btn btn-whatsapp btn-block" style="margin-top:8px">💬 WhatsApp</a>
@@ -50,7 +51,7 @@
             <a href="#zones" class="nav-link">Zones</a>
             <a href="#pricing" class="nav-link">Pricing</a>
             <a href="#campaignBuilder" class="nav-link">Build Campaign</a>
-            <a href="dashboard.html" class="nav-link">Dashboard</a>
+            <a href="#" onclick="RASAAI.openDashboard()" class="nav-link">Dashboard</a>
         </nav>
         <div class="header-actions">
             <a href="https://wa.me/919594306625" class="btn btn-whatsapp btn-sm">💬</a>
@@ -67,29 +68,28 @@
 
 <main>
 
-<!-- HERO -->
 <section class="hero" style="background-image:url('https://www.hanksadvertising.com/cms/uploads/images/auto-rickshaw-advertising-ad.jpg');background-size:cover;background-position:center">
     <div style="position:absolute;inset:0;background:linear-gradient(135deg,rgba(34,31,96,0.92),rgba(34,31,96,0.85))"></div>
     <div class="hero-inner" style="position:relative;z-index:1">
         <div class="hero-content-col">
-            <div class="hero-badge"><span class="dot"></span> 4 strategic routes across Mumbra</div>
+            <div class="hero-badge"><span class="dot"></span> 4 routes across Mumbra • 600+ Rickshaws</div>
             <h1 class="hero-title">Advertise on <span>Moving Rickshaws</span> Across Mumbra</h1>
-            <p class="hero-subtitle">LED screens & audio ads reaching <strong>17.7M+ monthly eye views</strong>. Starting at <strong>₹1,238/day</strong>.</p>
+            <p class="hero-subtitle">LED screens & audio ads reaching <strong>17.7M+ monthly eye views</strong>. Starting at <strong>₹1,238/day</strong> per rickshaw. Physical ads that can't be skipped, blocked, or ignored.</p>
             <div class="hero-actions">
-                <a href="tel:+919594306625" class="btn btn-primary btn-lg pulse-btn">📞 +91 95943 06625</a>
-                <button onclick="document.getElementById('campaignBuilder').scrollIntoView({behavior:'smooth'})" class="btn btn-outline btn-lg" style="color:white;border-color:rgba(255,255,255,0.5)">📊 Free Estimate</button>
+                <a href="tel:+919594306625" class="btn btn-primary btn-lg pulse-btn">📞 Call: +91 95943 06625</a>
+                <button onclick="document.getElementById('campaignBuilder').scrollIntoView({behavior:'smooth'})" class="btn btn-outline btn-lg" style="color:white;border-color:rgba(255,255,255,0.5)">📊 Get Free Estimate</button>
             </div>
             <div class="hero-stats-row">
-                <div class="hero-stat"><span class="hero-stat-num" data-count="17700000">0</span><span class="hero-stat-lbl">Monthly Eye Views</span></div>
-                <div class="hero-stat"><span class="hero-stat-num" data-count="850">0</span><span class="hero-stat-lbl">Businesses</span></div>
-                <div class="hero-stat"><span class="hero-stat-num" data-count="2847">0</span><span class="hero-stat-lbl">Campaigns</span></div>
-                <div class="hero-stat"><span class="hero-stat-num" data-count="600">0</span><span class="hero-stat-lbl">Rickshaws</span></div>
+                <div class="hero-stat"><span class="hero-stat-num" data-count="17700000">17.7M+</span><span class="hero-stat-lbl">Monthly Eye Views</span></div>
+                <div class="hero-stat"><span class="hero-stat-num" data-count="850">850+</span><span class="hero-stat-lbl">Businesses Served</span></div>
+                <div class="hero-stat"><span class="hero-stat-num" data-count="2847">2,847</span><span class="hero-stat-lbl">Campaigns Delivered</span></div>
+                <div class="hero-stat"><span class="hero-stat-num" data-count="600">600+</span><span class="hero-stat-lbl">Active Rickshaws</span></div>
             </div>
         </div>
         <div class="hero-visual">
             <div class="rickshaw-card floating-card">
                 <div class="rickshaw-illustration" style="background-image:url('https://www.hanksadvertising.com/cms/resources/assets/frontend/images2/1/Thumbnail/21.jpg');background-size:cover;background-position:center">
-                    <span style="background:rgba(0,0,0,0.5);color:white;padding:8px 16px;border-radius:100px;font-weight:700">YOUR AD</span>
+                    <span style="background:rgba(0,0,0,0.6);color:white;padding:8px 16px;border-radius:100px;font-weight:700">YOUR AD HERE</span>
                 </div>
                 <p class="price-tag">LED Campaign starting at</p>
                 <p class="price" id="heroPrice">₹1,238<span>/day</span></p>
@@ -104,227 +104,196 @@
     </div>
 </section>
 
-<!-- LIVE STATS -->
 <section class="live-stats-bar"><div class="section-inner"><div class="live-stats-grid">
-    <div class="live-stat-card"><div class="live-indicator"></div><div class="live-stat-value" id="liveRickshaws">342</div><div class="live-stat-label">Live Rickshaws</div></div>
+    <div class="live-stat-card"><div class="live-indicator"></div><div class="live-stat-value" id="liveRickshaws">342</div><div class="live-stat-label">Live Rickshaws Now</div></div>
     <div class="live-stat-card"><div class="live-stat-value" id="liveCampaigns">127</div><div class="live-stat-label">Active Campaigns</div></div>
     <div class="live-stat-card"><div class="live-stat-value" id="liveEyeViews">1,247,893</div><div class="live-stat-label">Eye Views Today</div></div>
     <div class="live-stat-card"><div class="live-stat-value">12</div><div class="live-stat-label">Zones Covered</div></div>
 </div></div></section>
 
-<!-- TRUST BAR -->
 <section class="trust-bar"><div class="section-inner">
     <div class="trust-stats">
-        <div class="trust-stat"><div class="number">600+</div><div class="label">Rickshaws</div></div>
-        <div class="trust-stat"><div class="number">150+</div><div class="label">Campaigns</div></div>
-        <div class="trust-stat"><div class="number">17.7M</div><div class="label">Monthly Eyes</div></div>
-        <div class="trust-stat"><div class="number">350+</div><div class="label">Businesses</div></div>
+        <div class="trust-stat"><div class="number">600+</div><div class="label">Total Rickshaws</div></div>
+        <div class="trust-stat"><div class="number">150+</div><div class="label">Active Campaigns</div></div>
+        <div class="trust-stat"><div class="number">17.7M</div><div class="label">Monthly Eye Views</div></div>
+        <div class="trust-stat"><div class="number">350+</div><div class="label">Businesses Served</div></div>
     </div>
     <div class="trust-logo-wrapper"><div class="trust-logo-track" id="trustLogosTrack"></div></div>
 </div></section>
 
-<!-- PROBLEM -->
 <section class="section" id="problem"><div class="section-inner">
-    <div class="section-header"><span class="section-badge">The Problem</span><h2 class="section-title">Tired of Digital Ads Nobody Sees?</h2></div>
+    <div class="section-header"><span class="section-badge">The Problem</span><h2 class="section-title">Tired of Digital Ads Nobody Sees?</h2><p class="section-subtitle">Instagram, Facebook & YouTube ads get scrolled past, skipped, or blocked. Your budget deserves real human eyes.</p></div>
     <div class="problem-cards">
-        <div class="problem-card"><div class="problem-icon">📱</div><h3>76% Skip Rate</h3><p>YouTube ads skipped in 5 seconds</p></div>
-        <div class="problem-card"><div class="problem-icon">👻</div><h3>Ad Blockers</h3><p>42% block digital ads completely</p></div>
-        <div class="problem-card"><div class="problem-icon">📉</div><h3>Low Recall</h3><p>18% recall for social media ads</p></div>
+        <div class="problem-card"><div class="problem-icon">📱</div><h3>76% Skip Rate</h3><p>YouTube ads get skipped within 5 seconds. Your budget literally disappears.</p></div>
+        <div class="problem-card"><div class="problem-icon">👻</div><h3>Ad Blockers</h3><p>42% of users block digital ads completely. Your message never reaches them.</p></div>
+        <div class="problem-card"><div class="problem-icon">📉</div><h3>Low Recall</h3><p>Only 18% brand recall for social media ads. Forgotten in seconds.</p></div>
     </div>
 </div></section>
 
-<!-- SOLUTION -->
 <section class="section section-alt" id="solution"><div class="section-inner">
-    <div class="section-header"><span class="section-badge badge-green">Solution</span><h2 class="section-title">Physical Ads That Can't Be Skipped</h2></div>
+    <div class="section-header"><span class="section-badge badge-green">The Solution</span><h2 class="section-title">Physical Ads That Can't Be Skipped</h2><p class="section-subtitle">Your brand on 600+ rickshaws across Mumbra's busiest routes. Real visibility. Real recall. Real results.</p></div>
     <div class="solution-comparison">
-        <div class="comp-side comp-bad"><span class="comp-label">Digital Ads</span><div class="comp-phone"><div class="phone-screen"><div class="phone-ad">Ad</div><div class="phone-skip">Skip →</div></div></div></div>
+        <div class="comp-side comp-bad"><span class="comp-label">Digital Ads</span><div class="comp-phone"><div class="phone-screen"><div class="phone-ad">Ad</div><div class="phone-skip">Skip Ad →</div></div></div></div>
         <div class="comp-vs">VS</div>
-        <div class="comp-side comp-good"><span class="comp-label">RASAAI</span><div class="comp-rickshaw" style="background-image:url('https://www.hanksadvertising.com/cms/resources/assets/frontend/images2/1/Thumbnail/5.jpg');background-size:cover"><div class="mini-ad">YOUR BRAND</div></div></div>
+        <div class="comp-side comp-good"><span class="comp-label">RASAAI</span><div class="comp-rickshaw" style="background-image:url('https://www.hanksadvertising.com/cms/resources/assets/frontend/images2/1/Thumbnail/5.jpg');background-size:cover;background-position:center"><div class="mini-ad">YOUR BRAND</div></div></div>
     </div>
 </div></section>
 
-<!-- HOW IT WORKS -->
 <section class="section" id="howItWorks"><div class="section-inner">
-    <div class="section-header"><span class="section-badge">Process</span><h2 class="section-title">Launch in 4 Easy Steps</h2></div>
+    <div class="section-header"><span class="section-badge">Simple Process</span><h2 class="section-title">Launch Your Campaign in 4 Easy Steps</h2></div>
     <div class="steps-grid">
-        <div class="step-card"><div class="step-number">1</div><div class="step-icon">🎯</div><h4>Choose Zone</h4><p>12 zones across 4 Mumbra routes</p></div>
-        <div class="step-card"><div class="step-number">2</div><div class="step-icon">🎨</div><h4>Upload Creative</h4><p>30 FREE social media creatives</p></div>
-        <div class="step-card"><div class="step-number">3</div><div class="step-icon">🚀</div><h4>Go Live</h4><p>Your ad hits streets in 48 hours</p></div>
-        <div class="step-card"><div class="step-number">4</div><div class="step-icon">📊</div><h4>Track Results</h4><p>Real-time eye views & ROI</p></div>
+        <div class="step-card"><div class="step-number">1</div><div class="step-icon">🎯</div><h4>Choose Zone & Route</h4><p>Select from 12 zones across 4 strategic Mumbra routes with detailed traffic data</p></div>
+        <div class="step-card"><div class="step-number">2</div><div class="step-icon">🎨</div><h4>Upload Creative</h4><p>LED display, audio message, or both. Get 30 FREE social media creatives included</p></div>
+        <div class="step-card"><div class="step-number">3</div><div class="step-icon">🚀</div><h4>Go Live</h4><p>Your ad hits the streets within 48 hours. We handle production & installation</p></div>
+        <div class="step-card"><div class="step-number">4</div><div class="step-icon">📊</div><h4>Track Results</h4><p>Real-time dashboard with eye views, reach, GPS tracking & ROI analytics</p></div>
     </div>
 </div></section>
 
-<!-- ROUTES -->
 <section class="section section-alt" id="routes"><div class="section-inner">
-    <div class="section-header"><span class="section-badge badge-green">Routes</span><h2 class="section-title">4 High-Traffic Routes Across Mumbra</h2></div>
+    <div class="section-header"><span class="section-badge badge-green">Strategic Routes</span><h2 class="section-title">4 High-Traffic Routes Across Mumbra</h2><p class="section-subtitle">Exact routes covered by our rickshaw network with real-time tracking</p></div>
     <div class="routes-grid" id="routesGrid"></div>
 </div></section>
 
-<!-- MAP -->
 <section class="section" id="coverage"><div class="section-inner">
-    <div class="section-header"><span class="section-badge">Coverage</span><h2 class="section-title">Dominating Mumbra's Streets</h2></div>
+    <div class="section-header"><span class="section-badge">Live Coverage</span><h2 class="section-title">Dominating Mumbra's Streets</h2><p class="section-subtitle">600+ rickshaws covering every major zone. Click markers to explore.</p></div>
     <div id="coverageMap" class="coverage-map"></div>
 </div></section>
 
-<!-- ZONES -->
 <section class="section section-alt" id="zones"><div class="section-inner">
-    <div class="section-header"><span class="section-badge badge-green">Zones</span><h2 class="section-title">Explore 12 Advertising Zones</h2></div>
+    <div class="section-header"><span class="section-badge badge-green">Zone Intelligence</span><h2 class="section-title">Explore 12 Advertising Zones</h2><p class="section-subtitle">Each zone mapped with population, traffic & rickshaw availability</p></div>
     <div class="zones-grid" id="zonesGrid"></div>
 </div></section>
 
-<!-- ROUTE INTELLIGENCE -->
 <section class="section" id="routeIntel"><div class="section-inner">
-    <div class="section-header"><span class="section-badge">Live</span><h2 class="section-title">Route Intelligence Engine</h2></div>
+    <div class="section-header"><span class="section-badge">Live Tracking</span><h2 class="section-title">Route Intelligence Engine</h2><p class="section-subtitle">Every rickshaw tracked in real-time with GPS, battery, and campaign status</p></div>
     <div class="rickshaw-track-grid" id="rickshawTrackGrid"></div>
 </div></section>
 
-<!-- EYE CALCULATOR -->
 <section class="section section-alt" id="calculator"><div class="section-inner">
-    <div class="section-header"><span class="section-badge badge-green">Calculator</span><h2 class="section-title">Eye View Calculator</h2></div>
+    <div class="section-header"><span class="section-badge badge-green">Estimate ROI</span><h2 class="section-title">Eye View Calculator</h2><p class="section-subtitle">See exactly how many real human eyes will see your ad</p></div>
     <div class="calculator-card" id="eyeCalculator"></div>
 </div></section>
 
-<!-- NEUROMARKETING -->
 <section class="section" id="neuromarketing"><div class="section-inner">
-    <div class="section-header"><span class="section-badge badge-purple">Science</span><h2 class="section-title">Why Moving Ads Capture Attention</h2></div>
+    <div class="section-header"><span class="section-badge badge-purple">Science</span><h2 class="section-title">Why Moving Advertising Captures Human Attention</h2><p class="section-subtitle">The neuroscience of transit media explained in 8 principles</p></div>
     <div class="neuro-grid" id="neuroGrid"></div>
 </div></section>
 
-<!-- METRICS -->
 <section class="section section-alt" id="metrics"><div class="section-inner">
-    <div class="section-header"><span class="section-badge">Metrics</span><h2 class="section-title">Real Eye Views. Not Impressions.</h2></div>
+    <div class="section-header"><span class="section-badge">Real Metrics</span><h2 class="section-title">Not Impressions. Not Reach. Real Eye Views.</h2></div>
     <div class="metrics-grid" id="metricsGrid"></div>
     <div class="metrics-detail-row" id="metricsDetail"></div>
 </div></section>
 
-<!-- COMPARISON -->
 <section class="section" id="comparison"><div class="section-inner">
-    <div class="section-header"><span class="section-badge badge-orange">Comparison</span><h2 class="section-title">Why RASAAI Beats Digital Ads</h2></div>
+    <div class="section-header"><span class="section-badge badge-orange">Comparison</span><h2 class="section-title">Why RASAAI Beats Digital Ads</h2><p class="section-subtitle">Interactive comparison. Click tabs to explore.</p></div>
     <div id="comparisonTabs" class="comparison-tabs"></div>
     <div id="comparisonContent" class="comparison-content"></div>
 </div></section>
 
-<!-- AUDIO -->
 <section class="section section-alt" id="audioDemo"><div class="section-inner">
-    <div class="section-header"><span class="section-badge badge-green">Audio</span><h2 class="section-title">Hear What Your Customers Hear</h2></div>
+    <div class="section-header"><span class="section-badge badge-green">Audio Ads</span><h2 class="section-title">Hear What Your Customers Hear</h2><p class="section-subtitle">Dual-channel advertising: Visual + Audio for 85% higher recall</p></div>
     <div id="audioPlayer" class="audio-grid"></div>
 </div></section>
 
-<!-- FORMATS -->
 <section class="section" id="formats"><div class="section-inner">
-    <div class="section-header"><span class="section-badge">Formats</span><h2 class="section-title">Choose Your Advertising Format</h2></div>
+    <div class="section-header"><span class="section-badge">Ad Formats</span><h2 class="section-title">Choose Your Advertising Format</h2></div>
     <div class="formats-grid" id="formatCards"></div>
 </div></section>
 
-<!-- CAMPAIGN BUILDER -->
 <section class="section section-alt" id="campaignBuilder"><div class="section-inner">
-    <div class="section-header"><span class="section-badge badge-green">Builder</span><h2 class="section-title">Build Your Campaign</h2><p class="section-subtitle">Book via WhatsApp instantly</p></div>
+    <div class="section-header"><span class="section-badge badge-green">Builder</span><h2 class="section-title">Build Your Campaign</h2><p class="section-subtitle">Fill details & book instantly via WhatsApp. We'll call you back in 5 minutes.</p></div>
     <div class="booking-card" id="bookingCard"></div>
 </div></section>
 
-<!-- PRICING -->
 <section class="section" id="pricing"><div class="section-inner">
-    <div class="section-header"><span class="section-badge badge-orange">Pricing</span><h2 class="section-title">Dynamic Zone-Wise Pricing</h2><p class="section-subtitle">₹1,238-1,647/day. Changes every 15 min.</p></div>
-    <div class="pricing-refresh">⏱️ Refreshes in: <span id="priceTimer">14:59</span></div>
+    <div class="section-header"><span class="section-badge badge-orange">Pricing</span><h2 class="section-title">Dynamic Zone-Wise Pricing</h2><p class="section-subtitle">₹1,238 - ₹1,647/day per rickshaw. Price changes every 15 minutes based on demand.</p></div>
+    <div class="pricing-refresh">⏱️ Price refreshes in: <span id="priceTimer">14:59</span></div>
     <div class="pricing-grid" id="pricingGrid"></div>
 </div></section>
 
-<!-- INVENTORY -->
 <section class="section section-alt" id="inventory"><div class="section-inner">
-    <div class="section-header"><span class="section-badge badge-red">Limited</span><h2 class="section-title">Available Rickshaws Per Zone</h2></div>
+    <div class="section-header"><span class="section-badge badge-red">Limited Availability</span><h2 class="section-title">Available Rickshaws Per Zone</h2><p class="section-subtitle">⚠️ Inventory updates in real-time. Book before slots fill up.</p></div>
     <div class="inventory-grid" id="inventoryGrid"></div>
 </div></section>
 
-<!-- ROI CALCULATOR -->
 <section class="section" id="roiCalculator"><div class="section-inner">
-    <div class="section-header"><span class="section-badge">ROI</span><h2 class="section-title">Advanced ROI Calculator</h2></div>
+    <div class="section-header"><span class="section-badge">Advanced ROI</span><h2 class="section-title">Advanced ROI Calculator</h2><p class="section-subtitle">Project your campaign performance with detailed metrics</p></div>
     <div class="calculator-card" id="roiCalc"></div>
 </div></section>
 
-<!-- CASE STUDIES -->
 <section class="section section-alt" id="caseStudies"><div class="section-inner">
     <div class="section-header"><span class="section-badge badge-green">Results</span><h2 class="section-title">Real Businesses, Real Results</h2></div>
     <div class="case-studies-grid" id="caseStudiesGrid"></div>
 </div></section>
 
-<!-- INDUSTRIES -->
 <section class="section" id="industries"><div class="section-inner">
     <div class="section-header"><span class="section-badge">20 Industries</span><h2 class="section-title">Perfect For Every Business</h2></div>
     <div class="industries-grid" id="industryCards"></div>
 </div></section>
 
-<!-- TESTIMONIALS -->
 <section class="section section-alt" id="testimonials"><div class="section-inner">
-    <div class="section-header"><span class="section-badge">Reviews</span><h2 class="section-title">What 350+ Advertisers Say</h2><div style="text-align:center;margin-bottom:20px">⭐⭐⭐⭐⭐ 4.8/5</div></div>
+    <div class="section-header"><span class="section-badge">Testimonials</span><h2 class="section-title">What 350+ Advertisers Say</h2><div style="text-align:center;margin-bottom:20px">⭐⭐⭐⭐⭐ 4.8/5 from 312 reviews</div></div>
     <div id="testimonialSlider" class="testimonial-slider"></div>
 </div></section>
 
-<!-- VIDEOS -->
 <section class="section" id="videos"><div class="section-inner">
     <div class="section-header"><span class="section-badge">Gallery</span><h2 class="section-title">See RASAAI In Action</h2></div>
     <div class="video-grid" id="videoGrid"></div>
     <div id="videoModal" class="video-modal" onclick="RASAAI.closeVideoModal()"><div class="video-modal-content" onclick="event.stopPropagation()"><button class="video-close" onclick="RASAAI.closeVideoModal()">✕</button><div id="videoEmbed" class="video-embed"></div></div></div>
 </div></section>
 
-<!-- HEATMAP -->
 <section class="section section-alt" id="heatmap"><div class="section-inner">
-    <div class="section-header"><span class="section-badge badge-purple">Analytics</span><h2 class="section-title">Coverage Heatmap</h2></div>
+    <div class="section-header"><span class="section-badge badge-purple">Analytics</span><h2 class="section-title">Coverage Heatmap</h2><p class="section-subtitle">See rickshaw density across zones and time of day</p></div>
     <div id="heatmapContainer"></div>
 </div></section>
 
-<!-- LEADERBOARD -->
 <section class="section" id="leaderboard"><div class="section-inner">
     <div class="section-header"><span class="section-badge badge-orange">Rankings</span><h2 class="section-title">Top Performing Zones</h2></div>
     <div id="leaderboardContainer" class="leaderboard-container"></div>
 </div></section>
 
-<!-- AFFILIATE -->
 <section class="section section-alt" id="affiliate"><div class="section-inner">
-    <div class="section-header"><span class="section-badge badge-green">Earn 10%</span><h2 class="section-title">Affiliate Program</h2></div>
+    <div class="section-header"><span class="section-badge badge-green">Earn 10%</span><h2 class="section-title">Affiliate Program</h2><p class="section-subtitle">Refer a business and earn 10% commission on their first campaign</p></div>
     <div id="affiliateContainer"></div>
 </div></section>
 
-<!-- CONTEST -->
 <section class="section" id="contest"><div class="section-inner">
     <div class="section-header"><span class="section-badge badge-purple">Engage</span><h2 class="section-title">Run a Hashtag Contest</h2></div>
     <div id="contestContainer"></div>
 </div></section>
 
-<!-- HASHTAG -->
 <section class="section section-alt" id="hashtag"><div class="section-inner">
     <div class="section-header"><span class="section-badge">Track</span><h2 class="section-title">Live Hashtag Tracking</h2></div>
     <div id="hashtagContainer"></div>
 </div></section>
 
-<!-- SOCIAL BONUS -->
 <section class="section" id="socialBonus"><div class="section-inner">
     <div class="bonus-banner">
         <h3>🎁 FREE 30 Social Media Creatives!</h3>
-        <p>Book any LED or Combo campaign and get 30 ready-to-use designs FREE!</p>
+        <p>Book any LED or Combo campaign and get 30 ready-to-use social media designs absolutely FREE!</p>
         <div class="bonus-icons">
-            <span>📸 Instagram (10)</span><span>💬 WhatsApp (5)</span><span>👍 Facebook (5)</span>
+            <span>📸 Instagram Posts (10)</span><span>💬 WhatsApp Ads (5)</span><span>👍 Facebook Posts (5)</span>
             <span>📖 Stories (5)</span><span>🎠 Carousels (3)</span><span>🎥 Reels (2)</span>
         </div>
-        <button onclick="document.getElementById('campaignBuilder').scrollIntoView({behavior:'smooth'})" class="btn btn-lg" style="background:white;color:#221F60;font-weight:700">🎯 Book Now & Claim</button>
+        <button onclick="document.getElementById('campaignBuilder').scrollIntoView({behavior:'smooth'})" class="btn btn-lg" style="background:white;color:#221F60;font-weight:700">🎯 Book Now & Claim Bonus</button>
     </div>
 </div></section>
 
-<!-- FAQ -->
 <section class="section section-alt" id="faq"><div class="section-inner">
     <div class="section-header"><span class="section-badge">Help</span><h2 class="section-title">Frequently Asked Questions</h2></div>
     <div id="faqContainer" class="faq-container"></div>
 </div></section>
 
-<!-- FINAL CTA -->
 <section class="section" id="finalCta"><div class="section-inner">
     <div class="bonus-banner">
         <h3>Ready to Dominate Mumbra's Streets?</h3>
-        <p>Join 350+ businesses. Starting at ₹1,238/day.</p>
-        <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap">
-            <a href="tel:+919594306625" class="btn btn-primary btn-lg pulse-btn">📞 +91 95943 06625</a>
-            <a href="https://wa.me/919594306625" class="btn btn-whatsapp btn-lg">💬 WhatsApp</a>
+        <p>Join 350+ businesses getting real eye views every day. Starting at ₹1,238/day.</p>
+        <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;position:relative;z-index:1">
+            <a href="tel:+919594306625" class="btn btn-primary btn-lg pulse-btn">📞 Call: +91 95943 06625</a>
+            <a href="https://wa.me/919594306625" class="btn btn-whatsapp btn-lg">💬 WhatsApp Us</a>
         </div>
-        <div class="cta-stats-row"><span>🛺 600+ Rickshaws</span><span>📍 12 Zones</span><span>👁️ 17.7M+ Eyes</span><span>⭐ 4.8/5</span></div>
+        <div class="cta-stats-row"><span>🛺 600+ Rickshaws</span><span>📍 12 Zones</span><span>👁️ 17.7M+ Eye Views</span><span>⭐ 4.8/5 Rating</span></div>
     </div>
 </div></section>
 
@@ -332,13 +301,13 @@
 
 <footer class="footer"><div class="section-inner">
     <div class="footer-grid">
-        <div class="footer-col"><div class="footer-logo">🛺 RASAAI</div><p>Hyperlocal auto rickshaw advertising. LED & Audio campaigns across 12 Mumbra zones.</p><div class="footer-contact"><a href="tel:+919594306625">📞 +91 95943 06625</a><a href="https://wa.me/919594306625">💬 WhatsApp</a><span>📍 Mumbra, Thane, Maharashtra</span></div></div>
-        <div class="footer-col"><h4>Links</h4><a href="#howItWorks">How It Works</a><a href="#routes">Routes</a><a href="#zones">Zones</a><a href="#pricing">Pricing</a></div>
-        <div class="footer-col"><h4>Services</h4><a href="#pricing">LED Campaigns</a><a href="#pricing">Audio Campaigns</a><a href="#pricing">Combo</a><a href="#affiliate">Affiliate</a></div>
-        <div class="footer-col"><h4>Contact</h4><a href="tel:+919594306625">📞 Call</a><a href="https://wa.me/919594306625">💬 WhatsApp</a><a href="dashboard.html">📊 Dashboard</a></div>
+        <div class="footer-col"><div class="footer-logo">🛺 RASAAI</div><p>India's first hyperlocal auto rickshaw advertising network. LED & Audio campaigns across 12 Mumbra zones.</p><div class="footer-contact"><a href="tel:+919594306625">📞 +91 95943 06625</a><a href="https://wa.me/919594306625">💬 WhatsApp</a><a href="mailto:mafs.grp@gmail.com">✉️ mafs.grp@gmail.com</a><span>📍 Mumbra, Thane, Maharashtra</span></div></div>
+        <div class="footer-col"><h4>Quick Links</h4><a href="#howItWorks">How It Works</a><a href="#routes">Routes</a><a href="#zones">Zones</a><a href="#pricing">Pricing</a></div>
+        <div class="footer-col"><h4>Services</h4><a href="#pricing">LED Campaigns</a><a href="#pricing">Audio Campaigns</a><a href="#pricing">Combo Packages</a><a href="#affiliate">Affiliate Program</a></div>
+        <div class="footer-col"><h4>Contact</h4><a href="tel:+919594306625">📞 Call Now</a><a href="https://wa.me/919594306625">💬 WhatsApp</a><a href="#" onclick="RASAAI.openDashboard()">📊 Dashboard</a></div>
     </div>
     <div class="footer-trust">🏆 Trusted by 350+ Businesses Across Mumbra</div>
-    <div class="footer-bottom"><span>© 2026 RASAAI</span><span>Made with ❤️ in Mumbra</span></div>
+    <div class="footer-bottom"><span>© 2026 RASAAI Outdoor Advertising Network</span><span>Made with ❤️ in Mumbra</span></div>
 </div></footer>
 
 <nav class="bottom-nav">
@@ -349,8 +318,15 @@
     <a href="tel:+919594306625" class="bottom-nav-item"><span class="icon">📞</span>Contact</a>
 </nav>
 
+<div id="dashboardModal" class="modal-overlay">
+    <div class="modal-content" style="max-width:900px;max-height:90vh;overflow-y:auto">
+        <button class="modal-close-btn" onclick="RASAAI.closeDashboard()">✕</button>
+        <h2>📊 RASAAI Dashboard</h2>
+        <div id="dashboardContent"></div>
+    </div>
+</div>
+
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script src="app.js"></script>
-<script src="campaign.js"></script>
 </body>
 </html>
