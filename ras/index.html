@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
+  <title>RASAAI • Auto Rickshaw Advertising</title>
+  <!-- Inter font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <!-- Styles -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="mobile-nav-sticky">
+    <div class="nav-container">
+      <div class="logo">🚖 RASAAI</div>
+      <nav class="desktop-nav">
+        <a href="#home">Home</a><a href="#routes">Routes</a><a href="#coverage">Map</a><a href="#builder">Book</a><a href="#pricing">Pricing</a>
+      </nav>
+      <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
+    </div>
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="#home">Home</a><a href="#routes">Routes</a><a href="#coverage">Map</a><a href="#builder">Book</a><a href="#pricing">Pricing</a>
+    </div>
+  </header>
+
+  <main id="home">
+    <!-- 1. Hero -->
+    <section class="hero-section" style="background-image: url('https://www.hanksadvertising.com/cms/uploads/images/auto-rickshaw-advertising-ad.jpg');">
+      <div class="hero-overlay">
+        <h1 class="hero-title">MOVE YOUR BRAND<span> EVERY MUMBRA STREET</span></h1>
+        <p class="hero-subtitle">Auto Rickshaw Advertising • Real-Time Tracking • WhatsApp Booking</p>
+        <div class="hero-price-badge" id="heroPriceDisplay">₹1,450<span>/rickshaw/day</span></div>
+        <button class="btn-primary" id="heroBookBtn">Book via WhatsApp</button>
+      </div>
+    </section>
+
+    <!-- 2. Live Statistics Bar -->
+    <section class="live-stats-bar">
+      <div class="stat-item"><span class="stat-number" data-count="1250">0</span><span class="stat-label">Active Rickshaws</span></div>
+      <div class="stat-item"><span class="stat-number" data-count="8900">0</span><span class="stat-label">Daily Impressions</span></div>
+      <div class="stat-item"><span class="stat-number" data-count="24">0</span><span class="stat-label">Zones Covered</span></div>
+      <div class="stat-item"><span class="stat-number" data-count="98">0</span><span class="stat-label">% Uptime</span></div>
+    </section>
+
+    <!-- 3. Trust Bar (Single line slider) -->
+    <section class="trust-slider-section">
+      <div class="trust-track" id="trustTrack">
+        <!-- Duplicated logos injected by js -->
+      </div>
+    </section>
+
+    <!-- 4. Problem Statement -->
+    <section class="problem-section" id="problem">
+      <h2>ADVERTISING CHALLENGES</h2>
+      <div class="cards-grid-3">
+        <div class="problem-card"><span>📉</span><h3>Low Visibility</h3><p>Billboards ignored, digital ads blocked.</p></div>
+        <div class="problem-card"><span>💸</span><h3>High Cost</h3><p>Traditional media burns budgets fast.</p></div>
+        <div class="problem-card"><span>📍</span><h3>Poor Targeting</h3><p>Can't reach hyperlocal Mumbra audiences.</p></div>
+      </div>
+    </section>
+
+    <!-- 5. Solution -->
+    <section class="solution-section">
+      <h2>RASAAI DIGITAL ADVANTAGE</h2>
+      <div class="comparison-visual">
+        <div class="old-way"><span>❌ Static Billboards</span><span>❌ No Tracking</span></div>
+        <div class="vs">VS</div>
+        <div class="new-way"><span>✅ LED + Audio</span><span>✅ GPS Live View</span></div>
+      </div>
+    </section>
+
+    <!-- 6. How It Works -->
+    <section class="steps-section">
+      <h2>HOW IT WORKS</h2>
+      <div class="steps-flex">
+        <div class="step"><div class="step-icon">1</div><h4>Choose Route</h4><p>Select from 4 high-traffic corridors.</p></div>
+        <div class="step"><div class="step-icon">2</div><h4>Pick Rickshaws</h4><p>LED/Audio combo available.</p></div>
+        <div class="step"><div class="step-icon">3</div><h4>WhatsApp Book</h4><p>Instant confirmation, no email.</p></div>
+        <div class="step"><div class="step-icon">4</div><h4>Track Live</h4><p>GPS intelligence dashboard.</p></div>
+      </div>
+    </section>
+
+    <!-- 7. Routes -->
+    <section class="routes-section" id="routes">
+      <h2>RASAAI ROUTES</h2>
+      <div class="routes-grid" id="routesGrid"></div>
+    </section>
+
+    <!-- 8. Coverage Map -->
+    <section class="map-section" id="coverage">
+      <h2>LIVE COVERAGE MAP</h2>
+      <div id="rasaaiMap" style="height: 500px; border-radius: 20px;"></div>
+    </section>
+
+    <!-- 9. Zone Explorer -->
+    <section class="zone-explorer-section">
+      <h2>ZONE EXPLORER</h2>
+      <div class="zone-cards-grid" id="zoneCardsContainer"></div>
+    </section>
+
+    <!-- 10. Route Intelligence Engine -->
+    <section class="intel-section">
+      <h2>ROUTE INTELLIGENCE</h2>
+      <div class="intel-grid" id="intelGrid"></div>
+    </section>
+
+    <!-- 11. Eye View Calculator -->
+    <section class="calculator-section">
+      <h2>EYE VIEW CALCULATOR</h2>
+      <div class="calc-box">
+        <label>Zone <select id="eyeZoneSelect"></select></label>
+        <label>Rickshaws <input type="range" id="eyeRickshaw" min="1" max="20" value="5"></label>
+        <label>Hours <input type="range" id="eyeHours" min="1" max="16" value="8"></label>
+        <div class="calc-result">Estimated Views: <strong id="eyeViewsResult">12,500</strong></div>
+      </div>
+    </section>
+
+    <!-- 12. Neuromarketing (flip cards) -->
+    <section class="neuro-section">
+      <h2>NEUROMARKETING TRIGGERS</h2>
+      <div class="flip-grid" id="flipGrid"></div>
+    </section>
+
+    <!-- 13. Eye View Metrics -->
+    <section class="metrics-section">
+      <h2>EYE VIEW METRICS</h2>
+      <div class="metrics-flex">
+        <div class="metric"><span>CPM</span><strong>₹24</strong></div>
+        <div class="metric"><span>Recall</span><strong>89%</strong></div>
+        <div class="metric"><span>Attention</span><strong>4.2s</strong></div>
+        <div class="metric"><span>Skip Rate</span><strong>2%</strong></div>
+      </div>
+    </section>
+
+    <!-- 14. Comparison Tables -->
+    <section class="comparison-section">
+      <h2>PLATFORM COMPARISON</h2>
+      <div class="tabs" id="compTabs">
+        <button class="tab active" data-tab="instagram">Instagram</button>
+        <button class="tab" data-tab="facebook">Facebook</button>
+        <button class="tab" data-tab="youtube">YouTube</button>
+      </div>
+      <div class="table-container" id="compTable"></div>
+    </section>
+
+    <!-- 15. Audio Player -->
+    <section class="audio-section">
+      <h2>AUDIO AD SAMPLES</h2>
+      <div class="audio-columns" id="audioColumns"></div>
+    </section>
+
+    <!-- 16. Ad Formats -->
+    <section class="formats-section">
+      <h2>AD FORMATS</h2>
+      <div class="formats-columns" id="formatsColumns"></div>
+    </section>
+
+    <!-- 17. Campaign Builder + WhatsApp -->
+    <section class="builder-section" id="builder">
+      <h2>CAMPAIGN BUILDER</h2>
+      <form id="campaignForm" class="campaign-form">
+        <input type="text" id="campName" placeholder="Your Name" required>
+        <select id="campType"><option>LED Display</option><option>Audio Announcement</option><option>LED+Audio Combo</option></select>
+        <select id="campRoute"></select>
+        <input type="number" id="campRickshaws" placeholder="No. of Rickshaws" min="1" value="5">
+        <input type="number" id="campDuration" placeholder="Days" min="1" value="7">
+        <input type="tel" id="campPhone" placeholder="Phone" value="+919594306625">
+        <button type="button" id="whatsappBookBtn" class="btn-primary">Book via WhatsApp</button>
+      </form>
+      <div id="bookingEstimate" class="estimate-box">Estimate: ₹7,250</div>
+    </section>
+
+    <!-- 18. Pricing -->
+    <section class="pricing-section" id="pricing">
+      <h2>DYNAMIC PRICING</h2>
+      <div class="pricing-cards" id="pricingCards"></div>
+      <div class="countdown-timer" id="priceTimer">Next update: 14:59</div>
+    </section>
+
+    <!-- 19. Inventory Live -->
+    <section class="inventory-section">
+      <h2>LIVE INVENTORY</h2>
+      <div id="inventoryGrid" class="zone-cards-grid"></div>
+    </section>
+
+    <!-- 20. Advanced ROI Calculator -->
+    <section class="roi-section">
+      <h2>ROI CALCULATOR</h2>
+      <div class="roi-box">
+        <select id="roiBusiness"><option>Restaurant</option><option>Clinic</option></select>
+        <select id="roiZone"></select>
+        <input type="number" id="roiBudget" placeholder="Budget ₹" value="50000">
+        <button id="calcRoiBtn">Calculate</button>
+        <div id="roiResult">Projected ROI: 320%</div>
+      </div>
+    </section>
+
+    <!-- 21. Case Studies -->
+    <section class="case-section"><h2>CASE STUDIES</h2><div class="cards-grid-3" id="caseGrid"></div></section>
+
+    <!-- 22. Industries -->
+    <section class="industries-section"><h2>INDUSTRIES</h2><div class="industries-grid" id="industriesGrid"></div></section>
+
+    <!-- 23. Testimonials -->
+    <section class="testimonials-section"><h2>TESTIMONIALS</h2><div class="testimonial-slider" id="testimonialSlider"></div></section>
+
+    <!-- 24. Video Gallery -->
+    <section class="video-section"><h2>VIDEO GALLERY</h2><div class="video-grid" id="videoGrid"></div></section>
+
+    <!-- 25. Coverage Heatmap -->
+    <section class="heatmap-section"><h2>COVERAGE HEATMAP</h2><input type="range" id="timeSlider" min="6" max="22" value="8"><div id="heatmapDisplay">Peak: 8 AM</div></section>
+
+    <!-- 26. Leaderboard -->
+    <section class="leaderboard-section"><h2>ZONE LEADERBOARD</h2><ol id="leaderboardList"></ol></section>
+
+    <!-- 27. Affiliate Program -->
+    <section class="affiliate-section"><h2>AFFILIATE</h2><input type="range" id="affiliateSlider" min="1" max="20"><span id="affiliateComm">₹500</span></section>
+
+    <!-- 28. Contest Engine -->
+    <section class="contest-section"><h2>CONTEST</h2><input id="contestHashtag" placeholder="#RASAAIcontest"><button id="launchContestBtn">Launch via WhatsApp</button></section>
+
+    <!-- 29. Hashtag Tracking -->
+    <section class="hashtag-section"><h2>HASHTAG TRACKING</h2><div id="hashtagCount">#RASAAI: 12.4K mentions</div></section>
+
+    <!-- 30. 30 Free Social Bonus -->
+    <section class="bonus-section"><h2>30 DAYS FREE SOCIAL</h2><p>Free Instagram/Facebook posts with every campaign.</p></section>
+
+    <!-- 31. FAQ -->
+    <section class="faq-section"><h2>FAQ</h2><div id="faqContainer"></div></section>
+
+    <!-- 32. Final CTA -->
+    <section class="final-cta"><h2>READY TO DOMINATE MUMBRA?</h2><button class="btn-primary" id="finalCtaBtn">WhatsApp Now</button></section>
+  </main>
+
+  <footer class="footer-clean">
+    <div class="footer-col"><strong>RASAAI</strong><p>Auto Rickshaw Media</p></div>
+    <div class="footer-col"><strong>Quick Links</strong><a href="#">Routes</a><a href="#">Pricing</a></div>
+    <div class="footer-col"><strong>Services</strong><span>LED Ads</span><span>Audio Ads</span></div>
+    <div class="footer-col"><strong>Contact</strong><span>+91 95943 06625</span><span>mafs.grp@gmail.com</span></div>
+    <div class="copyright">© 2025 RASAAI. All rights reserved.</div>
+  </footer>
+
+  <!-- Video Modal -->
+  <div id="videoModal" class="modal"><span class="close-modal" id="closeVideoModal">&times;</span><iframe id="videoFrame" src="" frameborder="0" allowfullscreen></iframe></div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="app.js"></script>
+  <script src="campaign.js"></script>
+</body>
+</html>
